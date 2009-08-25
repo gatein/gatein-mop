@@ -33,7 +33,7 @@
 
    <groupId>org.gatein.mop</groupId>
    <artifactId>mop.main</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
+   <version>1-SNAPSHOT</version>
    <packaging>pom</packaging>
 
    <name>MOP Main</name>
