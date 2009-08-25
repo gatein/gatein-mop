@@ -47,6 +47,15 @@
       <url>http://fisheye.exoplatform.org/browse/projects-internal/exorh/exo-portal/mop/trunk/core/</url>
    </scm>
 
+   <!-- required for org.chromattic:chromattic.exo -->
+   <repositories>
+      <repository>
+         <id>exo-int</id>
+         <name>exoplatform.org internal repository</name>
+         <url>http://maven2.exoplatform.org/rest/maven2</url>
+      </repository>
+   </repositories>
+
    <dependencies>
 
       <dependency>
