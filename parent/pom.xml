@@ -102,7 +102,7 @@
       <!-- Plugins settings -->
       
       <!-- Cross plugins settings -->
-      <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       
       <!-- maven-compiler-plugin -->
       <maven.compiler.target>1.5</maven.compiler.target>
