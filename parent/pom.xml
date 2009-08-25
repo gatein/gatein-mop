@@ -213,6 +213,20 @@
                      </rules>
                   </configuration>
                </execution>
+               <execution>
+                  <id>enforce-maven-version</id>
+                  <goals>
+                     <goal>enforce</goal>
+                  </goals>
+                  <configuration>
+                     <rules>
+                        <requireMavenVersion>
+                           <message>To build this project Maven 2.2.1 is required. Please install it.</message>
+                           <version>2.2.1</version>
+                        </requireMavenVersion>
+                     </rules>
+                  </configuration>
+               </execution>
             </executions>
          </plugin>
       </plugins>
@@ -300,26 +314,6 @@
                         <goals>
                            <goal>jar</goal>
                         </goals>
-                     </execution>
-                  </executions>
-               </plugin>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-enforcer-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <id>enforce-maven-version</id>
-                        <goals>
-                           <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                           <rules>
-                              <requireMavenVersion>
-                                 <message>We are using some Maven 2.1+ features and only 2.2+ has the required stability. 2.2.1 is recommanded.</message>
-                                 <version>2.2.0</version>
-                              </requireMavenVersion>
-                           </rules>
-                        </configuration>
                      </execution>
                   </executions>
                </plugin>
