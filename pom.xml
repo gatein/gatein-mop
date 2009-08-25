@@ -58,6 +58,14 @@
       <developerConnection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/</developerConnection>
       <url>http://fisheye.exoplatform.org/browse/projects-internal/exorh/exo-portal/mop/trunk/</url>
    </scm>
+   
+   <!-- Required to download Parent -->
+   <repositories>
+      <repository>
+         <id>repository.jboss.org</id>
+         <url>http://repository.jboss.org/maven2</url>
+      </repository>
+   </repositories>
 
    <!-- **************** -->
    <!-- Build Definition -->
