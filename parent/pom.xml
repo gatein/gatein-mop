@@ -39,7 +39,7 @@
 
    <groupId>org.gatein.mop</groupId>
    <artifactId>mop.parent</artifactId>
-   <version>1-SNAPSHOT</version>
+   <version>1-beta2</version>
    <packaging>pom</packaging>
 
    <name>MOP Parent</name>
@@ -59,9 +59,9 @@
    </licenses>
 
    <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/trunk/parent/</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/parent/</developerConnection>
-      <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/parent/</url>
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/tags/mop.parent-1-beta2</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/tags/mop.parent-1-beta2</developerConnection>
+      <url>http://fisheye.jboss.org/browse/gatein/components/mop/tags/mop.parent-1-beta2</url>
    </scm>
 
    <!-- Required to download Parent -->
