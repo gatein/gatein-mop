@@ -42,9 +42,9 @@
    <description>Model Object for Portal Core</description>
 
    <scm>
-      <connection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/core/</connection>
-      <developerConnection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/core/</developerConnection>
-      <url>http://fisheye.exoplatform.org/browse/projects-internal/exorh/exo-portal/mop/trunk/core/</url>
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/trunk/core/</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/core/</developerConnection>
+      <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/core/</url>
    </scm>
 
    <!-- required for org.chromattic:chromattic.exo -->

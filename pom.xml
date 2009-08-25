@@ -54,9 +54,9 @@
    </licenses>
 
    <scm>
-      <connection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/</connection>
-      <developerConnection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/</developerConnection>
-      <url>http://fisheye.exoplatform.org/browse/projects-internal/exorh/exo-portal/mop/trunk/</url>
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/trunk/</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/</developerConnection>
+      <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/</url>
    </scm>
    
    <!-- Required to download Parent -->

@@ -42,9 +42,9 @@
    <description>SPI of the Object Model for Portal</description>
 
    <scm>
-      <connection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/spi/</connection>
-      <developerConnection>scm:svn:http://svn.exoplatform.org/projects/exorh/exo-portal/mop/trunk/spi/</developerConnection>
-      <url>http://fisheye.exoplatform.org/browse/projects-internal/exorh/exo-portal/mop/trunk/spi/</url>
+      <connection>scm:svn:hhttp://anonsvn.jboss.org/repos/gatein/components/mop/trunk/spi/</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/spi/</developerConnection>
+      <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/spi/</url>
    </scm>
 
    <dependencies>
