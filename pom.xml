@@ -22,15 +22,15 @@
 
    <modelVersion>4.0.0</modelVersion>
 
-   <!-- ****************** -->
-   <!-- Project Definition -->
-   <!-- ****************** -->
-
    <parent>
       <groupId>org.jboss</groupId>
       <artifactId>jboss-parent</artifactId>
       <version>5-beta-1</version>
    </parent>
+
+   <!-- ****************** -->
+   <!-- Project Definition -->
+   <!-- ****************** -->
 
    <groupId>org.gatein.mop</groupId>
    <artifactId>mop.parent</artifactId>
@@ -116,6 +116,7 @@
       <!-- maven-release-plugin -->
       <useReleaseProfile>false</useReleaseProfile>
       <arguments>-Prelease</arguments>
+      <autoVersionSubmodules>true</autoVersionSubmodules>
    </properties>
 
    <!-- **************** -->
