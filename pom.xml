@@ -232,7 +232,7 @@
                   <configuration>
                      <rules>
                         <requireMavenVersion>
-                           <message>To build this project Maven 2.2.1 is required. Please install it.</message>
+                           <message>To build this project Maven 2.2.1 (or upper) is required. Please install it.</message>
                            <version>2.2.1</version>
                         </requireMavenVersion>
                      </rules>
