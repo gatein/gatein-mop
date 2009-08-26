@@ -32,26 +32,17 @@
    <!-- Project Definition -->
    <!-- ****************** -->
 
-   <groupId>org.gatein.mop</groupId>
    <artifactId>mop.spi</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
-   <packaging>jar</packaging>
 
    <name>MOP SPI</name>
    <description>SPI of the Object Model for Portal</description>
 
-   <scm>
-      <connection>scm:svn:hhttp://anonsvn.jboss.org/repos/gatein/components/mop/trunk/spi/</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/spi/</developerConnection>
-      <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/spi/</url>
-   </scm>
-
    <dependencies>
 
       <dependency>
-         <groupId>org.gatein.mop</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>mop.api</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
+         <version>${project.version}</version>
       </dependency>
 
    </dependencies>

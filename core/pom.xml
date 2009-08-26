@@ -32,19 +32,10 @@
    <!-- Project Definition -->
    <!-- ****************** -->
 
-   <groupId>org.gatein.mop</groupId>
    <artifactId>mop.core</artifactId>
-   <version>1.0.0-SNAPSHOT</version>
-   <packaging>jar</packaging>
 
    <name>MOP Core</name>
    <description>Model Object for Portal Core</description>
-
-   <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/trunk/core/</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/core/</developerConnection>
-      <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/core/</url>
-   </scm>
 
    <!-- required for org.chromattic:chromattic.exo -->
    <repositories>
@@ -58,15 +49,15 @@
    <dependencies>
 
       <dependency>
-         <groupId>org.gatein.mop</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>mop.api</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
+         <version>${project.version}</version>
       </dependency>
 
       <dependency>
-         <groupId>org.gatein.mop</groupId>
+         <groupId>${project.groupId}</groupId>
          <artifactId>mop.spi</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
+         <version>${project.version}</version>
       </dependency>
 
       <dependency>
