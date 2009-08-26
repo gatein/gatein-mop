@@ -1,1 +1,0 @@
-- perhaps page subclasses to specify functionnalities would be a good idea

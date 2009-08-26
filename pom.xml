@@ -58,16 +58,6 @@
       <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/tags/1.0.0-Beta02</developerConnection>
       <url>http://fisheye.jboss.org/browse/gatein/components/mop/tags/1.0.0-Beta02</url>
    </scm>
-
-   <!-- Override the definition done in JBoss parent which requires 
-        to checkout all the maven 2 repository from JBoss -->
-   <distributionManagement>
-      <repository>
-         <id>repository.jboss.org</id>
-         <name>JBoss Releases Repository</name>
-         <url>dav:https://svn.jboss.org/repos/repository.jboss.org/maven2</url>
-      </repository>
-   </distributionManagement>
   
    <!-- Required to download Parent -->
    <repositories>
@@ -242,7 +232,7 @@
                   <configuration>
                      <rules>
                         <requireMavenVersion>
-                           <message>To build this project Maven 2.2.1 is required. Please install it.</message>
+                           <message>To build this project Maven 2.2.1 (or upper) is required. Please install it.</message>
                            <version>2.2.1</version>
                         </requireMavenVersion>
                      </rules>
