@@ -33,7 +33,7 @@
    <!-- ****************** -->
 
    <groupId>org.gatein.mop</groupId>
-   <artifactId>mop.parent</artifactId>
+   <artifactId>mop-parent</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>pom</packaging>
 
