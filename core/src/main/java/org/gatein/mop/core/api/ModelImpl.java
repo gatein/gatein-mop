@@ -129,8 +129,13 @@ public class ModelImpl implements Model {
     return q.execute(type.getJavaType());
   }
 
-  public String getPath(Object o) {
+  public String getPath(WorkspaceObject o) {
     return session.getPath(o);
+  }
+
+  public <O extends WorkspaceObject> O getObject(ObjectType<? extends O> type, String path) {
+    Class<? extends O> t = type.getJavaType();
+    return session.findByPath(t, path);
   }
 
   private void inject(Object o, boolean persistent) {
