@@ -64,7 +64,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     Workspace workspace = pomService.getModel().getWorkspace();
     Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
     UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.addChild(ObjectType.WINDOW, "window");
+    UIWindow window = layout.add(ObjectType.WINDOW, "window");
     Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", prefs1);
     assertSame(customization, window.getCustomization());
     assertEquals(null, customization.getName());
@@ -75,7 +75,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     Workspace workspace = pomService.getModel().getWorkspace();
     Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
     UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.addChild(ObjectType.WINDOW, "window");
+    UIWindow window = layout.add(ObjectType.WINDOW, "window");
     Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", null);
     assertSame(customization, window.getCustomization());
     assertEquals(null, customization.getName());
@@ -87,7 +87,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
     Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", prefs1);
     UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.addChild(ObjectType.WINDOW, "window");
+    UIWindow window = layout.add(ObjectType.WINDOW, "window");
     Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
     //
@@ -117,7 +117,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
     Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", prefs1);
     UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.addChild(ObjectType.WINDOW, "window");
+    UIWindow window = layout.add(ObjectType.WINDOW, "window");
     Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
     //

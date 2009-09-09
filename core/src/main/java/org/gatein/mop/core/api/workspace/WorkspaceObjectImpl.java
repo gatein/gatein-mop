@@ -92,6 +92,8 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject {
   @Name
   public abstract String getName();
 
+  public abstract void setName(String name);
+
   @Id
   public abstract String getObjectId();
 

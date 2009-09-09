@@ -22,6 +22,7 @@ import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.NodeMapping;
 import org.gatein.mop.api.content.CustomizationContext;
+import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.core.api.content.CustomizationContextResolver;
 
 /**
@@ -47,6 +48,14 @@ public abstract class ContextSpecialization extends AbstractCustomization {
 
   @ManyToOne
   public abstract ContextType getContextType();
+
+  public ContentType<Object> getType() {
+    throw new UnsupportedOperationException();
+  }
+
+  public String getContentId() {
+    throw new UnsupportedOperationException();
+  }
 
   public String getName() {
     return getParentCustomization().getName();

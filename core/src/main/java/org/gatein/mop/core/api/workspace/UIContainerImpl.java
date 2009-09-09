@@ -21,12 +21,16 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.Name;
 import org.gatein.mop.api.workspace.ui.UIContainer;
 import org.gatein.mop.api.workspace.ui.UIComponent;
 import org.gatein.mop.api.workspace.ObjectType;
 
 import java.util.Map;
+import java.util.List;
+import java.util.Iterator;
 import java.util.Collection;
+import java.util.ListIterator;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -45,18 +49,21 @@ public abstract class UIContainerImpl extends UIComponentImpl implements UIConta
   public abstract UIWindowImpl createWindow();
 
   @OneToMany
-  public abstract Map<String, UIComponentImpl> getComponents();
+  public abstract Map<String, UIComponentImpl> getComponentMap();
+  
+  @OneToMany
+  public abstract List<UIComponent> getComponentList();
 
   public ObjectType<? extends UIContainer> getObjectType() {
     return ObjectType.CONTAINER;
   }
 
-  public UIComponent getChild(String componentName) {
-    Map<String, UIComponentImpl> children = getComponents();
+  public UIComponent get(String componentName) {
+    Map<String, UIComponentImpl> children = getComponentMap();
     return children.get(componentName);
   }
 
-  public <T extends UIComponent> T addChild(ObjectType<T> componentType, String name) {
+  public <T extends UIComponent> T add(ObjectType<T> componentType, String name) {
     UIComponentImpl child;
     if (componentType == ObjectType.WINDOW) {
       child = createWindow();
@@ -67,12 +74,119 @@ public abstract class UIContainerImpl extends UIComponentImpl implements UIConta
     } else {
       throw new UnsupportedOperationException();
     }
-    Map<String, UIComponentImpl> children = getComponents();
+    Map<String, UIComponentImpl> children = getComponentMap();
     children.put(name, child);
     return componentType.cast(child);
   }
 
-  public Collection<? extends UIComponent> getChildren() {
-    return getComponents().values();
+  public <T extends UIComponent> T add(int index, ObjectType<T> componentType, String name) {
+    UIComponentImpl child;
+    if (componentType == ObjectType.WINDOW) {
+      child = createWindow();
+    } else if (componentType == ObjectType.CONTAINER) {
+      child = createContainer();
+    } else if (componentType == ObjectType.BODY) {
+      child = createInsertion();
+    } else {
+      throw new UnsupportedOperationException();
+    }
+    child.setName(name);
+    List<UIComponent> children = getComponentList();
+    children.add(index, child);
+    return componentType.cast(child);
+  }
+
+  // List<UIComponent> implementation **********************************************************************************
+
+  public int size() {
+    return getComponentList().size();
+  }
+
+  public boolean isEmpty() {
+    return getComponentList().isEmpty();
+  }
+
+  public boolean contains(Object o) {
+    return getComponentList().contains(o);
+  }
+
+  public Iterator<UIComponent> iterator() {
+    return getComponentList().iterator();
+  }
+
+  public Object[] toArray() {
+    return new Object[0];  
+  }
+
+  public <T> T[] toArray(T[] a) {
+    return getComponentList().toArray(a);
+  }
+
+  public boolean add(UIComponent uiComponent) {
+    return getComponentList().add(uiComponent);
+  }
+
+  public boolean remove(Object o) {
+    return getComponentList().remove(o);
+  }
+
+  public boolean containsAll(Collection<?> c) {
+    return getComponentList().containsAll(c);
+  }
+
+  public boolean addAll(Collection<? extends UIComponent> c) {
+    return getComponentList().addAll(c);
+  }
+
+  public boolean addAll(int index, Collection<? extends UIComponent> c) {
+    return getComponentList().addAll(index, c);
+  }
+
+  public boolean removeAll(Collection<?> c) {
+    return getComponentList().removeAll(c);
+  }
+
+  public boolean retainAll(Collection<?> c) {
+    return getComponentList().retainAll(c);
+  }
+
+  public void clear() {
+    getComponentList().clear();
+  }
+
+  public UIComponent get(int index) {
+    return getComponentList().get(index);
+  }
+
+  public UIComponent set(int index, UIComponent element) {
+    return getComponentList().set(index, element);
+  }
+
+  public void add(int index, UIComponent element) {
+    getComponentList().add(index, element);
+  }
+
+  public UIComponent remove(int index) {
+    return getComponentList().remove(index);
+  }
+
+  public int indexOf(Object o) {
+    return getComponentList().indexOf(o);
+  }
+
+  public int lastIndexOf(Object o) {
+    return getComponentList().lastIndexOf(o);
+  }
+
+  public ListIterator<UIComponent> listIterator() {
+    return getComponentList().listIterator();
+  }
+
+  public ListIterator<UIComponent> listIterator(int index) {
+    return getComponentList().listIterator(index);
+  }
+
+  public List<UIComponent> subList(int fromIndex, int toIndex) {
+    return getComponentList().subList(fromIndex, toIndex);
   }
 }

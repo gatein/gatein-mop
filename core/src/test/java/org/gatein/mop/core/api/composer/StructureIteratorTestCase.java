@@ -45,22 +45,22 @@ public class StructureIteratorTestCase extends AbstractPOMTestCase {
     //
     Page t = root.addChild("t");
     UIContainer t0 = t.getRootComponent();
-    UIComponent t1 = t0.addChild(ObjectType.WINDOW, "t1");
-    UIComponent t2 = t0.addChild(ObjectType.BODY, "t2");
-    UIComponent t3 = t0.addChild(ObjectType.WINDOW, "t3");
+    UIComponent t1 = t0.add(ObjectType.WINDOW, "t1");
+    UIComponent t2 = t0.add(ObjectType.BODY, "t2");
+    UIComponent t3 = t0.add(ObjectType.WINDOW, "t3");
 
     //
     Page u = root.addChild("u");
     UIContainer u0 = u.getRootComponent();
-    UIComponent u1 = u0.addChild(ObjectType.WINDOW, "u1");
-    UIComponent u2 = u0.addChild(ObjectType.BODY, "u2");
+    UIComponent u1 = u0.add(ObjectType.WINDOW, "u1");
+    UIComponent u2 = u0.add(ObjectType.BODY, "u2");
 
     //
     Page a = root.addChild("a");
     a.setTemplate(t);
     UIContainer a0 = a.getRootComponent();
-    UIComponent a1 = a0.addChild(ObjectType.WINDOW, "a1");
-    UIComponent a2 = a0.addChild(ObjectType.WINDOW, "a2");
+    UIComponent a1 = a0.add(ObjectType.WINDOW, "a1");
+    UIComponent a2 = a0.add(ObjectType.WINDOW, "a2");
     PageIterator ia = new PageIterator(a, PageIteratorStrategies.PAGE_TEMPLATE);
     assertStart(ia, t0);
     assertStart(ia, t1);
@@ -79,8 +79,8 @@ public class StructureIteratorTestCase extends AbstractPOMTestCase {
     //
     Page b = root.addChild("b");
     UIContainer b0 = b.getRootComponent();
-    UIComponent b1 = b0.addChild(ObjectType.WINDOW, "b1");
-    UIComponent b2 = b0.addChild(ObjectType.WINDOW, "b2");
+    UIComponent b1 = b0.add(ObjectType.WINDOW, "b1");
+    UIComponent b2 = b0.add(ObjectType.WINDOW, "b2");
 
     //
     Page c = root.addChild("c");
@@ -115,7 +115,7 @@ public class StructureIteratorTestCase extends AbstractPOMTestCase {
     Site site = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "site");
     Page root = site.getRootPage();
     UIContainer c0 = root.getRootComponent();
-    UIComponent c1 = c0.addChild(ObjectType.WINDOW, "c1");
+    UIComponent c1 = c0.add(ObjectType.WINDOW, "c1");
 
     //
     PageIterator i = new PageIterator(root, PageIteratorStrategies.PAGE_TEMPLATE);
@@ -131,11 +131,11 @@ public class StructureIteratorTestCase extends AbstractPOMTestCase {
     Site site = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "site");
     Page root = site.getRootPage();
     UIContainer c0 = root.getRootComponent();
-    UIComponent c1 = c0.addChild(ObjectType.WINDOW, "c1");
-    UIContainer c2 = c0.addChild(ObjectType.CONTAINER, "c2");
-    UIComponent c3 = c2.addChild(ObjectType.WINDOW, "c3");
-    UIComponent c4 = c2.addChild(ObjectType.WINDOW, "c4");
-    UIComponent c5 = c0.addChild(ObjectType.WINDOW, "c5");
+    UIComponent c1 = c0.add(ObjectType.WINDOW, "c1");
+    UIContainer c2 = c0.add(ObjectType.CONTAINER, "c2");
+    UIComponent c3 = c2.add(ObjectType.WINDOW, "c3");
+    UIComponent c4 = c2.add(ObjectType.WINDOW, "c4");
+    UIComponent c5 = c0.add(ObjectType.WINDOW, "c5");
 
     //
     ComponentIterator i0 = new ComponentIterator(c1);

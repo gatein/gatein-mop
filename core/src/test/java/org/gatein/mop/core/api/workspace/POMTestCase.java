@@ -68,7 +68,7 @@ public class POMTestCase extends AbstractPOMTestCase {
 
     UIContainer container = template.getRootComponent();
     assertNotNull(container);
-    container.addChild(ObjectType.WINDOW, "window");
+    container.add(ObjectType.WINDOW, "window");
 
     //
     Page page = root.addChild("page");

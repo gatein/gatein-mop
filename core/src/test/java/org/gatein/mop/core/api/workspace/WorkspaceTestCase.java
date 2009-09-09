@@ -24,6 +24,7 @@ import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.Navigation;
+import org.gatein.mop.api.workspace.ui.UIContainer;
 import org.gatein.mop.api.workspace.link.PageLink;
 import org.gatein.mop.core.api.AbstractPOMTestCase;
 import org.gatein.mop.core.api.ModelImpl;
@@ -200,5 +201,35 @@ public class WorkspaceTestCase extends AbstractPOMTestCase {
     pom = pomService.getModel();
     workspace.addSite(ObjectType.PORTAL_SITE, "portal");
 
+  }
+
+  public void testComponentOrder() {
+    ModelImpl pom = pomService.getModel();
+    Workspace workspace = pom.getWorkspace();
+    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+    Page root = portal.getRootPage();
+
+    UIContainer container = root.getRootComponent();
+
+    container.add(ObjectType.WINDOW, "2");
+    container.add(0, ObjectType.WINDOW, "0");
+
+    assertEquals("0", container.get(0).getName());
+    assertEquals("2", container.get(1).getName());
+    assertEquals(2, container.size());
+
+    container.add(1, ObjectType.WINDOW, "1");
+
+    assertEquals("0", container.get(0).getName());
+    assertEquals("1", container.get(1).getName());
+    assertEquals("2", container.get(2).getName());
+    assertEquals(3, container.size());
+
+    container.add(0, container.get(2));
+
+    assertEquals("2", container.get(0).getName());
+    assertEquals("0", container.get(1).getName());
+    assertEquals("1", container.get(2).getName());
+    assertEquals(3, container.size());
   }
 }

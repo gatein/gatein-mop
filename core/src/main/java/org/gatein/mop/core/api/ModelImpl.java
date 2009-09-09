@@ -33,10 +33,12 @@ import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.Model;
-import org.chromattic.api.LifeCycleListener;
 import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.query.QueryLanguage;
 import org.chromattic.api.query.Query;
+import org.chromattic.api.query.ObjectQueryBuilder;
+import org.chromattic.api.query.ObjectQuery;
+import org.chromattic.api.event.LifeCycleListener;
 
 import java.util.Iterator;
 
@@ -81,7 +83,7 @@ public class ModelImpl implements Model {
     this.contentManager = new ContentManagerImpl(contentManagers, customizationContextResolvers, session);
 
     //
-    session.addLifeCycleListener(contextualizer);
+    session.addEventListener(contextualizer);
   }
 
   public Workspace getWorkspace() {
@@ -110,7 +112,7 @@ public class ModelImpl implements Model {
     session.close();
   }
 
-  private final LifeCycleListener<Object> contextualizer = new LifeCycleListener<Object>() {
+  private final LifeCycleListener contextualizer = new LifeCycleListener() {
     public void created(Object o) {
       inject(o, false);
     }
@@ -125,8 +127,7 @@ public class ModelImpl implements Model {
   };
 
   public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement) {
-    Query q = session.createQuery(QueryLanguage.SQL, statement);
-    return q.execute(type.getJavaType());
+    return session.createQueryBuilder().from(type.getJavaType()).<O>where(statement).get().iterator();
   }
 
   public String getPath(WorkspaceObject o) {
