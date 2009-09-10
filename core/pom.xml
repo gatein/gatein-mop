@@ -37,64 +37,47 @@
    <name>MOP Core</name>
    <description>Model Object for Portal Core</description>
 
-   <!-- required for org.chromattic:chromattic.exo -->
-   <repositories>
-      <repository>
-         <id>exo-int</id>
-         <name>exoplatform.org internal repository</name>
-         <url>http://maven2.exoplatform.org/rest/maven2</url>
-      </repository>
-   </repositories>
-
    <dependencies>
 
       <dependency>
          <groupId>org.gatein.mop</groupId>
          <artifactId>mop-api</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
          <groupId>org.gatein.mop</groupId>
          <artifactId>mop-spi</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
          <groupId>javax.jcr</groupId>
          <artifactId>jcr</artifactId>
-         <version>1.0</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.api</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.core</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.apt</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.exo</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
          <scope>test</scope>
       </dependency>
 
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
-         <version>3.8</version>
          <scope>test</scope>
       </dependency>
 

@@ -42,7 +42,6 @@
       <dependency>
          <groupId>org.gatein.mop</groupId>
          <artifactId>mop-api</artifactId>
-         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
    </dependencies>
