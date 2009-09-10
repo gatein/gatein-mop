@@ -20,20 +20,18 @@ package org.gatein.mop.api.workspace.ui;
 
 import org.gatein.mop.api.workspace.ObjectType;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface UIContainer extends UIComponent {
+public interface UIContainer extends UIComponent, List<UIComponent> {
 
-  Collection<? extends UIComponent> getChildren();
+  <T extends UIComponent> T add(ObjectType<T> componentType, String componentName);
 
-  <T extends UIComponent> T addChild(ObjectType<T> componentType, String componentName);
+  <T extends UIComponent> T add(int index, ObjectType<T> componentType, String componentName);
 
-  UIComponent getChild(String componentName);
-
-  <T extends UIComponent> T getChild(ObjectType<T> componentType, String componentName);
+  UIComponent get(String componentName);
 
 }
