@@ -27,13 +27,6 @@ package org.gatein.mop.api.workspace;
 public interface Site extends WorkspaceObject, WorkspaceCustomizationContext {
 
   /**
-   * Returns the site id.
-   *
-   * @return the site id
-   */
-  String getObjectId();
-
-  /**
    * Returns the site name.
    *
    * @return the site name
