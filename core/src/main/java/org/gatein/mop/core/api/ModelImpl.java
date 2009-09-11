@@ -18,26 +18,19 @@
  */
 package org.gatein.mop.core.api;
 
-import org.gatein.mop.core.api.content.ContentManagerImpl;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextProviderRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextResolver;
 import org.gatein.mop.core.api.workspace.WorkspaceImpl;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
-import org.gatein.mop.core.api.workspace.UIWindowImpl;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
 import org.gatein.mop.core.api.workspace.content.WorkspaceClone;
-import org.gatein.mop.api.content.ContentManager;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.Model;
 import org.chromattic.api.ChromatticSession;
-import org.chromattic.api.query.QueryLanguage;
-import org.chromattic.api.query.Query;
-import org.chromattic.api.query.ObjectQueryBuilder;
-import org.chromattic.api.query.ObjectQuery;
 import org.chromattic.api.event.LifeCycleListener;
 
 import java.util.Iterator;
@@ -56,9 +49,6 @@ public class ModelImpl implements Model {
 
   /** . */
   private final CustomizationContextProviderRegistry customizationContextResolvers;
-
-  /** . */
-  private final ContentManagerImpl contentManager;
 
   /** . */
   private WorkspaceImpl workspace;
@@ -80,7 +70,6 @@ public class ModelImpl implements Model {
     this.session = session;
     this.contentManagers = contentManagers;
     this.customizationContextResolvers = customizationContextResolvers;
-    this.contentManager = new ContentManagerImpl(contentManagers, customizationContextResolvers, session);
 
     //
     session.addEventListener(contextualizer);
@@ -98,10 +87,6 @@ public class ModelImpl implements Model {
       }
     }
     return workspace;
-  }
-
-  public ContentManager getContentManager() {
-    return contentManager;
   }
 
   public void save() {
@@ -140,9 +125,7 @@ public class ModelImpl implements Model {
   }
 
   private void inject(Object o, boolean persistent) {
-    if (o instanceof UIWindowImpl) {
-      ((UIWindowImpl)o).setContentManager(contentManager);
-    } else if (o instanceof ContextSpecialization) {
+    if (o instanceof ContextSpecialization) {
         ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
     } else if (o instanceof WorkspaceClone && persistent) {
       ((WorkspaceClone)o).registry = contentManagers;

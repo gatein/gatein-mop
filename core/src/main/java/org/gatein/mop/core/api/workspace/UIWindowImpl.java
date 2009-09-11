@@ -25,7 +25,6 @@ import org.chromattic.api.annotations.Create;
 import org.gatein.mop.api.workspace.ui.UIWindow;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
-import org.gatein.mop.api.content.ContentManager;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.ContentType;
@@ -39,17 +38,6 @@ import org.gatein.mop.core.api.workspace.content.WorkspaceCustomization;
  */
 @NodeMapping(name = "mop:uiwindow")
 public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, CustomizationContext {
-
-  /** The content manager. */
-  private ContentManager contentManager;
-
-  public ContentManager getContentManager() {
-    return contentManager;
-  }
-
-  public void setContentManager(ContentManager contentManager) {
-    this.contentManager = contentManager;
-  }
 
   public ObjectType<? extends UIWindow> getObjectType() {
     return ObjectType.WINDOW;
