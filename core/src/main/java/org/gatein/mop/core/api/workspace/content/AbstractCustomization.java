@@ -21,7 +21,6 @@ package org.gatein.mop.core.api.workspace.content;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
-import org.gatein.mop.api.content.customization.CustomizationMode;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.core.api.content.CustomizationContextComparator;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
@@ -146,15 +145,9 @@ public abstract class AbstractCustomization implements Customization<Object> {
     return get(contexts, false);
   }
 
-  public Customization<Object> customize(CustomizationMode mode, Collection<CustomizationContext> contexts) {
-    if (mode == null) {
-      throw new NullPointerException();
-    }
+  public Customization<Object> customize(Collection<CustomizationContext> contexts) {
     if (contexts == null) {
       throw new NullPointerException();
-    }
-    if (mode == CustomizationMode.CLONE) {
-      throw new UnsupportedOperationException("todo : support cloning");
     }
     return get(contexts, true);
   }

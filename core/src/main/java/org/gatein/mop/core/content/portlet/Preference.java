@@ -101,7 +101,7 @@ public final class Preference {
     }
     if (obj instanceof Preference) {
       Preference that = (Preference)obj;
-      return this.name.equals(that.name) && this.getValues().equals(that.getValues()) && this.readOnly == that.isReadOnly();
+      return this.name.equals(that.name) && this.getValues().equals(that.getValues());
     }
     return false;
   }

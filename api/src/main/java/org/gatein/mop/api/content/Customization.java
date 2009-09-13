@@ -18,8 +18,6 @@
  */
 package org.gatein.mop.api.content;
 
-import org.gatein.mop.api.content.customization.CustomizationMode;
-
 import java.util.Set;
 import java.util.Collection;
 
@@ -85,7 +83,7 @@ public interface Customization<S> {
    * @param contexts the customization context
    * @return the customization
    */
-  Customization<S> customize(CustomizationMode mode, Collection<CustomizationContext> contexts);
+  Customization<S> customize(Collection<CustomizationContext> contexts);
 
   /**
    * Returns the customization cascaded state.

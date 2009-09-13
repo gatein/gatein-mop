@@ -86,7 +86,7 @@ public final class Preferences implements Iterable<Preference> {
     } else {
       entry = new Preference(entry.getName(), value, entry.isReadOnly());
     }
-    entries.put(name, entry);
+    state.put(name, entry);
     return this;
   }
 
@@ -101,7 +101,7 @@ public final class Preferences implements Iterable<Preference> {
       throw new IllegalStateException();
     }
     entry = new Preference(entry.getName(), entry.getValues(), readOnly);
-    entries.put(name, entry);
+    state.put(name, entry);
     return this;
   }
 
@@ -110,7 +110,7 @@ public final class Preferences implements Iterable<Preference> {
   }
 
   public Preferences putPreference(Preference preference) {
-    entries.put(preference.getName(), preference);
+    state.put(preference.getName(), preference);
     return this;
   }
 
