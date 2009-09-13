@@ -50,14 +50,25 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
   /** . */
   private final Preferences parisFarenheit = new PreferencesBuilder().add("city", "paris").add("temperature", "farenheit").build();
 
-  public void testCustomizationBlending() {
+  public void testVirtualCustomization() {
     Workspace workspace = pomService.getModel().getWorkspace();
     Customization<Preferences> customization1 = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
     Customization<Preferences> customization2 = workspace.customize("paris", customization1);
+
+    //
     customization2.setState(paris);
     assertEquals(paris, customization2.getState());
     assertEquals(parisCelsius, customization2.getVirtualState());
-//    customization1.setState(customization1.getState().setReadOnly("temperature", true));
+
+    //
+    customization2.setState(parisFarenheit);
+    assertEquals(parisFarenheit, customization2.getState());
+    assertEquals(parisFarenheit, customization2.getVirtualState());
+
+    //
+    customization1.setState(customization1.getState().setReadOnly("temperature", true));
+    assertEquals(parisFarenheit, customization2.getState());
+    assertEquals(parisCelsius, customization2.getVirtualState());
   }
 
   public void testCustomizeWorkspace() {
