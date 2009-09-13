@@ -19,9 +19,13 @@
 package org.gatein.mop.api;
 
 import org.gatein.mop.api.workspace.Workspace;
+import org.gatein.mop.api.workspace.WorkspaceObject;
+import org.gatein.mop.api.workspace.ObjectType;
+
+import java.util.Iterator;
 
 /**
- * Provides access to the model.
+ * Provides access to the model.  
  *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
@@ -34,5 +38,25 @@ public interface Model {
    * @return the workspace
    */
   Workspace getWorkspace();
+
+  /**
+   * Returns a specified object or null if it cannot be found.
+   *
+   * @param type the object type
+   * @param id the object id
+   * @param <O> the object type parameter
+   * @return the object
+   */
+  <O extends WorkspaceObject> O findObjectById(ObjectType<O> type, String id);
+
+  <O extends WorkspaceObject> O findObjectByPath(ObjectType<? extends O> type, String path);
+
+  <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement);
+
+  String pathOf(WorkspaceObject o);
+
+  void save();
+
+  void close();
 
 }

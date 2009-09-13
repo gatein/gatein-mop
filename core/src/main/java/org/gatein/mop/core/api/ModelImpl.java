@@ -22,6 +22,20 @@ import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextProviderRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextResolver;
 import org.gatein.mop.core.api.workspace.WorkspaceImpl;
+import org.gatein.mop.core.api.workspace.SiteImpl;
+import org.gatein.mop.core.api.workspace.PortalSite;
+import org.gatein.mop.core.api.workspace.GroupSite;
+import org.gatein.mop.core.api.workspace.UserSite;
+import org.gatein.mop.core.api.workspace.UIContainerImpl;
+import org.gatein.mop.core.api.workspace.UIWindowImpl;
+import org.gatein.mop.core.api.workspace.UIBodyImpl;
+import org.gatein.mop.core.api.workspace.PageImpl;
+import org.gatein.mop.core.api.workspace.NavigationImpl;
+import org.gatein.mop.core.api.workspace.WorkspaceObjectImpl;
+import org.gatein.mop.core.api.workspace.SharedSite;
+import org.gatein.mop.core.api.workspace.UIComponentImpl;
+import org.gatein.mop.core.api.workspace.PageLinkImpl;
+import org.gatein.mop.core.api.workspace.URLLinkImpl;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
@@ -34,12 +48,37 @@ import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.event.LifeCycleListener;
 
 import java.util.Iterator;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
 public class ModelImpl implements Model {
+
+  /** . */
+  private static final Map<ObjectType<?>, Class<? extends WorkspaceObjectImpl>> typeToClassImpl;
+
+  static {
+    Map<ObjectType<?>, Class<? extends WorkspaceObjectImpl>> tmp = new HashMap<ObjectType<?>, Class<? extends WorkspaceObjectImpl>>();
+    tmp.put(ObjectType.ANY, WorkspaceObjectImpl.class);
+    tmp.put(ObjectType.WORKSPACE, WorkspaceImpl.class);
+    tmp.put(ObjectType.SITE, SiteImpl.class);
+    tmp.put(ObjectType.PORTAL_SITE, PortalSite.class);
+    tmp.put(ObjectType.GROUP_SITE, GroupSite.class);
+    tmp.put(ObjectType.USER_SITE, UserSite.class);
+    tmp.put(ObjectType.SHARED_SITE, SharedSite.class);
+    tmp.put(ObjectType.PAGE, PageImpl.class);
+    tmp.put(ObjectType.NAVIGATION, NavigationImpl.class);
+    tmp.put(ObjectType.COMPONENT, UIComponentImpl.class);
+    tmp.put(ObjectType.BODY, UIBodyImpl.class);
+    tmp.put(ObjectType.CONTAINER, UIContainerImpl.class);
+    tmp.put(ObjectType.WINDOW, UIWindowImpl.class);
+    tmp.put(ObjectType.PAGE_LINK, PageLinkImpl.class);
+    tmp.put(ObjectType.URL_LINK, URLLinkImpl.class);
+    typeToClassImpl = tmp;
+  }
 
   /** . */
   private final ChromatticSession session;
@@ -57,7 +96,7 @@ public class ModelImpl implements Model {
   private final CustomizationContextResolver customizationContextResolver = new CustomizationContextResolver() {
     public CustomizationContext resolve(String contextType, String contextId) {
       if (WorkspaceCustomizationContext.TYPE.equals(contextType)) {
-        return getWorkspace().getObject(ObjectType.WINDOW, contextId);
+        return findObjectById(ObjectType.WINDOW, contextId);
       } else {
         return customizationContextResolvers.resolve(contextType, contextId);
       }
@@ -112,14 +151,15 @@ public class ModelImpl implements Model {
   };
 
   public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement) {
-    return session.createQueryBuilder().from(type.getJavaType()).<O>where(statement).get().iterator();
+    Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
+    return session.createQueryBuilder().from(impl).<O>where(statement).get().iterator();
   }
 
-  public String getPath(WorkspaceObject o) {
+  public String pathOf(WorkspaceObject o) {
     return session.getPath(o);
   }
 
-  public <O extends WorkspaceObject> O getObject(ObjectType<? extends O> type, String path) {
+  public <O extends WorkspaceObject> O findObjectByPath(ObjectType<? extends O> type, String path) {
     Class<? extends O> t = type.getJavaType();
     return session.findByPath(t, path);
   }
@@ -130,6 +170,16 @@ public class ModelImpl implements Model {
     }
     if (o instanceof ContextSpecialization) {
       ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
+    }
+  }
+
+  public <O extends WorkspaceObject> O findObjectById(ObjectType<O> type, String id) {
+    Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
+    WorkspaceObjectImpl object = session.findById(impl, id);
+    if (object != null) {
+      return type.cast(object);
+    } else {
+      return null;
     }
   }
 }

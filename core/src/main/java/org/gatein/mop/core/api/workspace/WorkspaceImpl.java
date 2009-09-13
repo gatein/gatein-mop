@@ -70,9 +70,6 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
   // CustomizationContextResolver implementation ***********************************************************************
 
   @FindById
-  public abstract WorkspaceObject getObject(String objectId);
-
-  @FindById
   public abstract CustomizationContext resolveContext(String contextId);
 
   // WorkspaceCustomizationContext implementation **********************************************************************
@@ -135,15 +132,6 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
   public <S extends Site> S addSite(ObjectType<S> siteType, String name) {
     SiteContainer<S> sites = getSiteContainer(siteType);
     return sites.addSite(name);
-  }
-
-  public <O extends WorkspaceObject> O getObject(ObjectType<O> type, String id) {
-    WorkspaceObject object = getObject(id);
-    if (object != null) {
-      return type.cast(object);
-    } else {
-      return null;
-    }
   }
 
   public Site getSharedSite() {

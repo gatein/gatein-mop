@@ -40,19 +40,21 @@ import java.util.Collections;
 public class WorkspaceTestCase extends AbstractPOMTestCase {
 
   public void testGetSite() {
-    Workspace workspace = pomService.getModel().getWorkspace();
+    ModelImpl model = pomService.getModel();
+    Workspace workspace = model.getWorkspace();
     Site site = workspace.addSite(ObjectType.GROUP_SITE, "site");
     assertNotNull(site);
-    Site s2 = workspace.getObject(ObjectType.SITE, site.getObjectId());
+    Site s2 = model.findObjectById(ObjectType.SITE, site.getObjectId());
     assertEquals(site, s2);
     assertEquals(workspace, site.getWorkspace());
   }
 
   public void testGetPortal() {
-    Workspace workspace = pomService.getModel().getWorkspace();
+    ModelImpl model = pomService.getModel();
+    Workspace workspace = model.getWorkspace();
     Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
     assertNotNull(portal);
-    Site s2 = workspace.getObject(ObjectType.SITE, portal.getObjectId());
+    Site s2 = model.findObjectById(ObjectType.SITE, portal.getObjectId());
     assertEquals(portal, s2);
   }
 

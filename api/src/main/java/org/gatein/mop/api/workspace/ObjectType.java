@@ -61,15 +61,6 @@ public class ObjectType<O extends WorkspaceObject> {
   public static final ObjectType<Page> PAGE = new ObjectType<Page>(Page.class);
 
   /** . */
-  public static final ObjectType<Page> TEMPLATE = new ObjectType<Page>(Page.class, PAGE);
-
-  /** . */
-  public static final ObjectType<Page> CONFIGURATION = new ObjectType<Page>(Page.class, PAGE);
-
-  /** . */
-  public static final ObjectType<Page> CONTENT = new ObjectType<Page>(Page.class, PAGE);
-
-  /** . */
   public static final ObjectType<Navigation> NAVIGATION = new ObjectType<Navigation>(Navigation.class);
 
   /** . */

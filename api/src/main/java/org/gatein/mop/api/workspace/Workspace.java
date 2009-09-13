@@ -68,13 +68,4 @@ public interface Workspace extends WorkspaceObject, WorkspaceCustomizationContex
    */
   <S extends Site> S addSite(ObjectType<S> siteType, String name);
 
-  /**
-   * Returns a specified object or null if it cannot be found.
-   *
-   * @param type the object type
-   * @param id the object id
-   * @param <O> the object type parameter
-   * @return the object
-   */
-  <O extends WorkspaceObject> O getObject(ObjectType<O> type, String id);
 }
