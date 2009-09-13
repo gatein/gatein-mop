@@ -23,6 +23,8 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 /**
+ * An immutable preference.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
@@ -78,6 +80,10 @@ public final class Preference {
 
   public String getName() {
     return name;
+  }
+
+  public String getValue() {
+    return values.get(0);
   }
 
   public List<String> getValues() {

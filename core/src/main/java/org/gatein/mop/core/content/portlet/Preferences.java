@@ -20,10 +20,11 @@ package org.gatein.mop.core.content.portlet;
 
 import org.gatein.mop.api.content.ContentType;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Iterator;
 
 /**
  * A set of preferences.
@@ -31,7 +32,7 @@ import java.util.HashMap;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public final class Preferences {
+public final class Preferences implements Iterable<Preference> {
 
   /** . */
   public static final ContentType<Preferences> CONTENT_TYPE = new ContentType<Preferences>("application/portlet", Preferences.class);
@@ -57,8 +58,64 @@ public final class Preferences {
     this.entries = Collections.unmodifiableMap(this.state);
   }
 
-  public Collection<Preference> getEntries() {
-    return entries.values();
+  public List<String> getValues(String name) {
+    Preference entry = entries.get(name);
+    return entry != null ? entry.getValues() : null;
+  }
+
+  public Preferences setValues(String name, List<String> values) {
+    Preference entry = entries.get(name);
+    if (entry == null) {
+      entry = new Preference(name, values, false);
+    } else {
+      entry = new Preference(entry.getName(), values, entry.isReadOnly());
+    }
+    entries.put(name, entry);
+    return this;
+  }
+
+  public String getValue(String name) {
+    Preference entry = entries.get(name);
+    return entry != null ? entry.getValue() : null;
+  }
+
+  public Preferences setValue(String name, String value) {
+    Preference entry = entries.get(name);
+    if (entry == null) {
+      entry = new Preference(name, value, false);
+    } else {
+      entry = new Preference(entry.getName(), value, entry.isReadOnly());
+    }
+    entries.put(name, entry);
+    return this;
+  }
+
+  public Boolean isReadOnly(String name) {
+    Preference entry = entries.get(name);
+    return entry != null ? entry.isReadOnly() : null;
+  }
+
+  public Preferences setReadOnly(String name, boolean readOnly) {
+    Preference entry = entries.get(name);
+    if (entry == null) {
+      throw new IllegalStateException();
+    }
+    entry = new Preference(entry.getName(), entry.getValues(), readOnly);
+    entries.put(name, entry);
+    return this;
+  }
+
+  public Preference getPreference(String name) {
+    return entries.get(name);
+  }
+
+  public Preferences putPreference(Preference preference) {
+    entries.put(preference.getName(), preference);
+    return this;
+  }
+
+  public Iterator<Preference> iterator() {
+    return entries.values().iterator();
   }
 
   @Override

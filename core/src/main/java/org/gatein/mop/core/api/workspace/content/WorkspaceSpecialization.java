@@ -37,6 +37,10 @@ public abstract class WorkspaceSpecialization extends WorkspaceCustomization {
 
   public abstract void setCustomization(WorkspaceCustomization customization);
 
+  public void destroy() {
+    doDestroy();
+  }
+
   public String getName() {
     AbstractCustomization parent = getParentCustomization();
     if (parent == null) {

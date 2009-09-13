@@ -24,7 +24,7 @@ import org.gatein.mop.core.api.content.CustomizationContextResolver;
 import org.gatein.mop.core.api.workspace.WorkspaceImpl;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
-import org.gatein.mop.core.api.workspace.content.WorkspaceClone;
+import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -125,10 +125,11 @@ public class ModelImpl implements Model {
   }
 
   private void inject(Object o, boolean persistent) {
+    if (o instanceof AbstractCustomization && persistent) {
+      ((AbstractCustomization)o).registry = contentManagers;
+    }
     if (o instanceof ContextSpecialization) {
-        ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
-    } else if (o instanceof WorkspaceClone && persistent) {
-      ((WorkspaceClone)o).registry = contentManagers;
+      ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
     }
   }
 }

@@ -52,7 +52,7 @@ public abstract class PortletPreferencesState extends CustomizationState {
     Map<String, PortletPreferenceState> entries = getChildren();
     entries.clear();
 
-    for (Preference pref : payload.getEntries()) {
+    for (Preference pref : payload) {
       PortletPreferenceState prefState = create();
       entries.put(pref.getName(), prefState);
       prefState.setValue(pref.getValues());

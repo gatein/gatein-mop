@@ -20,10 +20,13 @@ package org.gatein.mop.core.api.workspace.content;
 
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
+import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.content.customization.CustomizationMode;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.core.api.content.CustomizationContextComparator;
+import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.core.api.workspace.content.portlet.PortletPreferencesState;
+import org.gatein.mop.spi.content.ContentProvider;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Create;
@@ -34,6 +37,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 import java.util.Map;
 import java.util.LinkedHashSet;
+import java.util.Arrays;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -52,6 +56,9 @@ public abstract class AbstractCustomization implements Customization<Object> {
     //
     comparator = _comparator;
   }
+
+  /** . */
+  public ContentManagerRegistry registry;
 
   @OneToOne
   @MappedBy("state")
@@ -76,21 +83,42 @@ public abstract class AbstractCustomization implements Customization<Object> {
 
   public abstract AbstractCustomization getParentCustomization();
 
-
-  public Object getState() {
-
+  public Object getVirtualState() {
+    Object childPayload = null;
     CustomizationState state = getContentState();
     if (state != null) {
-      return getContentState().getPayload();
-    } else {
-      AbstractCustomization parent = getParentCustomization();
-      if (parent != null) {
-        return parent.getState();
-      } else {
-        return null;
-      }
+      childPayload = state.getPayload();
     }
 
+    //
+    Object parentPayload = null;
+    AbstractCustomization parent = getParentCustomization();
+    if (parent != null) {
+      parentPayload = parent.getVirtualState();
+    }
+
+    //
+    if (parentPayload != null) {
+      if (childPayload != null) {
+        ContentType contentType = getType();
+        String mimeType = contentType.getMimeType();
+        ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+        return contentProvider.combine(Arrays.asList(parentPayload, childPayload));
+      } else {
+        return parentPayload;
+      }
+    } else {
+      return childPayload;
+    }
+  }
+
+  public Object getState() {
+    CustomizationState state = getContentState();
+    if (state != null) {
+      return state.getPayload();
+    } else {
+      return null;
+    }
   }
 
   public void setState(Object state) {

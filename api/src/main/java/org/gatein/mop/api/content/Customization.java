@@ -88,6 +88,13 @@ public interface Customization<S> {
   Customization<S> customize(CustomizationMode mode, Collection<CustomizationContext> contexts);
 
   /**
+   * Returns the customization cascaded state.
+   *
+   * @return the cascaded state
+   */
+  S getVirtualState();
+
+  /**
    * Returns the customization state.
    *
    * @return the state

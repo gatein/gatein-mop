@@ -27,7 +27,6 @@ import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
-import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.core.api.content.ContentRegistration;
 
 import java.util.Set;
@@ -41,8 +40,6 @@ import java.util.ArrayList;
  */
 @NodeMapping(name = "mop:workspaceclone")
 public abstract class WorkspaceClone extends WorkspaceCustomization {
-
-  public ContentManagerRegistry registry;
 
   public Set<CustomizationContext> getContexts() {
     return Collections.emptySet();
@@ -87,10 +84,8 @@ public abstract class WorkspaceClone extends WorkspaceCustomization {
 
     //
     for (WorkspaceSpecialization specialization : specializations) {
-      // Compute flat state
-      Object state = specialization.getState();
-
-      // Update with flat state
+      // Update the specialization with its virtual state
+      Object state = specialization.getVirtualState();
       specialization.setState(state);
 
       // Clear ref

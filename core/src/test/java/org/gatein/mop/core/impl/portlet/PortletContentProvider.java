@@ -58,10 +58,10 @@ public class PortletContentProvider implements ContentProvider<Preferences> {
 
     //
     for (Preferences preferences : states) {
-      for (Preference entry : preferences.getEntries()) {
-        Preference previous = entries.get(entry.getName());
+      for (Preference preference : preferences) {
+        Preference previous = entries.get(preference.getName());
         if (previous == null || !previous.isReadOnly()) {
-          entries.put(entry.getName(), entry);
+          entries.put(preference.getName(), preference);
         }
       }
     }
