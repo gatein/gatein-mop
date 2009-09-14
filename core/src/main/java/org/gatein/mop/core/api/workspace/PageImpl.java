@@ -131,6 +131,10 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page, Work
     return getCustomizations().customize(name, customization);
   }
 
+  public String nameOf(Customization customization) {
+    return getCustomizations().nameOf(customization);
+  }
+
   // *******************************************************************************************************************
 
   public <T extends TemplatizedObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> templatizedType) {

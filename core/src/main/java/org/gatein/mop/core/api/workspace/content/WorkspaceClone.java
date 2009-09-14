@@ -65,7 +65,7 @@ public abstract class WorkspaceClone extends WorkspaceCustomization {
   //
 
   public String getName() {
-    CustomizationContext customizationContext = getCustomizationContext();
+    CustomizationContext customizationContext = getContext();
     if (customizationContext instanceof WorkspaceCustomizationContext) {
       return getFooName();
     } else {
@@ -73,11 +73,10 @@ public abstract class WorkspaceClone extends WorkspaceCustomization {
     }
   }
 
-  public AbstractCustomization getParentCustomization() {
+  public AbstractCustomization getParent() {
     return null;
   }
 
-  @Override
   public void destroy() {
     // Get specializations (clone for now because of bug with concurrent modif in chromattic)
     Collection<WorkspaceSpecialization> specializations = new ArrayList<WorkspaceSpecialization>(getSpecializations());

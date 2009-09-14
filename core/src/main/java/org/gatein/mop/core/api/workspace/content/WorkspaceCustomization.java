@@ -30,17 +30,17 @@ import org.gatein.mop.core.api.workspace.UIWindowImpl;
 public abstract class WorkspaceCustomization extends AbstractCustomization {
 
   @ManyToOne
-  public abstract Object getParent();
+  public abstract Object getOwner();
 
   @Destroy
   public abstract void doDestroy();
 
-  public CustomizationContext getCustomizationContext() {
-    Object parent = getParent();
-    if (parent instanceof CustomizationContainer) {
-      return ((CustomizationContainer)parent).getOwner();
-    } else if (parent instanceof UIWindowImpl) {
-      return (UIWindowImpl)parent;
+  public CustomizationContext getContext() {
+    Object owner = getOwner();
+    if (owner instanceof CustomizationContainer) {
+      return ((CustomizationContainer)owner).getOwner();
+    } else if (owner instanceof UIWindowImpl) {
+      return (UIWindowImpl)owner;
     } else {
       throw new AssertionError();
     }

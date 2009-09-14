@@ -65,4 +65,14 @@ public interface WorkspaceCustomizationContext extends CustomizationContext {
    */
   <S> Customization<S> customize(String name, Customization<S> customization);
 
+
+  /**
+   * Returns the customization name related to this context or null if the customization is not
+   * related to this context.
+   *
+   * @param customization the customization related to this context
+   * @return the customization name
+   */
+  String nameOf(Customization customization);
+
 }

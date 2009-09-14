@@ -93,4 +93,8 @@ public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, Work
   public <S> Customization<S> customize(String name, Customization<S> customization) {
     return getCustomizations().customize(name, customization);
   }
+
+  public String nameOf(Customization customization) {
+    return getCustomizations().nameOf(customization);
+  }
 }

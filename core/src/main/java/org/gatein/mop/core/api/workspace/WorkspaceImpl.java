@@ -98,6 +98,10 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
     return getCustomizations().customize(name, customization);
   }
 
+  public String nameOf(Customization customization) {
+    return getCustomizations().nameOf(customization);
+  }
+
   // Workspace implementation ******************************************************************************************
 
   @SuppressWarnings("unchecked")

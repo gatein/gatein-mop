@@ -53,22 +53,22 @@ public abstract class ContextSpecialization extends AbstractCustomization {
     throw new UnsupportedOperationException();
   }
 
-  public String getContentId() {
-    throw new UnsupportedOperationException();
-  }
-
-  public String getName() {
-    return getParentCustomization().getName();
-  }
-
-  public CustomizationContext getCustomizationContext() {
+  public CustomizationContext getContext() {
     ContextType currentContextType = getContextType();
     String contextType = currentContextType.getName();
     return customizationContextResolver.resolve(contextType, getContextId());
   }
 
-  public AbstractCustomization getParentCustomization() {
+  public AbstractCustomization getParent() {
     ContextType contextType = getContextType();
     return contextType.getContainer().getCustomization();
+  }
+
+  public String getContentId() {
+    throw new UnsupportedOperationException();
+  }
+
+  public void destroy() {
+    throw new UnsupportedOperationException("todo");
   }
 }

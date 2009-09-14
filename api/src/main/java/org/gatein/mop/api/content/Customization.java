@@ -31,13 +31,6 @@ import java.util.Collection;
 public interface Customization<S> {
 
   /**
-   * Returns the customization name or null if it does not have any name.
-   *
-   * @return the customization name
-   */
-  String getName();
-
-  /**
    * Returns the content id this customization refers to.
    *
    * @return the content id
@@ -52,7 +45,14 @@ public interface Customization<S> {
   ContentType<S> getType();
 
   /**
-   * Returns the contexts that are associated with that customization. Note that the set returned
+   * Returns the related context of this customization.
+   *
+   * @return the related context
+   */
+  CustomizationContext getContext();
+
+  /**
+   * Returns the contexts that are associated with this customization. Note that the set returned
    * maintains the hierararchy order of the set from the most specific to the least specific.
    *
    * @return the contexts
@@ -79,16 +79,22 @@ public interface Customization<S> {
   /**
    * Customize the state with respect to the provided customization context.
    *
-   * @param mode the customization mode
    * @param contexts the customization context
    * @return the customization
    */
   Customization<S> customize(Collection<CustomizationContext> contexts);
 
   /**
-   * Returns the customization cascaded state.
+   * Returns the parent customization or null if this customization is full featured clone.
    *
-   * @return the cascaded state
+   * @return the parent customization
+   */
+  Customization getParent();
+
+  /**
+   * Returns the customization virtual state that is computed from various state of the customization hierarchy.
+   *
+   * @return the virtual state
    */
   S getVirtualState();
 

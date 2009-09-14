@@ -73,14 +73,14 @@ public abstract class AbstractCustomization implements Customization<Object> {
   abstract ContextType create();
 
   @Create
-  abstract ContextSpecialization create2();
+  abstract ContextSpecialization createContextSpecialization();
 
   @Create
-  public abstract PortletPreferencesState createPS();
+  public abstract PortletPreferencesState createPreferenceState();
 
-  public abstract CustomizationContext getCustomizationContext();
+  public abstract CustomizationContext getContext();
 
-  public abstract AbstractCustomization getParentCustomization();
+  public abstract AbstractCustomization getParent();
 
   public Object getVirtualState() {
     Object childPayload = null;
@@ -91,7 +91,7 @@ public abstract class AbstractCustomization implements Customization<Object> {
 
     //
     Object parentPayload = null;
-    AbstractCustomization parent = getParentCustomization();
+    AbstractCustomization parent = getParent();
     if (parent != null) {
       parentPayload = parent.getVirtualState();
     }
@@ -128,17 +128,13 @@ public abstract class AbstractCustomization implements Customization<Object> {
 
       //
       if (contentState == null) {
-        contentState = createPS();
+        contentState = createPreferenceState();
         setContentState(contentState);
       }
 
       //
       contentState.setPayload(state);
     }
-  }
-
-  public void destroy() {
-    throw new UnsupportedOperationException("todo");
   }
 
   public Customization<Object> getCustomization(Set<CustomizationContext> contexts) {
@@ -159,7 +155,7 @@ public abstract class AbstractCustomization implements Customization<Object> {
 
     //
     while (true) {
-      CustomizationContext currentContext = current.getCustomizationContext();
+      CustomizationContext currentContext = current.getContext();
       if (currentContext == null) {
         throw new IllegalStateException("Could not resolve customization context for customization " +  this);
       }
@@ -168,7 +164,7 @@ public abstract class AbstractCustomization implements Customization<Object> {
       contexts.add(currentContext);
 
       //
-      AbstractCustomization parent = current.getParentCustomization();
+      AbstractCustomization parent = current.getParent();
       if (parent != null) {
         current = parent;
       } else {
@@ -228,7 +224,7 @@ public abstract class AbstractCustomization implements Customization<Object> {
       }
 
       //
-      blah = create2();
+      blah = createContextSpecialization();
       c.put(id, blah);
 
       //

@@ -71,4 +71,15 @@ public abstract class CustomizationContainer {
     content.setCustomization((WorkspaceCustomization)customization);
     return (Customization<S>)content;
   }
+
+  public String nameOf(Customization customization) {
+    if (customization instanceof WorkspaceClone) {
+      WorkspaceClone wc = (WorkspaceClone)customization;
+      Map<String, WorkspaceCustomization> contents = getCustomizations();
+      if (contents.containsValue(wc)) {
+        return wc.getFooName();
+      }
+    }
+    return null;
+  }
 }

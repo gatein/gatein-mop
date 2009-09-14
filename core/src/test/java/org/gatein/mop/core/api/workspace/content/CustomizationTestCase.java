@@ -81,7 +81,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     assertEquals(0, customization.getContexts().size());
     assertEquals("WeatherPortlet", customization.getContentId());
     assertEquals(Preferences.CONTENT_TYPE, customization.getType());
-    assertEquals("marseille", customization.getName());
+    assertEquals("marseille", workspace.nameOf(customization));
   }
 
   public void testCustomizeWindow() {
@@ -93,7 +93,13 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     //
     Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
     assertSame(customization, window.getCustomization());
-    assertEquals(null, customization.getName());
+    assertEquals(marseille, customization.getVirtualState());
+    assertEquals(marseille, customization.getState());
+
+    //
+    customization = (Customization<Preferences>)window.getCustomization();
+    assertSame(customization, window.getCustomization());
+    assertEquals(marseille, customization.getVirtualState());
     assertEquals(marseille, customization.getState());
   }
 
@@ -106,7 +112,6 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     //
     Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", null);
     assertSame(customization, window.getCustomization());
-    assertEquals(null, customization.getName());
     assertNull(customization.getState());
   }
 
@@ -125,7 +130,6 @@ public class CustomizationTestCase extends AbstractPOMTestCase {
     assertEquals(Arrays.<CustomizationContext>asList(window, portal), new ArrayList<CustomizationContext>(windowCustomization.getContexts()));
     assertSame(windowCustomization, window.getCustomization());
     assertTrue(((Customization)windowCustomization) instanceof WorkspaceSpecialization);
-    assertEquals("marseille", windowCustomization.getName());
 
     //
     assertPreferences(null, windowCustomization.getState());

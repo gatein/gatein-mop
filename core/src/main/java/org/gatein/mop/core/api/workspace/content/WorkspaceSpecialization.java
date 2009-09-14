@@ -41,17 +41,8 @@ public abstract class WorkspaceSpecialization extends WorkspaceCustomization {
     doDestroy();
   }
 
-  public String getName() {
-    AbstractCustomization parent = getParentCustomization();
-    if (parent == null) {
-      return null;
-    } else {
-      return parent.getName();
-    }
-  }
-
   public String getContentId() {
-    AbstractCustomization parent = getParentCustomization();
+    AbstractCustomization parent = getParent();
     if (parent == null) {
       return null;
     } else {
@@ -60,7 +51,7 @@ public abstract class WorkspaceSpecialization extends WorkspaceCustomization {
   }
 
   public ContentType<Object> getType() {
-    AbstractCustomization parent = getParentCustomization();
+    AbstractCustomization parent = getParent();
     if (parent == null) {
       return null;
     } else {
@@ -68,7 +59,7 @@ public abstract class WorkspaceSpecialization extends WorkspaceCustomization {
     }
   }
 
-  public AbstractCustomization getParentCustomization() {
+  public AbstractCustomization getParent() {
     return getCustomization();
   }
 }
