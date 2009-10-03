@@ -34,7 +34,7 @@ public interface ContentProvider<S> {
    * @param contentId the content id
    * @return the content state
    */
-  GetState getState(String contentId);
+  GetState<S> getState(String contentId);
 
   /**
    * Combines several states into a single state representation.
