@@ -26,7 +26,7 @@ import org.chromattic.api.annotations.Property;
 @NodeMapping(name = "mop:gadget")
 public abstract class GadgetState {
 
-  @Property(name = "userprefs")
+  @Property(name = "prefs")
   public abstract String getUserPrefs();
 
   public abstract void setUserPrefs(String userPrefs);

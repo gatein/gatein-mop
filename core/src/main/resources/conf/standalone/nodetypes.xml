@@ -56,6 +56,17 @@
     </propertyDefinitions>
   </nodeType>
 
+  <nodeType name="mop:gadget" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:customizationstate</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="prefs" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
   <nodeType name="mop:contexttypecontainer" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>

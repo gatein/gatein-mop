@@ -60,7 +60,7 @@ public class GadgetContentProvider implements ContentProvider<Gadget> {
         if (state == null) {
           return;
         } else {
-          Node stateNode = node.addNode("state", "mop:portletpreferences");
+          Node stateNode = node.addNode("state", "mop:gadget");
           prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
         }
       }
