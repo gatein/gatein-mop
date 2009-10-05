@@ -51,14 +51,6 @@ public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, 
 
   public abstract void setCustomization(WorkspaceCustomization customization);
 
-/*
-  @ManyToOne(type = RelationshipType.PATH)
-  @MappedBy("relatedcustomization")
-  public abstract Customization getRelatedCustomization();
-
-  public abstract void setRelatedCustomization(Customization relatedCustomization);
-*/
-
   @Create
   public abstract WorkspaceClone create();
 
@@ -71,11 +63,6 @@ public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, 
     if (getCustomization() != null) {
       throw new IllegalStateException("Already customized");
     }
-/*
-    if (getRelatedCustomization() != null) {
-      throw new IllegalStateException("Referencing a customization context");
-    }
-*/
     WorkspaceClone customization = create();
     setCustomization(customization);
     customization.setMimeType(contentType.getMimeType());
@@ -92,10 +79,23 @@ public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, 
         throw new IllegalStateException("Already customized");
       }
 
-      //
+      // Get parent customization
+      WorkspaceCustomization parentCustomization = (WorkspaceCustomization)customization;
+
+      // Create
       WorkspaceSpecialization specialization = create2();
+
+      // Persist
       setCustomization(specialization);
-      specialization.setCustomization((WorkspaceCustomization)customization);
+
+      // Configuration
+      specialization.setMimeType(parentCustomization.getMimeType());
+      specialization.setContentId(parentCustomization.getContentId());
+
+      // Create relationship
+      specialization.setCustomization(parentCustomization);
+
+      //
       return (Customization<S>)specialization;
     } else {
       throw new IllegalArgumentException("implement customization of "+ customization);

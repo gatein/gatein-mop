@@ -165,7 +165,8 @@ public class ModelImpl implements Model {
   }
 
   private void inject(Object o, boolean persistent) {
-    if (o instanceof AbstractCustomization && persistent) {
+    if (o instanceof AbstractCustomization) {
+      ((AbstractCustomization)o).session = session;
       ((AbstractCustomization)o).registry = contentManagers;
     }
     if (o instanceof ContextSpecialization) {

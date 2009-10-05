@@ -66,9 +66,12 @@ public abstract class CustomizationContainer {
 
   public <S> Customization<S> customize(String name, Customization<S> customization) {
     Map<String, WorkspaceCustomization> contents = getCustomizations();
+    WorkspaceCustomization workspaceCustomization = (WorkspaceCustomization)customization;
     WorkspaceSpecialization content = createSpecialization();
     contents.put(name, content);
-    content.setCustomization((WorkspaceCustomization)customization);
+    content.setMimeType(workspaceCustomization.getMimeType());
+    content.setContentId(workspaceCustomization.getContentId());
+    content.setCustomization(workspaceCustomization);
     return (Customization<S>)content;
   }
 

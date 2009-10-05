@@ -20,8 +20,11 @@ package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.Property;
 import org.gatein.mop.api.content.CustomizationContext;
+import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.core.api.workspace.UIWindowImpl;
+import org.gatein.mop.core.api.content.ContentRegistration;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -29,13 +32,23 @@ import org.gatein.mop.core.api.workspace.UIWindowImpl;
  */
 public abstract class WorkspaceCustomization extends AbstractCustomization {
 
+  @Property(name = "mimetype")
+  public abstract String getMimeType();
+
+  public abstract void setMimeType(String mimeType);
+
+  @Property(name = "contentid")
+  public abstract String getContentId();
+
+  public abstract void setContentId(String contentId);
+
   @ManyToOne
   public abstract Object getOwner();
 
   @Destroy
   public abstract void doDestroy();
 
-  public CustomizationContext getContext() {
+  public final CustomizationContext getContext() {
     Object owner = getOwner();
     if (owner instanceof CustomizationContainer) {
       return ((CustomizationContainer)owner).getOwner();
@@ -43,6 +56,15 @@ public abstract class WorkspaceCustomization extends AbstractCustomization {
       return (UIWindowImpl)owner;
     } else {
       throw new AssertionError();
+    }
+  }
+
+  public final ContentType<Object> getType() {
+    ContentRegistration registration = registry.providers.get(getMimeType());
+    if (registration != null) {
+      return (ContentType<Object>)registration.getContentType();
+    } else {
+      return null;
     }
   }
 }

@@ -25,9 +25,7 @@ import org.chromattic.api.annotations.RelatedMappedBy;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.content.CustomizationContext;
-import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
-import org.gatein.mop.core.api.content.ContentRegistration;
 
 import java.util.Set;
 import java.util.Collections;
@@ -47,16 +45,6 @@ public abstract class WorkspaceClone extends WorkspaceCustomization {
 
   @Name
   public abstract String getFooName();
-
-  @Property(name = "mimetype")
-  public abstract String getMimeType();
-
-  public abstract void setMimeType(String mimeType);
-
-  @Property(name = "contentid")
-  public abstract String getContentId();
-
-  public abstract void setContentId(String contentId);
 
   @OneToMany(type = RelationshipType.PATH)
   @RelatedMappedBy("customization")
@@ -93,14 +81,5 @@ public abstract class WorkspaceClone extends WorkspaceCustomization {
 
     //
     doDestroy();
-  }
-
-  public ContentType<Object> getType() {
-    ContentRegistration registration = registry.providers.get(getMimeType());
-    if (registration != null) {
-      return (ContentType<Object>)registration.getContentType();
-    } else {
-      return null;
-    }
   }
 }

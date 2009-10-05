@@ -22,7 +22,6 @@ import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.RelationshipType;
-import org.gatein.mop.api.content.ContentType;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -39,24 +38,6 @@ public abstract class WorkspaceSpecialization extends WorkspaceCustomization {
 
   public void destroy() {
     doDestroy();
-  }
-
-  public String getContentId() {
-    AbstractCustomization parent = getParent();
-    if (parent == null) {
-      return null;
-    } else {
-      return parent.getContentId();
-    }
-  }
-
-  public ContentType<Object> getType() {
-    AbstractCustomization parent = getParent();
-    if (parent == null) {
-      return null;
-    } else {
-      return parent.getType();
-    }
   }
 
   public AbstractCustomization getParent() {

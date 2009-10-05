@@ -24,11 +24,12 @@ import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.core.api.content.CustomizationContextComparator;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
-import org.gatein.mop.core.api.workspace.content.portlet.PortletPreferencesState;
 import org.gatein.mop.spi.content.ContentProvider;
+import org.gatein.mop.spi.content.StateContainer;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.ChromatticSession;
 
 import java.util.Set;
 import java.util.Collection;
@@ -42,7 +43,7 @@ import java.util.Arrays;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class AbstractCustomization implements Customization<Object> {
+public abstract class AbstractCustomization implements Customization<Object>, StateContainer {
 
   /** . */
   protected static final CustomizationContextComparator comparator;
@@ -59,11 +60,8 @@ public abstract class AbstractCustomization implements Customization<Object> {
   /** . */
   public ContentManagerRegistry registry;
 
-  @OneToOne
-  @MappedBy("state")
-  public abstract CustomizationState getContentState();
-
-  public abstract void setContentState(CustomizationState state);
+  /** . */
+  public ChromatticSession session;
 
   @OneToOne
   @MappedBy("contexttypes")
@@ -75,19 +73,20 @@ public abstract class AbstractCustomization implements Customization<Object> {
   @Create
   abstract ContextSpecialization createContextSpecialization();
 
-  @Create
-  public abstract PortletPreferencesState createPreferenceState();
-
   public abstract CustomizationContext getContext();
 
   public abstract AbstractCustomization getParent();
 
   public Object getVirtualState() {
-    Object childPayload = null;
-    CustomizationState state = getContentState();
-    if (state != null) {
-      childPayload = state.getPayload();
-    }
+
+    ContentType contentType = getType();
+
+    String mimeType = contentType.getMimeType();
+
+    ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+
+    //
+    Object childPayload = contentProvider.getState(this);
 
     //
     Object parentPayload = null;
@@ -99,9 +98,6 @@ public abstract class AbstractCustomization implements Customization<Object> {
     //
     if (parentPayload != null) {
       if (childPayload != null) {
-        ContentType contentType = getType();
-        String mimeType = contentType.getMimeType();
-        ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
         return contentProvider.combine(Arrays.asList(parentPayload, childPayload));
       } else {
         return parentPayload;
@@ -112,29 +108,17 @@ public abstract class AbstractCustomization implements Customization<Object> {
   }
 
   public Object getState() {
-    CustomizationState state = getContentState();
-    if (state != null) {
-      return state.getPayload();
-    } else {
-      return null;
-    }
+    ContentType contentType = getType();
+    String mimeType = contentType.getMimeType();
+    ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+    return contentProvider.getState(this);
   }
 
   public void setState(Object state) {
-    if (state == null) {
-      setContentState(null);
-    } else {
-      CustomizationState contentState = getContentState();
-
-      //
-      if (contentState == null) {
-        contentState = createPreferenceState();
-        setContentState(contentState);
-      }
-
-      //
-      contentState.setPayload(state);
-    }
+    ContentType contentType = getType();
+    String mimeType = contentType.getMimeType();
+    ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+    contentProvider.setState(this, state);
   }
 
   public Customization<Object> getCustomization(Set<CustomizationContext> contexts) {

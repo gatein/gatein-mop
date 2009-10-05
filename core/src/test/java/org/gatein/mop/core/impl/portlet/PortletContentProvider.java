@@ -20,9 +20,16 @@ package org.gatein.mop.core.impl.portlet;
 
 import org.gatein.mop.spi.content.ContentProvider;
 import org.gatein.mop.spi.content.GetState;
+import org.gatein.mop.spi.content.StateContainer;
 import org.gatein.mop.core.content.portlet.Preference;
 import org.gatein.mop.core.content.portlet.Preferences;
+import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
+import org.gatein.mop.core.api.workspace.content.portlet.PortletPreferencesState;
+import org.chromattic.api.ChromatticSession;
+import org.chromattic.api.UndeclaredRepositoryException;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -68,5 +75,62 @@ public class PortletContentProvider implements ContentProvider<Preferences> {
 
     //
     return new Preferences(entries);
+  }
+
+  public void setState(StateContainer container, Preferences state) {
+    try {
+      ChromatticSession session = ((AbstractCustomization)container).session;
+      String containerId = session.getId(container);
+      Node node = session.getJCRSession().getNodeByUUID(containerId);
+
+      //
+      PortletPreferencesState prefs;
+      if (node.hasNode("state")) {
+        Node stateNode = node.getNode("state");
+        prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
+        if (state == null) {
+          session.remove(prefs);
+          return;
+        }
+      } else {
+        if (state == null) {
+          return;
+        } else {
+          Node stateNode = node.addNode("state", "mop:portletpreferences");
+          prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
+        }
+      }
+
+      //
+      prefs.setPayload(state);
+    }
+    catch (RepositoryException e) {
+      throw new UndeclaredRepositoryException(e);
+    }
+  }
+
+  public Preferences getState(StateContainer container) {
+    try {
+      ChromatticSession session = ((AbstractCustomization)container).session;
+      String containerId = session.getId(container);
+      Node node = session.getJCRSession().getNodeByUUID(containerId);
+
+      //
+      PortletPreferencesState prefs;
+      if (node.hasNode("state")) {
+        Node stateNode = node.getNode("state");
+        prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
+        return (Preferences)prefs.getPayload();
+      } else {
+        return null;
+      }
+    }
+    catch (RepositoryException e) {
+      throw new UndeclaredRepositoryException(e);
+    }
+  }
+
+  public Class<Preferences> getStateType() {
+    return Preferences.class;
   }
 }

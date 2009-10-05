@@ -113,12 +113,6 @@
     <supertypes>
       <supertype>mop:customization</supertype>
     </supertypes>
-  </nodeType>
-
-  <nodeType name="mop:workspaceclone" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>mop:workspacecustomization</supertype>
-    </supertypes>
     <propertyDefinitions>
       <propertyDefinition name="contentid" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
@@ -127,6 +121,12 @@
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:workspaceclone" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:workspacecustomization</supertype>
+    </supertypes>
   </nodeType>
 
   <nodeType name="mop:workspacespecialization" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
