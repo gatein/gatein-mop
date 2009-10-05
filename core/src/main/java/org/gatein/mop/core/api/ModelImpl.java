@@ -40,6 +40,7 @@ import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
 import org.gatein.mop.api.content.CustomizationContext;
+import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.WorkspaceObject;
@@ -140,15 +141,19 @@ public class ModelImpl implements Model {
     public void created(Object o) {
       inject(o, false);
     }
-    public void loaded(Object o) {
+    public void loaded(String id, String path, String name, Object o) {
       inject(o, true);
     }
-    public void persisted(Object o) {
+    public void added(String id, String path, String name, Object o) {
       inject(o, true);
     }
-    public void removed(Object o) {
+    public void removed(String id, String path, String name, Object o) {
     }
   };
+
+  public Customization<?> findCustomizationById(String id) {
+    return session.findById(Customization.class, id);
+  }
 
   public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement) {
     Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);

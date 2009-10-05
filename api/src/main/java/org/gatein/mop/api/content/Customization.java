@@ -31,6 +31,13 @@ import java.util.Collection;
 public interface Customization<S> {
 
   /**
+   * Returns the customization id
+   *
+   * @return the customization id
+   */
+  String getId();
+
+  /**
    * Returns the content id this customization refers to.
    *
    * @return the content id

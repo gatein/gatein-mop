@@ -21,6 +21,7 @@ package org.gatein.mop.api;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
+import org.gatein.mop.api.content.Customization;
 
 import java.util.Iterator;
 
@@ -54,6 +55,8 @@ public interface Model {
   <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement);
 
   String pathOf(WorkspaceObject o);
+
+  Customization<?> findCustomizationById(String id);
 
   void save();
 

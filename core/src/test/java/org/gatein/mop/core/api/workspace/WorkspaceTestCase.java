@@ -208,7 +208,7 @@ public class WorkspaceTestCase extends AbstractPOMTestCase {
   public void testComponentOrder() {
     ModelImpl pom = pomService.getModel();
     Workspace workspace = pom.getWorkspace();
-    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal2");
     Page root = portal.getRootPage();
 
     UIContainer container = root.getRootComponent();

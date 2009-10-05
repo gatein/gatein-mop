@@ -29,6 +29,7 @@ import org.gatein.mop.spi.content.StateContainer;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.Id;
 import org.chromattic.api.ChromatticSession;
 
 import java.util.Set;
@@ -62,6 +63,9 @@ public abstract class AbstractCustomization implements Customization<Object>, St
 
   /** . */
   public ChromatticSession session;
+
+  @Id
+  public abstract String getId();
 
   @OneToOne
   @MappedBy("contexttypes")
