@@ -16,7 +16,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.core.impl.portlet;
+package org.gatein.mop.core.content.portlet;
 
 import org.gatein.mop.spi.content.ContentProvider;
 import org.gatein.mop.spi.content.GetState;
@@ -24,7 +24,7 @@ import org.gatein.mop.spi.content.StateContainer;
 import org.gatein.mop.core.content.portlet.Preference;
 import org.gatein.mop.core.content.portlet.Preferences;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
-import org.gatein.mop.core.api.workspace.content.portlet.PortletPreferencesState;
+import org.gatein.mop.core.content.portlet.PortletPreferencesState;
 import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.UndeclaredRepositoryException;
 

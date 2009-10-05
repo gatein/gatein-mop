@@ -43,8 +43,13 @@ import org.gatein.mop.core.api.workspace.content.ContextTypeContainer;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
 import org.gatein.mop.core.api.workspace.content.WorkspaceClone;
 import org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization;
-import org.gatein.mop.core.api.workspace.content.portlet.PortletPreferencesState;
-import org.gatein.mop.core.api.workspace.content.portlet.PortletPreferenceState;
+import org.gatein.mop.core.content.portlet.PortletPreferencesState;
+import org.gatein.mop.core.content.portlet.PortletPreferenceState;
+import org.gatein.mop.core.content.portlet.Preferences;
+import org.gatein.mop.core.content.portlet.PortletContentProvider;
+import org.gatein.mop.core.content.gadget.GadgetState;
+import org.gatein.mop.core.content.gadget.Gadget;
+import org.gatein.mop.core.content.gadget.GadgetContentProvider;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextProviderRegistry;
 
@@ -113,8 +118,13 @@ public class MOPService {
     builder.add(ContextSpecialization.class);
     builder.add(WorkspaceClone.class);
     builder.add(WorkspaceSpecialization.class);
+
+    //
     builder.add(PortletPreferencesState.class);
     builder.add(PortletPreferenceState.class);
+
+    //
+    builder.add(GadgetState.class);
 
     //
     chrome = builder.build();
@@ -123,8 +133,13 @@ public class MOPService {
     CustomizationContextProviderRegistry customizationContextResolvers = new CustomizationContextProviderRegistry();
 
     //
+    ContentManagerRegistry cmr = new ContentManagerRegistry();
+    cmr.register(Preferences.CONTENT_TYPE, new PortletContentProvider());
+    cmr.register(Gadget.CONTENT_TYPE, new GadgetContentProvider());
+
+    //
     this.chrome = builder.build();
-    this.contentManagerRegistry = new ContentManagerRegistry();
+    this.contentManagerRegistry = cmr;
     this.customizationContextResolvers = customizationContextResolvers;
   }
 

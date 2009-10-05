@@ -24,7 +24,7 @@ import java.util.Collections;
 
 import org.gatein.mop.core.content.portlet.Preference;
 import org.gatein.mop.core.content.portlet.Preferences;
-import org.gatein.mop.core.impl.portlet.PortletContentProvider;
+import org.gatein.mop.core.content.portlet.PortletContentProvider;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -48,8 +48,8 @@ public abstract class AbstractPOMTestCase extends TestCase {
     //
     pomService.start();
 
-    //
-    pomService.getContentManagerRegistry().register(Preferences.CONTENT_TYPE, portletContentProvider);
+    // Not needed for now
+    // pomService.getContentManagerRegistry().register(Preferences.CONTENT_TYPE, portletContentProvider);
 
     //
     this.pomService = pomService;
