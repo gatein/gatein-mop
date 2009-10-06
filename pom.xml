@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.gatein</groupId>
     <artifactId>gatein-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-Beta01</version>
   </parent>
 
   <!-- ****************** -->
@@ -66,7 +66,7 @@
       <dependency>
         <groupId>org.gatein</groupId>
         <artifactId>gatein-dep</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-Beta01</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -92,49 +92,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <properties>
+    <!-- ************** -->
+    <!-- Build settings -->
+    <!-- ************** -->
+
+    <!-- maven-enforcer-plugin -->
+    <jdk.min.version>1.6</jdk.min.version>
+        
+  </properties>
 
   <!-- **************** -->
   <!-- Build Definition -->
   <!-- **************** -->
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>enforce-java-version</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireJavaVersion>
-                  <message>Even if deliveries are checked to be compatible with Java 5, MOP requires Java 6 to build.</message>
-                  <version>1.6</version>
-                </requireJavaVersion>
-              </rules>
-            </configuration>
-          </execution>
-          <execution>
-            <id>enforce-maven-version</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <message>To build this project Maven 2.2.1 (or upper) is required. Please install it.</message>
-                  <version>2.2.1</version>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
   
   <repositories>
     <repository>
@@ -159,106 +130,6 @@
       </releases>
     </repository>
   </repositories>
-
-  <profiles>
-    <profile>
-      <id>release</id>
-      <repositories>
-        <!--  Used by animal-sniffer -->
-        <repository>
-          <id>maven2-repository.dev.java.net</id>
-          <name>Java.net Repository for Maven</name>
-          <url>http://download.java.net/maven/2/</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <!--  Used by animal-sniffer -->
-        <pluginRepository>
-          <id>maven2-repository.dev.java.net</id>
-          <name>Java.net Repository for Maven</name>
-          <url>http://download.java.net/maven/2/</url>
-        </pluginRepository>
-      </pluginRepositories>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-jar-plugin</artifactId>
-              <configuration>
-                <archive>
-                  <!-- Additional entries in Manifest -->
-                  <manifestEntries>
-                    <SCM-Revision>${buildNumber}</SCM-Revision>
-                  </manifestEntries>
-                </archive>
-              </configuration>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <configuration>
-                <archive>
-                  <!-- Additional entries in Manifest -->
-                  <manifestEntries>
-                    <SCM-Revision>${buildNumber}</SCM-Revision>
-                  </manifestEntries>
-                </archive>
-              </configuration>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-source-plugin</artifactId>
-              <configuration>
-                <archive>
-                  <!-- Additional entries in Manifest -->
-                  <manifestEntries>
-                    <SCM-Revision>${buildNumber}</SCM-Revision>
-                  </manifestEntries>
-                </archive>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>buildnumber-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <!-- Requires Maven 2.1+ -->
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>create</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.jvnet</groupId>
-            <artifactId>animal-sniffer</artifactId>
-            <version>1.2</version>
-            <executions>
-              <execution>
-                <id>check-java-compatibility</id>
-                <phase>compile</phase>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-                <configuration>
-                  <signature>
-                    <groupId>org.jvnet.animal-sniffer</groupId>
-                    <artifactId>java1.5</artifactId>
-                    <version>1.0</version>
-                  </signature>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
   <modules>
     <module>api</module>
