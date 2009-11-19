@@ -37,21 +37,8 @@
   <version>1.0.0-Beta10-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>MOP</name>
+  <name>GateIn - MOP</name>
   <description>Model Object for Portal</description>
-  <url>http://www.exoplatform.com</url>
-
-  <organization>
-    <name>eXo Platform SAS</name>
-    <url>http://www.exoplatform.com</url>
-  </organization>
-
-  <licenses>
-    <license>
-      <name>LGPL, version 2.1</name>
-      <url>http://www.opensource.org/licenses/lgpl-license.php</url>
-    </license>
-  </licenses>
 
   <scm>
     <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/trunk/</connection>
