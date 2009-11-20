@@ -27,16 +27,6 @@ import java.util.List;
 public interface ContentProvider<S> {
 
   /**
-   * <p>Returns the state wrapper associated with the specified content or null if no relationship can be
-   * done with the specifiec content. When the <tt>GetState</tt> response is returned with a null state
-   * it means that the content is found but is stateless.</p>
-   *
-   * @param contentId the content id
-   * @return the content state
-   */
-  GetState<S> getState(String contentId);
-
-  /**
    * Combines several states into a single state representation.
    *
    * @param states the various states to combine

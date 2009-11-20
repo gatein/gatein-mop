@@ -16,15 +16,11 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.core.content.portlet;
+package org.gatein.mop.core.support.content.portlet;
 
 import org.gatein.mop.spi.content.ContentProvider;
-import org.gatein.mop.spi.content.GetState;
 import org.gatein.mop.spi.content.StateContainer;
-import org.gatein.mop.core.content.portlet.Preference;
-import org.gatein.mop.core.content.portlet.Preferences;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
-import org.gatein.mop.core.content.portlet.PortletPreferencesState;
 import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.UndeclaredRepositoryException;
 
@@ -39,26 +35,6 @@ import java.util.List;
  * @version $Revision$
  */
 public class PortletContentProvider implements ContentProvider<Preferences> {
-
-  /** . */
-  private Map<String, PortletDefinition> definitions;
-
-  public PortletContentProvider() {
-    definitions = new HashMap<String, PortletDefinition>();
-  }
-
-  public void addPortletDefinition(String name, Preferences preferences) {
-    definitions.put(name, new PortletDefinition(name, preferences));
-  }
-
-  public GetState<Preferences> getState(String contentId) {
-    PortletDefinition def = definitions.get(contentId);
-    if (def != null) {
-      return new GetState<Preferences>(def.getPreferences());
-    } else {
-      return null;
-    }
-  }
 
   public Preferences combine(List<Preferences> states) {
     Map<String, Preference> entries = new HashMap<String, Preference>();

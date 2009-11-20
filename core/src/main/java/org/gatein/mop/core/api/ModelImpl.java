@@ -56,136 +56,174 @@ import java.util.HashMap;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ModelImpl implements Model {
+public class ModelImpl implements Model
+{
 
-  /** . */
-  private static final Map<ObjectType<?>, Class<? extends WorkspaceObjectImpl>> typeToClassImpl;
+   /** . */
+   private static final Map<ObjectType<?>, Class<? extends WorkspaceObjectImpl>> typeToClassImpl;
 
-  static {
-    Map<ObjectType<?>, Class<? extends WorkspaceObjectImpl>> tmp = new HashMap<ObjectType<?>, Class<? extends WorkspaceObjectImpl>>();
-    tmp.put(ObjectType.ANY, WorkspaceObjectImpl.class);
-    tmp.put(ObjectType.WORKSPACE, WorkspaceImpl.class);
-    tmp.put(ObjectType.SITE, SiteImpl.class);
-    tmp.put(ObjectType.PORTAL_SITE, PortalSite.class);
-    tmp.put(ObjectType.GROUP_SITE, GroupSite.class);
-    tmp.put(ObjectType.USER_SITE, UserSite.class);
-    tmp.put(ObjectType.SHARED_SITE, SharedSite.class);
-    tmp.put(ObjectType.PAGE, PageImpl.class);
-    tmp.put(ObjectType.NAVIGATION, NavigationImpl.class);
-    tmp.put(ObjectType.COMPONENT, UIComponentImpl.class);
-    tmp.put(ObjectType.BODY, UIBodyImpl.class);
-    tmp.put(ObjectType.CONTAINER, UIContainerImpl.class);
-    tmp.put(ObjectType.WINDOW, UIWindowImpl.class);
-    tmp.put(ObjectType.PAGE_LINK, PageLinkImpl.class);
-    tmp.put(ObjectType.URL_LINK, URLLinkImpl.class);
-    typeToClassImpl = tmp;
-  }
+   static
+   {
+      Map<ObjectType<?>, Class<? extends WorkspaceObjectImpl>> tmp = new HashMap<ObjectType<?>, Class<? extends WorkspaceObjectImpl>>();
+      tmp.put(ObjectType.ANY, WorkspaceObjectImpl.class);
+      tmp.put(ObjectType.WORKSPACE, WorkspaceImpl.class);
+      tmp.put(ObjectType.SITE, SiteImpl.class);
+      tmp.put(ObjectType.PORTAL_SITE, PortalSite.class);
+      tmp.put(ObjectType.GROUP_SITE, GroupSite.class);
+      tmp.put(ObjectType.USER_SITE, UserSite.class);
+      tmp.put(ObjectType.SHARED_SITE, SharedSite.class);
+      tmp.put(ObjectType.PAGE, PageImpl.class);
+      tmp.put(ObjectType.NAVIGATION, NavigationImpl.class);
+      tmp.put(ObjectType.COMPONENT, UIComponentImpl.class);
+      tmp.put(ObjectType.BODY, UIBodyImpl.class);
+      tmp.put(ObjectType.CONTAINER, UIContainerImpl.class);
+      tmp.put(ObjectType.WINDOW, UIWindowImpl.class);
+      tmp.put(ObjectType.PAGE_LINK, PageLinkImpl.class);
+      tmp.put(ObjectType.URL_LINK, URLLinkImpl.class);
+      typeToClassImpl = tmp;
+   }
 
-  /** . */
-  private final ChromatticSession session;
+   /** . */
+   private final ChromatticSession session;
 
-  /** . */
-  private final ContentManagerRegistry contentManagers;
+   /** . */
+   private final ContentManagerRegistry contentManagers;
 
-  /** . */
-  private final CustomizationContextProviderRegistry customizationContextResolvers;
+   /** . */
+   private final CustomizationContextProviderRegistry customizationContextResolvers;
 
-  /** . */
-  private WorkspaceImpl workspace;
+   /** . */
+   private WorkspaceImpl workspace;
 
-  /** . */
-  private final CustomizationContextResolver customizationContextResolver = new CustomizationContextResolver() {
-    public CustomizationContext resolve(String contextType, String contextId) {
-      if (WorkspaceCustomizationContext.TYPE.equals(contextType)) {
-        return findObjectById(ObjectType.WINDOW, contextId);
-      } else {
-        return customizationContextResolvers.resolve(contextType, contextId);
+   /** . */
+   private final CustomizationContextResolver customizationContextResolver = new CustomizationContextResolver()
+   {
+      public CustomizationContext resolve(String contextType, String contextId)
+      {
+         if (WorkspaceCustomizationContext.TYPE.equals(contextType))
+         {
+            return findObjectById(ObjectType.WINDOW, contextId);
+         }
+         else
+         {
+            return customizationContextResolvers.resolve(contextType, contextId);
+         }
       }
-    }
-  };
+   };
 
-  public ModelImpl(ChromatticSession session, ContentManagerRegistry contentManagers, CustomizationContextProviderRegistry customizationContextResolvers) {
+   public ModelImpl(ChromatticSession session, ContentManagerRegistry contentManagers, CustomizationContextProviderRegistry customizationContextResolvers)
+   {
 
-    //
-    this.session = session;
-    this.contentManagers = contentManagers;
-    this.customizationContextResolvers = customizationContextResolvers;
+      //
+      this.session = session;
+      this.contentManagers = contentManagers;
+      this.customizationContextResolvers = customizationContextResolvers;
 
-    //
-    session.addEventListener(contextualizer);
-  }
+      //
+      session.addEventListener(contextualizer);
+   }
 
-  public Workspace getWorkspace() {
-    return getWorkspaceImpl();
-  }
+   public ChromatticSession getSession()
+   {
+      return session;
+   }
 
-  private WorkspaceImpl getWorkspaceImpl() {
-    if (workspace == null) {
-      workspace = session.findByPath(WorkspaceImpl.class, "workspace");
-      if (workspace == null) {
-        workspace = session.insert(WorkspaceImpl.class, "workspace");
+   public Workspace getWorkspace()
+   {
+      return getWorkspaceImpl();
+   }
+
+   private WorkspaceImpl getWorkspaceImpl()
+   {
+      if (workspace == null)
+      {
+         workspace = session.findByPath(WorkspaceImpl.class, "workspace");
+         if (workspace == null)
+         {
+            workspace = session.insert(WorkspaceImpl.class, "workspace");
+         }
       }
-    }
-    return workspace;
-  }
+      return workspace;
+   }
 
-  public void save() {
-    session.save();
-  }
+   public void save()
+   {
+      session.save();
+   }
 
-  public void close() {
-    session.close();
-  }
+   public void close()
+   {
+      session.close();
+   }
 
-  private final LifeCycleListener contextualizer = new LifeCycleListener() {
-    public void created(Object o) {
-      inject(o, false);
-    }
-    public void loaded(String id, String path, String name, Object o) {
-      inject(o, true);
-    }
-    public void added(String id, String path, String name, Object o) {
-      inject(o, true);
-    }
-    public void removed(String id, String path, String name, Object o) {
-    }
-  };
+   private final LifeCycleListener contextualizer = new LifeCycleListener()
+   {
+      public void created(Object o)
+      {
+         inject(o, false);
+      }
 
-  public Customization<?> findCustomizationById(String id) {
-    return session.findById(Customization.class, id);
-  }
+      public void loaded(String id, String path, String name, Object o)
+      {
+         inject(o, true);
+      }
 
-  public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement) {
-    Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
-    return session.createQueryBuilder().from(impl).<O>where(statement).get().iterator();
-  }
+      public void added(String id, String path, String name, Object o)
+      {
+         inject(o, true);
+      }
 
-  public String pathOf(WorkspaceObject o) {
-    return session.getPath(o);
-  }
+      public void removed(String id, String path, String name, Object o)
+      {
+      }
+   };
 
-  public <O extends WorkspaceObject> O findObjectByPath(ObjectType<? extends O> type, String path) {
-    Class<? extends O> t = type.getJavaType();
-    return session.findByPath(t, path);
-  }
+   public Customization<?> findCustomizationById(String id)
+   {
+      return session.findById(Customization.class, id);
+   }
 
-  private void inject(Object o, boolean persistent) {
-    if (o instanceof AbstractCustomization) {
-      ((AbstractCustomization)o).session = session;
-      ((AbstractCustomization)o).registry = contentManagers;
-    }
-    if (o instanceof ContextSpecialization) {
-      ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
-    }
-  }
+   public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement)
+   {
+      Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
+      return session.createQueryBuilder().from(impl).<O>where(statement).get().iterator();
+   }
 
-  public <O extends WorkspaceObject> O findObjectById(ObjectType<O> type, String id) {
-    Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
-    WorkspaceObjectImpl object = session.findById(impl, id);
-    if (object != null) {
-      return type.cast(object);
-    } else {
-      return null;
-    }
-  }
+   public String pathOf(WorkspaceObject o)
+   {
+      return session.getPath(o);
+   }
+
+   public <O extends WorkspaceObject> O findObjectByPath(ObjectType<? extends O> type, String path)
+   {
+      Class<? extends O> t = type.getJavaType();
+      return session.findByPath(t, path);
+   }
+
+   private void inject(Object o, boolean persistent)
+   {
+      if (o instanceof AbstractCustomization)
+      {
+         ((AbstractCustomization)o).session = session;
+         ((AbstractCustomization)o).registry = contentManagers;
+      }
+      if (o instanceof ContextSpecialization)
+      {
+         ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
+      }
+   }
+
+   public <O extends WorkspaceObject> O findObjectById(ObjectType<O> type, String id)
+   {
+      Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
+      WorkspaceObjectImpl object = session.findById(impl, id);
+      if (object != null)
+      {
+         return type.cast(object);
+      }
+      else
+      {
+         return null;
+      }
+   }
 }

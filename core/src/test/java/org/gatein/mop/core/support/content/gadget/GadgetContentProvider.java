@@ -14,10 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.gatein.mop.core.content.gadget;
+package org.gatein.mop.core.support.content.gadget;
 
 import org.gatein.mop.spi.content.ContentProvider;
-import org.gatein.mop.spi.content.GetState;
 import org.gatein.mop.spi.content.StateContainer;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
 import org.chromattic.api.ChromatticSession;
@@ -32,10 +31,6 @@ import java.util.List;
  * @version $Revision$
  */
 public class GadgetContentProvider implements ContentProvider<Gadget> {
-
-  public GetState<Gadget> getState(String contentId) {
-    throw new UnsupportedOperationException();
-  }
 
   public Gadget combine(List<Gadget> states) {
     throw new UnsupportedOperationException();

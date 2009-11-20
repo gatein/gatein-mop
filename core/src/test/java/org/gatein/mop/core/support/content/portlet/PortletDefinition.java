@@ -16,42 +16,32 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.core.content.portlet;
+package org.gatein.mop.core.support.content.portlet;
 
-import org.chromattic.api.annotations.NodeMapping;
-import org.chromattic.api.annotations.ManyToOne;
-import org.chromattic.api.annotations.Name;
-import org.chromattic.api.annotations.Property;
-
-import java.util.List;
+import org.gatein.mop.core.support.content.portlet.Preferences;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:portletpreference")
-public abstract class PortletPreferenceState {
+public class PortletDefinition {
 
-  @ManyToOne
-  public abstract PortletPreferenceState getParent();
+  /** . */
+  private final String name;
 
-  @Name
-  public abstract String getName();
+  /** . */
+  private final Preferences preferences;
 
-  @Property(name = "value")
-  public abstract List<String> getValue();
+  public PortletDefinition(String name, Preferences preferences) {
+    this.name = name;
+    this.preferences = preferences;
+  }
 
-  public abstract void setValue(List<String> value);
+  public String getName() {
+    return name;
+  }
 
-  @Property(name = "value")
-  public abstract List<String> getValues();
-
-  public abstract void setValues(List<String> value);
-
-  @Property(name = "readonly")
-  public abstract boolean getReadOnly();
-
-  public abstract void setReadOnly(boolean readOnly);
-
-
+  public Preferences getPreferences() {
+    return preferences;
+  }
 }

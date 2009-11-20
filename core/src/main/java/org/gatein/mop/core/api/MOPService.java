@@ -43,13 +43,6 @@ import org.gatein.mop.core.api.workspace.content.ContextTypeContainer;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
 import org.gatein.mop.core.api.workspace.content.WorkspaceClone;
 import org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization;
-import org.gatein.mop.core.content.portlet.PortletPreferencesState;
-import org.gatein.mop.core.content.portlet.PortletPreferenceState;
-import org.gatein.mop.core.content.portlet.Preferences;
-import org.gatein.mop.core.content.portlet.PortletContentProvider;
-import org.gatein.mop.core.content.gadget.GadgetState;
-import org.gatein.mop.core.content.gadget.Gadget;
-import org.gatein.mop.core.content.gadget.GadgetContentProvider;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextProviderRegistry;
 
@@ -57,97 +50,113 @@ import org.gatein.mop.core.api.content.CustomizationContextProviderRegistry;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class MOPService {
+public class MOPService
+{
 
-  /** . */
-  private Chromattic chrome;
+   /** . */
+   private Chromattic chrome;
 
-  /** . */
-  private ContentManagerRegistry contentManagerRegistry;
+   /** . */
+   private ContentManagerRegistry contentManagerRegistry;
 
-  /** . */
-  private CustomizationContextProviderRegistry customizationContextResolvers;
+   /** . */
+   private CustomizationContextProviderRegistry customizationContextResolvers;
 
-  /** . */
-  private final ChromatticBuilder builder;
+   /** . */
+   private final ChromatticBuilder builder;
 
-  public MOPService() {
-    ChromatticBuilder builder = ChromatticBuilder.create();
-//    builder.setOption(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.cglib.CGLibInstrumentor");
-    builder.setOption(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
-    builder.setOption(ChromatticBuilder.OBJECT_FORMATTER_CLASSNAME, MOPFormatter.class.getName());
+   public MOPService()
+   {
+      ChromatticBuilder builder = ChromatticBuilder.create();
+      builder.setOption(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
+      builder.setOption(ChromatticBuilder.OBJECT_FORMATTER_CLASSNAME, MOPFormatter.class.getName());
 
-    //
-    this.builder = builder;
-  }
+      //
+      this.builder = builder;
+   }
 
-  public <T> void setOption(ChromatticBuilder.Option<T> option, T value) {
-    builder.setOption(option, value);
-  }
+   public CustomizationContextProviderRegistry getCustomizationContextResolvers()
+   {
+      return customizationContextResolvers;
+   }
 
-  public CustomizationContextProviderRegistry getCustomizationContextResolvers() {
-    return customizationContextResolvers;
-  }
+   public ContentManagerRegistry getContentManagerRegistry()
+   {
+      return contentManagerRegistry;
+   }
 
-  public ContentManagerRegistry getContentManagerRegistry() {
-    return contentManagerRegistry;
-  }
+   protected void configure(CustomizationContextProviderRegistry registry)
+   {
+      //
+   }
 
-  public void start() throws Exception {
-    builder.add(WorkspaceImpl.class);
-    builder.add(UIContainerImpl.class);
-    builder.add(UIWindowImpl.class);
-    builder.add(UIBodyImpl.class);
-    builder.add(PageImpl.class);
-    builder.add(PageContainer.class);
-    builder.add(NavigationImpl.class);
-    builder.add(NavigationContainer.class);
-    builder.add(PageLinkImpl.class);
-    builder.add(URLLinkImpl.class);
-    builder.add(PortalSiteContainer.class);
-    builder.add(PortalSite.class);
-    builder.add(GroupSiteContainer.class);
-    builder.add(GroupSite.class);
-    builder.add(UserSiteContainer.class);
-    builder.add(UserSite.class);
+   protected void configure(ChromatticBuilder builder)
+   {
+      //
+   }
 
-    //
-    builder.add(CustomizationContainer.class);
-    builder.add(ContextTypeContainer.class);
-    builder.add(ContextType.class);
-    builder.add(ContextSpecialization.class);
-    builder.add(WorkspaceClone.class);
-    builder.add(WorkspaceSpecialization.class);
+   protected void configure(ContentManagerRegistry registry)
+   {
+      //
+   }
 
-    //
-    builder.add(PortletPreferencesState.class);
-    builder.add(PortletPreferenceState.class);
+   public void start() throws Exception
+   {
+      builder.add(WorkspaceImpl.class);
+      builder.add(UIContainerImpl.class);
+      builder.add(UIWindowImpl.class);
+      builder.add(UIBodyImpl.class);
+      builder.add(PageImpl.class);
+      builder.add(PageContainer.class);
+      builder.add(NavigationImpl.class);
+      builder.add(NavigationContainer.class);
+      builder.add(PageLinkImpl.class);
+      builder.add(URLLinkImpl.class);
+      builder.add(PortalSiteContainer.class);
+      builder.add(PortalSite.class);
+      builder.add(GroupSiteContainer.class);
+      builder.add(GroupSite.class);
+      builder.add(UserSiteContainer.class);
+      builder.add(UserSite.class);
 
-    //
-    builder.add(GadgetState.class);
+      //
+      builder.add(CustomizationContainer.class);
+      builder.add(ContextTypeContainer.class);
+      builder.add(ContextType.class);
+      builder.add(ContextSpecialization.class);
+      builder.add(WorkspaceClone.class);
+      builder.add(WorkspaceSpecialization.class);
 
-    //
-    chrome = builder.build();
-    
-    //
-    CustomizationContextProviderRegistry customizationContextResolvers = new CustomizationContextProviderRegistry();
+      //
+      configure(builder);
 
-    //
-    ContentManagerRegistry cmr = new ContentManagerRegistry();
-    cmr.register(Preferences.CONTENT_TYPE, new PortletContentProvider());
-    cmr.register(Gadget.CONTENT_TYPE, new GadgetContentProvider());
+      //
+      chrome = builder.build();
 
-    //
-    this.chrome = builder.build();
-    this.contentManagerRegistry = cmr;
-    this.customizationContextResolvers = customizationContextResolvers;
-  }
+      //
+      CustomizationContextProviderRegistry customizationContextResolvers = new CustomizationContextProviderRegistry();
 
-  public ModelImpl getModel() {
-    ChromatticSession chromeSession = chrome.openSession();
-    return new ModelImpl(
-      chromeSession,
-      contentManagerRegistry,
-      customizationContextResolvers);
-  }
+      //
+      configure(customizationContextResolvers);
+
+      //
+      ContentManagerRegistry cmr = new ContentManagerRegistry();
+
+      //
+      configure(cmr);
+
+      //
+      this.chrome = builder.build();
+      this.contentManagerRegistry = cmr;
+      this.customizationContextResolvers = customizationContextResolvers;
+   }
+
+   public ModelImpl getModel()
+   {
+      ChromatticSession chromeSession = chrome.openSession();
+      return new ModelImpl(
+         chromeSession,
+         contentManagerRegistry,
+         customizationContextResolvers);
+   }
 }

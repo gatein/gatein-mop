@@ -16,22 +16,42 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.spi.content;
+package org.gatein.mop.core.support.content.portlet;
+
+import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.ManyToOne;
+import org.chromattic.api.annotations.Name;
+import org.chromattic.api.annotations.Property;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class GetState<S> {
+@NodeMapping(name = "mop:portletpreference")
+public abstract class PortletPreferenceState {
 
-  /** . */
-  private final S state;
+  @ManyToOne
+  public abstract PortletPreferenceState getParent();
 
-  public GetState(S state) {
-    this.state = state;
-  }
+  @Name
+  public abstract String getName();
 
-  public S getState() {
-    return state;
-  }
+  @Property(name = "value")
+  public abstract List<String> getValue();
+
+  public abstract void setValue(List<String> value);
+
+  @Property(name = "value")
+  public abstract List<String> getValues();
+
+  public abstract void setValues(List<String> value);
+
+  @Property(name = "readonly")
+  public abstract boolean getReadOnly();
+
+  public abstract void setReadOnly(boolean readOnly);
+
+
 }

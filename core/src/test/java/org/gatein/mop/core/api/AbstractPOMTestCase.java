@@ -22,9 +22,10 @@ import junit.framework.TestCase;
 
 import java.util.Collections;
 
-import org.gatein.mop.core.content.portlet.Preference;
-import org.gatein.mop.core.content.portlet.Preferences;
-import org.gatein.mop.core.content.portlet.PortletContentProvider;
+import org.gatein.mop.core.support.TestMOPService;
+import org.gatein.mop.core.support.content.portlet.Preference;
+import org.gatein.mop.core.support.content.portlet.Preferences;
+import org.gatein.mop.core.support.content.portlet.PortletContentProvider;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -40,10 +41,9 @@ public abstract class AbstractPOMTestCase extends TestCase {
     Preferences weatherPreferences = new Preferences(Collections.<String, Preference>singletonMap(
       "zip", new Preference("zip", Collections.singletonList("marseille"), false)));
     PortletContentProvider portletContentProvider = new PortletContentProvider();
-    portletContentProvider.addPortletDefinition("WeatherPortlet", weatherPreferences);
 
     //
-    MOPService pomService = new MOPService();
+    MOPService pomService = new TestMOPService();
 
     //
     pomService.start();

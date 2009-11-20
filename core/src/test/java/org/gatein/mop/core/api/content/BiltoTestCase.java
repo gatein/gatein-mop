@@ -20,7 +20,7 @@ package org.gatein.mop.core.api.content;
 
 import org.gatein.mop.core.api.AbstractPOMTestCase;
 import org.gatein.mop.api.content.ContentType;
-import org.gatein.mop.core.content.portlet.Preferences;
+import org.gatein.mop.core.support.content.portlet.Preferences;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>

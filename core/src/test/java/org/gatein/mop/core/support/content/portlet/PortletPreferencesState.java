@@ -16,16 +16,16 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.core.content.portlet;
+package org.gatein.mop.core.support.content.portlet;
 
 import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.RelatedMappedBy;
-import org.gatein.mop.core.content.portlet.Preferences;
-import org.gatein.mop.core.content.portlet.Preference;
-import org.gatein.mop.core.content.portlet.PreferencesBuilder;
+import org.gatein.mop.core.support.content.portlet.Preferences;
+import org.gatein.mop.core.support.content.portlet.Preference;
+import org.gatein.mop.core.support.content.portlet.PreferencesBuilder;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
 
 import java.util.Map;

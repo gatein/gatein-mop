@@ -19,8 +19,8 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.gatein.mop.core.api.AbstractPOMTestCase;
-import org.gatein.mop.core.content.portlet.Preferences;
-import org.gatein.mop.core.content.portlet.PreferencesBuilder;
+import org.gatein.mop.core.support.content.portlet.Preferences;
+import org.gatein.mop.core.support.content.portlet.PreferencesBuilder;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
