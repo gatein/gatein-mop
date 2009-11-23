@@ -26,20 +26,21 @@ import org.gatein.mop.api.workspace.Page;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface PageLink extends Link {
+public interface PageLink extends Link
+{
 
-  /**
-   * The target page.
-   *
-   * @return the page
-   */
-  Page getPage();
+   /**
+    * The target page.
+    *
+    * @return the page
+    */
+   Page getPage();
 
-  /**
-   * Updates the target page.
-   *
-   * @param page the page to update
-   */
-  void setPage(Page page);
+   /**
+    * Updates the target page.
+    *
+    * @param page the page to update
+    */
+   void setPage(Page page);
 
 }

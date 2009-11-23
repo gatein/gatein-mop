@@ -26,27 +26,28 @@ import org.gatein.mop.api.Attributes;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface WorkspaceObject {
+public interface WorkspaceObject
+{
 
-  /**
-   * Returns an id that uniquely identify the object in the workspace.
-   *
-   * @return the id
-   */
-  String getObjectId();
+   /**
+    * Returns an id that uniquely identify the object in the workspace.
+    *
+    * @return the id
+    */
+   String getObjectId();
 
-  /**
-   * Returns the object type.
-   *
-   * @return the object type
-   */
-  ObjectType<? extends WorkspaceObject> getObjectType();
+   /**
+    * Returns the object type.
+    *
+    * @return the object type
+    */
+   ObjectType<? extends WorkspaceObject> getObjectType();
 
-  /**
-   * Returns the object attributes.
-   *
-   * @return the attributes
-   */
-  Attributes getAttributes();
+   /**
+    * Returns the object attributes.
+    *
+    * @return the attributes
+    */
+   Attributes getAttributes();
 
 }

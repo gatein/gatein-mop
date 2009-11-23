@@ -24,5 +24,6 @@ package org.gatein.mop.api.workspace;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface TemplatizedObject extends WorkspaceObject, Templatized {
+public interface TemplatizedObject extends WorkspaceObject, Templatized
+{
 }

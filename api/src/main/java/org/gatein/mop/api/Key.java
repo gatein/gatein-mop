@@ -20,80 +20,93 @@ package org.gatein.mop.api;
 
 /**
  * A key is a typed name. This class is immutable and is therefore thread safe.
- * 
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class Key<T> {
+public class Key<T>
+{
 
-  public static <T> Key<T> create(java.lang.String name, ValueType<T> type) {
-    if (type == null) {
-      throw new NullPointerException();
-    }
-    return new Key<T>(name, type);
-  }
+   public static <T> Key<T> create(java.lang.String name, ValueType<T> type)
+   {
+      if (type == null)
+      {
+         throw new NullPointerException();
+      }
+      return new Key<T>(name, type);
+   }
 
-  /** The key name. */
-  private final java.lang.String name;
+   /** The key name. */
+   private final java.lang.String name;
 
-  /** The type. */
-  private final ValueType<T> type;
+   /** The type. */
+   private final ValueType<T> type;
 
-  /**
-   * Creates a new key.
-   *
-   * @param name the key name
-   * @param type the key type
-   * @throws NullPointerException if the name is null
-   */
-  protected Key(java.lang.String name, ValueType<T> type) throws NullPointerException {
-    if (name == null) {
-      throw new NullPointerException();
-    }
-    if (type == null) {
-      throw new NullPointerException();
-    }
-    this.name = name;
-    this.type = type;
-  }
+   /**
+    * Creates a new key.
+    *
+    * @param name the key name
+    * @param type the key type
+    * @throws NullPointerException if the name is null
+    */
+   protected Key(java.lang.String name, ValueType<T> type) throws NullPointerException
+   {
+      if (name == null)
+      {
+         throw new NullPointerException();
+      }
+      if (type == null)
+      {
+         throw new NullPointerException();
+      }
+      this.name = name;
+      this.type = type;
+   }
 
-  /**
-   * Returns the key type.
-   *
-   * @return the type
-   */
-  public ValueType<T> getType() {
-    return type;
-  }
+   /**
+    * Returns the key type.
+    *
+    * @return the type
+    */
+   public ValueType<T> getType()
+   {
+      return type;
+   }
 
-  /**
-   * Returns the key name.
-   *
-   * @return the name
-   */
-  public final java.lang.String getName() {
-    return name;
-  }
+   /**
+    * Returns the key name.
+    *
+    * @return the name
+    */
+   public final java.lang.String getName()
+   {
+      return name;
+   }
 
-  @Override
-  public int hashCode() {
-    return getType().hashCode() + name.hashCode();
-  }
+   @Override
+   public int hashCode()
+   {
+      return getType().hashCode() + name.hashCode();
+   }
 
-  @Override
-  public boolean equals(java.lang.Object obj) {
-    if (obj == this) {
-      return true;
-    }
-    if (obj.getClass() == getClass()) {
-      Key that = (Key)obj;
-      return name.equals(that.name);
-    }
-    return false;
-  }
+   @Override
+   public boolean equals(java.lang.Object obj)
+   {
+      if (obj == this)
+      {
+         return true;
+      }
+      if (obj.getClass() == getClass())
+      {
+         Key that = (Key)obj;
+         return name.equals(that.name);
+      }
+      return false;
+   }
 
-  @Override
-  public java.lang.String toString() {
-    return "Key[name=" + name + ",type=" + getType() + "]";
-  }
+   @Override
+   public java.lang.String toString()
+   {
+      return "Key[name=" + name + ",type=" + getType() + "]";
+   }
 }

@@ -28,81 +28,105 @@ import java.util.LinkedList;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ComponentIterator implements StructureIterator {
+public class ComponentIterator implements StructureIterator
+{
 
-  /** . */
-  private final UIComponent root;
+   /** . */
+   private final UIComponent root;
 
-  /** . */
-  private final LinkedList<ContainerVisit> stack;
+   /** . */
+   private final LinkedList<ContainerVisit> stack;
 
-  /** . */
-  private UIComponent current;
+   /** . */
+   private UIComponent current;
 
-  /** . */
-  private IterationType type;
+   /** . */
+   private IterationType type;
 
-  public ComponentIterator(UIComponent root) {
-    this.root = root;
-    this.stack = new LinkedList<ContainerVisit>();
-    this.type = null;
-  }
+   public ComponentIterator(UIComponent root)
+   {
+      this.root = root;
+      this.stack = new LinkedList<ContainerVisit>();
+      this.type = null;
+   }
 
-  public UIComponent getComponent() {
-    return current;
-  }
+   public UIComponent getComponent()
+   {
+      return current;
+   }
 
-  public IterationType next() {
+   public IterationType next()
+   {
 
-    if (type == null) {
-      current = root;
-      type = IterationType.START;
-    } else {
-      if (type == IterationType.START) {
-        if (current instanceof UIContainer) {
-          UIContainer container = (UIContainer)current;
-          Iterator<? extends UIComponent> iterator = container.iterator();
-          if (iterator.hasNext()) {
-            stack.add(new ContainerVisit(container, iterator));
-            current = iterator.next();
-          } else {
-            type = IterationType.END;
-          }
-        } else {
-          type = IterationType.END;
-        }
-      } else {
-        if (stack.size() > 0) {
-          ContainerVisit visit = stack.getLast();
-          if (visit.iterator.hasNext()) {
-            type = IterationType.START;
-            current = visit.iterator.next();
-          } else {
-            stack.removeLast();
-            current = visit.container;
-          }
-        } else {
-          current = null;
-          return IterationType.DONE;
-        }
+      if (type == null)
+      {
+         current = root;
+         type = IterationType.START;
       }
-    }
+      else
+      {
+         if (type == IterationType.START)
+         {
+            if (current instanceof UIContainer)
+            {
+               UIContainer container = (UIContainer)current;
+               Iterator<? extends UIComponent> iterator = container.iterator();
+               if (iterator.hasNext())
+               {
+                  stack.add(new ContainerVisit(container, iterator));
+                  current = iterator.next();
+               }
+               else
+               {
+                  type = IterationType.END;
+               }
+            }
+            else
+            {
+               type = IterationType.END;
+            }
+         }
+         else
+         {
+            if (stack.size() > 0)
+            {
+               ContainerVisit visit = stack.getLast();
+               if (visit.iterator.hasNext())
+               {
+                  type = IterationType.START;
+                  current = visit.iterator.next();
+               }
+               else
+               {
+                  stack.removeLast();
+                  current = visit.container;
+               }
+            }
+            else
+            {
+               current = null;
+               return IterationType.DONE;
+            }
+         }
+      }
 
-    //
-    return type;
-  }
+      //
+      return type;
+   }
 
-  private static class ContainerVisit {
+   private static class ContainerVisit
+   {
 
-    /** . */
-    private final UIContainer container;
+      /** . */
+      private final UIContainer container;
 
-    /** . */
-    private final Iterator<? extends UIComponent> iterator;
+      /** . */
+      private final Iterator<? extends UIComponent> iterator;
 
-    private ContainerVisit(UIContainer container, Iterator<? extends UIComponent> iterator) {
-      this.container = container;
-      this.iterator = iterator;
-    }
-  }
+      private ContainerVisit(UIContainer container, Iterator<? extends UIComponent> iterator)
+      {
+         this.container = container;
+         this.iterator = iterator;
+      }
+   }
 }

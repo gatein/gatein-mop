@@ -28,33 +28,34 @@ import org.gatein.mop.api.content.ContentType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface UIWindow extends UIComponent, CustomizationContext {
+public interface UIWindow extends UIComponent, CustomizationContext
+{
 
-  /**
-   * Returns the customization of this window or null if no customization exists.
-   *
-   * @return the window customization
-   */
-  Customization<?> getCustomization();
+   /**
+    * Returns the customization of this window or null if no customization exists.
+    *
+    * @return the window customization
+    */
+   Customization<?> getCustomization();
 
-  /**
-   * Customizes the specified content.
-   *
-   * @param contentType the content type
-   * @param contentId the content id
-   * @param state the content state
-   * @param <S> the content type parameter
-   * @return the created customization
-   */
-  <S> Customization<S> customize(ContentType<S> contentType, String contentId, S state);
+   /**
+    * Customizes the specified content.
+    *
+    * @param contentType the content type
+    * @param contentId   the content id
+    * @param state       the content state
+    * @param <S>         the content type parameter
+    * @return the created customization
+    */
+   <S> Customization<S> customize(ContentType<S> contentType, String contentId, S state);
 
-  /**
-   * Specialize the specified customization.
-   *
-   * @param customization the customization to specialise
-   * @param <S> the content type parameter
-   * @return the created customization
-   */
-  <S> Customization<S> customize(Customization<S> customization);
+   /**
+    * Specialize the specified customization.
+    *
+    * @param customization the customization to specialise
+    * @param <S>           the content type parameter
+    * @return the created customization
+    */
+   <S> Customization<S> customize(Customization<S> customization);
 
 }

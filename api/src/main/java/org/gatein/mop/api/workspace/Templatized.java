@@ -22,20 +22,21 @@ package org.gatein.mop.api.workspace;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Templatized {
+public interface Templatized
+{
 
-  /**
-   * Returns the page template or null if no page template exists.
-   *
-   * @return the page template
-   */
-  Page getTemplate();
+   /**
+    * Returns the page template or null if no page template exists.
+    *
+    * @return the page template
+    */
+   Page getTemplate();
 
-  /**
-   * Updates the page template.
-   *
-   * @param template the page template
-   */
-  void setTemplate(Page template);
+   /**
+    * Updates the page template.
+    *
+    * @param template the page template
+    */
+   void setTemplate(Page template);
 
 }

@@ -28,44 +28,61 @@ import java.util.NoSuchElementException;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public enum PageIteratorStrategies implements PageIteratorStrategy {
+public enum PageIteratorStrategies implements PageIteratorStrategy
+{
 
-  SIMPLE {
-    public Iterator<Page> iterator(Page page) {
-      return Collections.singletonList(page).iterator();
-    }},
+   SIMPLE
+      {
+         public Iterator<Page> iterator(Page page)
+         {
+            return Collections.singletonList(page).iterator();
+         }},
 
-  PAGE_TEMPLATE {
-    public Iterator<Page> iterator(final Page page) {
-      return new Iterator<Page>() {
-        Page current = page;
-        public boolean hasNext() {
-          return current != null;
-        }
-        public Page next() {
-          if (current == null) {
-            throw new NoSuchElementException();
-          }
-          Page next = null;
-          for (Page p = current;p != null;p = p.getParent()) {
-            Page template = p.getTemplate();
-            if (template != null) {
-              next = template;
-              break;
-            }
-          }
-          Page tmp = current;
-          current = next;
-          return tmp;
-        }
-        public void remove() {
-          throw new UnsupportedOperationException();
-        }
-      };
-    }},
+   PAGE_TEMPLATE
+      {
+         public Iterator<Page> iterator(final Page page)
+         {
+            return new Iterator<Page>()
+            {
+               Page current = page;
 
-  PAGE_AND_SITE_TEMPLATE {
-    public Iterator<Page> iterator(Page page) {
-      throw new UnsupportedOperationException();
-    }}
+               public boolean hasNext()
+               {
+                  return current != null;
+               }
+
+               public Page next()
+               {
+                  if (current == null)
+                  {
+                     throw new NoSuchElementException();
+                  }
+                  Page next = null;
+                  for (Page p = current; p != null; p = p.getParent())
+                  {
+                     Page template = p.getTemplate();
+                     if (template != null)
+                     {
+                        next = template;
+                        break;
+                     }
+                  }
+                  Page tmp = current;
+                  current = next;
+                  return tmp;
+               }
+
+               public void remove()
+               {
+                  throw new UnsupportedOperationException();
+               }
+            };
+         }},
+
+   PAGE_AND_SITE_TEMPLATE
+      {
+         public Iterator<Page> iterator(Page page)
+         {
+            throw new UnsupportedOperationException();
+         }}
 }

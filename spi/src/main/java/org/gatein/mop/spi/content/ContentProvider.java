@@ -24,37 +24,38 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface ContentProvider<S> {
+public interface ContentProvider<S>
+{
 
-  /**
-   * Combines several states into a single state representation.
-   *
-   * @param states the various states to combine
-   * @return the combined state
-   */
-  S combine(List<S> states);
+   /**
+    * Combines several states into a single state representation.
+    *
+    * @param states the various states to combine
+    * @return the combined state
+    */
+   S combine(List<S> states);
 
-  /**
-   * Update the state container with the provided state.
-   * 
-   * @param container the state container
-   * @param state the state
-   */
-  void setState(StateContainer container, S state);
+   /**
+    * Update the state container with the provided state.
+    *
+    * @param container the state container
+    * @param state     the state
+    */
+   void setState(StateContainer container, S state);
 
-  /**
-   * Returns the state attached to the provided container.
-   *
-   * @param container the container
-   * @return the state
-   */
-  S getState(StateContainer container);
+   /**
+    * Returns the state attached to the provided container.
+    *
+    * @param container the container
+    * @return the state
+    */
+   S getState(StateContainer container);
 
-  /**
-   * Returns the class the represents the state as seen by the framework client.
-   *
-   * @return the external state class
-   */
-  Class<S> getStateType();
+   /**
+    * Returns the class the represents the state as seen by the framework client.
+    *
+    * @return the external state class
+    */
+   Class<S> getStateType();
 
 }

@@ -26,14 +26,15 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface UIComponent extends WorkspaceObject {
+public interface UIComponent extends WorkspaceObject
+{
 
-  String getName();
+   String getName();
 
-  ObjectType<? extends UIComponent> getObjectType();
+   ObjectType<? extends UIComponent> getObjectType();
 
-  UIContainer getParent();
-  
-  Page getPage();
+   UIContainer getParent();
+
+   Page getPage();
 
 }

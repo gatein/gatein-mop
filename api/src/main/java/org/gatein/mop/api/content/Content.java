@@ -25,20 +25,21 @@ package org.gatein.mop.api.content;
  * @version $Revision$
  * @param <S> the content state type parameter
  */
-public interface Content<S> {
+public interface Content<S>
+{
 
-  /**
-   * Returns the content id.
-   *
-   * @return the id
-   */
-  String getId();
+   /**
+    * Returns the content id.
+    *
+    * @return the id
+    */
+   String getId();
 
-  /**
-   * Returns the content type.
-   *
-   * @return the content type
-   */
-  ContentType<S> getType();
+   /**
+    * Returns the content type.
+    *
+    * @return the content type
+    */
+   ContentType<S> getType();
 
 }

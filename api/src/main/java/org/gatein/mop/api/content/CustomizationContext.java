@@ -19,46 +19,40 @@
 package org.gatein.mop.api.content;
 
 /**
- * <p>The customization context defines where customization applies, it can be an entity, an identity, or anything
- * else that is subject to customization.</p>
- *
- * <p>Contexts are partitionned by their type, i.e all the context that share the same value returned by the
- * invocation of the method {@link #getContextType()} are considered to belong to the same type.</p>
- *
- * <p>Within a partition it is possible to find out the relationship between two contexts thanks to the
- * {@link #contains(CustomizationContext)} method.
- * <ul>
- * <li>Two contexts are considered equals when they contain each other.</li>
- * <li>Two contexts are not related when no context contains the other one.</li>
- * <li>Otherwise one contexts belongs to the other.</li>
- * </ul>
- * The <tt>contains</tt> relationship is transitive.</p>
+ * <p>The customization context defines where customization applies, it can be an entity, an identity, or anything else
+ * that is subject to customization.</p> <p/> <p>Contexts are partitionned by their type, i.e all the context that share
+ * the same value returned by the invocation of the method {@link #getContextType()} are considered to belong to the
+ * same type.</p> <p/> <p>Within a partition it is possible to find out the relationship between two contexts thanks to
+ * the {@link #contains(CustomizationContext)} method. <ul> <li>Two contexts are considered equals when they contain
+ * each other.</li> <li>Two contexts are not related when no context contains the other one.</li> <li>Otherwise one
+ * contexts belongs to the other.</li> </ul> The <tt>contains</tt> relationship is transitive.</p>
  *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface CustomizationContext {
+public interface CustomizationContext
+{
 
-  /**
-   * Returns the identifier of the context.
-   *
-   * @return the context identifier
-   */
-  String getContextId();
+   /**
+    * Returns the identifier of the context.
+    *
+    * @return the context identifier
+    */
+   String getContextId();
 
-  /**
-   * Returns the customization context type.
-   *
-   * @return the customization context type
-   */
-  String getContextType();
+   /**
+    * Returns the customization context type.
+    *
+    * @return the customization context type
+    */
+   String getContextType();
 
-  /**
-   * Returns true if the context contains the provided context.
-   *
-   * @param that the context to test
-   * @return a boolean indicated whether the provided context is contained by this context
-   */
-  boolean contains(CustomizationContext that);
+   /**
+    * Returns true if the context contains the provided context.
+    *
+    * @param that the context to test
+    * @return a boolean indicated whether the provided context is contained by this context
+    */
+   boolean contains(CustomizationContext that);
 
 }

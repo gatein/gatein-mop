@@ -23,140 +23,172 @@ import java.lang.reflect.Type;
 import java.util.Date;
 
 /**
- * The enumeration of value type that are permitted for attributes state. The generic type is used to represent
- * the relevant associated java type for the runtime values.
+ * The enumeration of value type that are permitted for attributes state. The generic type is used to represent the
+ * relevant associated java type for the runtime values.
  *
- * @param <T> the value java type
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
+ * @param <T> the value java type
  */
-public abstract class ValueType<T> {
+public abstract class ValueType<T>
+{
 
-  /** . */
-  public static final ValueType<String> STRING = new ValueType<String>() {};
+   /** . */
+   public static final ValueType<String> STRING = new ValueType<String>()
+   {
+   };
 
-  /** . */
-  public static final ValueType<Integer> INTEGER = new ValueType<Integer>() {};
+   /** . */
+   public static final ValueType<Integer> INTEGER = new ValueType<Integer>()
+   {
+   };
 
-  /** . */
-  public static final ValueType<Boolean> BOOLEAN = new ValueType<Boolean>() {};
+   /** . */
+   public static final ValueType<Boolean> BOOLEAN = new ValueType<Boolean>()
+   {
+   };
 
-  /** . */
-  public static final ValueType<Date> DATE = new ValueType<Date>() {};
+   /** . */
+   public static final ValueType<Date> DATE = new ValueType<Date>()
+   {
+   };
 
-  /** . */
-  public static final ValueType<Double> DOUBLE = new ValueType<Double>() {};
+   /** . */
+   public static final ValueType<Double> DOUBLE = new ValueType<Double>()
+   {
+   };
 
-  /** . */
-  private final Class<T> javaType;
+   /** . */
+   private final Class<T> javaType;
 
-  @SuppressWarnings("unchecked")
-  private ValueType() {
-    Type type = getClass().getGenericSuperclass();
-    ParameterizedType parameterizedType = (ParameterizedType)type;
-    javaType = (Class<T>)parameterizedType.getActualTypeArguments()[0];
-  }
+   @SuppressWarnings("unchecked")
+   private ValueType()
+   {
+      Type type = getClass().getGenericSuperclass();
+      ParameterizedType parameterizedType = (ParameterizedType)type;
+      javaType = (Class<T>)parameterizedType.getActualTypeArguments()[0];
+   }
 
-  /**
-   * Returns the java type.
-   *
-   * @return the java type
-   */
-  public Class<T> getJavaType() {
-    return javaType;
-  }
+   /**
+    * Returns the java type.
+    *
+    * @return the java type
+    */
+   public Class<T> getJavaType()
+   {
+      return javaType;
+   }
 
-  /**
-   * Returns true if the object matches the type.
-   *
-   * @param o the object
-   * @return true when the value matches the type
-   */
-  public boolean isInstance(Object o) {
-    return javaType.isInstance(o);
-  }
+   /**
+    * Returns true if the object matches the type.
+    *
+    * @param o the object
+    * @return true when the value matches the type
+    */
+   public boolean isInstance(Object o)
+   {
+      return javaType.isInstance(o);
+   }
 
-  /**
-   * Casts the object to the underlying java type.
-   *
-   * @param o the object to cast
-   * @return the casted object
-   * @throws ClassCastException if the object cannot be casted
-   */
-  public T cast(Object o) throws ClassCastException {
-    if (o == null) {
+   /**
+    * Casts the object to the underlying java type.
+    *
+    * @param o the object to cast
+    * @return the casted object
+    * @throws ClassCastException if the object cannot be casted
+    */
+   public T cast(Object o) throws ClassCastException
+   {
+      if (o == null)
+      {
+         return null;
+      }
+      if (javaType.isInstance(o))
+      {
+         return javaType.cast(o);
+      }
+      throw new ClassCastException("Object " + o + " cannot be casted to " + javaType.getName());
+   }
+
+   /**
+    * Returns the corresponding value type for the specified object or null if no valid one can be found.
+    *
+    * @param t   the object to decode type for
+    * @param <T> the java type
+    * @return the decoded type
+    */
+   @SuppressWarnings("unchecked")
+   public static <T> ValueType<T> decode(T t)
+   {
+      if (t == null)
+      {
+         return null;
+      }
+      if (t instanceof String)
+      {
+         return (ValueType<T>)ValueType.STRING;
+      }
+      if (t instanceof Integer)
+      {
+         return (ValueType<T>)ValueType.INTEGER;
+      }
+      if (t instanceof Boolean)
+      {
+         return (ValueType<T>)ValueType.BOOLEAN;
+      }
+      if (t instanceof Date)
+      {
+         return (ValueType<T>)ValueType.DATE;
+      }
+      if (t instanceof Double)
+      {
+         return (ValueType<T>)ValueType.DOUBLE;
+      }
       return null;
-    }
-    if (javaType.isInstance(o)) {
-      return javaType.cast(o);
-    }
-    throw new ClassCastException("Object " + o + " cannot be casted to " + javaType.getName());
-  }
+   }
 
-  /**
-   * Returns the corresponding value type for the specified object or null if no valid one can be found.
-   *
-   * @param t the object to decode type for
-   * @param <T> the java type
-   * @return the decoded type
-   */
-  @SuppressWarnings("unchecked")
-  public static <T> ValueType<T> decode(T t) {
-    if (t == null) {
-      return null;
-    }
-    if (t instanceof String) {
-      return (ValueType<T>)ValueType.STRING;
-    }
-    if (t instanceof Integer) {
-      return (ValueType<T>)ValueType.INTEGER;
-    }
-    if (t instanceof Boolean) {
-      return (ValueType<T>)ValueType.BOOLEAN;
-    }
-    if (t instanceof Date) {
-      return (ValueType<T>)ValueType.DATE;
-    }
-    if (t instanceof Double) {
-      return (ValueType<T>)ValueType.DOUBLE;
-    }
-    return null;
-  }
+   /**
+    * Returns the corresponding value type for the specified object.
+    *
+    * @param t   the object to get the type for
+    * @param <T> the java type
+    * @return the decoded type
+    * @throws NullPointerException     if the argument is null
+    * @throws IllegalArgumentException if the argument does not match a valid type
+    */
+   @SuppressWarnings("unchecked")
+   public static <T> ValueType<T> get(T t) throws NullPointerException, IllegalArgumentException
+   {
+      if (t == null)
+      {
+         throw new NullPointerException();
+      }
+      if (t instanceof String)
+      {
+         return (ValueType<T>)ValueType.STRING;
+      }
+      if (t instanceof Integer)
+      {
+         return (ValueType<T>)ValueType.INTEGER;
+      }
+      if (t instanceof Boolean)
+      {
+         return (ValueType<T>)ValueType.BOOLEAN;
+      }
+      if (t instanceof Date)
+      {
+         return (ValueType<T>)ValueType.DATE;
+      }
+      if (t instanceof Double)
+      {
+         return (ValueType<T>)ValueType.DOUBLE;
+      }
+      throw new IllegalArgumentException("Java class " + t.getClass().getName() + " cannot be used as a value type");
+   }
 
-  /**
-   * Returns the corresponding value type for the specified object.
-   *
-   * @param t the object to get the type for
-   * @param <T> the java type
-   * @return the decoded type
-   * @throws NullPointerException if the argument is null
-   * @throws IllegalArgumentException if the argument does not match a valid type
-   */
-  @SuppressWarnings("unchecked")
-  public static <T> ValueType<T> get(T t) throws NullPointerException, IllegalArgumentException {
-    if (t == null) {
-      throw new NullPointerException();
-    }
-    if (t instanceof String) {
-      return (ValueType<T>)ValueType.STRING;
-    }
-    if (t instanceof Integer) {
-      return (ValueType<T>)ValueType.INTEGER;
-    }
-    if (t instanceof Boolean) {
-      return (ValueType<T>)ValueType.BOOLEAN;
-    }
-    if (t instanceof Date) {
-      return (ValueType<T>)ValueType.DATE;
-    }
-    if (t instanceof Double) {
-      return (ValueType<T>)ValueType.DOUBLE;
-    }
-    throw new IllegalArgumentException("Java class " + t.getClass().getName() + " cannot be used as a value type");
-  }
-
-  @Override
-  public String toString() {
-    return "ValueType[" + javaType.getSimpleName() + "]";
-  }
+   @Override
+   public String toString()
+   {
+      return "ValueType[" + javaType.getSimpleName() + "]";
+   }
 }

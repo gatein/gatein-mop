@@ -24,46 +24,45 @@ package org.gatein.mop.api.workspace;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Site extends WorkspaceObject, WorkspaceCustomizationContext {
+public interface Site extends WorkspaceObject, WorkspaceCustomizationContext
+{
 
-  /**
-   * Returns the site name.
-   *
-   * @return the site name
-   */
-  String getName();
+   /**
+    * Returns the site name.
+    *
+    * @return the site name
+    */
+   String getName();
 
-  /**
-   * Returns a type that extends the site.
-   *
-   * @return the objec type
-   */
-  ObjectType<? extends Site> getObjectType();
+   /**
+    * Returns a type that extends the site.
+    *
+    * @return the objec type
+    */
+   ObjectType<? extends Site> getObjectType();
 
-  /**
-   * Returns the site root navigation.
-   *
-   * @return the site navigation
-   */
-  Navigation getRootNavigation();
+   /**
+    * Returns the site root navigation.
+    *
+    * @return the site navigation
+    */
+   Navigation getRootNavigation();
 
-  /**
-   * Returns the site root page.
-   *
-   * @return the site root page
-   */
-  Page getRootPage();
+   /**
+    * Returns the site root page.
+    *
+    * @return the site root page
+    */
+   Page getRootPage();
 
-  /**
-   * Returns the site workspace.
-   *
-   * @return the site workspace
-   */
-  Workspace getWorkspace();
+   /**
+    * Returns the site workspace.
+    *
+    * @return the site workspace
+    */
+   Workspace getWorkspace();
 
-  /**
-   * Destroy the site.
-   */
-  void destroy();
+   /** Destroy the site. */
+   void destroy();
 
 }

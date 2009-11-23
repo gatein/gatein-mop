@@ -22,46 +22,47 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * <p>This interface extends a map to provide convenient method for dealing with attribute values in a type safe
- * manner when the interface client knows the type of an attribute and wants to deal with it accordingly.</p>
+ * <p>This interface extends a map to provide convenient method for dealing with attribute values in a type safe manner
+ * when the interface client knows the type of an attribute and wants to deal with it accordingly.</p>
  *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Attributes {
+public interface Attributes
+{
 
-  Set<String> getKeys();
+   Set<String> getKeys();
 
-  String getString(String name);
+   String getString(String name);
 
-  void setString(String name, String value);
+   void setString(String name, String value);
 
-  Boolean getBoolean(String name);
+   Boolean getBoolean(String name);
 
-  void setBoolean(String name, Boolean value);
+   void setBoolean(String name, Boolean value);
 
-  Integer getInteger(String name);
+   Integer getInteger(String name);
 
-  void setInteger(String name, Integer value);
+   void setInteger(String name, Integer value);
 
-  Date getDate(String name);
+   Date getDate(String name);
 
-  void setDate(String name, Date value);
+   void setDate(String name, Date value);
 
-  Double getDouble(String name);
+   Double getDouble(String name);
 
-  void setDouble(String name, Double value);
+   void setDouble(String name, Double value);
 
-  Object getObject(String name);
+   Object getObject(String name);
 
-  <T> void setObject(String name, T value);
+   <T> void setObject(String name, T value);
 
-  ValueType<?> getType(String name);
+   ValueType<?> getType(String name);
 
-  <T> T getValue(Key<T> key);
+   <T> T getValue(Key<T> key);
 
-  <T> T getValue(Key<T> key, T defaultValue);
+   <T> T getValue(Key<T> key, T defaultValue);
 
-  <T> void setValue(Key<T> key, T value);
+   <T> void setValue(Key<T> key, T value);
 
 }

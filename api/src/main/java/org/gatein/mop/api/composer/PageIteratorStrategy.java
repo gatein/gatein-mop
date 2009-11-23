@@ -26,8 +26,9 @@ import java.util.Iterator;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface PageIteratorStrategy {
+public interface PageIteratorStrategy
+{
 
-  Iterator<Page> iterator(Page page);
+   Iterator<Page> iterator(Page page);
 
 }

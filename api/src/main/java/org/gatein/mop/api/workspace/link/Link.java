@@ -26,5 +26,6 @@ import org.gatein.mop.api.workspace.WorkspaceObject;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Link extends WorkspaceObject {
+public interface Link extends WorkspaceObject
+{
 }

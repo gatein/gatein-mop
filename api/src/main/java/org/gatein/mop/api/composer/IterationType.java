@@ -22,13 +22,14 @@ package org.gatein.mop.api.composer;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public enum IterationType {
+public enum IterationType
+{
 
-  START,
+   START,
 
-  END,
+   END,
 
-  DONE
+   DONE
 
 
 }

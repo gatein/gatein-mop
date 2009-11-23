@@ -26,20 +26,21 @@ import org.gatein.mop.api.content.Content;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface ContentLink extends Link {
+public interface ContentLink extends Link
+{
 
-  /**
-   * Returns the link to a content.
-   *
-   * @return the content
-   */
-  Content getContent();
+   /**
+    * Returns the link to a content.
+    *
+    * @return the content
+    */
+   Content getContent();
 
-  /**
-   * Updates the content linked.
-   *
-   * @param content the content to link
-   */
-  void setContent(Content content);
+   /**
+    * Updates the content linked.
+    *
+    * @param content the content to link
+    */
+   void setContent(Content content);
 
 }

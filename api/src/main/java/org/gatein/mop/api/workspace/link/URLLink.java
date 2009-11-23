@@ -24,19 +24,20 @@ package org.gatein.mop.api.workspace.link;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface URLLink extends Link {
+public interface URLLink extends Link
+{
 
-  /**
-   * Returns the link URL.
-   *
-   * @return the link URL
-   */
-  String getURL();
+   /**
+    * Returns the link URL.
+    *
+    * @return the link URL
+    */
+   String getURL();
 
-  /**
-   * Sets the link URL.
-   *
-   * @param url the link URL
-   */
-  void setURL(String url);
+   /**
+    * Sets the link URL.
+    *
+    * @param url the link URL
+    */
+   void setURL(String url);
 }

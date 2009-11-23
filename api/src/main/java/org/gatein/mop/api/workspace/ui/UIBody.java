@@ -19,11 +19,11 @@
 package org.gatein.mop.api.workspace.ui;
 
 /**
- * The ui body denotes a place holder in a user interface structure. Usually it is used by template
- * mechanisms.
+ * The ui body denotes a place holder in a user interface structure. Usually it is used by template mechanisms.
  *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface UIBody extends UIComponent {
+public interface UIBody extends UIComponent
+{
 }

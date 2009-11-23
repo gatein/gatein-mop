@@ -26,14 +26,15 @@ import org.gatein.mop.api.content.CustomizationContext;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface CustomizationContextProvider {
+public interface CustomizationContextProvider
+{
 
-  /**
-   * Resolves the provided customization context or returns null if no context can be resolved.
-   *
-   * @param contextId the context id
-   * @return the resolved context
-   */
-  CustomizationContext resolveContext(String contextId);
+   /**
+    * Resolves the provided customization context or returns null if no context can be resolved.
+    *
+    * @param contextId the context id
+    * @return the resolved context
+    */
+   CustomizationContext resolveContext(String contextId);
 
 }

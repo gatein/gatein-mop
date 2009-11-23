@@ -26,46 +26,47 @@ import java.util.Collection;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Workspace extends WorkspaceObject, WorkspaceCustomizationContext {
+public interface Workspace extends WorkspaceObject, WorkspaceCustomizationContext
+{
 
-  /**
-   * Returns the default share site.
-   *
-   * @return the default shared site
-   */
-  Site getSharedSite();
+   /**
+    * Returns the default share site.
+    *
+    * @return the default shared site
+    */
+   Site getSharedSite();
 
-  /**
-   * Returns a specified site or null if it cannot be found.
-   *
-   * @param siteType the site type
-   * @param siteName the site name
-   * @return the site
-   */
-  <S extends Site> S getSite(ObjectType<S> siteType, String siteName);
+   /**
+    * Returns a specified site or null if it cannot be found.
+    *
+    * @param siteType the site type
+    * @param siteName the site name
+    * @return the site
+    */
+   <S extends Site> S getSite(ObjectType<S> siteType, String siteName);
 
-  /**
-   * Returns the sites of a given type.
-   *
-   * @param siteType the site type
-   * @return the sites
-   */
-  <S extends Site> Collection<S> getSites(ObjectType<S> siteType);
+   /**
+    * Returns the sites of a given type.
+    *
+    * @param siteType the site type
+    * @return the sites
+    */
+   <S extends Site> Collection<S> getSites(ObjectType<S> siteType);
 
-  /**
-   * Returns all the sites.
-   *
-   * @return the sites
-   */
-  Collection<Site> getSites();
+   /**
+    * Returns all the sites.
+    *
+    * @return the sites
+    */
+   Collection<Site> getSites();
 
-  /**
-   * Creates a new site.
-   *
-   * @param siteType the site type
-   * @param name the site name
-   * @return the new site
-   */
-  <S extends Site> S addSite(ObjectType<S> siteType, String name);
+   /**
+    * Creates a new site.
+    *
+    * @param siteType the site type
+    * @param name     the site name
+    * @return the new site
+    */
+   <S extends Site> S addSite(ObjectType<S> siteType, String name);
 
 }

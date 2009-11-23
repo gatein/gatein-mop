@@ -34,103 +34,119 @@ import java.util.HashSet;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ObjectType<O extends WorkspaceObject> {
+public class ObjectType<O extends WorkspaceObject>
+{
 
-  /** . */
-  public static final ObjectType<WorkspaceObject> ANY = new ObjectType<WorkspaceObject>(WorkspaceObject.class);
+   /** . */
+   public static final ObjectType<WorkspaceObject> ANY = new ObjectType<WorkspaceObject>(WorkspaceObject.class);
 
-  /** . */
-  public static final ObjectType<Workspace> WORKSPACE = new ObjectType<Workspace>(Workspace.class);
+   /** . */
+   public static final ObjectType<Workspace> WORKSPACE = new ObjectType<Workspace>(Workspace.class);
 
-  /** . */
-  public static final ObjectType<Site> SITE = new ObjectType<Site>(Site.class);
+   /** . */
+   public static final ObjectType<Site> SITE = new ObjectType<Site>(Site.class);
 
-  /** . */
-  public static final ObjectType<Site> PORTAL_SITE = new ObjectType<Site>(Site.class, SITE);
+   /** . */
+   public static final ObjectType<Site> PORTAL_SITE = new ObjectType<Site>(Site.class, SITE);
 
-  /** . */
-  public static final ObjectType<Site> GROUP_SITE = new ObjectType<Site>(Site.class, SITE);
+   /** . */
+   public static final ObjectType<Site> GROUP_SITE = new ObjectType<Site>(Site.class, SITE);
 
-  /** . */
-  public static final ObjectType<Site> USER_SITE = new ObjectType<Site>(Site.class, SITE);
+   /** . */
+   public static final ObjectType<Site> USER_SITE = new ObjectType<Site>(Site.class, SITE);
 
-  /** . */
-  public static final ObjectType<Site> SHARED_SITE = new ObjectType<Site>(Site.class, SITE);
+   /** . */
+   public static final ObjectType<Site> SHARED_SITE = new ObjectType<Site>(Site.class, SITE);
 
-  /** . */
-  public static final ObjectType<Page> PAGE = new ObjectType<Page>(Page.class);
+   /** . */
+   public static final ObjectType<Page> PAGE = new ObjectType<Page>(Page.class);
 
-  /** . */
-  public static final ObjectType<Navigation> NAVIGATION = new ObjectType<Navigation>(Navigation.class);
+   /** . */
+   public static final ObjectType<Navigation> NAVIGATION = new ObjectType<Navigation>(Navigation.class);
 
-  /** . */
-  public static final ObjectType<UIComponent> COMPONENT = new ObjectType<UIComponent>(UIComponent.class);
+   /** . */
+   public static final ObjectType<UIComponent> COMPONENT = new ObjectType<UIComponent>(UIComponent.class);
 
-  /** . */
-  public static final ObjectType<UIBody> BODY = new ObjectType<UIBody>(UIBody.class, COMPONENT);
+   /** . */
+   public static final ObjectType<UIBody> BODY = new ObjectType<UIBody>(UIBody.class, COMPONENT);
 
-  /** . */
-  public static final ObjectType<UIContainer> CONTAINER = new ObjectType<UIContainer>(UIContainer.class, COMPONENT);
+   /** . */
+   public static final ObjectType<UIContainer> CONTAINER = new ObjectType<UIContainer>(UIContainer.class, COMPONENT);
 
-  /** . */
-  public static final ObjectType<UIWindow> WINDOW = new ObjectType<UIWindow>(UIWindow.class, COMPONENT);
+   /** . */
+   public static final ObjectType<UIWindow> WINDOW = new ObjectType<UIWindow>(UIWindow.class, COMPONENT);
 
-  /** . */
-  public static final ObjectType<PageLink> PAGE_LINK = new ObjectType<PageLink>(PageLink.class);
+   /** . */
+   public static final ObjectType<PageLink> PAGE_LINK = new ObjectType<PageLink>(PageLink.class);
 
-  /** . */
-  public static final ObjectType<URLLink> URL_LINK = new ObjectType<URLLink>(URLLink.class);
+   /** . */
+   public static final ObjectType<URLLink> URL_LINK = new ObjectType<URLLink>(URLLink.class);
 
-  /** . */
-  private final Class<O> javaType;
+   /** . */
+   private final Class<O> javaType;
 
-  /** . */
-  private final Set<ObjectType<?>> superTypes;
+   /** . */
+   private final Set<ObjectType<?>> superTypes;
 
-  private ObjectType(Class<O> javaType, ObjectType<?>... superTypes) {
-    for (ObjectType<?> superType : superTypes) {
-      if (!superType.javaType.isAssignableFrom(javaType)) {
-        throw new AssertionError();
+   private ObjectType(Class<O> javaType, ObjectType<?>... superTypes)
+   {
+      for (ObjectType<?> superType : superTypes)
+      {
+         if (!superType.javaType.isAssignableFrom(javaType))
+         {
+            throw new AssertionError();
+         }
       }
-    }
 
-    //
-    Set<ObjectType<?>> tmp = new HashSet<ObjectType<?>>();
-    for (ObjectType<?> superType : superTypes) {
-      tmp.add(superType);
-    }
+      //
+      Set<ObjectType<?>> tmp = new HashSet<ObjectType<?>>();
+      for (ObjectType<?> superType : superTypes)
+      {
+         tmp.add(superType);
+      }
 
-    //
-    this.javaType = javaType;
-    this.superTypes = tmp;
-  }
+      //
+      this.javaType = javaType;
+      this.superTypes = tmp;
+   }
 
-  public Class<O> getJavaType() {
-    return javaType;
-  }
+   public Class<O> getJavaType()
+   {
+      return javaType;
+   }
 
-  public boolean isAssignableFrom(ObjectType<?> other) {
-    if (other == null) {
-      throw new NullPointerException();
-    }
-    if (this == ANY) {
-      return true;
-    }
-    return other == this || other.superTypes.contains(this);
-  }
+   public boolean isAssignableFrom(ObjectType<?> other)
+   {
+      if (other == null)
+      {
+         throw new NullPointerException();
+      }
+      if (this == ANY)
+      {
+         return true;
+      }
+      return other == this || other.superTypes.contains(this);
+   }
 
-  public O cast(Object o) {
-    if (o == null) {
-      return null;
-    } if (javaType.isInstance(o)) {
-      return javaType.cast(o);
-    } else {
-      throw new ClassCastException();
-    }
-  }
+   public O cast(Object o)
+   {
+      if (o == null)
+      {
+         return null;
+      }
+      if (javaType.isInstance(o))
+      {
+         return javaType.cast(o);
+      }
+      else
+      {
+         throw new ClassCastException();
+      }
+   }
 
-  @Override
-  public String toString() {
-    return "ObjectType[" + javaType + "]";
-  }
+   @Override
+   public String toString()
+   {
+      return "ObjectType[" + javaType + "]";
+   }
 }

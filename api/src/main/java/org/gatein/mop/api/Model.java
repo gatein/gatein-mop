@@ -26,40 +26,41 @@ import org.gatein.mop.api.content.Customization;
 import java.util.Iterator;
 
 /**
- * Provides access to the model.  
+ * Provides access to the model.
  *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Model {
+public interface Model
+{
 
-  /**
-   * Returns the workspace.
-   *
-   * @return the workspace
-   */
-  Workspace getWorkspace();
+   /**
+    * Returns the workspace.
+    *
+    * @return the workspace
+    */
+   Workspace getWorkspace();
 
-  /**
-   * Returns a specified object or null if it cannot be found.
-   *
-   * @param type the object type
-   * @param id the object id
-   * @param <O> the object type parameter
-   * @return the object
-   */
-  <O extends WorkspaceObject> O findObjectById(ObjectType<O> type, String id);
+   /**
+    * Returns a specified object or null if it cannot be found.
+    *
+    * @param type the object type
+    * @param id   the object id
+    * @param <O>  the object type parameter
+    * @return the object
+    */
+   <O extends WorkspaceObject> O findObjectById(ObjectType<O> type, String id);
 
-  <O extends WorkspaceObject> O findObjectByPath(ObjectType<? extends O> type, String path);
+   <O extends WorkspaceObject> O findObjectByPath(ObjectType<? extends O> type, String path);
 
-  <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement);
+   <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement);
 
-  String pathOf(WorkspaceObject o);
+   String pathOf(WorkspaceObject o);
 
-  Customization<?> findCustomizationById(String id);
+   Customization<?> findCustomizationById(String id);
 
-  void save();
+   void save();
 
-  void close();
+   void close();
 
 }

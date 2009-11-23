@@ -24,10 +24,11 @@ import org.gatein.mop.api.workspace.ui.UIComponent;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface StructureIterator {
+public interface StructureIterator
+{
 
-  IterationType next();
+   IterationType next();
 
-  UIComponent getComponent();
+   UIComponent getComponent();
 
 }

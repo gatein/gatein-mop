@@ -25,56 +25,66 @@ package org.gatein.mop.api.content;
  * @version $Revision$
  * @param <S> the content state type parameter
  */
-public final class ContentType<S> {
+public final class ContentType<S>
+{
 
-  /** . */
-  private final String mimeType;
+   /** . */
+   private final String mimeType;
 
-  /** . */
-  private final Class<S> stateClass;
+   /** . */
+   private final Class<S> stateClass;
 
-  /**
-   * Create a new content type.
-   *
-   * @param mimeType the mime type
-   * @param stateClass the state class
-   * @throws NullPointerException if any argument is null
-   */
-  public ContentType(String mimeType, Class<S> stateClass) throws NullPointerException {
-    if (mimeType == null) {
-      throw new NullPointerException("No null mime type accepted");
-    }
-    if (stateClass == null) {
-      throw new NullPointerException("No null state class accepted");
-    }
+   /**
+    * Create a new content type.
+    *
+    * @param mimeType   the mime type
+    * @param stateClass the state class
+    * @throws NullPointerException if any argument is null
+    */
+   public ContentType(String mimeType, Class<S> stateClass) throws NullPointerException
+   {
+      if (mimeType == null)
+      {
+         throw new NullPointerException("No null mime type accepted");
+      }
+      if (stateClass == null)
+      {
+         throw new NullPointerException("No null state class accepted");
+      }
 
-    //
-    this.mimeType = mimeType;
-    this.stateClass = stateClass;
-  }
+      //
+      this.mimeType = mimeType;
+      this.stateClass = stateClass;
+   }
 
-  public String getMimeType() {
-    return mimeType;
-  }
+   public String getMimeType()
+   {
+      return mimeType;
+   }
 
-  public Class<S> getStateClass() {
-    return stateClass;
-  }
+   public Class<S> getStateClass()
+   {
+      return stateClass;
+   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == this) {
-      return true;
-    }
-    if (obj instanceof ContentType) {
-      ContentType that = (ContentType)obj;
-      return mimeType.equals(that.mimeType);
-    }
-    return false;
-  }
+   @Override
+   public boolean equals(Object obj)
+   {
+      if (obj == this)
+      {
+         return true;
+      }
+      if (obj instanceof ContentType)
+      {
+         ContentType that = (ContentType)obj;
+         return mimeType.equals(that.mimeType);
+      }
+      return false;
+   }
 
-  @Override
-  public int hashCode() {
-    return mimeType.hashCode();
-  }
+   @Override
+   public int hashCode()
+   {
+      return mimeType.hashCode();
+   }
 }
