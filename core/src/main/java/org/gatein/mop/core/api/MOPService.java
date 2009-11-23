@@ -69,7 +69,7 @@ public class MOPService
    {
       ChromatticBuilder builder = ChromatticBuilder.create();
       builder.setOption(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
-      builder.setOption(ChromatticBuilder.OBJECT_FORMATTER_CLASSNAME, MOPFormatter.class.getName());
+//      builder.setOption(ChromatticBuilder.OBJECT_FORMATTER_CLASSNAME, MOPFormatter.class.getName());
 
       //
       this.builder = builder;

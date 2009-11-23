@@ -18,9 +18,11 @@
  */
 package org.gatein.mop.core.api.workspace.content;
 
+import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.NodeMapping;
+import org.gatein.mop.core.api.MOPFormatter;
 
 import java.util.Map;
 
@@ -29,6 +31,7 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:contexttypecontainer")
+@FormattedBy(MOPFormatter.class)
 public abstract class ContextTypeContainer
 {
 

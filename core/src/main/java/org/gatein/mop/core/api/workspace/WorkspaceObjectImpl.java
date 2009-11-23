@@ -18,10 +18,12 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.FormattedBy;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.Attributes;
 import org.gatein.mop.api.content.CustomizationContext;
+import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.util.AbstractAttributes;
 import org.chromattic.api.annotations.Id;
 import org.chromattic.api.annotations.Name;
@@ -37,6 +39,7 @@ import java.util.Iterator;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@FormattedBy(MOPFormatter.class)
 public abstract class WorkspaceObjectImpl implements WorkspaceObject
 {
 

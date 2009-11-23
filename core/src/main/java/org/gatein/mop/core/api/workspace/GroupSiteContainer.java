@@ -20,8 +20,6 @@ package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.RelatedMappedBy;
-import org.gatein.mop.core.api.workspace.SiteContainer;
-import org.gatein.mop.core.api.workspace.WorkspaceImpl;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>

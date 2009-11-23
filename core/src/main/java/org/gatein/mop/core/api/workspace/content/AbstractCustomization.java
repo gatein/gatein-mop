@@ -18,10 +18,12 @@
  */
 package org.gatein.mop.core.api.workspace.content;
 
+import org.chromattic.api.annotations.FormattedBy;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
+import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.content.CustomizationContextComparator;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.spi.content.ContentProvider;
@@ -44,6 +46,7 @@ import java.util.Arrays;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@FormattedBy(MOPFormatter.class)
 public abstract class AbstractCustomization implements Customization<Object>, StateContainer
 {
 

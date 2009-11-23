@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2009 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
@@ -18,39 +18,29 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.FormattedBy;
-import org.chromattic.api.annotations.NodeMapping;
-import org.chromattic.api.annotations.OneToMany;
-import org.chromattic.api.annotations.OneToOne;
-import org.chromattic.api.annotations.Create;
-import org.chromattic.api.annotations.RelatedMappedBy;
-import org.gatein.mop.core.api.MOPFormatter;
+import org.chromattic.core.DomainSession;
+import org.gatein.mop.api.workspace.ObjectType;
+import org.gatein.mop.api.workspace.Site;
+import org.gatein.mop.api.workspace.Workspace;
+import org.gatein.mop.core.api.AbstractPOMTestCase;
+import org.gatein.mop.core.api.ModelImpl;
 
-import java.util.Map;
+import javax.jcr.Node;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:pagecontainer")
-@FormattedBy(MOPFormatter.class)
-public abstract class PageContainer
+public class NameEncodingTestCase extends AbstractPOMTestCase
 {
 
-   @OneToOne
-   @RelatedMappedBy("pages")
-   public abstract PageImpl getOwner();
-
-   @OneToMany
-   public abstract Map<String, PageImpl> getPages();
-
-   @Create
-   public abstract PageImpl createPage();
-
-   public PageImpl addPage(String name)
+   public void testEncodeSite() throws Exception
    {
-      PageImpl page = createPage();
-      getPages().put(name, page);
-      return page;
+      ModelImpl model = pomService.getModel();
+      Workspace workspace = model.getWorkspace();
+      Site site = workspace.addSite(ObjectType.GROUP_SITE, ":");
+      DomainSession session = (DomainSession)model.getSession();
+      Node siteNode = session.getNode(site);
+      assertEquals("%04", siteNode.getName());
    }
 }

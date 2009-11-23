@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
@@ -29,12 +30,14 @@ import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.ContentType;
+import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@FormattedBy(MOPFormatter.class)
 public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, WorkspaceCustomizationContext
 {
 

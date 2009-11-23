@@ -19,7 +19,6 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.NodeMapping;
-import org.gatein.mop.core.api.workspace.SiteImpl;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
 

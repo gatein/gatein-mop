@@ -18,10 +18,12 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Create;
 import org.gatein.mop.api.workspace.Site;
+import org.gatein.mop.core.api.MOPFormatter;
 
 import java.util.Collection;
 import java.util.Map;
@@ -30,6 +32,7 @@ import java.util.Map;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@FormattedBy(MOPFormatter.class)
 public abstract class SiteContainer<T extends Site>
 {
 
