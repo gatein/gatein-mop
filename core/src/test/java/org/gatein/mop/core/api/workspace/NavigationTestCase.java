@@ -18,39 +18,32 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
-import org.chromattic.api.annotations.OneToMany;
-import org.chromattic.api.annotations.OneToOne;
-import org.chromattic.api.annotations.Create;
-import org.chromattic.api.annotations.RelatedMappedBy;
+import org.gatein.mop.api.workspace.Navigation;
+import org.gatein.mop.api.workspace.ObjectType;
+import org.gatein.mop.api.workspace.Site;
+import org.gatein.mop.core.api.AbstractPOMTestCase;
+import org.gatein.mop.core.api.ModelImpl;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:navigationcontainer")
-public abstract class NavigationContainer {
-
-  @OneToOne
-  @RelatedMappedBy("navigations")
-  public abstract NavigationImpl getOwner();
-
-  @OneToMany
-  public abstract Map<String, NavigationImpl> getNavigationMap();
-
-   @OneToMany
-  public abstract List<NavigationImpl> getNavigationList();
-
-  @Create
-  public abstract NavigationImpl createNavigation();
-
-  public NavigationImpl addNavigation(String name) {
-    NavigationImpl page = createNavigation();
-    page.setName(name);
-    getNavigationList().add(page);
-    return page;
-  }
+public class NavigationTestCase extends AbstractPOMTestCase
+{
+   public void testNavigationOrder()
+   {
+      ModelImpl model = pomService.getModel();
+      Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal_for_navigation");
+      Navigation root = portal.getRootNavigation();
+      Navigation n1 = root.addChild("1");
+      Navigation n2 = root.addChild("2");
+      Navigation n3 = root.addChild("3");
+      List<? extends Navigation> ns = root.getChildren();
+      assertEquals(3, ns.size());
+      assertSame(n1, ns.get(0));
+      assertSame(n2, ns.get(1));
+      assertSame(n3, ns.get(2));
+   }
 }

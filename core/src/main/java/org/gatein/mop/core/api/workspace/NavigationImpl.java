@@ -33,7 +33,7 @@ import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.link.PageLink;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -98,9 +98,9 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
     }
   }
 
-  public Collection<? extends Navigation> getChildren() {
+  public List<? extends Navigation> getChildren() {
     NavigationContainer childrenContainer = getChildrenContainer();
-    return childrenContainer.getNavigations().values();
+    return childrenContainer.getNavigationList();
   }
 
   public Navigation getChild(String name) {
@@ -108,7 +108,7 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
       throw new NullPointerException();
     }
     NavigationContainer childrenContainer = getChildrenContainer();
-    return childrenContainer.getNavigations().get(name);
+    return childrenContainer.getNavigationMap().get(name);
   }
 
   public NavigationImpl addChild(String name) {

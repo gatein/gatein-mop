@@ -230,7 +230,7 @@
     </childNodeDefinitions>
   </nodeType>
 
-  <nodeType name="mop:navigationcontainer" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  <nodeType name="mop:navigationcontainer" isMixin="false" hasOrderableChildNodes="true" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>
       <supertype>mix:referenceable</supertype>
