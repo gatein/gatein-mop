@@ -35,66 +35,76 @@ import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, WorkspaceCustomizationContext {
+public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, WorkspaceCustomizationContext
+{
 
-  @OneToOne
-  @MappedBy("rootpage")
-  public abstract PageImpl getRoot();
+   @OneToOne
+   @MappedBy("rootpage")
+   public abstract PageImpl getRoot();
 
-  @OneToOne
-  @MappedBy("rootnavigation")
-  public abstract NavigationImpl getRootNavigation();
+   @OneToOne
+   @MappedBy("rootnavigation")
+   public abstract NavigationImpl getRootNavigation();
 
-  @ManyToOne
-  public abstract SiteContainer getSites();
+   @ManyToOne
+   public abstract SiteContainer getSites();
 
-  @Destroy
-  public abstract void destroy();
+   @Destroy
+   public abstract void destroy();
 
-  @OneToOne
-  @MappedBy("customizations")
-  public abstract CustomizationContainer getCustomizations();
+   @OneToOne
+   @MappedBy("customizations")
+   public abstract CustomizationContainer getCustomizations();
 
-  public abstract ObjectType<? extends Site> getObjectType();
+   public abstract ObjectType<? extends Site> getObjectType();
 
-  // Site implementation ***********************************************************************************************
+   // Site implementation ***********************************************************************************************
 
-  public WorkspaceImpl getWorkspace() {
-    SiteContainer sites = getSites();
-    return sites.getWorkspace();
-  }
+   public WorkspaceImpl getWorkspace()
+   {
+      SiteContainer sites = getSites();
+      return sites.getWorkspace();
+   }
 
-  public Page getRootPage() {
-    return getRoot();
-  }
+   public Page getRootPage()
+   {
+      return getRoot();
+   }
 
-  // WorkspaceCustomizationContext implementation **********************************************************************
+   // WorkspaceCustomizationContext implementation **********************************************************************
 
-  public String getContextType() {
-    return WorkspaceCustomizationContext.TYPE;
-  }
+   public String getContextType()
+   {
+      return WorkspaceCustomizationContext.TYPE;
+   }
 
-  public String getContextId() {
-    return getObjectId();
-  }
+   public String getContextId()
+   {
+      return getObjectId();
+   }
 
-  public boolean contains(CustomizationContext that) {
-    return contains(this, that);
-  }
+   public boolean contains(CustomizationContext that)
+   {
+      return contains(this, that);
+   }
 
-  public Customization<?> getCustomization(String name) {
-    return getCustomizations().getCustomization(name);
-  }
+   public Customization<?> getCustomization(String name)
+   {
+      return getCustomizations().getCustomization(name);
+   }
 
-  public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state) {
-    return getCustomizations().customize(name, contentType, contentId, state);
-  }
+   public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
+   {
+      return getCustomizations().customize(name, contentType, contentId, state);
+   }
 
-  public <S> Customization<S> customize(String name, Customization<S> customization) {
-    return getCustomizations().customize(name, customization);
-  }
+   public <S> Customization<S> customize(String name, Customization<S> customization)
+   {
+      return getCustomizations().customize(name, customization);
+   }
 
-  public String nameOf(Customization customization) {
-    return getCustomizations().nameOf(customization);
-  }
+   public String nameOf(Customization customization)
+   {
+      return getCustomizations().nameOf(customization);
+   }
 }

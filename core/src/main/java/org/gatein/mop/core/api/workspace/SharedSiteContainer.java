@@ -28,9 +28,10 @@ import org.gatein.mop.core.api.workspace.WorkspaceImpl;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:sharedsites")
-public abstract class SharedSiteContainer extends SiteContainer<SharedSite> {
+public abstract class SharedSiteContainer extends SiteContainer<SharedSite>
+{
 
-  @RelatedMappedBy("sharedsites")
-  public abstract WorkspaceImpl getWorkspace();
+   @RelatedMappedBy("sharedsites")
+   public abstract WorkspaceImpl getWorkspace();
 
 }

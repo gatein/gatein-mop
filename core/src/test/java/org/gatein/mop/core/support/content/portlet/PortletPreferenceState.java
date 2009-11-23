@@ -30,28 +30,29 @@ import java.util.List;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:portletpreference")
-public abstract class PortletPreferenceState {
+public abstract class PortletPreferenceState
+{
 
-  @ManyToOne
-  public abstract PortletPreferenceState getParent();
+   @ManyToOne
+   public abstract PortletPreferenceState getParent();
 
-  @Name
-  public abstract String getName();
+   @Name
+   public abstract String getName();
 
-  @Property(name = "value")
-  public abstract List<String> getValue();
+   @Property(name = "value")
+   public abstract List<String> getValue();
 
-  public abstract void setValue(List<String> value);
+   public abstract void setValue(List<String> value);
 
-  @Property(name = "value")
-  public abstract List<String> getValues();
+   @Property(name = "value")
+   public abstract List<String> getValues();
 
-  public abstract void setValues(List<String> value);
+   public abstract void setValues(List<String> value);
 
-  @Property(name = "readonly")
-  public abstract boolean getReadOnly();
+   @Property(name = "readonly")
+   public abstract boolean getReadOnly();
 
-  public abstract void setReadOnly(boolean readOnly);
+   public abstract void setReadOnly(boolean readOnly);
 
 
 }

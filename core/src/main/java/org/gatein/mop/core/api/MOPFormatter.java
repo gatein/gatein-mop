@@ -25,122 +25,150 @@ import org.chromattic.api.format.FormatterContext;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class MOPFormatter implements ObjectFormatter {
+public class MOPFormatter implements ObjectFormatter
+{
 
-  private static boolean isSpecialChar(char c) {
-    return getCode(c) != null;
-  }
+   private static boolean isSpecialChar(char c)
+   {
+      return getCode(c) != null;
+   }
 
-  private static String getCode(char c) {
-    if (c == 0x9
-      || c == 0xA
-      ||  c == 0xD
-      || (c >= 0x20 && c <= 0xD7FF)
-      || (c >= 0xE000 && c <= 0xFFFD)
-      || (c >= 0x10000 && c <= 0x10FFFF)) {
-      switch (c) {
-        case '{':
-          return "00";
-        case '}':
-          return "01";
-        case '.':
-          return "02";
-        case '/':
-          return "03";
-        case ':':
-          return "04";
-        case '[':
-          return "05";
-        case ']':
-          return "06";
-        case '|':
-          return "07";
-        case '*':
-          return "08";
-        case '%':
-          return "09";
-        default:
-          return null;
+   private static String getCode(char c)
+   {
+      if (c == 0x9
+         || c == 0xA
+         || c == 0xD
+         || (c >= 0x20 && c <= 0xD7FF)
+         || (c >= 0xE000 && c <= 0xFFFD)
+         || (c >= 0x10000 && c <= 0x10FFFF))
+      {
+         switch (c)
+         {
+            case '{':
+               return "00";
+            case '}':
+               return "01";
+            case '.':
+               return "02";
+            case '/':
+               return "03";
+            case ':':
+               return "04";
+            case '[':
+               return "05";
+            case ']':
+               return "06";
+            case '|':
+               return "07";
+            case '*':
+               return "08";
+            case '%':
+               return "09";
+            default:
+               return null;
+         }
       }
-    } else {
-      throw new UnsupportedOperationException();
-    }
-  }
-
-  private static final char[] table = new char[] {
-    '{', '}', '.', '/', ':', '[', ']', '|', '*', '%'
-  };
-
-  private String decode(String s, int from) {
-    StringBuffer buffer = new StringBuffer(s.length());
-    buffer.append(s, 0, from);
-    int to = s.length();
-    while (from < to) {
-      char c = s.charAt(from++);
-      if (c == '%') {
-        if (from + 1 >= to) {
-          throw new IllegalStateException("Cannot decode wrong name " + s);
-        }
-        char c1 = s.charAt(from++);
-        if (c1 != '0') {
-          throw new IllegalStateException("Cannot decode wrong name " + s);
-        }
-        char c2 = s.charAt(from++);
-        if (c2 < '0' || c2 > '9') {
-          throw new IllegalStateException("Cannot decode wrong name " + s);
-        }
-        buffer.append(table[c2 - '0']);
-      } else {
-        buffer.append(c);
+      else
+      {
+         throw new UnsupportedOperationException();
       }
-    }
-    return buffer.toString();
-  }
+   }
 
-  public String decodeNodeName(FormatterContext context, String internalName) {
-    int length = internalName.length();
-    for (int i = 0;i < length;i++) {
-      char c = internalName.charAt(i);
-      if (c == '%') {
-        return decode(internalName, i);
+   private static final char[] table = new char[]{
+      '{', '}', '.', '/', ':', '[', ']', '|', '*', '%'
+   };
+
+   private String decode(String s, int from)
+   {
+      StringBuffer buffer = new StringBuffer(s.length());
+      buffer.append(s, 0, from);
+      int to = s.length();
+      while (from < to)
+      {
+         char c = s.charAt(from++);
+         if (c == '%')
+         {
+            if (from + 1 >= to)
+            {
+               throw new IllegalStateException("Cannot decode wrong name " + s);
+            }
+            char c1 = s.charAt(from++);
+            if (c1 != '0')
+            {
+               throw new IllegalStateException("Cannot decode wrong name " + s);
+            }
+            char c2 = s.charAt(from++);
+            if (c2 < '0' || c2 > '9')
+            {
+               throw new IllegalStateException("Cannot decode wrong name " + s);
+            }
+            buffer.append(table[c2 - '0']);
+         }
+         else
+         {
+            buffer.append(c);
+         }
       }
-    }
-    return internalName;
-  }
+      return buffer.toString();
+   }
 
-  private String encode(String s, int from) {
-    StringBuffer buffer = new StringBuffer((s.length() * 5) >> 2);
-    buffer.append(s, 0, from);
-    int to = s.length();
-    while (from < to) {
-      char c = s.charAt(from++);
-      String code = getCode(c);
-      if (code != null) {
-        buffer.append('%');
-        buffer.append(code);
-      } else {
-        buffer.append(c);
+   public String decodeNodeName(FormatterContext context, String internalName)
+   {
+      int length = internalName.length();
+      for (int i = 0; i < length; i++)
+      {
+         char c = internalName.charAt(i);
+         if (c == '%')
+         {
+            return decode(internalName, i);
+         }
       }
-    }
-    return buffer.toString();
-  }
+      return internalName;
+   }
 
-  public String encodeNodeName(FormatterContext context, String externalName) {
-    int length = externalName.length();
-    for (int i = 0;i < length;i++) {
-      char c = externalName.charAt(i);
-      if (isSpecialChar(c)) {
-        return encode(externalName, i);
+   private String encode(String s, int from)
+   {
+      StringBuffer buffer = new StringBuffer((s.length() * 5) >> 2);
+      buffer.append(s, 0, from);
+      int to = s.length();
+      while (from < to)
+      {
+         char c = s.charAt(from++);
+         String code = getCode(c);
+         if (code != null)
+         {
+            buffer.append('%');
+            buffer.append(code);
+         }
+         else
+         {
+            buffer.append(c);
+         }
       }
-    }
-    return externalName;
-  }
+      return buffer.toString();
+   }
 
-  public String decodePropertyName(FormatterContext context, String internalName) {
-    return internalName;
-  }
+   public String encodeNodeName(FormatterContext context, String externalName)
+   {
+      int length = externalName.length();
+      for (int i = 0; i < length; i++)
+      {
+         char c = externalName.charAt(i);
+         if (isSpecialChar(c))
+         {
+            return encode(externalName, i);
+         }
+      }
+      return externalName;
+   }
 
-  public String encodePropertyName(FormatterContext context, String externalName) {
-    return externalName;
-  }
+   public String decodePropertyName(FormatterContext context, String internalName)
+   {
+      return internalName;
+   }
+
+   public String encodePropertyName(FormatterContext context, String externalName)
+   {
+      return externalName;
+   }
 }

@@ -33,81 +33,90 @@ import java.util.Collection;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class POMTestCase extends AbstractPOMTestCase {
+public class POMTestCase extends AbstractPOMTestCase
+{
 
-  public void testPortals() throws Exception {
-    test(0);
-  }
+   public void testPortals() throws Exception
+   {
+      test(0);
+   }
 
-  public void testGroups() throws Exception {
-    test(1);
-  }
+   public void testGroups() throws Exception
+   {
+      test(1);
+   }
 
-  private void test(int type) throws Exception {
+   private void test(int type) throws Exception
+   {
 
-    ModelImpl model = pomService.getModel();
+      ModelImpl model = pomService.getModel();
 
-    Workspace workspace = model.getWorkspace();
+      Workspace workspace = model.getWorkspace();
 
-    //
-    ObjectType<? extends Site> siteType;
-    if (type == 0) {
-      siteType = ObjectType.PORTAL_SITE;
-    } else if (type == 1) {
-      siteType = ObjectType.GROUP_SITE;
-    } else {
-      throw new UnsupportedOperationException();
-    }
+      //
+      ObjectType<? extends Site> siteType;
+      if (type == 0)
+      {
+         siteType = ObjectType.PORTAL_SITE;
+      }
+      else if (type == 1)
+      {
+         siteType = ObjectType.GROUP_SITE;
+      }
+      else
+      {
+         throw new UnsupportedOperationException();
+      }
 
-    //
-    Site site = workspace.addSite(siteType, "default");
-    Page root = site.getRootPage();
-    assertNotNull(root);
-    Page template = root.addChild("template");
-    assertNotNull(template);
+      //
+      Site site = workspace.addSite(siteType, "default");
+      Page root = site.getRootPage();
+      assertNotNull(root);
+      Page template = root.addChild("template");
+      assertNotNull(template);
 
-    UIContainer container = template.getRootComponent();
-    assertNotNull(container);
-    container.add(ObjectType.WINDOW, "window");
+      UIContainer container = template.getRootComponent();
+      assertNotNull(container);
+      container.add(ObjectType.WINDOW, "window");
 
-    //
-    Page page = root.addChild("page");
-    assertNotNull(page);
-    page.setTemplate(template);
+      //
+      Page page = root.addChild("page");
+      assertNotNull(page);
+      page.setTemplate(template);
 
-    //
-    NavigationImpl nav = (NavigationImpl)site.getRootNavigation();
-    assertNotNull(nav);
+      //
+      NavigationImpl nav = (NavigationImpl)site.getRootNavigation();
+      assertNotNull(nav);
 //    assertNull(nav.getLink());
 
-    //
-    nav.setTemplate(template);
+      //
+      nav.setTemplate(template);
 
-    //
-    PageLinkImpl pageTarget = nav.createPageLink();
+      //
+      PageLinkImpl pageTarget = nav.createPageLink();
 //    nav.setLink(pageTarget);
 //    pageTarget.setPage(page);
 
-    //
-    NavigationImpl subnav = nav.addChild("subnav");
-    URLLinkImpl urlTarget = nav.createURLTarget();
+      //
+      NavigationImpl subnav = nav.addChild("subnav");
+      URLLinkImpl urlTarget = nav.createURLTarget();
 //    subnav.setLink(urlTarget);
 //    urlTarget.setURL("http://www.exoplatform.com");
 
-    // Try something with template relationships
+      // Try something with template relationships
 
-    Collection<? extends Page> templatizedPages = template.getTemplatizedObjects(ObjectType.PAGE);
-    assertNotNull(templatizedPages);
-    assertEquals(1, templatizedPages.size());
+      Collection<? extends Page> templatizedPages = template.getTemplatizedObjects(ObjectType.PAGE);
+      assertNotNull(templatizedPages);
+      assertEquals(1, templatizedPages.size());
 
-    Collection<? extends Navigation> templatizedNavigations = template.getTemplatizedObjects(ObjectType.NAVIGATION);
-    assertNotNull(templatizedNavigations);
-    assertEquals(1, templatizedNavigations.size());
+      Collection<? extends Navigation> templatizedNavigations = template.getTemplatizedObjects(ObjectType.NAVIGATION);
+      assertNotNull(templatizedNavigations);
+      assertEquals(1, templatizedNavigations.size());
 
 /*
     Collection<Templatized> templatizedObjects = template.getTemplatizedObjects(Templatized.class);
     assertNotNull(templatizedObjects);
     assertEquals(2, templatizedObjects.size());
 */
-  }
+   }
 }

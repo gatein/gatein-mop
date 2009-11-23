@@ -40,107 +40,128 @@ import java.util.List;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:navigation")
-public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navigation {
+public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navigation
+{
 
-  @OneToOne
-  @RelatedMappedBy("rootnavigation")
-  public abstract SiteImpl getParentSite();
+   @OneToOne
+   @RelatedMappedBy("rootnavigation")
+   public abstract SiteImpl getParentSite();
 
-  @OneToOne
-  @MappedBy("children")
-  public abstract NavigationContainer getChildrenContainer();
+   @OneToOne
+   @MappedBy("children")
+   public abstract NavigationContainer getChildrenContainer();
 
-  @ManyToOne
-  public abstract NavigationContainer getParentContainer();
+   @ManyToOne
+   public abstract NavigationContainer getParentContainer();
 
-  @OneToOne
-  @MappedBy("link")
-  public abstract LinkImpl getLink();
+   @OneToOne
+   @MappedBy("link")
+   public abstract LinkImpl getLink();
 
-  public abstract LinkImpl setLink(LinkImpl target);
+   public abstract LinkImpl setLink(LinkImpl target);
 
-  @Create
-  public abstract NavigationImpl createNavigation(String name);
+   @Create
+   public abstract NavigationImpl createNavigation(String name);
 
-  @Create
-  public abstract URLLinkImpl createURLTarget();
+   @Create
+   public abstract URLLinkImpl createURLTarget();
 
-  @Create
-  public abstract PageLinkImpl createPageLink();
+   @Create
+   public abstract PageLinkImpl createPageLink();
 
-  @ManyToOne(type = RelationshipType.PATH)
-  @MappedBy("template")
-  public abstract PageImpl getPageTemplate();
+   @ManyToOne(type = RelationshipType.PATH)
+   @MappedBy("template")
+   public abstract PageImpl getPageTemplate();
 
-  public abstract void setPageTemplate(PageImpl template);
+   public abstract void setPageTemplate(PageImpl template);
 
-  @Destroy
-  public abstract void destroy();
+   @Destroy
+   public abstract void destroy();
 
-  public ObjectType<? extends Navigation> getObjectType() {
-    return ObjectType.NAVIGATION;
-  }
+   public ObjectType<? extends Navigation> getObjectType()
+   {
+      return ObjectType.NAVIGATION;
+   }
 
-  public Page getTemplate() {
-    return getPageTemplate();
-  }
+   public Page getTemplate()
+   {
+      return getPageTemplate();
+   }
 
-  public void setTemplate(Page template) {
-    setPageTemplate((PageImpl)template);
-  }
+   public void setTemplate(Page template)
+   {
+      setPageTemplate((PageImpl)template);
+   }
 
-  public Navigation getParent() {
-    NavigationContainer parent = getParentContainer();
-    if (parent != null) {
-      return parent.getOwner();
-    } else {
-      return null;
-    }
-  }
-
-  public List<? extends Navigation> getChildren() {
-    NavigationContainer childrenContainer = getChildrenContainer();
-    return childrenContainer.getNavigationList();
-  }
-
-  public Navigation getChild(String name) {
-    if (name == null) {
-      throw new NullPointerException();
-    }
-    NavigationContainer childrenContainer = getChildrenContainer();
-    return childrenContainer.getNavigationMap().get(name);
-  }
-
-  public NavigationImpl addChild(String name) {
-    NavigationContainer childrenContainer = getChildrenContainer();
-    return childrenContainer.addNavigation(name);
-  }
-
-  public <L extends Link> L linkTo(ObjectType<L> linkType) {
-    setLink(null);
-
-    //
-    L link = null;
-    if (linkType != null) {
-      if (linkType.getJavaType().equals(PageLink.class)) {
-        PageLinkImpl pl = createPageLink();
-        setLink(pl);
-        link = (L)pl;
-      } else {
-        throw new UnsupportedOperationException("Links of type " + linkType + " are not supported");
+   public Navigation getParent()
+   {
+      NavigationContainer parent = getParentContainer();
+      if (parent != null)
+      {
+         return parent.getOwner();
       }
-    }
+      else
+      {
+         return null;
+      }
+   }
 
-    //
-    return link;
-  }
+   public List<? extends Navigation> getChildren()
+   {
+      NavigationContainer childrenContainer = getChildrenContainer();
+      return childrenContainer.getNavigationList();
+   }
 
-  public Site getSite() {
-    SiteImpl parent = getParentSite();
-    if (parent != null) {
-      return parent;
-    } else {
-      return getParent().getSite();
-    }
-  }
+   public Navigation getChild(String name)
+   {
+      if (name == null)
+      {
+         throw new NullPointerException();
+      }
+      NavigationContainer childrenContainer = getChildrenContainer();
+      return childrenContainer.getNavigationMap().get(name);
+   }
+
+   public NavigationImpl addChild(String name)
+   {
+      NavigationContainer childrenContainer = getChildrenContainer();
+      return childrenContainer.addNavigation(name);
+   }
+
+   public <L extends Link> L linkTo(ObjectType<L> linkType)
+   {
+      setLink(null);
+
+      //
+      L link = null;
+      if (linkType != null)
+      {
+         if (linkType.getJavaType().equals(PageLink.class))
+         {
+            PageLinkImpl pl = createPageLink();
+            setLink(pl);
+            link = (L)pl;
+         }
+         else
+         {
+            throw new UnsupportedOperationException("Links of type " + linkType + " are not supported");
+         }
+      }
+
+      //
+      return link;
+   }
+
+   public Site getSite()
+   {
+      SiteImpl parent = getParentSite();
+      if (parent != null)
+      {
+         return parent;
+      }
+      else
+      {
+         return getParent().getSite();
+      }
+   }
 }

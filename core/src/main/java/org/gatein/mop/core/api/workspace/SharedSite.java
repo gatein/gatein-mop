@@ -28,11 +28,13 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:sharedsite")
-public abstract class SharedSite extends SiteImpl {
+public abstract class SharedSite extends SiteImpl
+{
 
-  // Site implementation ***********************************************************************************************
+   // Site implementation ***********************************************************************************************
 
-  public ObjectType<? extends Site> getObjectType() {
-    return ObjectType.SHARED_SITE;
-  }
+   public ObjectType<? extends Site> getObjectType()
+   {
+      return ObjectType.SHARED_SITE;
+   }
 }

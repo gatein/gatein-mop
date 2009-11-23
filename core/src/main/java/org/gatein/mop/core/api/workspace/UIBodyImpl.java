@@ -27,9 +27,11 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:uibody")
-public abstract class UIBodyImpl extends UIComponentImpl implements UIBody {
+public abstract class UIBodyImpl extends UIComponentImpl implements UIBody
+{
 
-  public ObjectType<? extends UIBody> getObjectType() {
-    return ObjectType.BODY;
-  }
+   public ObjectType<? extends UIBody> getObjectType()
+   {
+      return ObjectType.BODY;
+   }
 }

@@ -25,21 +25,23 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ObjectTypeTestCase extends TestCase {
+public class ObjectTypeTestCase extends TestCase
+{
 
-  public void testAssignability() {
-    assertFalse(ObjectType.WORKSPACE.isAssignableFrom(ObjectType.SITE));
-    assertFalse(ObjectType.SITE.isAssignableFrom(ObjectType.WORKSPACE));
+   public void testAssignability()
+   {
+      assertFalse(ObjectType.WORKSPACE.isAssignableFrom(ObjectType.SITE));
+      assertFalse(ObjectType.SITE.isAssignableFrom(ObjectType.WORKSPACE));
 
-    //
-    assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.SITE));
+      //
+      assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.SITE));
 
-    //
-    assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.PORTAL_SITE));
-    assertFalse(ObjectType.PORTAL_SITE.isAssignableFrom(ObjectType.SITE));
+      //
+      assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.PORTAL_SITE));
+      assertFalse(ObjectType.PORTAL_SITE.isAssignableFrom(ObjectType.SITE));
 
-    //
-    assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.GROUP_SITE));
-    assertFalse(ObjectType.GROUP_SITE.isAssignableFrom(ObjectType.SITE));
-  }
+      //
+      assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.GROUP_SITE));
+      assertFalse(ObjectType.GROUP_SITE.isAssignableFrom(ObjectType.SITE));
+   }
 }

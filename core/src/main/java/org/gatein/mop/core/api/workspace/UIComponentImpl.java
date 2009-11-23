@@ -27,26 +27,32 @@ import org.chromattic.api.annotations.Name;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class UIComponentImpl extends WorkspaceObjectImpl implements UIComponent {
+public abstract class UIComponentImpl extends WorkspaceObjectImpl implements UIComponent
+{
 
-  @ManyToOne
-  public abstract UIContainerImpl getParentContainer();
+   @ManyToOne
+   public abstract UIContainerImpl getParentContainer();
 
-  @ManyToOne
-  public abstract PageImpl getParentPage();
+   @ManyToOne
+   public abstract PageImpl getParentPage();
 
-  public abstract ObjectType<? extends UIComponent> getObjectType();
+   public abstract ObjectType<? extends UIComponent> getObjectType();
 
-  public final UIContainerImpl getParent() {
-    return getParentContainer();
-  }
+   public final UIContainerImpl getParent()
+   {
+      return getParentContainer();
+   }
 
-  public final PageImpl getPage() {
-    UIContainerImpl container = getParentContainer();
-    if (container != null) {
-      return container.getPage();
-    } else {
-      return getParentPage();
-    }
-  }
+   public final PageImpl getPage()
+   {
+      UIContainerImpl container = getParentContainer();
+      if (container != null)
+      {
+         return container.getPage();
+      }
+      else
+      {
+         return getParentPage();
+      }
+   }
 }

@@ -24,19 +24,22 @@ import org.gatein.mop.api.content.ContentType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class Gadget {
+public class Gadget
+{
 
-  /** . */
-  public static final ContentType<Gadget> CONTENT_TYPE = new ContentType<Gadget>("application/gadget", Gadget.class);
+   /** . */
+   public static final ContentType<Gadget> CONTENT_TYPE = new ContentType<Gadget>("application/gadget", Gadget.class);
 
-  /** . */
-  private String userPref;
+   /** . */
+   private String userPref;
 
-  public String getUserPref() {
-    return userPref;
-  }
+   public String getUserPref()
+   {
+      return userPref;
+   }
 
-  public void setUserPref(String userPref) {
-    this.userPref = userPref;
-  }
+   public void setUserPref(String userPref)
+   {
+      this.userPref = userPref;
+   }
 }

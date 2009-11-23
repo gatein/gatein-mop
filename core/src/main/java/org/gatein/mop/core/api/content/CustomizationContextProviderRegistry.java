@@ -30,49 +30,60 @@ import java.util.HashMap;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class CustomizationContextProviderRegistry implements CustomizationContextResolver {
+public class CustomizationContextProviderRegistry implements CustomizationContextResolver
+{
 
-  /** The various providers. */
-  final transient Map<String, CustomizationContextProvider> resolvers;
+   /** The various providers. */
+   final transient Map<String, CustomizationContextProvider> resolvers;
 
-  public CustomizationContextProviderRegistry() {
-    resolvers = new HashMap<String, CustomizationContextProvider>();
-  }
+   public CustomizationContextProviderRegistry()
+   {
+      resolvers = new HashMap<String, CustomizationContextProvider>();
+   }
 
-  public synchronized void register(String contextType, CustomizationContextProvider contentProvider) {
-    if (contextType == null) {
-      throw new NullPointerException();
-    }
-    if (contentProvider == null) {
-      throw new NullPointerException();
-    }
-    resolvers.put(contextType, contentProvider);
-  }
+   public synchronized void register(String contextType, CustomizationContextProvider contentProvider)
+   {
+      if (contextType == null)
+      {
+         throw new NullPointerException();
+      }
+      if (contentProvider == null)
+      {
+         throw new NullPointerException();
+      }
+      resolvers.put(contextType, contentProvider);
+   }
 
-  public synchronized void unregister(String contextType) {
-    if (contextType == null) {
-      throw new NullPointerException();
-    }
-    resolvers.remove(contextType);
-  }
+   public synchronized void unregister(String contextType)
+   {
+      if (contextType == null)
+      {
+         throw new NullPointerException();
+      }
+      resolvers.remove(contextType);
+   }
 
-  public CustomizationContext resolve(String contextType, String contextId) {
-    if (contextType == null) {
-      throw new NullPointerException();
-    }
-    if (contextId == null) {
-      throw new NullPointerException();
-    }
+   public CustomizationContext resolve(String contextType, String contextId)
+   {
+      if (contextType == null)
+      {
+         throw new NullPointerException();
+      }
+      if (contextId == null)
+      {
+         throw new NullPointerException();
+      }
 
-    //
-    CustomizationContextProvider provider = resolvers.get(contextType);
+      //
+      CustomizationContextProvider provider = resolvers.get(contextType);
 
-    //
-    if (provider != null) {
-      return provider.resolveContext(contextId);
-    }
+      //
+      if (provider != null)
+      {
+         return provider.resolveContext(contextId);
+      }
 
-    //
-    return null;
-  }
+      //
+      return null;
+   }
 }

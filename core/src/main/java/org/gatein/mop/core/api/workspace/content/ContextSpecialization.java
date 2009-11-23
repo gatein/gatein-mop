@@ -30,45 +30,53 @@ import org.gatein.mop.core.api.content.CustomizationContextResolver;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:contextspecialization")
-public abstract class ContextSpecialization extends AbstractCustomization {
+public abstract class ContextSpecialization extends AbstractCustomization
+{
 
-  /** . */
-  private CustomizationContextResolver customizationContextResolver;
+   /** . */
+   private CustomizationContextResolver customizationContextResolver;
 
-  public CustomizationContextResolver getCustomizationContextResolver() {
-    return customizationContextResolver;
-  }
+   public CustomizationContextResolver getCustomizationContextResolver()
+   {
+      return customizationContextResolver;
+   }
 
-  public void setCustomizationContextResolver(CustomizationContextResolver customizationContextResolver) {
-    this.customizationContextResolver = customizationContextResolver;
-  }
+   public void setCustomizationContextResolver(CustomizationContextResolver customizationContextResolver)
+   {
+      this.customizationContextResolver = customizationContextResolver;
+   }
 
-  @Name
-  public abstract String getContextId();
+   @Name
+   public abstract String getContextId();
 
-  @ManyToOne
-  public abstract ContextType getContextType();
+   @ManyToOne
+   public abstract ContextType getContextType();
 
-  public ContentType<Object> getType() {
-    throw new UnsupportedOperationException();
-  }
+   public ContentType<Object> getType()
+   {
+      throw new UnsupportedOperationException();
+   }
 
-  public CustomizationContext getContext() {
-    ContextType currentContextType = getContextType();
-    String contextType = currentContextType.getName();
-    return customizationContextResolver.resolve(contextType, getContextId());
-  }
+   public CustomizationContext getContext()
+   {
+      ContextType currentContextType = getContextType();
+      String contextType = currentContextType.getName();
+      return customizationContextResolver.resolve(contextType, getContextId());
+   }
 
-  public AbstractCustomization getParent() {
-    ContextType contextType = getContextType();
-    return contextType.getContainer().getCustomization();
-  }
+   public AbstractCustomization getParent()
+   {
+      ContextType contextType = getContextType();
+      return contextType.getContainer().getCustomization();
+   }
 
-  public String getContentId() {
-    throw new UnsupportedOperationException();
-  }
+   public String getContentId()
+   {
+      throw new UnsupportedOperationException();
+   }
 
-  public void destroy() {
-    throw new UnsupportedOperationException("todo");
-  }
+   public void destroy()
+   {
+      throw new UnsupportedOperationException("todo");
+   }
 }

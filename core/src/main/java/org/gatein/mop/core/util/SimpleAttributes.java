@@ -26,31 +26,40 @@ import java.util.Set;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class SimpleAttributes extends AbstractAttributes {
+public class SimpleAttributes extends AbstractAttributes
+{
 
-  private final Map<String, Object> map;
+   private final Map<String, Object> map;
 
-  public SimpleAttributes(Map<String, Object> map) {
-    this.map = map;
-  }
+   public SimpleAttributes(Map<String, Object> map)
+   {
+      this.map = map;
+   }
 
-  public SimpleAttributes() {
-    this(new HashMap<String, Object>());
-  }
+   public SimpleAttributes()
+   {
+      this(new HashMap<String, Object>());
+   }
 
-  public Set<String> getKeys() {
-    return map.keySet();
-  }
+   public Set<String> getKeys()
+   {
+      return map.keySet();
+   }
 
-  protected Object get(String name) {
-    return map.get(name);
-  }
+   protected Object get(String name)
+   {
+      return map.get(name);
+   }
 
-  protected void set(String name, Object o) {
-    if (o == null) {
-      map.remove(name);
-    } else {
-      map.put(name, o);
-    }
-  }
+   protected void set(String name, Object o)
+   {
+      if (o == null)
+      {
+         map.remove(name);
+      }
+      else
+      {
+         map.put(name, o);
+      }
+   }
 }

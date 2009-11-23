@@ -28,11 +28,13 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:groupsite")
-public abstract class GroupSite extends SiteImpl {
+public abstract class GroupSite extends SiteImpl
+{
 
-  // Site implementation ***********************************************************************************************
+   // Site implementation ***********************************************************************************************
 
-  public ObjectType<? extends Site> getObjectType() {
-    return ObjectType.GROUP_SITE;
-  }
+   public ObjectType<? extends Site> getObjectType()
+   {
+      return ObjectType.GROUP_SITE;
+   }
 }

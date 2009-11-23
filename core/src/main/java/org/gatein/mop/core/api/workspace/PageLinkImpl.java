@@ -33,25 +33,28 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:pagelink")
-public abstract class PageLinkImpl extends LinkImpl implements PageLink {
+public abstract class PageLinkImpl extends LinkImpl implements PageLink
+{
 
-  @ManyToOne(type = RelationshipType.PATH)
-  @MappedBy("page")
-  public abstract PageImpl getPage();
+   @ManyToOne(type = RelationshipType.PATH)
+   @MappedBy("page")
+   public abstract PageImpl getPage();
 
-  public abstract void setPage(PageImpl page);
+   public abstract void setPage(PageImpl page);
 
-  @Path
-  @Property(name = "path")
-  public abstract String getPathPath();
+   @Path
+   @Property(name = "path")
+   public abstract String getPathPath();
 
-  public abstract void setPagePath(String path);
+   public abstract void setPagePath(String path);
 
-  public void setPage(Page page) {
-    setPage((PageImpl)page);
-  }
+   public void setPage(Page page)
+   {
+      setPage((PageImpl)page);
+   }
 
-  public ObjectType<? extends PageLink> getObjectType() {
-    return ObjectType.PAGE_LINK;
-  }
+   public ObjectType<? extends PageLink> getObjectType()
+   {
+      return ObjectType.PAGE_LINK;
+   }
 }

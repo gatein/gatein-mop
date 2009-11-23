@@ -24,24 +24,28 @@ import org.gatein.mop.core.support.content.portlet.Preferences;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class PortletDefinition {
+public class PortletDefinition
+{
 
-  /** . */
-  private final String name;
+   /** . */
+   private final String name;
 
-  /** . */
-  private final Preferences preferences;
+   /** . */
+   private final Preferences preferences;
 
-  public PortletDefinition(String name, Preferences preferences) {
-    this.name = name;
-    this.preferences = preferences;
-  }
+   public PortletDefinition(String name, Preferences preferences)
+   {
+      this.name = name;
+      this.preferences = preferences;
+   }
 
-  public String getName() {
-    return name;
-  }
+   public String getName()
+   {
+      return name;
+   }
 
-  public Preferences getPreferences() {
-    return preferences;
-  }
+   public Preferences getPreferences()
+   {
+      return preferences;
+   }
 }

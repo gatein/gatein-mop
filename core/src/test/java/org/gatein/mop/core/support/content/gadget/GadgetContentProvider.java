@@ -32,68 +32,87 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class GadgetContentProvider implements ContentProvider<Gadget> {
+public class GadgetContentProvider implements ContentProvider<Gadget>
+{
 
-  public Gadget combine(List<Gadget> states) {
-    throw new UnsupportedOperationException();
-  }
+   public Gadget combine(List<Gadget> states)
+   {
+      throw new UnsupportedOperationException();
+   }
 
-  public void setState(StateContainer container, Gadget state) {
-    try {
-      ChromatticSession session = ((AbstractCustomization)container).session;
-      String containerId = session.getId(container);
-      Node node = session.getJCRSession().getNodeByUUID(containerId);
+   public void setState(StateContainer container, Gadget state)
+   {
+      try
+      {
+         ChromatticSession session = ((AbstractCustomization)container).session;
+         String containerId = session.getId(container);
+         Node node = session.getJCRSession().getNodeByUUID(containerId);
 
-      //
-      GadgetState prefs;
-      if (node.hasNode("state")) {
-        Node stateNode = node.getNode("state");
-        prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
-        if (state == null) {
-          session.remove(prefs);
-          return;
-        }
-      } else {
-        if (state == null) {
-          return;
-        } else {
-          Node stateNode = node.addNode("state", "mop:gadget");
-          prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
-        }
+         //
+         GadgetState prefs;
+         if (node.hasNode("state"))
+         {
+            Node stateNode = node.getNode("state");
+            prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
+            if (state == null)
+            {
+               session.remove(prefs);
+               return;
+            }
+         }
+         else
+         {
+            if (state == null)
+            {
+               return;
+            }
+            else
+            {
+               Node stateNode = node.addNode("state", "mop:gadget");
+               prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
+            }
+         }
+
+         //
+         prefs.setUserPrefs(state.getUserPref());
       }
-
-      //
-      prefs.setUserPrefs(state.getUserPref());
-    }
-    catch (RepositoryException e) {
-      throw new UndeclaredRepositoryException(e);
-    }
-  }
-
-  public Gadget getState(StateContainer container) {
-    try {
-      ChromatticSession session = ((AbstractCustomization)container).session;
-      String containerId = session.getId(container);
-      Node node = session.getJCRSession().getNodeByUUID(containerId);
-
-      //
-      GadgetState prefs;
-      if (node.hasNode("state")) {
-        Node stateNode = node.getNode("state");
-        prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
-        Gadget gadget = new Gadget();
-        gadget.setUserPref(prefs.getUserPrefs());
-        return gadget;
-      } else {
-        return null;
+      catch (RepositoryException e)
+      {
+         throw new UndeclaredRepositoryException(e);
       }
-    }
-    catch (RepositoryException e) {
-      throw new UndeclaredRepositoryException(e);
-    }
-  }
+   }
 
-  public Class<Gadget> getStateType() {
-    return Gadget.class;
-  }
+   public Gadget getState(StateContainer container)
+   {
+      try
+      {
+         ChromatticSession session = ((AbstractCustomization)container).session;
+         String containerId = session.getId(container);
+         Node node = session.getJCRSession().getNodeByUUID(containerId);
+
+         //
+         GadgetState prefs;
+         if (node.hasNode("state"))
+         {
+            Node stateNode = node.getNode("state");
+            prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
+            Gadget gadget = new Gadget();
+            gadget.setUserPref(prefs.getUserPrefs());
+            return gadget;
+         }
+         else
+         {
+            return null;
+         }
+      }
+      catch (RepositoryException e)
+      {
+         throw new UndeclaredRepositoryException(e);
+      }
+   }
+
+   public Class<Gadget> getStateType()
+   {
+      return Gadget.class;
+   }
 }

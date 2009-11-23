@@ -28,19 +28,22 @@ import org.chromattic.api.RelationshipType;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:workspacespecialization")
-public abstract class WorkspaceSpecialization extends WorkspaceCustomization {
+public abstract class WorkspaceSpecialization extends WorkspaceCustomization
+{
 
-  @ManyToOne(type = RelationshipType.PATH)
-  @MappedBy("customization")
-  public abstract WorkspaceCustomization getCustomization();
+   @ManyToOne(type = RelationshipType.PATH)
+   @MappedBy("customization")
+   public abstract WorkspaceCustomization getCustomization();
 
-  public abstract void setCustomization(WorkspaceCustomization customization);
+   public abstract void setCustomization(WorkspaceCustomization customization);
 
-  public void destroy() {
-    doDestroy();
-  }
+   public void destroy()
+   {
+      doDestroy();
+   }
 
-  public AbstractCustomization getParent() {
-    return getCustomization();
-  }
+   public AbstractCustomization getParent()
+   {
+      return getCustomization();
+   }
 }

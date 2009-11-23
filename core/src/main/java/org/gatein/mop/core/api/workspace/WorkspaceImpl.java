@@ -39,106 +39,130 @@ import java.util.Collection;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:workspace")
-public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Workspace, WorkspaceCustomizationContext {
+public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Workspace, WorkspaceCustomizationContext
+{
 
-  public ObjectType<? extends Workspace> getObjectType() {
-    return ObjectType.WORKSPACE;
-  }
+   public ObjectType<? extends Workspace> getObjectType()
+   {
+      return ObjectType.WORKSPACE;
+   }
 
-  // Abstract **********************************************************************************************************
+   // Abstract **********************************************************************************************************
 
-  @OneToOne
-  @MappedBy("portalsites")
-  public abstract PortalSiteContainer getPortalSites();
+   @OneToOne
+   @MappedBy("portalsites")
+   public abstract PortalSiteContainer getPortalSites();
 
-  @OneToOne
-  @MappedBy("groupsites")
-  public abstract GroupSiteContainer getGroupSites();
+   @OneToOne
+   @MappedBy("groupsites")
+   public abstract GroupSiteContainer getGroupSites();
 
-  @OneToOne
-  @MappedBy("usersites")
-  public abstract UserSiteContainer getUserSites();
+   @OneToOne
+   @MappedBy("usersites")
+   public abstract UserSiteContainer getUserSites();
 
-  @OneToOne
-  @MappedBy("sharedsites")
-  public abstract UserSiteContainer getSharedSites();
+   @OneToOne
+   @MappedBy("sharedsites")
+   public abstract UserSiteContainer getSharedSites();
 
-  @OneToOne
-  @MappedBy("customizations")
-  public abstract CustomizationContainer getCustomizations();
+   @OneToOne
+   @MappedBy("customizations")
+   public abstract CustomizationContainer getCustomizations();
 
-  // CustomizationContextResolver implementation ***********************************************************************
+   // CustomizationContextResolver implementation ***********************************************************************
 
-  @FindById
-  public abstract CustomizationContext resolveContext(String contextId);
+   @FindById
+   public abstract CustomizationContext resolveContext(String contextId);
 
-  // WorkspaceCustomizationContext implementation **********************************************************************
+   // WorkspaceCustomizationContext implementation **********************************************************************
 
-  public String getContextType() {
-    return WorkspaceCustomizationContext.TYPE;
-  }
+   public String getContextType()
+   {
+      return WorkspaceCustomizationContext.TYPE;
+   }
 
-  public String getContextId() {
-    return getObjectId();
-  }
+   public String getContextId()
+   {
+      return getObjectId();
+   }
 
-  public boolean contains(CustomizationContext that) {
-    return contains(this, that);
-  }
+   public boolean contains(CustomizationContext that)
+   {
+      return contains(this, that);
+   }
 
-  public Customization<?> getCustomization(String name) {
-    return getCustomizations().getCustomization(name);
-  }
+   public Customization<?> getCustomization(String name)
+   {
+      return getCustomizations().getCustomization(name);
+   }
 
-  public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state) {
-    return getCustomizations().customize(name, contentType, contentId, state);
-  }
+   public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
+   {
+      return getCustomizations().customize(name, contentType, contentId, state);
+   }
 
-  public <S> Customization<S> customize(String name, Customization<S> customization) {
-    return getCustomizations().customize(name, customization);
-  }
+   public <S> Customization<S> customize(String name, Customization<S> customization)
+   {
+      return getCustomizations().customize(name, customization);
+   }
 
-  public String nameOf(Customization customization) {
-    return getCustomizations().nameOf(customization);
-  }
+   public String nameOf(Customization customization)
+   {
+      return getCustomizations().nameOf(customization);
+   }
 
-  // Workspace implementation ******************************************************************************************
+   // Workspace implementation ******************************************************************************************
 
-  @SuppressWarnings("unchecked")
-  private <S extends Site> SiteContainer<S> getSiteContainer(ObjectType<S> siteType) {
-    if (siteType == ObjectType.PORTAL_SITE) {
-      return (SiteContainer<S>)getPortalSites();
-    } else if (siteType == ObjectType.GROUP_SITE) {
-      return (SiteContainer<S>)getGroupSites();
-    } else if (siteType == ObjectType.USER_SITE) {
-      return (SiteContainer<S>)getUserSites();
-    } else if (siteType == ObjectType.SHARED_SITE) {
-      return (SiteContainer<S>)getSharedSites();
-    } else {
+   @SuppressWarnings("unchecked")
+   private <S extends Site> SiteContainer<S> getSiteContainer(ObjectType<S> siteType)
+   {
+      if (siteType == ObjectType.PORTAL_SITE)
+      {
+         return (SiteContainer<S>)getPortalSites();
+      }
+      else if (siteType == ObjectType.GROUP_SITE)
+      {
+         return (SiteContainer<S>)getGroupSites();
+      }
+      else if (siteType == ObjectType.USER_SITE)
+      {
+         return (SiteContainer<S>)getUserSites();
+      }
+      else if (siteType == ObjectType.SHARED_SITE)
+      {
+         return (SiteContainer<S>)getSharedSites();
+      }
+      else
+      {
+         throw new UnsupportedOperationException();
+      }
+   }
+
+   public <S extends Site> S getSite(ObjectType<S> siteType, String siteName)
+   {
+      SiteContainer<S> sites = getSiteContainer(siteType);
+      return sites.getSite(siteName);
+   }
+
+   public Collection<Site> getSites()
+   {
       throw new UnsupportedOperationException();
-    }
-  }
+   }
 
-  public <S extends Site> S getSite(ObjectType<S> siteType, String siteName) {
-    SiteContainer<S> sites = getSiteContainer(siteType);
-    return sites.getSite(siteName);
-  }
+   public <S extends Site> Collection<S> getSites(ObjectType<S> siteType)
+   {
+      SiteContainer<S> sites = getSiteContainer(siteType);
+      return sites.getAllSites();
+   }
 
-  public Collection<Site> getSites() {
-    throw new UnsupportedOperationException();
-  }
+   public <S extends Site> S addSite(ObjectType<S> siteType, String name)
+   {
+      SiteContainer<S> sites = getSiteContainer(siteType);
+      return sites.addSite(name);
+   }
 
-  public <S extends Site> Collection<S> getSites(ObjectType<S> siteType) {
-    SiteContainer<S> sites = getSiteContainer(siteType);
-    return sites.getAllSites();
-  }
-
-  public <S extends Site> S addSite(ObjectType<S> siteType, String name) {
-    SiteContainer<S> sites = getSiteContainer(siteType);
-    return sites.addSite(name);
-  }
-
-  public Site getSharedSite() {
-    return getSite(ObjectType.SHARED_SITE, "default");
-  }
+   public Site getSharedSite()
+   {
+      return getSite(ObjectType.SHARED_SITE, "default");
+   }
 }

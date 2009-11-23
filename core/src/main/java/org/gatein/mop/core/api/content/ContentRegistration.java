@@ -25,24 +25,28 @@ import org.gatein.mop.spi.content.ContentProvider;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ContentRegistration {
+public class ContentRegistration
+{
 
-  /** . */
-  private final ContentType<?> contentType;
+   /** . */
+   private final ContentType<?> contentType;
 
-  /** . */
-  private final ContentProvider provider;
+   /** . */
+   private final ContentProvider provider;
 
-  public ContentRegistration(ContentType<?> contentType, ContentProvider provider) {
-    this.contentType = contentType;
-    this.provider = provider;
-  }
+   public ContentRegistration(ContentType<?> contentType, ContentProvider provider)
+   {
+      this.contentType = contentType;
+      this.provider = provider;
+   }
 
-  public ContentType<?> getContentType() {
-    return contentType;
-  }
+   public ContentType<?> getContentType()
+   {
+      return contentType;
+   }
 
-  public ContentProvider getProvider() {
-    return provider;
-  }
+   public ContentProvider getProvider()
+   {
+      return provider;
+   }
 }

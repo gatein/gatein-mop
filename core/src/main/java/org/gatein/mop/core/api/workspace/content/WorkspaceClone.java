@@ -37,49 +37,58 @@ import java.util.ArrayList;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:workspaceclone")
-public abstract class WorkspaceClone extends WorkspaceCustomization {
+public abstract class WorkspaceClone extends WorkspaceCustomization
+{
 
-  public Set<CustomizationContext> getContexts() {
-    return Collections.emptySet();
-  }
+   public Set<CustomizationContext> getContexts()
+   {
+      return Collections.emptySet();
+   }
 
-  @Name
-  public abstract String getFooName();
+   @Name
+   public abstract String getFooName();
 
-  @OneToMany(type = RelationshipType.PATH)
-  @RelatedMappedBy("customization")
-  public abstract Collection<WorkspaceSpecialization> getSpecializations();
+   @OneToMany(type = RelationshipType.PATH)
+   @RelatedMappedBy("customization")
+   public abstract Collection<WorkspaceSpecialization> getSpecializations();
 
-  //
+   //
 
-  public String getName() {
-    CustomizationContext customizationContext = getContext();
-    if (customizationContext instanceof WorkspaceCustomizationContext) {
-      return getFooName();
-    } else {
+   public String getName()
+   {
+      CustomizationContext customizationContext = getContext();
+      if (customizationContext instanceof WorkspaceCustomizationContext)
+      {
+         return getFooName();
+      }
+      else
+      {
+         return null;
+      }
+   }
+
+   public AbstractCustomization getParent()
+   {
       return null;
-    }
-  }
+   }
 
-  public AbstractCustomization getParent() {
-    return null;
-  }
+   public void destroy()
+   {
+      // Get specializations (clone for now because of bug with concurrent modif in chromattic)
+      Collection<WorkspaceSpecialization> specializations = new ArrayList<WorkspaceSpecialization>(getSpecializations());
 
-  public void destroy() {
-    // Get specializations (clone for now because of bug with concurrent modif in chromattic)
-    Collection<WorkspaceSpecialization> specializations = new ArrayList<WorkspaceSpecialization>(getSpecializations());
+      //
+      for (WorkspaceSpecialization specialization : specializations)
+      {
+         // Update the specialization with its virtual state
+         Object state = specialization.getVirtualState();
+         specialization.setState(state);
 
-    //
-    for (WorkspaceSpecialization specialization : specializations) {
-      // Update the specialization with its virtual state
-      Object state = specialization.getVirtualState();
-      specialization.setState(state);
+         // Clear ref
+         specialization.setCustomization(null);
+      }
 
-      // Clear ref
-      specialization.setCustomization(null);
-    }
-
-    //
-    doDestroy();
-  }
+      //
+      doDestroy();
+   }
 }

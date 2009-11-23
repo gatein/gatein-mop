@@ -36,152 +36,161 @@ import java.util.ArrayList;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class CustomizationTestCase extends AbstractPOMTestCase {
+public class CustomizationTestCase extends AbstractPOMTestCase
+{
 
-  /** . */
-  private final Preferences marseille = new PreferencesBuilder().add("city", "marseille").add("temperature", "celsius").build();
+   /** . */
+   private final Preferences marseille = new PreferencesBuilder().add("city", "marseille").add("temperature", "celsius").build();
 
-  /** . */
-  private final Preferences paris = new PreferencesBuilder().add("city", "paris").build();
+   /** . */
+   private final Preferences paris = new PreferencesBuilder().add("city", "paris").build();
 
-  /** . */
-  private final Preferences parisCelsius = new PreferencesBuilder().add("city", "paris").add("temperature", "celsius").build();
+   /** . */
+   private final Preferences parisCelsius = new PreferencesBuilder().add("city", "paris").add("temperature", "celsius").build();
 
-  /** . */
-  private final Preferences parisFarenheit = new PreferencesBuilder().add("city", "paris").add("temperature", "farenheit").build();
+   /** . */
+   private final Preferences parisFarenheit = new PreferencesBuilder().add("city", "paris").add("temperature", "farenheit").build();
 
-  public void testVirtualCustomization() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    Customization<Preferences> customization1 = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-    Customization<Preferences> customization2 = workspace.customize("paris", customization1);
+   public void testVirtualCustomization()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      Customization<Preferences> customization1 = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> customization2 = workspace.customize("paris", customization1);
 
-    //
-    customization2.setState(paris);
-    assertEquals(paris, customization2.getState());
-    assertEquals(parisCelsius, customization2.getVirtualState());
+      //
+      customization2.setState(paris);
+      assertEquals(paris, customization2.getState());
+      assertEquals(parisCelsius, customization2.getVirtualState());
 
-    //
-    customization2.setState(parisFarenheit);
-    assertEquals(parisFarenheit, customization2.getState());
-    assertEquals(parisFarenheit, customization2.getVirtualState());
+      //
+      customization2.setState(parisFarenheit);
+      assertEquals(parisFarenheit, customization2.getState());
+      assertEquals(parisFarenheit, customization2.getVirtualState());
 
-    //
-    customization1.setState(customization1.getState().setReadOnly("temperature", true));
-    assertEquals(parisFarenheit, customization2.getState());
-    assertEquals(parisCelsius, customization2.getVirtualState());
-  }
+      //
+      customization1.setState(customization1.getState().setReadOnly("temperature", true));
+      assertEquals(parisFarenheit, customization2.getState());
+      assertEquals(parisCelsius, customization2.getVirtualState());
+   }
 
-  public void testCustomizeWorkspace() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    assertNull(workspace.getCustomization("marseille"));
-    Customization<Preferences> customization = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-    assertNotNull(customization);
-    Preferences b = customization.getState();
-    assertEquals(marseille, b);
-    assertEquals(0, customization.getContexts().size());
-    assertEquals("WeatherPortlet", customization.getContentId());
-    assertEquals(Preferences.CONTENT_TYPE, customization.getType());
-    assertEquals("marseille", workspace.nameOf(customization));
-  }
+   public void testCustomizeWorkspace()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      assertNull(workspace.getCustomization("marseille"));
+      Customization<Preferences> customization = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      assertNotNull(customization);
+      Preferences b = customization.getState();
+      assertEquals(marseille, b);
+      assertEquals(0, customization.getContexts().size());
+      assertEquals("WeatherPortlet", customization.getContentId());
+      assertEquals(Preferences.CONTENT_TYPE, customization.getType());
+      assertEquals("marseille", workspace.nameOf(customization));
+   }
 
-  public void testCustomizeWindow() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
-    UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.add(ObjectType.WINDOW, "window");
+   public void testCustomizeWindow()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+      UIContainer layout = portal.getRootPage().getRootComponent();
+      UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
-    //
-    Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-    assertSame(customization, window.getCustomization());
-    assertEquals(marseille, customization.getVirtualState());
-    assertEquals(marseille, customization.getState());
+      //
+      Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      assertSame(customization, window.getCustomization());
+      assertEquals(marseille, customization.getVirtualState());
+      assertEquals(marseille, customization.getState());
 
-    //
-    customization = (Customization<Preferences>)window.getCustomization();
-    assertSame(customization, window.getCustomization());
-    assertEquals(marseille, customization.getVirtualState());
-    assertEquals(marseille, customization.getState());
-  }
+      //
+      customization = (Customization<Preferences>)window.getCustomization();
+      assertSame(customization, window.getCustomization());
+      assertEquals(marseille, customization.getVirtualState());
+      assertEquals(marseille, customization.getState());
+   }
 
-  public void testCustomizeWindowByCloneWithNoState() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
-    UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.add(ObjectType.WINDOW, "window");
+   public void testCustomizeWindowByCloneWithNoState()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+      UIContainer layout = portal.getRootPage().getRootComponent();
+      UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
-    //
-    Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", null);
-    assertSame(customization, window.getCustomization());
-    assertNull(customization.getState());
-  }
+      //
+      Customization<Preferences> customization = window.customize(Preferences.CONTENT_TYPE, "WeatherPortlet", null);
+      assertSame(customization, window.getCustomization());
+      assertNull(customization.getState());
+   }
 
-  public void testCustomizeWindowBySpecialization() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
-    UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.add(ObjectType.WINDOW, "window");
+   public void testCustomizeWindowBySpecialization()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+      UIContainer layout = portal.getRootPage().getRootComponent();
+      UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
-    //
-    Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-    Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
+      //
+      Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
-    //
-    assertNotNull(windowCustomization);
-    assertEquals(Arrays.<CustomizationContext>asList(window, portal), new ArrayList<CustomizationContext>(windowCustomization.getContexts()));
-    assertSame(windowCustomization, window.getCustomization());
-    assertTrue(((Customization)windowCustomization) instanceof WorkspaceSpecialization);
+      //
+      assertNotNull(windowCustomization);
+      assertEquals(Arrays.<CustomizationContext>asList(window, portal), new ArrayList<CustomizationContext>(windowCustomization.getContexts()));
+      assertSame(windowCustomization, window.getCustomization());
+      assertTrue(((Customization)windowCustomization) instanceof WorkspaceSpecialization);
 
-    //
-    assertPreferences(null, windowCustomization.getState());
-    assertPreferences(marseille, windowCustomization.getVirtualState());
-    assertPreferences(marseille, workspaceCustomization.getState());
+      //
+      assertPreferences(null, windowCustomization.getState());
+      assertPreferences(marseille, windowCustomization.getVirtualState());
+      assertPreferences(marseille, workspaceCustomization.getState());
 
-    //
-    workspaceCustomization.setState(paris);
-    assertPreferences(paris, windowCustomization.getVirtualState());
-    assertPreferences(null, windowCustomization.getState());
-    assertPreferences(paris, workspaceCustomization.getState());
+      //
+      workspaceCustomization.setState(paris);
+      assertPreferences(paris, windowCustomization.getVirtualState());
+      assertPreferences(null, windowCustomization.getState());
+      assertPreferences(paris, workspaceCustomization.getState());
 
-    //
-    windowCustomization.setState(parisFarenheit);
-    assertPreferences(parisFarenheit, windowCustomization.getVirtualState());
-    assertPreferences(parisFarenheit, windowCustomization.getState());
-    assertPreferences(paris, workspaceCustomization.getState());
-  }
+      //
+      windowCustomization.setState(parisFarenheit);
+      assertPreferences(parisFarenheit, windowCustomization.getVirtualState());
+      assertPreferences(parisFarenheit, windowCustomization.getState());
+      assertPreferences(paris, workspaceCustomization.getState());
+   }
 
-  public void testDestroySpecializedCustomization() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
-    UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.add(ObjectType.WINDOW, "window");
+   public void testDestroySpecializedCustomization()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+      UIContainer layout = portal.getRootPage().getRootComponent();
+      UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
-    //
-    Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-    Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
+      //
+      Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
-    //
-    workspaceCustomization.destroy();
+      //
+      workspaceCustomization.destroy();
 
-    //
-    assertEquals(marseille, windowCustomization.getVirtualState());
-    assertEquals(marseille, windowCustomization.getState());
-  }
+      //
+      assertEquals(marseille, windowCustomization.getVirtualState());
+      assertEquals(marseille, windowCustomization.getState());
+   }
 
-  public void testDestroySpecialization() {
-    Workspace workspace = pomService.getModel().getWorkspace();
-    Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
-    UIContainer layout = portal.getRootPage().getRootComponent();
-    UIWindow window = layout.add(ObjectType.WINDOW, "window");
+   public void testDestroySpecialization()
+   {
+      Workspace workspace = pomService.getModel().getWorkspace();
+      Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
+      UIContainer layout = portal.getRootPage().getRootComponent();
+      UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
-    //
-    Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-    Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
+      //
+      Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
-    //
-    windowCustomization.destroy();
-  }
+      //
+      windowCustomization.destroy();
+   }
 
-  private void assertPreferences(Preferences expectedPrefs, Preferences prefs) {
-    assertEquals("Was expecting to have prefs " + prefs + " equals to " + expectedPrefs, expectedPrefs, prefs);
-  }
+   private void assertPreferences(Preferences expectedPrefs, Preferences prefs)
+   {
+      assertEquals("Was expecting to have prefs " + prefs + " equals to " + expectedPrefs, expectedPrefs, prefs);
+   }
 }

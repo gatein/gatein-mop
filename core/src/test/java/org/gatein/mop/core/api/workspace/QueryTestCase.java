@@ -30,16 +30,18 @@ import java.util.Iterator;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class QueryTestCase extends AbstractPOMTestCase {
+public class QueryTestCase extends AbstractPOMTestCase
+{
 
-  public void testFoo() {
-    ModelImpl model = pomService.getModel();
-    Workspace workspace = model.getWorkspace();
-    Site site = workspace.addSite(ObjectType.PORTAL_SITE, "foo");
-    model.save();
-    Iterator<Site> sites = model.findObject(ObjectType.PORTAL_SITE, "jcr:path='" + model.pathOf(site) + "'");
-    assertTrue(sites.hasNext());
-    assertSame(site, sites.next());
-    assertFalse(sites.hasNext());
-  }
+   public void testFoo()
+   {
+      ModelImpl model = pomService.getModel();
+      Workspace workspace = model.getWorkspace();
+      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "foo");
+      model.save();
+      Iterator<Site> sites = model.findObject(ObjectType.PORTAL_SITE, "jcr:path='" + model.pathOf(site) + "'");
+      assertTrue(sites.hasNext());
+      assertSame(site, sites.next());
+      assertFalse(sites.hasNext());
+   }
 }

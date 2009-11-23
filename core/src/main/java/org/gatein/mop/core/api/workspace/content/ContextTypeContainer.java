@@ -29,12 +29,13 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:contexttypecontainer")
-public abstract class ContextTypeContainer {
+public abstract class ContextTypeContainer
+{
 
-  @OneToMany
-  public abstract Map<String, ContextType> getContextTypes();
+   @OneToMany
+   public abstract Map<String, ContextType> getContextTypes();
 
-  @ManyToOne
-  public abstract AbstractCustomization getCustomization();
+   @ManyToOne
+   public abstract AbstractCustomization getCustomization();
 
 }

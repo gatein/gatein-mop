@@ -24,9 +24,11 @@ import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class WorkspaceCustomizationPolicy {
+public class WorkspaceCustomizationPolicy
+{
 
-  public boolean contains(WorkspaceCustomizationContext c1, WorkspaceCustomizationContext c2) {
+   public boolean contains(WorkspaceCustomizationContext c1, WorkspaceCustomizationContext c2)
+   {
 /*
     if (c1 instanceof Workspace) {
       if (c2 instanceof Workspace) {
@@ -74,6 +76,6 @@ public class WorkspaceCustomizationPolicy {
       throw new AssertionError();
     }
 */
-    throw new UnsupportedOperationException();
-  }
+      throw new UnsupportedOperationException();
+   }
 }

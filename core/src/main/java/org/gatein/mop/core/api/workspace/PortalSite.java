@@ -27,25 +27,30 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:portalsite")
-public abstract class PortalSite extends SiteImpl {
+public abstract class PortalSite extends SiteImpl
+{
 
-  // Site implementation ***********************************************************************************************
+   // Site implementation ***********************************************************************************************
 
-  public ObjectType<? extends Site> getObjectType() {
-    return ObjectType.PORTAL_SITE;
-  }
+   public ObjectType<? extends Site> getObjectType()
+   {
+      return ObjectType.PORTAL_SITE;
+   }
 
-  // Portal implementation *********************************************************************************************
+   // Portal implementation *********************************************************************************************
 
-  public String getSkinId() {
-    throw new UnsupportedOperationException();
-  }
+   public String getSkinId()
+   {
+      throw new UnsupportedOperationException();
+   }
 
-  public String getTitle() {
-    throw new UnsupportedOperationException();
-  }
+   public String getTitle()
+   {
+      throw new UnsupportedOperationException();
+   }
 
-  public String getLocale() {
-    throw new UnsupportedOperationException();
-  }
+   public String getLocale()
+   {
+      throw new UnsupportedOperationException();
+   }
 }

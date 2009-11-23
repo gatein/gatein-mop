@@ -22,10 +22,11 @@ package org.gatein.mop.core.api.workspace.content;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class ContentState {
+public abstract class ContentState
+{
 
-  public abstract Object getPayload();
+   public abstract Object getPayload();
 
-  public abstract void setPayload(Object payload);
+   public abstract void setPayload(Object payload);
 
 }

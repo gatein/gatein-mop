@@ -34,55 +34,62 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:customizationcontainer")
-public abstract class CustomizationContainer {
+public abstract class CustomizationContainer
+{
 
-  @OneToOne
-  @RelatedMappedBy("customizations")
-  public abstract WorkspaceCustomizationContext getOwner();
+   @OneToOne
+   @RelatedMappedBy("customizations")
+   public abstract WorkspaceCustomizationContext getOwner();
 
-  @OneToMany
-  public abstract Map<String, WorkspaceCustomization> getCustomizations();
+   @OneToMany
+   public abstract Map<String, WorkspaceCustomization> getCustomizations();
 
-  @Create
-  public abstract WorkspaceClone createClone();
+   @Create
+   public abstract WorkspaceClone createClone();
 
-  @Create
-  public abstract WorkspaceSpecialization createSpecialization();
+   @Create
+   public abstract WorkspaceSpecialization createSpecialization();
 
-  public Customization<?> getCustomization(String name) {
-    Map<String, WorkspaceCustomization> customizations = getCustomizations();
-    return customizations.get(name);
-  }
+   public Customization<?> getCustomization(String name)
+   {
+      Map<String, WorkspaceCustomization> customizations = getCustomizations();
+      return customizations.get(name);
+   }
 
-  public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state) {
-    Map<String, WorkspaceCustomization> contents = getCustomizations();
-    WorkspaceClone content = createClone();
-    contents.put(name, content);
-    content.setContentId(contentId);
-    content.setMimeType(contentType.getMimeType());
-    content.setState(state);
-    return (Customization<S>)content;
-  }
-
-  public <S> Customization<S> customize(String name, Customization<S> customization) {
-    Map<String, WorkspaceCustomization> contents = getCustomizations();
-    WorkspaceCustomization workspaceCustomization = (WorkspaceCustomization)customization;
-    WorkspaceSpecialization content = createSpecialization();
-    contents.put(name, content);
-    content.setMimeType(workspaceCustomization.getMimeType());
-    content.setContentId(workspaceCustomization.getContentId());
-    content.setCustomization(workspaceCustomization);
-    return (Customization<S>)content;
-  }
-
-  public String nameOf(Customization customization) {
-    if (customization instanceof WorkspaceClone) {
-      WorkspaceClone wc = (WorkspaceClone)customization;
+   public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
+   {
       Map<String, WorkspaceCustomization> contents = getCustomizations();
-      if (contents.containsValue(wc)) {
-        return wc.getFooName();
+      WorkspaceClone content = createClone();
+      contents.put(name, content);
+      content.setContentId(contentId);
+      content.setMimeType(contentType.getMimeType());
+      content.setState(state);
+      return (Customization<S>)content;
+   }
+
+   public <S> Customization<S> customize(String name, Customization<S> customization)
+   {
+      Map<String, WorkspaceCustomization> contents = getCustomizations();
+      WorkspaceCustomization workspaceCustomization = (WorkspaceCustomization)customization;
+      WorkspaceSpecialization content = createSpecialization();
+      contents.put(name, content);
+      content.setMimeType(workspaceCustomization.getMimeType());
+      content.setContentId(workspaceCustomization.getContentId());
+      content.setCustomization(workspaceCustomization);
+      return (Customization<S>)content;
+   }
+
+   public String nameOf(Customization customization)
+   {
+      if (customization instanceof WorkspaceClone)
+      {
+         WorkspaceClone wc = (WorkspaceClone)customization;
+         Map<String, WorkspaceCustomization> contents = getCustomizations();
+         if (contents.containsValue(wc))
+         {
+            return wc.getFooName();
+         }
       }
-    }
-    return null;
-  }
+      return null;
+   }
 }

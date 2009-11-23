@@ -30,30 +30,34 @@ import java.util.Map;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class SiteContainer<T extends Site> {
+public abstract class SiteContainer<T extends Site>
+{
 
-  @OneToMany
-  public abstract Map<String, T> getSites();
+   @OneToMany
+   public abstract Map<String, T> getSites();
 
-  @OneToOne
-  public abstract WorkspaceImpl getWorkspace();
+   @OneToOne
+   public abstract WorkspaceImpl getWorkspace();
 
-  public T addSite(String siteName) {
-    T site = createSite();
-    getSites().put(siteName, site);
-    return site;
-  }
+   public T addSite(String siteName)
+   {
+      T site = createSite();
+      getSites().put(siteName, site);
+      return site;
+   }
 
-  @Create
-  public abstract T createSite();
+   @Create
+   public abstract T createSite();
 
-  public T getSite(String name) {
-    Map<String, T> sites = getSites();
-    return sites.get(name);
-  }
+   public T getSite(String name)
+   {
+      Map<String, T> sites = getSites();
+      return sites.get(name);
+   }
 
-  public Collection<T> getAllSites() {
-    Map<String, T> sites = getSites();
-    return sites.values();
-  }
+   public Collection<T> getAllSites()
+   {
+      Map<String, T> sites = getSites();
+      return sites.values();
+   }
 }

@@ -30,41 +30,52 @@ import org.gatein.mop.core.api.content.ContentRegistration;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class WorkspaceCustomization extends AbstractCustomization {
+public abstract class WorkspaceCustomization extends AbstractCustomization
+{
 
-  @Property(name = "mimetype")
-  public abstract String getMimeType();
+   @Property(name = "mimetype")
+   public abstract String getMimeType();
 
-  public abstract void setMimeType(String mimeType);
+   public abstract void setMimeType(String mimeType);
 
-  @Property(name = "contentid")
-  public abstract String getContentId();
+   @Property(name = "contentid")
+   public abstract String getContentId();
 
-  public abstract void setContentId(String contentId);
+   public abstract void setContentId(String contentId);
 
-  @ManyToOne
-  public abstract Object getOwner();
+   @ManyToOne
+   public abstract Object getOwner();
 
-  @Destroy
-  public abstract void doDestroy();
+   @Destroy
+   public abstract void doDestroy();
 
-  public final CustomizationContext getContext() {
-    Object owner = getOwner();
-    if (owner instanceof CustomizationContainer) {
-      return ((CustomizationContainer)owner).getOwner();
-    } else if (owner instanceof UIWindowImpl) {
-      return (UIWindowImpl)owner;
-    } else {
-      throw new AssertionError();
-    }
-  }
+   public final CustomizationContext getContext()
+   {
+      Object owner = getOwner();
+      if (owner instanceof CustomizationContainer)
+      {
+         return ((CustomizationContainer)owner).getOwner();
+      }
+      else if (owner instanceof UIWindowImpl)
+      {
+         return (UIWindowImpl)owner;
+      }
+      else
+      {
+         throw new AssertionError();
+      }
+   }
 
-  public final ContentType<Object> getType() {
-    ContentRegistration registration = registry.providers.get(getMimeType());
-    if (registration != null) {
-      return (ContentType<Object>)registration.getContentType();
-    } else {
-      return null;
-    }
-  }
+   public final ContentType<Object> getType()
+   {
+      ContentRegistration registration = registry.providers.get(getMimeType());
+      if (registration != null)
+      {
+         return (ContentType<Object>)registration.getContentType();
+      }
+      else
+      {
+         return null;
+      }
+   }
 }

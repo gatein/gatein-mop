@@ -31,28 +31,30 @@ import org.gatein.mop.core.support.content.portlet.PortletContentProvider;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class AbstractPOMTestCase extends TestCase {
+public abstract class AbstractPOMTestCase extends TestCase
+{
 
-  /** . */
-  protected MOPService pomService;
+   /** . */
+   protected MOPService pomService;
 
-  @Override
-  protected void setUp() throws Exception {
-    Preferences weatherPreferences = new Preferences(Collections.<String, Preference>singletonMap(
-      "zip", new Preference("zip", Collections.singletonList("marseille"), false)));
-    PortletContentProvider portletContentProvider = new PortletContentProvider();
+   @Override
+   protected void setUp() throws Exception
+   {
+      Preferences weatherPreferences = new Preferences(Collections.<String, Preference>singletonMap(
+         "zip", new Preference("zip", Collections.singletonList("marseille"), false)));
+      PortletContentProvider portletContentProvider = new PortletContentProvider();
 
-    //
-    MOPService pomService = new TestMOPService();
+      //
+      MOPService pomService = new TestMOPService();
 
-    //
-    pomService.start();
+      //
+      pomService.start();
 
-    // Not needed for now
-    // pomService.getContentManagerRegistry().register(Preferences.CONTENT_TYPE, portletContentProvider);
+      // Not needed for now
+      // pomService.getContentManagerRegistry().register(Preferences.CONTENT_TYPE, portletContentProvider);
 
-    //
-    this.pomService = pomService;
-  }
+      //
+      this.pomService = pomService;
+   }
 
 }

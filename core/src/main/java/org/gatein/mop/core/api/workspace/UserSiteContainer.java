@@ -26,9 +26,10 @@ import org.chromattic.api.annotations.RelatedMappedBy;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:usersites")
-public abstract class UserSiteContainer extends SiteContainer<UserSite> {
+public abstract class UserSiteContainer extends SiteContainer<UserSite>
+{
 
-  @RelatedMappedBy("usersites")
-  public abstract WorkspaceImpl getWorkspace();
+   @RelatedMappedBy("usersites")
+   public abstract WorkspaceImpl getWorkspace();
 
 }

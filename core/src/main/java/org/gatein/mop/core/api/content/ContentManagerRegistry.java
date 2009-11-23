@@ -30,29 +30,36 @@ import java.util.HashMap;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ContentManagerRegistry {
+public class ContentManagerRegistry
+{
 
-  /** The various providers. */
-  public final transient Map<String, ContentRegistration> providers;
+   /** The various providers. */
+   public final transient Map<String, ContentRegistration> providers;
 
-  public ContentManagerRegistry() {
-    providers = new HashMap<String, ContentRegistration>();
-  }
+   public ContentManagerRegistry()
+   {
+      providers = new HashMap<String, ContentRegistration>();
+   }
 
-  public synchronized <S> void register(ContentType<S> contentType, ContentProvider<S> contentProvider) {
-    if (contentType == null) {
-      throw new NullPointerException();
-    }
-    if (contentProvider == null) {
-      throw new NullPointerException();
-    }
-    providers.put(contentType.getMimeType(), new ContentRegistration(contentType, contentProvider));
-  }
+   public synchronized <S> void register(ContentType<S> contentType, ContentProvider<S> contentProvider)
+   {
+      if (contentType == null)
+      {
+         throw new NullPointerException();
+      }
+      if (contentProvider == null)
+      {
+         throw new NullPointerException();
+      }
+      providers.put(contentType.getMimeType(), new ContentRegistration(contentType, contentProvider));
+   }
 
-  public synchronized void unregister(ContentType contentType) {
-    if (contentType == null) {
-      throw new NullPointerException();
-    }
-    providers.remove(contentType.getMimeType());
-  }
+   public synchronized void unregister(ContentType contentType)
+   {
+      if (contentType == null)
+      {
+         throw new NullPointerException();
+      }
+      providers.remove(contentType.getMimeType());
+   }
 }

@@ -28,91 +28,110 @@ import java.util.ArrayList;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public final class Preference {
+public final class Preference
+{
 
-  /** . */
-  private final String name;
+   /** . */
+   private final String name;
 
-  /** . */
-  private final List<String> values;
+   /** . */
+   private final List<String> values;
 
-  /** . */
-  private final boolean readOnly;
+   /** . */
+   private final boolean readOnly;
 
-  public Preference(String name, List<String> values, boolean readOnly) {
-    if (name == null) {
-      throw new NullPointerException();
-    }
-    if (values == null) {
-      throw new NullPointerException();
-    }
-
-    // Clone and check state
-    values = Collections.unmodifiableList(new ArrayList<String>(values));
-    if (values.size() == 0) {
-      throw new IllegalArgumentException();
-    }
-    for (String value : values) {
-      if (value == null) {
-        throw new IllegalArgumentException();
+   public Preference(String name, List<String> values, boolean readOnly)
+   {
+      if (name == null)
+      {
+         throw new NullPointerException();
       }
-    }
+      if (values == null)
+      {
+         throw new NullPointerException();
+      }
 
-    //
-    this.name = name;
-    this.values = values;
-    this.readOnly = readOnly;
-  }
+      // Clone and check state
+      values = Collections.unmodifiableList(new ArrayList<String>(values));
+      if (values.size() == 0)
+      {
+         throw new IllegalArgumentException();
+      }
+      for (String value : values)
+      {
+         if (value == null)
+         {
+            throw new IllegalArgumentException();
+         }
+      }
 
-  public Preference(String name, String value, boolean readOnly) {
-    if (name == null) {
-      throw new NullPointerException();
-    }
-    if (value == null) {
-      throw new NullPointerException();
-    }
+      //
+      this.name = name;
+      this.values = values;
+      this.readOnly = readOnly;
+   }
 
-    //
-    this.name = name;
-    this.values = Collections.singletonList(value);
-    this.readOnly = readOnly;
-  }
+   public Preference(String name, String value, boolean readOnly)
+   {
+      if (name == null)
+      {
+         throw new NullPointerException();
+      }
+      if (value == null)
+      {
+         throw new NullPointerException();
+      }
 
-  public String getName() {
-    return name;
-  }
+      //
+      this.name = name;
+      this.values = Collections.singletonList(value);
+      this.readOnly = readOnly;
+   }
 
-  public String getValue() {
-    return values.get(0);
-  }
+   public String getName()
+   {
+      return name;
+   }
 
-  public List<String> getValues() {
-    return values;
-  }
+   public String getValue()
+   {
+      return values.get(0);
+   }
 
-  public boolean isReadOnly() {
-    return readOnly;
-  }
+   public List<String> getValues()
+   {
+      return values;
+   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == this) {
-      return true;
-    }
-    if (obj instanceof Preference) {
-      Preference that = (Preference)obj;
-      return this.name.equals(that.name) && this.getValues().equals(that.getValues());
-    }
-    return false;
-  }
+   public boolean isReadOnly()
+   {
+      return readOnly;
+   }
 
-  @Override
-  public int hashCode() {
-    return name.hashCode() ^ values.hashCode() ^ (readOnly ? -1 : 0);
-  }
+   @Override
+   public boolean equals(Object obj)
+   {
+      if (obj == this)
+      {
+         return true;
+      }
+      if (obj instanceof Preference)
+      {
+         Preference that = (Preference)obj;
+         return this.name.equals(that.name) && this.getValues().equals(that.getValues());
+      }
+      return false;
+   }
 
-  @Override
-  public String toString() {
-    return "Preference[name=" + name + ",values=" + values + ",readOnly=" + readOnly + "]";
-  }
+   @Override
+   public int hashCode()
+   {
+      return name.hashCode() ^ values.hashCode() ^ (readOnly ? -1 : 0);
+   }
+
+   @Override
+   public String toString()
+   {
+      return "Preference[name=" + name + ",values=" + values + ",readOnly=" + readOnly + "]";
+   }
 }

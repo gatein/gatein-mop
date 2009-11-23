@@ -37,156 +37,198 @@ import java.util.ListIterator;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:uicontainer")
-public abstract class UIContainerImpl extends UIComponentImpl implements UIContainer {
+public abstract class UIContainerImpl extends UIComponentImpl implements UIContainer
+{
 
-  @Create
-  public abstract UIContainerImpl createContainer();
+   @Create
+   public abstract UIContainerImpl createContainer();
 
-  @Create
-  public abstract UIBodyImpl createInsertion();
+   @Create
+   public abstract UIBodyImpl createInsertion();
 
-  @Create
-  public abstract UIWindowImpl createWindow();
+   @Create
+   public abstract UIWindowImpl createWindow();
 
-  @OneToMany
-  public abstract Map<String, UIComponentImpl> getComponentMap();
-  
-  @OneToMany
-  public abstract List<UIComponent> getComponentList();
+   @OneToMany
+   public abstract Map<String, UIComponentImpl> getComponentMap();
 
-  public ObjectType<? extends UIContainer> getObjectType() {
-    return ObjectType.CONTAINER;
-  }
+   @OneToMany
+   public abstract List<UIComponent> getComponentList();
 
-  public UIComponent get(String componentName) {
-    Map<String, UIComponentImpl> children = getComponentMap();
-    return children.get(componentName);
-  }
+   public ObjectType<? extends UIContainer> getObjectType()
+   {
+      return ObjectType.CONTAINER;
+   }
 
-  public <T extends UIComponent> T add(ObjectType<T> componentType, String name) {
-    UIComponentImpl child;
-    if (componentType == ObjectType.WINDOW) {
-      child = createWindow();
-    } else if (componentType == ObjectType.CONTAINER) {
-      child = createContainer();
-    } else if (componentType == ObjectType.BODY) {
-      child = createInsertion();
-    } else {
-      throw new UnsupportedOperationException();
-    }
-    Map<String, UIComponentImpl> children = getComponentMap();
-    children.put(name, child);
-    return componentType.cast(child);
-  }
+   public UIComponent get(String componentName)
+   {
+      Map<String, UIComponentImpl> children = getComponentMap();
+      return children.get(componentName);
+   }
 
-  public <T extends UIComponent> T add(int index, ObjectType<T> componentType, String name) {
-    UIComponentImpl child;
-    if (componentType == ObjectType.WINDOW) {
-      child = createWindow();
-    } else if (componentType == ObjectType.CONTAINER) {
-      child = createContainer();
-    } else if (componentType == ObjectType.BODY) {
-      child = createInsertion();
-    } else {
-      throw new UnsupportedOperationException();
-    }
-    child.setName(name);
-    List<UIComponent> children = getComponentList();
-    children.add(index, child);
-    return componentType.cast(child);
-  }
+   public <T extends UIComponent> T add(ObjectType<T> componentType, String name)
+   {
+      UIComponentImpl child;
+      if (componentType == ObjectType.WINDOW)
+      {
+         child = createWindow();
+      }
+      else if (componentType == ObjectType.CONTAINER)
+      {
+         child = createContainer();
+      }
+      else if (componentType == ObjectType.BODY)
+      {
+         child = createInsertion();
+      }
+      else
+      {
+         throw new UnsupportedOperationException();
+      }
+      Map<String, UIComponentImpl> children = getComponentMap();
+      children.put(name, child);
+      return componentType.cast(child);
+   }
 
-  // List<UIComponent> implementation **********************************************************************************
+   public <T extends UIComponent> T add(int index, ObjectType<T> componentType, String name)
+   {
+      UIComponentImpl child;
+      if (componentType == ObjectType.WINDOW)
+      {
+         child = createWindow();
+      }
+      else if (componentType == ObjectType.CONTAINER)
+      {
+         child = createContainer();
+      }
+      else if (componentType == ObjectType.BODY)
+      {
+         child = createInsertion();
+      }
+      else
+      {
+         throw new UnsupportedOperationException();
+      }
+      child.setName(name);
+      List<UIComponent> children = getComponentList();
+      children.add(index, child);
+      return componentType.cast(child);
+   }
 
-  public int size() {
-    return getComponentList().size();
-  }
+   // List<UIComponent> implementation **********************************************************************************
 
-  public boolean isEmpty() {
-    return getComponentList().isEmpty();
-  }
+   public int size()
+   {
+      return getComponentList().size();
+   }
 
-  public boolean contains(Object o) {
-    return getComponentList().contains(o);
-  }
+   public boolean isEmpty()
+   {
+      return getComponentList().isEmpty();
+   }
 
-  public Iterator<UIComponent> iterator() {
-    return getComponentList().iterator();
-  }
+   public boolean contains(Object o)
+   {
+      return getComponentList().contains(o);
+   }
 
-  public Object[] toArray() {
-    return new Object[0];  
-  }
+   public Iterator<UIComponent> iterator()
+   {
+      return getComponentList().iterator();
+   }
 
-  public <T> T[] toArray(T[] a) {
-    return getComponentList().toArray(a);
-  }
+   public Object[] toArray()
+   {
+      return new Object[0];
+   }
 
-  public boolean add(UIComponent uiComponent) {
-    return getComponentList().add(uiComponent);
-  }
+   public <T> T[] toArray(T[] a)
+   {
+      return getComponentList().toArray(a);
+   }
 
-  public boolean remove(Object o) {
-    return getComponentList().remove(o);
-  }
+   public boolean add(UIComponent uiComponent)
+   {
+      return getComponentList().add(uiComponent);
+   }
 
-  public boolean containsAll(Collection<?> c) {
-    return getComponentList().containsAll(c);
-  }
+   public boolean remove(Object o)
+   {
+      return getComponentList().remove(o);
+   }
 
-  public boolean addAll(Collection<? extends UIComponent> c) {
-    return getComponentList().addAll(c);
-  }
+   public boolean containsAll(Collection<?> c)
+   {
+      return getComponentList().containsAll(c);
+   }
 
-  public boolean addAll(int index, Collection<? extends UIComponent> c) {
-    return getComponentList().addAll(index, c);
-  }
+   public boolean addAll(Collection<? extends UIComponent> c)
+   {
+      return getComponentList().addAll(c);
+   }
 
-  public boolean removeAll(Collection<?> c) {
-    return getComponentList().removeAll(c);
-  }
+   public boolean addAll(int index, Collection<? extends UIComponent> c)
+   {
+      return getComponentList().addAll(index, c);
+   }
 
-  public boolean retainAll(Collection<?> c) {
-    return getComponentList().retainAll(c);
-  }
+   public boolean removeAll(Collection<?> c)
+   {
+      return getComponentList().removeAll(c);
+   }
 
-  public void clear() {
-    getComponentList().clear();
-  }
+   public boolean retainAll(Collection<?> c)
+   {
+      return getComponentList().retainAll(c);
+   }
 
-  public UIComponent get(int index) {
-    return getComponentList().get(index);
-  }
+   public void clear()
+   {
+      getComponentList().clear();
+   }
 
-  public UIComponent set(int index, UIComponent element) {
-    return getComponentList().set(index, element);
-  }
+   public UIComponent get(int index)
+   {
+      return getComponentList().get(index);
+   }
 
-  public void add(int index, UIComponent element) {
-    getComponentList().add(index, element);
-  }
+   public UIComponent set(int index, UIComponent element)
+   {
+      return getComponentList().set(index, element);
+   }
 
-  public UIComponent remove(int index) {
-    return getComponentList().remove(index);
-  }
+   public void add(int index, UIComponent element)
+   {
+      getComponentList().add(index, element);
+   }
 
-  public int indexOf(Object o) {
-    return getComponentList().indexOf(o);
-  }
+   public UIComponent remove(int index)
+   {
+      return getComponentList().remove(index);
+   }
 
-  public int lastIndexOf(Object o) {
-    return getComponentList().lastIndexOf(o);
-  }
+   public int indexOf(Object o)
+   {
+      return getComponentList().indexOf(o);
+   }
 
-  public ListIterator<UIComponent> listIterator() {
-    return getComponentList().listIterator();
-  }
+   public int lastIndexOf(Object o)
+   {
+      return getComponentList().lastIndexOf(o);
+   }
 
-  public ListIterator<UIComponent> listIterator(int index) {
-    return getComponentList().listIterator(index);
-  }
+   public ListIterator<UIComponent> listIterator()
+   {
+      return getComponentList().listIterator();
+   }
 
-  public List<UIComponent> subList(int fromIndex, int toIndex) {
-    return getComponentList().subList(fromIndex, toIndex);
-  }
+   public ListIterator<UIComponent> listIterator(int index)
+   {
+      return getComponentList().listIterator(index);
+   }
+
+   public List<UIComponent> subList(int fromIndex, int toIndex)
+   {
+      return getComponentList().subList(fromIndex, toIndex);
+   }
 }

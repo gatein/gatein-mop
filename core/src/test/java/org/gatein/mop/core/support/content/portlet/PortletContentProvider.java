@@ -34,79 +34,101 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class PortletContentProvider implements ContentProvider<Preferences> {
+public class PortletContentProvider implements ContentProvider<Preferences>
+{
 
-  public Preferences combine(List<Preferences> states) {
-    Map<String, Preference> entries = new HashMap<String, Preference>();
-
-    //
-    for (Preferences preferences : states) {
-      for (Preference preference : preferences) {
-        Preference previous = entries.get(preference.getName());
-        if (previous == null || !previous.isReadOnly()) {
-          entries.put(preference.getName(), preference);
-        }
-      }
-    }
-
-    //
-    return new Preferences(entries);
-  }
-
-  public void setState(StateContainer container, Preferences state) {
-    try {
-      ChromatticSession session = ((AbstractCustomization)container).session;
-      String containerId = session.getId(container);
-      Node node = session.getJCRSession().getNodeByUUID(containerId);
+   public Preferences combine(List<Preferences> states)
+   {
+      Map<String, Preference> entries = new HashMap<String, Preference>();
 
       //
-      PortletPreferencesState prefs;
-      if (node.hasNode("state")) {
-        Node stateNode = node.getNode("state");
-        prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
-        if (state == null) {
-          session.remove(prefs);
-          return;
-        }
-      } else {
-        if (state == null) {
-          return;
-        } else {
-          Node stateNode = node.addNode("state", "mop:portletpreferences");
-          prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
-        }
+      for (Preferences preferences : states)
+      {
+         for (Preference preference : preferences)
+         {
+            Preference previous = entries.get(preference.getName());
+            if (previous == null || !previous.isReadOnly())
+            {
+               entries.put(preference.getName(), preference);
+            }
+         }
       }
 
       //
-      prefs.setPayload(state);
-    }
-    catch (RepositoryException e) {
-      throw new UndeclaredRepositoryException(e);
-    }
-  }
+      return new Preferences(entries);
+   }
 
-  public Preferences getState(StateContainer container) {
-    try {
-      ChromatticSession session = ((AbstractCustomization)container).session;
-      String containerId = session.getId(container);
-      Node node = session.getJCRSession().getNodeByUUID(containerId);
+   public void setState(StateContainer container, Preferences state)
+   {
+      try
+      {
+         ChromatticSession session = ((AbstractCustomization)container).session;
+         String containerId = session.getId(container);
+         Node node = session.getJCRSession().getNodeByUUID(containerId);
 
-      //
-      PortletPreferencesState prefs;
-      if (node.hasNode("state")) {
-        Node stateNode = node.getNode("state");
-        prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
-        return (Preferences)prefs.getPayload();
-      } else {
-        return null;
+         //
+         PortletPreferencesState prefs;
+         if (node.hasNode("state"))
+         {
+            Node stateNode = node.getNode("state");
+            prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
+            if (state == null)
+            {
+               session.remove(prefs);
+               return;
+            }
+         }
+         else
+         {
+            if (state == null)
+            {
+               return;
+            }
+            else
+            {
+               Node stateNode = node.addNode("state", "mop:portletpreferences");
+               prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
+            }
+         }
+
+         //
+         prefs.setPayload(state);
       }
-    }
-    catch (RepositoryException e) {
-      throw new UndeclaredRepositoryException(e);
-    }
-  }
+      catch (RepositoryException e)
+      {
+         throw new UndeclaredRepositoryException(e);
+      }
+   }
 
-  public Class<Preferences> getStateType() {
-    return Preferences.class;
-  }
+   public Preferences getState(StateContainer container)
+   {
+      try
+      {
+         ChromatticSession session = ((AbstractCustomization)container).session;
+         String containerId = session.getId(container);
+         Node node = session.getJCRSession().getNodeByUUID(containerId);
+
+         //
+         PortletPreferencesState prefs;
+         if (node.hasNode("state"))
+         {
+            Node stateNode = node.getNode("state");
+            prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
+            return (Preferences)prefs.getPayload();
+         }
+         else
+         {
+            return null;
+         }
+      }
+      catch (RepositoryException e)
+      {
+         throw new UndeclaredRepositoryException(e);
+      }
+   }
+
+   public Class<Preferences> getStateType()
+   {
+      return Preferences.class;
+   }
 }

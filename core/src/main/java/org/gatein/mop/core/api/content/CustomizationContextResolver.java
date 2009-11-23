@@ -24,8 +24,9 @@ import org.gatein.mop.api.content.CustomizationContext;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface CustomizationContextResolver {
+public interface CustomizationContextResolver
+{
 
-  CustomizationContext resolve(String contextType, String contextId);
+   CustomizationContext resolve(String contextType, String contextId);
 
 }

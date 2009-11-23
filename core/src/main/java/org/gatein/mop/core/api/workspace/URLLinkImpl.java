@@ -28,14 +28,16 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:urllink")
-public abstract class URLLinkImpl extends LinkImpl implements URLLink {
+public abstract class URLLinkImpl extends LinkImpl implements URLLink
+{
 
-  @Property(name = "url")
-  public abstract String getURL();
+   @Property(name = "url")
+   public abstract String getURL();
 
-  public abstract void setURL(String url);
+   public abstract void setURL(String url);
 
-  public ObjectType<? extends URLLink> getObjectType() {
-    return ObjectType.URL_LINK;
-  }
+   public ObjectType<? extends URLLink> getObjectType()
+   {
+      return ObjectType.URL_LINK;
+   }
 }

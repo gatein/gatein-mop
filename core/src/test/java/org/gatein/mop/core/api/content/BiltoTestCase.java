@@ -26,10 +26,11 @@ import org.gatein.mop.core.support.content.portlet.Preferences;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class BiltoTestCase extends AbstractPOMTestCase {
+public abstract class BiltoTestCase extends AbstractPOMTestCase
+{
 
-  /** . */
-  private final ContentType portletContentType = Preferences.CONTENT_TYPE;
+   /** . */
+   private final ContentType portletContentType = Preferences.CONTENT_TYPE;
 
 /*
   public void testBar() throws Exception {

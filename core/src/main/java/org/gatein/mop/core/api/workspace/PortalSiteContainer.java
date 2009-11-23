@@ -28,10 +28,11 @@ import org.gatein.mop.core.api.workspace.WorkspaceImpl;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:portalsites")
-public abstract class PortalSiteContainer extends SiteContainer<PortalSite> {
+public abstract class PortalSiteContainer extends SiteContainer<PortalSite>
+{
 
-  @RelatedMappedBy("portalsites")
-  public abstract WorkspaceImpl getWorkspace();
-  
+   @RelatedMappedBy("portalsites")
+   public abstract WorkspaceImpl getWorkspace();
+
 
 }

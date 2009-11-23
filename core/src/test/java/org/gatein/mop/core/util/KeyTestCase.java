@@ -29,40 +29,44 @@ import org.gatein.mop.api.ValueType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class KeyTestCase extends TestCase {
+public class KeyTestCase extends TestCase
+{
 
-  public void testCreate() {
-    Key<String> a = Key.create("a", ValueType.STRING);
-    assertNotNull(a);
-    assertEquals("a", a.getName());
+   public void testCreate()
+   {
+      Key<String> a = Key.create("a", ValueType.STRING);
+      assertNotNull(a);
+      assertEquals("a", a.getName());
 
-    //
-    Key<Integer> b = Key.create("a", ValueType.INTEGER);
-    assertNotNull(b);
-    assertEquals("a", b.getName());
+      //
+      Key<Integer> b = Key.create("a", ValueType.INTEGER);
+      assertNotNull(b);
+      assertEquals("a", b.getName());
 
-    //
-    Key<Boolean> c = Key.create("a", ValueType.BOOLEAN);
-    assertNotNull(c);
-    assertEquals("a", c.getName());
+      //
+      Key<Boolean> c = Key.create("a", ValueType.BOOLEAN);
+      assertNotNull(c);
+      assertEquals("a", c.getName());
 
-    //
-    Key<Date> d = Key.create("a", ValueType.DATE);
-    assertNotNull(d);
-    assertEquals("a", d.getName());
+      //
+      Key<Date> d = Key.create("a", ValueType.DATE);
+      assertNotNull(d);
+      assertEquals("a", d.getName());
 
-    //
-    Key<Double> e = Key.create("a", ValueType.DOUBLE);
-    assertNotNull(e);
-    assertEquals("a", e.getName());
+      //
+      Key<Double> e = Key.create("a", ValueType.DOUBLE);
+      assertNotNull(e);
+      assertEquals("a", e.getName());
 
-    //
-    try {
-      Key.create("a", null);
-      fail();
-    }
-    catch (NullPointerException ignore) {
-    }
-  }
+      //
+      try
+      {
+         Key.create("a", null);
+         fail();
+      }
+      catch (NullPointerException ignore)
+      {
+      }
+   }
 
 }

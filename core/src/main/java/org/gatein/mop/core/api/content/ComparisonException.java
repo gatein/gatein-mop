@@ -22,20 +22,25 @@ package org.gatein.mop.core.api.content;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ComparisonException extends RuntimeException {
+public class ComparisonException extends RuntimeException
+{
 
-  public ComparisonException() {
-  }
+   public ComparisonException()
+   {
+   }
 
-  public ComparisonException(String message) {
-    super(message);
-  }
+   public ComparisonException(String message)
+   {
+      super(message);
+   }
 
-  public ComparisonException(String message, Throwable cause) {
-    super(message, cause);
-  }
+   public ComparisonException(String message, Throwable cause)
+   {
+      super(message, cause);
+   }
 
-  public ComparisonException(Throwable cause) {
-    super(cause);
-  }
+   public ComparisonException(Throwable cause)
+   {
+      super(cause);
+   }
 }

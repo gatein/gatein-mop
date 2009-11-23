@@ -32,25 +32,27 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:navigationcontainer")
-public abstract class NavigationContainer {
+public abstract class NavigationContainer
+{
 
-  @OneToOne
-  @RelatedMappedBy("navigations")
-  public abstract NavigationImpl getOwner();
-
-  @OneToMany
-  public abstract Map<String, NavigationImpl> getNavigationMap();
+   @OneToOne
+   @RelatedMappedBy("navigations")
+   public abstract NavigationImpl getOwner();
 
    @OneToMany
-  public abstract List<NavigationImpl> getNavigationList();
+   public abstract Map<String, NavigationImpl> getNavigationMap();
 
-  @Create
-  public abstract NavigationImpl createNavigation();
+   @OneToMany
+   public abstract List<NavigationImpl> getNavigationList();
 
-  public NavigationImpl addNavigation(String name) {
-    NavigationImpl page = createNavigation();
-    page.setName(name);
-    getNavigationList().add(page);
-    return page;
-  }
+   @Create
+   public abstract NavigationImpl createNavigation();
+
+   public NavigationImpl addNavigation(String name)
+   {
+      NavigationImpl page = createNavigation();
+      page.setName(name);
+      getNavigationList().add(page);
+      return page;
+   }
 }

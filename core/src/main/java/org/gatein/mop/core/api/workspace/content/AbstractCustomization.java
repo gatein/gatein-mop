@@ -44,181 +44,212 @@ import java.util.Arrays;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class AbstractCustomization implements Customization<Object>, StateContainer {
+public abstract class AbstractCustomization implements Customization<Object>, StateContainer
+{
 
-  /** . */
-  protected static final CustomizationContextComparator comparator;
+   /** . */
+   protected static final CustomizationContextComparator comparator;
 
-  static {
-    CustomizationContextComparator _comparator = new CustomizationContextComparator(
-      WorkspaceCustomizationContext.TYPE
-    );
+   static
+   {
+      CustomizationContextComparator _comparator = new CustomizationContextComparator(
+         WorkspaceCustomizationContext.TYPE
+      );
 
-    //
-    comparator = _comparator;
-  }
+      //
+      comparator = _comparator;
+   }
 
-  /** . */
-  public ContentManagerRegistry registry;
+   /** . */
+   public ContentManagerRegistry registry;
 
-  /** . */
-  public ChromatticSession session;
+   /** . */
+   public ChromatticSession session;
 
-  @Id
-  public abstract String getId();
+   @Id
+   public abstract String getId();
 
-  @OneToOne
-  @MappedBy("contexttypes")
-  abstract ContextTypeContainer getContextTypes();
+   @OneToOne
+   @MappedBy("contexttypes")
+   abstract ContextTypeContainer getContextTypes();
 
-  @Create
-  abstract ContextType create();
+   @Create
+   abstract ContextType create();
 
-  @Create
-  abstract ContextSpecialization createContextSpecialization();
+   @Create
+   abstract ContextSpecialization createContextSpecialization();
 
-  public abstract CustomizationContext getContext();
+   public abstract CustomizationContext getContext();
 
-  public abstract AbstractCustomization getParent();
+   public abstract AbstractCustomization getParent();
 
-  public Object getVirtualState() {
+   public Object getVirtualState()
+   {
 
-    ContentType contentType = getType();
+      ContentType contentType = getType();
 
-    String mimeType = contentType.getMimeType();
+      String mimeType = contentType.getMimeType();
 
-    ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+      ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
 
-    //
-    Object childPayload = contentProvider.getState(this);
+      //
+      Object childPayload = contentProvider.getState(this);
 
-    //
-    Object parentPayload = null;
-    AbstractCustomization parent = getParent();
-    if (parent != null) {
-      parentPayload = parent.getVirtualState();
-    }
-
-    //
-    if (parentPayload != null) {
-      if (childPayload != null) {
-        return contentProvider.combine(Arrays.asList(parentPayload, childPayload));
-      } else {
-        return parentPayload;
-      }
-    } else {
-      return childPayload;
-    }
-  }
-
-  public Object getState() {
-    ContentType contentType = getType();
-    String mimeType = contentType.getMimeType();
-    ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
-    return contentProvider.getState(this);
-  }
-
-  public void setState(Object state) {
-    ContentType contentType = getType();
-    String mimeType = contentType.getMimeType();
-    ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
-    contentProvider.setState(this, state);
-  }
-
-  public Customization<Object> getCustomization(Set<CustomizationContext> contexts) {
-    return get(contexts, false);
-  }
-
-  public Customization<Object> customize(Collection<CustomizationContext> contexts) {
-    if (contexts == null) {
-      throw new NullPointerException();
-    }
-    return get(contexts, true);
-  }
-
-  public Set<CustomizationContext> getContexts() {
-    //
-    AbstractCustomization current = this;
-    LinkedHashSet<CustomizationContext> contexts = new LinkedHashSet<CustomizationContext>();
-
-    //
-    while (true) {
-      CustomizationContext currentContext = current.getContext();
-      if (currentContext == null) {
-        throw new IllegalStateException("Could not resolve customization context for customization " +  this);
+      //
+      Object parentPayload = null;
+      AbstractCustomization parent = getParent();
+      if (parent != null)
+      {
+         parentPayload = parent.getVirtualState();
       }
 
       //
-      contexts.add(currentContext);
-
-      //
-      AbstractCustomization parent = current.getParent();
-      if (parent != null) {
-        current = parent;
-      } else {
-        break;
+      if (parentPayload != null)
+      {
+         if (childPayload != null)
+         {
+            return contentProvider.combine(Arrays.asList(parentPayload, childPayload));
+         }
+         else
+         {
+            return parentPayload;
+         }
       }
-    }
-
-    //
-    return contexts;
-  }
-
-  //
-
-  protected final Customization<Object> get(Collection<CustomizationContext> contexts, boolean create) {
-
-    // The sorted contexts
-    TreeSet<CustomizationContext> sortedContexts = new TreeSet<CustomizationContext>(comparator);
-
-    // Contexts up to this node
-    Set<CustomizationContext> existingContexts = getContexts();
-
-    // Add all existing contexts
-    sortedContexts.addAll(existingContexts);
-
-    // Sort everything and check consistency
-    sortedContexts.addAll(contexts);
-
-    // Remove existing contexts
-    sortedContexts.removeAll(existingContexts);
-
-    //
-    return get(sortedContexts.iterator(), create);
-  }
-
-  protected final Customization<Object> get(Iterator<CustomizationContext> contexts, boolean create) {
-    if (contexts.hasNext()) {
-      CustomizationContext context = contexts.next();
-      String type = context.getContextType();
-      ContextTypeContainer typeContainer = getContextTypes();
-      Map<String, ContextType> contextTypes = typeContainer.getContextTypes();
-      ContextType tmp = contextTypes.get(type);
-      if (tmp == null) {
-        if (create) {
-          tmp = create();
-          contextTypes.put(type, tmp);
-        } else {
-          return null;
-        }
+      else
+      {
+         return childPayload;
       }
-      Map<String, ContextSpecialization> c = tmp.getSpecializations();
-      String id = context.getContextId();
-      ContextSpecialization blah = c.get(id);
+   }
+
+   public Object getState()
+   {
+      ContentType contentType = getType();
+      String mimeType = contentType.getMimeType();
+      ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+      return contentProvider.getState(this);
+   }
+
+   public void setState(Object state)
+   {
+      ContentType contentType = getType();
+      String mimeType = contentType.getMimeType();
+      ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+      contentProvider.setState(this, state);
+   }
+
+   public Customization<Object> getCustomization(Set<CustomizationContext> contexts)
+   {
+      return get(contexts, false);
+   }
+
+   public Customization<Object> customize(Collection<CustomizationContext> contexts)
+   {
+      if (contexts == null)
+      {
+         throw new NullPointerException();
+      }
+      return get(contexts, true);
+   }
+
+   public Set<CustomizationContext> getContexts()
+   {
+      //
+      AbstractCustomization current = this;
+      LinkedHashSet<CustomizationContext> contexts = new LinkedHashSet<CustomizationContext>();
 
       //
-      if (blah != null || !create) {
-        return blah;
+      while (true)
+      {
+         CustomizationContext currentContext = current.getContext();
+         if (currentContext == null)
+         {
+            throw new IllegalStateException("Could not resolve customization context for customization " + this);
+         }
+
+         //
+         contexts.add(currentContext);
+
+         //
+         AbstractCustomization parent = current.getParent();
+         if (parent != null)
+         {
+            current = parent;
+         }
+         else
+         {
+            break;
+         }
       }
 
       //
-      blah = createContextSpecialization();
-      c.put(id, blah);
+      return contexts;
+   }
+
+   //
+
+   protected final Customization<Object> get(Collection<CustomizationContext> contexts, boolean create)
+   {
+
+      // The sorted contexts
+      TreeSet<CustomizationContext> sortedContexts = new TreeSet<CustomizationContext>(comparator);
+
+      // Contexts up to this node
+      Set<CustomizationContext> existingContexts = getContexts();
+
+      // Add all existing contexts
+      sortedContexts.addAll(existingContexts);
+
+      // Sort everything and check consistency
+      sortedContexts.addAll(contexts);
+
+      // Remove existing contexts
+      sortedContexts.removeAll(existingContexts);
 
       //
-      return blah.get(contexts, create);
-    } else {
-      return this;
-    }
-  }
+      return get(sortedContexts.iterator(), create);
+   }
+
+   protected final Customization<Object> get(Iterator<CustomizationContext> contexts, boolean create)
+   {
+      if (contexts.hasNext())
+      {
+         CustomizationContext context = contexts.next();
+         String type = context.getContextType();
+         ContextTypeContainer typeContainer = getContextTypes();
+         Map<String, ContextType> contextTypes = typeContainer.getContextTypes();
+         ContextType tmp = contextTypes.get(type);
+         if (tmp == null)
+         {
+            if (create)
+            {
+               tmp = create();
+               contextTypes.put(type, tmp);
+            }
+            else
+            {
+               return null;
+            }
+         }
+         Map<String, ContextSpecialization> c = tmp.getSpecializations();
+         String id = context.getContextId();
+         ContextSpecialization blah = c.get(id);
+
+         //
+         if (blah != null || !create)
+         {
+            return blah;
+         }
+
+         //
+         blah = createContextSpecialization();
+         c.put(id, blah);
+
+         //
+         return blah.get(contexts, create);
+      }
+      else
+      {
+         return this;
+      }
+   }
 }

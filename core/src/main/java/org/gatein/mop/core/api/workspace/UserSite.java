@@ -28,11 +28,13 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:usersite")
-public abstract class UserSite extends SiteImpl {
+public abstract class UserSite extends SiteImpl
+{
 
-  // Site implementation ***********************************************************************************************
+   // Site implementation ***********************************************************************************************
 
-  public ObjectType<? extends Site> getObjectType() {
-    return ObjectType.USER_SITE;
-  }
+   public ObjectType<? extends Site> getObjectType()
+   {
+      return ObjectType.USER_SITE;
+   }
 }

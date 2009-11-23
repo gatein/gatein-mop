@@ -31,21 +31,23 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:pagecontainer")
-public abstract class PageContainer {
+public abstract class PageContainer
+{
 
-  @OneToOne
-  @RelatedMappedBy("pages")
-  public abstract PageImpl getOwner();
+   @OneToOne
+   @RelatedMappedBy("pages")
+   public abstract PageImpl getOwner();
 
-  @OneToMany
-  public abstract Map<String, PageImpl> getPages();
+   @OneToMany
+   public abstract Map<String, PageImpl> getPages();
 
-  @Create
-  public abstract PageImpl createPage();
+   @Create
+   public abstract PageImpl createPage();
 
-  public PageImpl addPage(String name) {
-    PageImpl page = createPage();
-    getPages().put(name, page);
-    return page;
-  }
+   public PageImpl addPage(String name)
+   {
+      PageImpl page = createPage();
+      getPages().put(name, page);
+      return page;
+   }
 }

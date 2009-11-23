@@ -35,49 +35,56 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:portletpreferences")
-public abstract class PortletPreferencesState {
+public abstract class PortletPreferencesState
+{
 
-  /** . */
-  private Preferences payload;
+   /** . */
+   private Preferences payload;
 
-  @OneToMany
-  public abstract Map<String, PortletPreferenceState> getChildren();
+   @OneToMany
+   public abstract Map<String, PortletPreferenceState> getChildren();
 
-  @Create
-  public abstract PortletPreferenceState create();
+   @Create
+   public abstract PortletPreferenceState create();
 
-  @OneToOne
-  @RelatedMappedBy("state")
-  public abstract AbstractCustomization getCustomization();
+   @OneToOne
+   @RelatedMappedBy("state")
+   public abstract AbstractCustomization getCustomization();
 
-  private void setPayload(Preferences payload) {
+   private void setPayload(Preferences payload)
+   {
 
-    this.payload = payload;
+      this.payload = payload;
 
-    //
-    Map<String, PortletPreferenceState> entries = getChildren();
-    entries.clear();
+      //
+      Map<String, PortletPreferenceState> entries = getChildren();
+      entries.clear();
 
-    for (Preference pref : payload) {
-      PortletPreferenceState prefState = create();
-      entries.put(pref.getName(), prefState);
-      prefState.setValue(pref.getValues());
-      prefState.setReadOnly(pref.isReadOnly());
-    }
-  }
-
-  public void setPayload(Object payload) {
-    setPayload((Preferences)payload);
-  }
-
-  public Object getPayload() {
-    if (payload == null) {
-      PreferencesBuilder builder = new PreferencesBuilder();
-      for (PortletPreferenceState entry : getChildren().values()) {
-        builder.add(entry.getName(), entry.getValues(), entry.getReadOnly());
+      for (Preference pref : payload)
+      {
+         PortletPreferenceState prefState = create();
+         entries.put(pref.getName(), prefState);
+         prefState.setValue(pref.getValues());
+         prefState.setReadOnly(pref.isReadOnly());
       }
-      payload = builder.build();
-    }
-    return payload;
-  }
+   }
+
+   public void setPayload(Object payload)
+   {
+      setPayload((Preferences)payload);
+   }
+
+   public Object getPayload()
+   {
+      if (payload == null)
+      {
+         PreferencesBuilder builder = new PreferencesBuilder();
+         for (PortletPreferenceState entry : getChildren().values())
+         {
+            builder.add(entry.getName(), entry.getValues(), entry.getReadOnly());
+         }
+         payload = builder.build();
+      }
+      return payload;
+   }
 }

@@ -29,91 +29,115 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class Tools {
+public class Tools
+{
 
-  public static <N> List<N> list(Iterator<N> iterable) {
-    ArrayList<N> set = new ArrayList<N>();
-    while (iterable.hasNext()) {
-      set.add(iterable.next());
-    }
-    return set;
-  }
+   public static <N> List<N> list(Iterator<N> iterable)
+   {
+      ArrayList<N> set = new ArrayList<N>();
+      while (iterable.hasNext())
+      {
+         set.add(iterable.next());
+      }
+      return set;
+   }
 
-  public static <N> Set<N> set(Iterable<N> iterable) {
-    HashSet<N> set = new HashSet<N>();
-    for (N n : iterable) {
-      set.add(n);
-    }
-    return set;
-  }
+   public static <N> Set<N> set(Iterable<N> iterable)
+   {
+      HashSet<N> set = new HashSet<N>();
+      for (N n : iterable)
+      {
+         set.add(n);
+      }
+      return set;
+   }
 
-  public static <N> Set<N> set(Iterator<N> iterator) {
-    HashSet<N> set = new HashSet<N>();
-    while (iterator.hasNext()) {
-      set.add(iterator.next());
-    }
-    return set;
-  }
+   public static <N> Set<N> set(Iterator<N> iterator)
+   {
+      HashSet<N> set = new HashSet<N>();
+      while (iterator.hasNext())
+      {
+         set.add(iterator.next());
+      }
+      return set;
+   }
 
-  public static <N> Set<N> set() {
-    return new HashSet<N>();
-  }
+   public static <N> Set<N> set()
+   {
+      return new HashSet<N>();
+   }
 
-  public static <N> Set<N> set(N object) {
-    HashSet<N> set = new HashSet<N>();
-    set.add(object);
-    return set;
-  }
-
-  public static <N> Set<N> set(N... objects) throws NullPointerException {
-    if (objects == null) {
-      throw new NullPointerException();
-    }
-    HashSet<N> set = new HashSet<N>();
-    for (N object : objects) {
+   public static <N> Set<N> set(N object)
+   {
+      HashSet<N> set = new HashSet<N>();
       set.add(object);
-    }
-    return set;
-  }
+      return set;
+   }
 
-  public static int max(int value, int... values) {
-    int max = value;
-    for (int v : values) {
-      if (v > max) {
-        max = v;
+   public static <N> Set<N> set(N... objects) throws NullPointerException
+   {
+      if (objects == null)
+      {
+         throw new NullPointerException();
       }
-    }
-    return max;
-  }
-
-  public static <E> Iterator<E> iterator(final Iterator<? extends E>... iterators) {
-    return new Iterator<E>() {
-
-      int index = 0;
-
-      public boolean hasNext() {
-        while (index < iterators.length) {
-          if (iterators[index].hasNext()) {
-            return true;
-          }
-          index++;
-        }
-        return false;
+      HashSet<N> set = new HashSet<N>();
+      for (N object : objects)
+      {
+         set.add(object);
       }
+      return set;
+   }
 
-      public E next() {
-        while (index < iterators.length) {
-          if (iterators[index].hasNext()) {
-            return iterators[index].next();
-          }
-          index++;
-        }
-        throw new NoSuchElementException();
+   public static int max(int value, int... values)
+   {
+      int max = value;
+      for (int v : values)
+      {
+         if (v > max)
+         {
+            max = v;
+         }
       }
+      return max;
+   }
 
-      public void remove() {
-        throw new UnsupportedOperationException();
-      }
-    };
-  }
+   public static <E> Iterator<E> iterator(final Iterator<? extends E>... iterators)
+   {
+      return new Iterator<E>()
+      {
+
+         int index = 0;
+
+         public boolean hasNext()
+         {
+            while (index < iterators.length)
+            {
+               if (iterators[index].hasNext())
+               {
+                  return true;
+               }
+               index++;
+            }
+            return false;
+         }
+
+         public E next()
+         {
+            while (index < iterators.length)
+            {
+               if (iterators[index].hasNext())
+               {
+                  return iterators[index].next();
+               }
+               index++;
+            }
+            throw new NoSuchElementException();
+         }
+
+         public void remove()
+         {
+            throw new UnsupportedOperationException();
+         }
+      };
+   }
 }

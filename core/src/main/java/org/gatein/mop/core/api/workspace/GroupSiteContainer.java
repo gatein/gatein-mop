@@ -28,9 +28,10 @@ import org.gatein.mop.core.api.workspace.WorkspaceImpl;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:groupsites")
-public abstract class GroupSiteContainer extends SiteContainer<GroupSite> {
+public abstract class GroupSiteContainer extends SiteContainer<GroupSite>
+{
 
-  @RelatedMappedBy("groupsites")
-  public abstract WorkspaceImpl getWorkspace();
+   @RelatedMappedBy("groupsites")
+   public abstract WorkspaceImpl getWorkspace();
 
 }

@@ -37,82 +37,96 @@ import org.gatein.mop.core.api.workspace.content.WorkspaceCustomization;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:uiwindow")
-public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, CustomizationContext {
+public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, CustomizationContext
+{
 
-  public ObjectType<? extends UIWindow> getObjectType() {
-    return ObjectType.WINDOW;
-  }
+   public ObjectType<? extends UIWindow> getObjectType()
+   {
+      return ObjectType.WINDOW;
+   }
 
-  // Abstract **********************************************************************************************************
+   // Abstract **********************************************************************************************************
 
-  @OneToOne
-  @MappedBy("customization")
-  public abstract WorkspaceCustomization getCustomization();
+   @OneToOne
+   @MappedBy("customization")
+   public abstract WorkspaceCustomization getCustomization();
 
-  public abstract void setCustomization(WorkspaceCustomization customization);
+   public abstract void setCustomization(WorkspaceCustomization customization);
 
-  @Create
-  public abstract WorkspaceClone create();
+   @Create
+   public abstract WorkspaceClone create();
 
-  @Create
-  public abstract WorkspaceSpecialization create2();
+   @Create
+   public abstract WorkspaceSpecialization create2();
 
-  // UIWindow implementation *******************************************************************************************
+   // UIWindow implementation *******************************************************************************************
 
-  public <S> Customization<S> customize(ContentType<S> contentType, String contentId, S state) {
-    if (getCustomization() != null) {
-      throw new IllegalStateException("Already customized");
-    }
-    WorkspaceClone customization = create();
-    setCustomization(customization);
-    customization.setMimeType(contentType.getMimeType());
-    customization.setContentId(contentId);
-    customization.setState(state);
-    return (Customization<S>)customization;
-  }
-
-  public <S> Customization<S> customize(Customization<S> customization) {
-    if (customization == null) {
-      throw new NullPointerException();
-    } else if (customization instanceof WorkspaceCustomization) {
-      if (getCustomization() != null) {
-        throw new IllegalStateException("Already customized");
+   public <S> Customization<S> customize(ContentType<S> contentType, String contentId, S state)
+   {
+      if (getCustomization() != null)
+      {
+         throw new IllegalStateException("Already customized");
       }
+      WorkspaceClone customization = create();
+      setCustomization(customization);
+      customization.setMimeType(contentType.getMimeType());
+      customization.setContentId(contentId);
+      customization.setState(state);
+      return (Customization<S>)customization;
+   }
 
-      // Get parent customization
-      WorkspaceCustomization parentCustomization = (WorkspaceCustomization)customization;
+   public <S> Customization<S> customize(Customization<S> customization)
+   {
+      if (customization == null)
+      {
+         throw new NullPointerException();
+      }
+      else if (customization instanceof WorkspaceCustomization)
+      {
+         if (getCustomization() != null)
+         {
+            throw new IllegalStateException("Already customized");
+         }
 
-      // Create
-      WorkspaceSpecialization specialization = create2();
+         // Get parent customization
+         WorkspaceCustomization parentCustomization = (WorkspaceCustomization)customization;
 
-      // Persist
-      setCustomization(specialization);
+         // Create
+         WorkspaceSpecialization specialization = create2();
 
-      // Configuration
-      specialization.setMimeType(parentCustomization.getMimeType());
-      specialization.setContentId(parentCustomization.getContentId());
+         // Persist
+         setCustomization(specialization);
 
-      // Create relationship
-      specialization.setCustomization(parentCustomization);
+         // Configuration
+         specialization.setMimeType(parentCustomization.getMimeType());
+         specialization.setContentId(parentCustomization.getContentId());
 
-      //
-      return (Customization<S>)specialization;
-    } else {
-      throw new IllegalArgumentException("implement customization of "+ customization);
-    }
-  }
+         // Create relationship
+         specialization.setCustomization(parentCustomization);
 
-  // WorkspaceCustomizationContext implementation **********************************************************************
+         //
+         return (Customization<S>)specialization;
+      }
+      else
+      {
+         throw new IllegalArgumentException("implement customization of " + customization);
+      }
+   }
 
-  public String getContextType() {
-    return WorkspaceCustomizationContext.TYPE;
-  }
+   // WorkspaceCustomizationContext implementation **********************************************************************
 
-  public String getContextId() {
-    return getObjectId();
-  }
+   public String getContextType()
+   {
+      return WorkspaceCustomizationContext.TYPE;
+   }
 
-  public boolean contains(CustomizationContext that) {
-    return contains(this, that);
-  }
+   public String getContextId()
+   {
+      return getObjectId();
+   }
+
+   public boolean contains(CustomizationContext that)
+   {
+      return contains(this, that);
+   }
 }

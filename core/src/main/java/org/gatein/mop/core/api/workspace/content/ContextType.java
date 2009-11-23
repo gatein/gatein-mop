@@ -30,15 +30,16 @@ import java.util.Map;
  * @version $Revision$
  */
 @NodeMapping(name = "mop:contexttype")
-public abstract class ContextType {
+public abstract class ContextType
+{
 
-  @Name
-  public abstract String getName();
+   @Name
+   public abstract String getName();
 
-  @OneToMany
-  public abstract Map<String, ContextSpecialization> getSpecializations();
+   @OneToMany
+   public abstract Map<String, ContextSpecialization> getSpecializations();
 
-  @ManyToOne
-  public abstract ContextTypeContainer getContainer();
+   @ManyToOne
+   public abstract ContextTypeContainer getContainer();
 
 }

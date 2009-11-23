@@ -25,8 +25,9 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class LinkImpl extends WorkspaceObjectImpl implements Link {
+public abstract class LinkImpl extends WorkspaceObjectImpl implements Link
+{
 
-  public abstract ObjectType<? extends Link> getObjectType();
+   public abstract ObjectType<? extends Link> getObjectType();
 
 }

@@ -28,13 +28,15 @@ import java.util.Iterator;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ToolsTestCase extends TestCase {
+public class ToolsTestCase extends TestCase
+{
 
-  public void testIterators() {
-    List<String> s1 = Arrays.asList();
-    List<String> s2 = Arrays.asList("a");
-    List<String> s3 = Arrays.asList("b", "c");
-    Iterator<String> it = Tools.iterator(s1.iterator(), s2.iterator(), s3.iterator());
-    assertEquals(Arrays.asList("a", "b", "c"), Tools.list(it));
-  }
+   public void testIterators()
+   {
+      List<String> s1 = Arrays.asList();
+      List<String> s2 = Arrays.asList("a");
+      List<String> s3 = Arrays.asList("b", "c");
+      Iterator<String> it = Tools.iterator(s1.iterator(), s2.iterator(), s3.iterator());
+      assertEquals(Arrays.asList("a", "b", "c"), Tools.list(it));
+   }
 }

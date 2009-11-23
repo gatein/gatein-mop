@@ -32,111 +32,136 @@ import java.util.Iterator;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public final class Preferences implements Iterable<Preference> {
+public final class Preferences implements Iterable<Preference>
+{
 
-  /** . */
-  public static final ContentType<Preferences> CONTENT_TYPE = new ContentType<Preferences>("application/portlet", Preferences.class);
+   /** . */
+   public static final ContentType<Preferences> CONTENT_TYPE = new ContentType<Preferences>("application/portlet", Preferences.class);
 
-  /** . */
-  final Map<String, Preference> state;
+   /** . */
+   final Map<String, Preference> state;
 
-  /** . */
-  private final Map<String, Preference> entries;
+   /** . */
+   private final Map<String, Preference> entries;
 
-  public Preferences() {
-    this.state = new HashMap<String, Preference>();
-    this.entries = Collections.unmodifiableMap(this.state);
-  }
+   public Preferences()
+   {
+      this.state = new HashMap<String, Preference>();
+      this.entries = Collections.unmodifiableMap(this.state);
+   }
 
-  public Preferences(Map<String, Preference> state) {
-    if (state == null) {
-      throw new NullPointerException();
-    }
+   public Preferences(Map<String, Preference> state)
+   {
+      if (state == null)
+      {
+         throw new NullPointerException();
+      }
 
-    //
-    this.state = new HashMap<String, Preference>(state);
-    this.entries = Collections.unmodifiableMap(this.state);
-  }
+      //
+      this.state = new HashMap<String, Preference>(state);
+      this.entries = Collections.unmodifiableMap(this.state);
+   }
 
-  public List<String> getValues(String name) {
-    Preference entry = entries.get(name);
-    return entry != null ? entry.getValues() : null;
-  }
+   public List<String> getValues(String name)
+   {
+      Preference entry = entries.get(name);
+      return entry != null ? entry.getValues() : null;
+   }
 
-  public Preferences setValues(String name, List<String> values) {
-    Preference entry = entries.get(name);
-    if (entry == null) {
-      entry = new Preference(name, values, false);
-    } else {
-      entry = new Preference(entry.getName(), values, entry.isReadOnly());
-    }
-    entries.put(name, entry);
-    return this;
-  }
+   public Preferences setValues(String name, List<String> values)
+   {
+      Preference entry = entries.get(name);
+      if (entry == null)
+      {
+         entry = new Preference(name, values, false);
+      }
+      else
+      {
+         entry = new Preference(entry.getName(), values, entry.isReadOnly());
+      }
+      entries.put(name, entry);
+      return this;
+   }
 
-  public String getValue(String name) {
-    Preference entry = entries.get(name);
-    return entry != null ? entry.getValue() : null;
-  }
+   public String getValue(String name)
+   {
+      Preference entry = entries.get(name);
+      return entry != null ? entry.getValue() : null;
+   }
 
-  public Preferences setValue(String name, String value) {
-    Preference entry = entries.get(name);
-    if (entry == null) {
-      entry = new Preference(name, value, false);
-    } else {
-      entry = new Preference(entry.getName(), value, entry.isReadOnly());
-    }
-    state.put(name, entry);
-    return this;
-  }
+   public Preferences setValue(String name, String value)
+   {
+      Preference entry = entries.get(name);
+      if (entry == null)
+      {
+         entry = new Preference(name, value, false);
+      }
+      else
+      {
+         entry = new Preference(entry.getName(), value, entry.isReadOnly());
+      }
+      state.put(name, entry);
+      return this;
+   }
 
-  public Boolean isReadOnly(String name) {
-    Preference entry = entries.get(name);
-    return entry != null ? entry.isReadOnly() : null;
-  }
+   public Boolean isReadOnly(String name)
+   {
+      Preference entry = entries.get(name);
+      return entry != null ? entry.isReadOnly() : null;
+   }
 
-  public Preferences setReadOnly(String name, boolean readOnly) {
-    Preference entry = entries.get(name);
-    if (entry == null) {
-      throw new IllegalStateException();
-    }
-    entry = new Preference(entry.getName(), entry.getValues(), readOnly);
-    state.put(name, entry);
-    return this;
-  }
+   public Preferences setReadOnly(String name, boolean readOnly)
+   {
+      Preference entry = entries.get(name);
+      if (entry == null)
+      {
+         throw new IllegalStateException();
+      }
+      entry = new Preference(entry.getName(), entry.getValues(), readOnly);
+      state.put(name, entry);
+      return this;
+   }
 
-  public Preference getPreference(String name) {
-    return entries.get(name);
-  }
+   public Preference getPreference(String name)
+   {
+      return entries.get(name);
+   }
 
-  public Preferences putPreference(Preference preference) {
-    state.put(preference.getName(), preference);
-    return this;
-  }
+   public Preferences putPreference(Preference preference)
+   {
+      state.put(preference.getName(), preference);
+      return this;
+   }
 
-  public Iterator<Preference> iterator() {
-    return entries.values().iterator();
-  }
+   public Iterator<Preference> iterator()
+   {
+      return entries.values().iterator();
+   }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == this) {
-      return true;
-    }
-    if (obj instanceof Preferences) {
-      Preferences that = (Preferences)obj;
-      return state.equals(that.state);
-    }
-    return false;
-  }
+   @Override
+   public boolean equals(Object obj)
+   {
+      if (obj == this)
+      {
+         return true;
+      }
+      if (obj instanceof Preferences)
+      {
+         Preferences that = (Preferences)obj;
+         return state.equals(that.state);
+      }
+      return false;
+   }
 
-  @Override
-  public int hashCode() {
-    return state.hashCode();
-  }
+   @Override
+   public int hashCode()
+   {
+      return state.hashCode();
+   }
 
-  @Override
-  public String toString() {
-    return "Preferences[state=" + state.toString() + "]";
-  }
+   @Override
+   public String toString()
+   {
+      return "Preferences[state=" + state.toString() + "]";
+   }
 }

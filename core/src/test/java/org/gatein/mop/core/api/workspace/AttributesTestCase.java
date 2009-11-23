@@ -29,33 +29,36 @@ import org.gatein.mop.api.Attributes;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class AttributesTestCase extends AbstractPOMTestCase {
+public class AttributesTestCase extends AbstractPOMTestCase
+{
 
-  public void testAttributes() {
-    ModelImpl model = pomService.getModel();
-    Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal");
-    Attributes portalAttributes = portal.getAttributes();
-    portalAttributes.setString("foo", "bar");
-    assertEquals("bar", portalAttributes.getString("foo"));
-    Attributes pageAttributes = portal.getRootPage().getAttributes();
-    pageAttributes.setString("foo", "bar");
-    assertEquals("bar", pageAttributes.getString("foo"));
-  }
+   public void testAttributes()
+   {
+      ModelImpl model = pomService.getModel();
+      Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal");
+      Attributes portalAttributes = portal.getAttributes();
+      portalAttributes.setString("foo", "bar");
+      assertEquals("bar", portalAttributes.getString("foo"));
+      Attributes pageAttributes = portal.getRootPage().getAttributes();
+      pageAttributes.setString("foo", "bar");
+      assertEquals("bar", pageAttributes.getString("foo"));
+   }
 
-  public void testCascadedAttributes() {
-    ModelImpl model = pomService.getModel();
-    Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal");
-    Page root = portal.getRootPage();
-    Page a = root.addChild("a");
-    Attributes rootAttrs = root.getAttributes();
-    Attributes aAttrs = a.getAttributes();
-    rootAttrs.setString("foo", "foo_root");
-    aAttrs.setString("bar", "bar_a");
-    rootAttrs.setString("juu", "juu_root");
-    aAttrs.setString("juu", "juu_a");
-    Attributes combinedAttrs = a.getCascadingAttributes();
-    assertEquals("foo_root", combinedAttrs.getString("foo"));
-    assertEquals("bar_a", combinedAttrs.getString("bar"));
-    assertEquals("juu_a", combinedAttrs.getString("juu"));
-  }
+   public void testCascadedAttributes()
+   {
+      ModelImpl model = pomService.getModel();
+      Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal");
+      Page root = portal.getRootPage();
+      Page a = root.addChild("a");
+      Attributes rootAttrs = root.getAttributes();
+      Attributes aAttrs = a.getAttributes();
+      rootAttrs.setString("foo", "foo_root");
+      aAttrs.setString("bar", "bar_a");
+      rootAttrs.setString("juu", "juu_root");
+      aAttrs.setString("juu", "juu_a");
+      Attributes combinedAttrs = a.getCascadingAttributes();
+      assertEquals("foo_root", combinedAttrs.getString("foo"));
+      assertEquals("bar_a", combinedAttrs.getString("bar"));
+      assertEquals("juu_a", combinedAttrs.getString("juu"));
+   }
 }
