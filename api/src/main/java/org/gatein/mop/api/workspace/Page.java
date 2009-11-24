@@ -75,7 +75,7 @@ public interface Page extends TemplatizedObject, WorkspaceCustomizationContext
     *
     * @return the children
     */
-   Collection<? extends Page> getChildren();
+   Collection<Page> getChildren();
 
    /**
     * Returns a named child or null if it does not exist.

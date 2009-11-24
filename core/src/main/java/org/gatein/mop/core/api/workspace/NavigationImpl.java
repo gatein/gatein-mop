@@ -106,10 +106,13 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
       }
    }
 
-   public List<? extends Navigation> getChildren()
+   public List<Navigation> getChildren()
    {
       NavigationContainer childrenContainer = getChildrenContainer();
-      return childrenContainer.getNavigationList();
+
+      // Yeah a bit ugly but navigation list should support type safety itself
+      // (i.e only accept object of type NavigationImpl
+      return (List)childrenContainer.getNavigationList();
    }
 
    public Navigation getChild(String name)

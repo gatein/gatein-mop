@@ -219,10 +219,10 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page, Work
       return childrenContainer.addPage(name);
    }
 
-   public Collection<? extends Page> getChildren()
+   public Collection<Page> getChildren()
    {
       PageContainer childrenContainer = getChildrenContainer();
-      return childrenContainer.getPages().values();
+      return (Collection)childrenContainer.getPages().values();
    }
 
    public PageImpl getChild(String name)

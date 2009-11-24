@@ -62,7 +62,9 @@ public interface Site extends WorkspaceObject, WorkspaceCustomizationContext
     */
    Workspace getWorkspace();
 
-   /** Destroy the site. */
+   /**
+    * Destroy the site.
+    */
    void destroy();
 
 }

@@ -67,7 +67,7 @@ public interface Navigation extends TemplatizedObject
     *
     * @return the child navigations
     */
-   List<? extends Navigation> getChildren();
+   List<Navigation> getChildren();
 
    /**
     * Returns a specified navigation.
