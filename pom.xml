@@ -59,6 +59,7 @@
       </dependency>
       
       <!-- Internal dependencies -->
+      <!--
       <dependency>
         <groupId>org.gatein.common</groupId>
         <artifactId>common-logging</artifactId>
@@ -69,6 +70,7 @@
         <artifactId>common-common</artifactId>
         <version>${version.gatein.common}</version>
       </dependency>
+      -->
       <dependency>
         <groupId>org.gatein.mop</groupId>
         <artifactId>mop-api</artifactId>
@@ -92,7 +94,9 @@
   </dependencies>
   
   <properties>
+    <!--
     <version.gatein.common>2.0.0-CR02</version.gatein.common>
+    -->
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->

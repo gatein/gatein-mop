@@ -69,6 +69,7 @@
          <artifactId>chromattic.apt</artifactId>
       </dependency>
 
+      <!--
       <dependency>
          <groupId>org.gatein.common</groupId>
          <artifactId>common-common</artifactId>
@@ -78,6 +79,7 @@
          <groupId>org.gatein.common</groupId>
          <artifactId>common-logging</artifactId>
       </dependency>
+      -->
 
       <dependency>
          <groupId>org.chromattic</groupId>
