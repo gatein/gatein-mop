@@ -18,9 +18,32 @@
  */
 package org.gatein.mop.core.support;
 
+import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticBuilder;
 import org.gatein.mop.core.api.MOPService;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
+import org.gatein.mop.core.api.workspace.GroupSite;
+import org.gatein.mop.core.api.workspace.GroupSiteContainer;
+import org.gatein.mop.core.api.workspace.NavigationContainer;
+import org.gatein.mop.core.api.workspace.NavigationImpl;
+import org.gatein.mop.core.api.workspace.PageContainer;
+import org.gatein.mop.core.api.workspace.PageImpl;
+import org.gatein.mop.core.api.workspace.PageLinkImpl;
+import org.gatein.mop.core.api.workspace.PortalSite;
+import org.gatein.mop.core.api.workspace.PortalSiteContainer;
+import org.gatein.mop.core.api.workspace.UIBodyImpl;
+import org.gatein.mop.core.api.workspace.UIContainerImpl;
+import org.gatein.mop.core.api.workspace.UIWindowImpl;
+import org.gatein.mop.core.api.workspace.URLLinkImpl;
+import org.gatein.mop.core.api.workspace.UserSite;
+import org.gatein.mop.core.api.workspace.UserSiteContainer;
+import org.gatein.mop.core.api.workspace.WorkspaceImpl;
+import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
+import org.gatein.mop.core.api.workspace.content.ContextType;
+import org.gatein.mop.core.api.workspace.content.ContextTypeContainer;
+import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
+import org.gatein.mop.core.api.workspace.content.WorkspaceClone;
+import org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization;
 import org.gatein.mop.core.support.content.gadget.Gadget;
 import org.gatein.mop.core.support.content.gadget.GadgetContentProvider;
 import org.gatein.mop.core.support.content.gadget.GadgetState;
@@ -36,14 +59,57 @@ import org.gatein.mop.core.support.content.portlet.Preferences;
 public class TestMOPService extends MOPService
 {
 
-   @Override
-   protected void configure(ChromatticBuilder builder)
+   /** . */
+   private final Chromattic chromattic;
+
+   public TestMOPService() throws Exception
    {
+      ChromatticBuilder builder = ChromatticBuilder.create();
+
+      //
+      builder.setOption(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
+
+      //
+      builder.add(WorkspaceImpl.class);
+      builder.add(UIContainerImpl.class);
+      builder.add(UIWindowImpl.class);
+      builder.add(UIBodyImpl.class);
+      builder.add(PageImpl.class);
+      builder.add(PageContainer.class);
+      builder.add(NavigationImpl.class);
+      builder.add(NavigationContainer.class);
+      builder.add(PageLinkImpl.class);
+      builder.add(URLLinkImpl.class);
+      builder.add(PortalSiteContainer.class);
+      builder.add(PortalSite.class);
+      builder.add(GroupSiteContainer.class);
+      builder.add(GroupSite.class);
+      builder.add(UserSiteContainer.class);
+      builder.add(UserSite.class);
+
+      //
+      builder.add(CustomizationContainer.class);
+      builder.add(ContextTypeContainer.class);
+      builder.add(ContextType.class);
+      builder.add(ContextSpecialization.class);
+      builder.add(WorkspaceClone.class);
+      builder.add(WorkspaceSpecialization.class);
+
+      //
       builder.add(PortletPreferencesState.class);
       builder.add(PortletPreferenceState.class);
 
       //
       builder.add(GadgetState.class);
+
+      //
+      this.chromattic = builder.build();
+   }
+
+   @Override
+   protected Chromattic getChromattic()
+   {
+      return chromattic;
    }
 
    @Override

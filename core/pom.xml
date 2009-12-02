@@ -67,6 +67,7 @@
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.apt</artifactId>
+         <scope>compile</scope>
       </dependency>
 
       <!--
