@@ -186,7 +186,7 @@ public class ModelImpl implements Model
    public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement)
    {
       Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
-      return session.createQueryBuilder().from(impl).<O>where(statement).get().iterator();
+      return session.createQueryBuilder().from(impl).<O>where(statement).get().objects();
    }
 
    public String pathOf(WorkspaceObject o)
