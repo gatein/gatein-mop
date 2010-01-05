@@ -25,7 +25,6 @@ import org.chromattic.api.annotations.FindById;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.ObjectType;
-import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.Customization;
@@ -60,10 +59,6 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
    @OneToOne
    @MappedBy("usersites")
    public abstract UserSiteContainer getUserSites();
-
-   @OneToOne
-   @MappedBy("sharedsites")
-   public abstract UserSiteContainer getSharedSites();
 
    @OneToOne
    @MappedBy("customizations")
@@ -128,10 +123,6 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
       {
          return (SiteContainer<S>)getUserSites();
       }
-      else if (siteType == ObjectType.SHARED_SITE)
-      {
-         return (SiteContainer<S>)getSharedSites();
-      }
       else
       {
          throw new UnsupportedOperationException();
@@ -159,10 +150,5 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
    {
       SiteContainer<S> sites = getSiteContainer(siteType);
       return sites.addSite(name);
-   }
-
-   public Site getSharedSite()
-   {
-      return getSite(ObjectType.SHARED_SITE, "default");
    }
 }

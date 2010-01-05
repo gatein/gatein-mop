@@ -32,7 +32,6 @@ import org.gatein.mop.core.api.workspace.UIBodyImpl;
 import org.gatein.mop.core.api.workspace.PageImpl;
 import org.gatein.mop.core.api.workspace.NavigationImpl;
 import org.gatein.mop.core.api.workspace.WorkspaceObjectImpl;
-import org.gatein.mop.core.api.workspace.SharedSite;
 import org.gatein.mop.core.api.workspace.UIComponentImpl;
 import org.gatein.mop.core.api.workspace.PageLinkImpl;
 import org.gatein.mop.core.api.workspace.URLLinkImpl;
@@ -71,7 +70,6 @@ public class ModelImpl implements Model
       tmp.put(ObjectType.PORTAL_SITE, PortalSite.class);
       tmp.put(ObjectType.GROUP_SITE, GroupSite.class);
       tmp.put(ObjectType.USER_SITE, UserSite.class);
-      tmp.put(ObjectType.SHARED_SITE, SharedSite.class);
       tmp.put(ObjectType.PAGE, PageImpl.class);
       tmp.put(ObjectType.NAVIGATION, NavigationImpl.class);
       tmp.put(ObjectType.COMPONENT, UIComponentImpl.class);

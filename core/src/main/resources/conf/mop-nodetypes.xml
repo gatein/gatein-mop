@@ -349,12 +349,6 @@
     </supertypes>
   </nodeType>
 
-  <nodeType name="mop:sharedsite" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>mop:site</supertype>
-    </supertypes>
-  </nodeType>
-
   <nodeType name="mop:portalsites" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>
@@ -400,21 +394,6 @@
     </childNodeDefinitions>
   </nodeType>
 
-  <nodeType name="mop:sharedsites" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>nt:base</supertype>
-      <supertype>mix:referenceable</supertype>
-    </supertypes>
-    <childNodeDefinitions>
-      <childNodeDefinition name="*" defaultPrimaryType="mop:sharedsite" autoCreated="false" mandatory="false"
-        onParentVersion="COPY" protected="false" sameNameSiblings="false">
-        <requiredPrimaryTypes>
-          <requiredPrimaryType>mop:sharedsite</requiredPrimaryType>
-        </requiredPrimaryTypes>
-      </childNodeDefinition>
-    </childNodeDefinitions>
-  </nodeType>
-
   <nodeType name="mop:workspace" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>mop:workspaceobject</supertype>
@@ -437,12 +416,6 @@
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:usersites</requiredPrimaryType>
-        </requiredPrimaryTypes>
-      </childNodeDefinition>
-      <childNodeDefinition name="sharedsites" defaultPrimaryType="mop:sharedsites" autoCreated="true" mandatory="false"
-        onParentVersion="COPY" protected="false" sameNameSiblings="false">
-        <requiredPrimaryTypes>
-          <requiredPrimaryType>mop:sharedsites</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
     </childNodeDefinitions>

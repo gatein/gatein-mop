@@ -56,9 +56,6 @@ public class ObjectType<O extends WorkspaceObject>
    public static final ObjectType<Site> USER_SITE = new ObjectType<Site>(Site.class, SITE);
 
    /** . */
-   public static final ObjectType<Site> SHARED_SITE = new ObjectType<Site>(Site.class, SITE);
-
-   /** . */
    public static final ObjectType<Page> PAGE = new ObjectType<Page>(Page.class);
 
    /** . */

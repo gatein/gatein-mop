@@ -30,13 +30,6 @@ public interface Workspace extends WorkspaceObject, WorkspaceCustomizationContex
 {
 
    /**
-    * Returns the default share site.
-    *
-    * @return the default shared site
-    */
-   Site getSharedSite();
-
-   /**
     * Returns a specified site or null if it cannot be found.
     *
     * @param siteType the site type
