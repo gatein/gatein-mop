@@ -68,9 +68,9 @@ public class PortletContentProvider implements ContentProvider<Preferences>
 
          //
          PortletPreferencesState prefs;
-         if (node.hasNode("state"))
+         if (node.hasNode("mop:state"))
          {
-            Node stateNode = node.getNode("state");
+            Node stateNode = node.getNode("mop:state");
             prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
             if (state == null)
             {
@@ -86,7 +86,7 @@ public class PortletContentProvider implements ContentProvider<Preferences>
             }
             else
             {
-               Node stateNode = node.addNode("state", "mop:portletpreferences");
+               Node stateNode = node.addNode("mop:state", "mop:portletpreferences");
                prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
             }
          }
@@ -110,9 +110,9 @@ public class PortletContentProvider implements ContentProvider<Preferences>
 
          //
          PortletPreferencesState prefs;
-         if (node.hasNode("state"))
+         if (node.hasNode("mop:state"))
          {
-            Node stateNode = node.getNode("state");
+            Node stateNode = node.getNode("mop:state");
             prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
             return (Preferences)prefs.getPayload();
          }

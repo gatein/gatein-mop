@@ -19,13 +19,13 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.OneToMany;
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.RelatedMappedBy;
 import org.gatein.mop.core.api.MOPFormatter;
 
@@ -35,13 +35,13 @@ import java.util.Map;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:customizationcontainer")
+@PrimaryType(name = "mop:customizationcontainer")
 @FormattedBy(MOPFormatter.class)
 public abstract class CustomizationContainer
 {
 
    @OneToOne
-   @RelatedMappedBy("customizations")
+   @RelatedMappedBy("mop:customizations")
    public abstract WorkspaceCustomizationContext getOwner();
 
    @OneToMany

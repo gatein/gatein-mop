@@ -19,10 +19,10 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.FormattedBy;
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.RelatedMappedBy;
 import org.gatein.mop.core.api.MOPFormatter;
 
@@ -32,7 +32,7 @@ import java.util.Map;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:pagecontainer")
+@PrimaryType(name = "mop:pagecontainer")
 @FormattedBy(MOPFormatter.class)
 public abstract class PageContainer
 {

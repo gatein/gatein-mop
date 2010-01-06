@@ -18,10 +18,12 @@
  */
 package org.gatein.mop.core.support.content.portlet;
 
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.Name;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
+import org.gatein.mop.core.api.MOPFormatter;
 
 import java.util.List;
 
@@ -29,7 +31,8 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:portletpreference")
+@PrimaryType(name = "mop:portletpreference")
+@FormattedBy(MOPFormatter.class)
 public abstract class PortletPreferenceState
 {
 
@@ -39,17 +42,17 @@ public abstract class PortletPreferenceState
    @Name
    public abstract String getName();
 
-   @Property(name = "value")
+   @Property(name = "mop:value")
    public abstract List<String> getValue();
 
    public abstract void setValue(List<String> value);
 
-   @Property(name = "value")
+   @Property(name = "mop:value")
    public abstract List<String> getValues();
 
    public abstract void setValues(List<String> value);
 
-   @Property(name = "readonly")
+   @Property(name = "mop:readonly")
    public abstract boolean getReadOnly();
 
    public abstract void setReadOnly(boolean readOnly);

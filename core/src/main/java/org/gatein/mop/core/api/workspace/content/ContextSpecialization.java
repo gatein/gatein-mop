@@ -20,7 +20,7 @@ package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.ManyToOne;
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.core.api.content.CustomizationContextResolver;
@@ -29,7 +29,7 @@ import org.gatein.mop.core.api.content.CustomizationContextResolver;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:contextspecialization")
+@PrimaryType(name = "mop:contextspecialization")
 public abstract class ContextSpecialization extends AbstractCustomization
 {
 

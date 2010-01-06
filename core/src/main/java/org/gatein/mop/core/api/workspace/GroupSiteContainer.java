@@ -18,14 +18,14 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.RelatedMappedBy;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:groupsites")
+@PrimaryType(name = "mop:groupsites")
 public abstract class GroupSiteContainer extends SiteContainer<GroupSite>
 {
 

@@ -63,13 +63,13 @@
       <supertype>mix:referenceable</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="contexttypes" defaultPrimaryType="mop:contexttypecontainer" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:contexttypes" defaultPrimaryType="mop:contexttypecontainer" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:contexttypecontainer</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
-      <childNodeDefinition name="state" defaultPrimaryType="mop:customizationstate" autoCreated="false" mandatory="false"
+      <childNodeDefinition name="mop:state" defaultPrimaryType="mop:customizationstate" autoCreated="false" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:customizationstate</requiredPrimaryType>
@@ -85,10 +85,10 @@
       <supertype>mop:customization</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="contentid" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:contentid" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
-      <propertyDefinition name="mimetype" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:mimetype" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
@@ -105,7 +105,7 @@
       <supertype>mop:workspacecustomization</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="customization" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:customization" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
@@ -137,7 +137,7 @@
       <supertype>nt:base</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="customizations" defaultPrimaryType="mop:customizationcontainer" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:customizations" defaultPrimaryType="mop:customizationcontainer" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:customizationcontainer</requiredPrimaryType>
@@ -186,7 +186,7 @@
       <supertype>mop:uicomponent</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="customization" defaultPrimaryType="mop:workspacecustomization" autoCreated="false" mandatory="false"
+      <childNodeDefinition name="mop:customization" defaultPrimaryType="mop:workspacecustomization" autoCreated="false" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:workspacecustomization</requiredPrimaryType>
@@ -203,7 +203,7 @@
 
   <nodeType name="mop:templatized" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <propertyDefinitions>
-      <propertyDefinition name="template" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:template" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
@@ -215,13 +215,13 @@
       <supertype>mop:templatized</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="children" defaultPrimaryType="mop:navigationcontainer" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:children" defaultPrimaryType="mop:navigationcontainer" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:navigationcontainer</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
-      <childNodeDefinition name="link" defaultPrimaryType="mop:link" autoCreated="false" mandatory="false"
+      <childNodeDefinition name="mop:link" defaultPrimaryType="mop:link" autoCreated="false" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:link</requiredPrimaryType>
@@ -256,7 +256,7 @@
       <supertype>mop:link</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="page" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:page" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
@@ -267,7 +267,7 @@
       <supertype>mop:link</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="url" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:url" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
@@ -280,13 +280,13 @@
       <supertype>mop:customizationcontext</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="children" defaultPrimaryType="mop:pagecontainer" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:children" defaultPrimaryType="mop:pagecontainer" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:pagecontainer</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
-      <childNodeDefinition name="rootcomponent" defaultPrimaryType="mop:uicontainer" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:rootcomponent" defaultPrimaryType="mop:uicontainer" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:uicontainer</requiredPrimaryType>
@@ -316,13 +316,13 @@
       <supertype>mop:customizationcontext</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="rootpage" defaultPrimaryType="mop:page" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:rootpage" defaultPrimaryType="mop:page" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:page</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
-      <childNodeDefinition name="rootnavigation" defaultPrimaryType="mop:navigation" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:rootnavigation" defaultPrimaryType="mop:navigation" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:navigation</requiredPrimaryType>
@@ -400,19 +400,19 @@
       <supertype>mop:customizationcontext</supertype>
     </supertypes>
     <childNodeDefinitions>
-      <childNodeDefinition name="portalsites" defaultPrimaryType="mop:portalsites" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:portalsites" defaultPrimaryType="mop:portalsites" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:portalsites</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
-      <childNodeDefinition name="groupsites" defaultPrimaryType="mop:groupsites" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:groupsites" defaultPrimaryType="mop:groupsites" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:groupsites</requiredPrimaryType>
         </requiredPrimaryTypes>
       </childNodeDefinition>
-      <childNodeDefinition name="usersites" defaultPrimaryType="mop:usersites" autoCreated="true" mandatory="false"
+      <childNodeDefinition name="mop:usersites" defaultPrimaryType="mop:usersites" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" sameNameSiblings="false">
         <requiredPrimaryTypes>
           <requiredPrimaryType>mop:usersites</requiredPrimaryType>

@@ -18,21 +18,21 @@
  */
 package org.gatein.mop.core.api.workspace.content;
 
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.RelationshipType;
+import org.chromattic.api.annotations.PrimaryType;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:workspacespecialization")
+@PrimaryType(name = "mop:workspacespecialization")
 public abstract class WorkspaceSpecialization extends WorkspaceCustomization
 {
 
    @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("customization")
+   @MappedBy("mop:customization")
    public abstract WorkspaceCustomization getCustomization();
 
    public abstract void setCustomization(WorkspaceCustomization customization);

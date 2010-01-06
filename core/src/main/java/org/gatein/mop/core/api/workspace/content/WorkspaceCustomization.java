@@ -33,12 +33,12 @@ import org.gatein.mop.core.api.content.ContentRegistration;
 public abstract class WorkspaceCustomization extends AbstractCustomization
 {
 
-   @Property(name = "mimetype")
+   @Property(name = "mop:mimetype")
    public abstract String getMimeType();
 
    public abstract void setMimeType(String mimeType);
 
-   @Property(name = "contentid")
+   @Property(name = "mop:contentid")
    public abstract String getContentId();
 
    public abstract void setContentId(String contentId);

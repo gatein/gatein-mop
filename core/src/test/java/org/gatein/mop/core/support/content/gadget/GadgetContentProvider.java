@@ -50,9 +50,9 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
 
          //
          GadgetState prefs;
-         if (node.hasNode("state"))
+         if (node.hasNode("mop:state"))
          {
-            Node stateNode = node.getNode("state");
+            Node stateNode = node.getNode("mop:state");
             prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
             if (state == null)
             {
@@ -68,7 +68,7 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
             }
             else
             {
-               Node stateNode = node.addNode("state", "mop:gadget");
+               Node stateNode = node.addNode("mop:state", "mop:gadget");
                prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
             }
          }
@@ -92,9 +92,9 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
 
          //
          GadgetState prefs;
-         if (node.hasNode("state"))
+         if (node.hasNode("mop:state"))
          {
-            Node stateNode = node.getNode("state");
+            Node stateNode = node.getNode("mop:state");
             prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
             Gadget gadget = new Gadget();
             gadget.setUserPref(prefs.getUserPrefs());

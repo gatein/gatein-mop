@@ -21,8 +21,8 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.ManyToOne;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.RelatedMappedBy;
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Destroy;
 import org.chromattic.api.RelationshipType;
@@ -48,7 +48,7 @@ import java.util.Set;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:page")
+@PrimaryType(name = "mop:page")
 public abstract class PageImpl extends WorkspaceObjectImpl implements Page, WorkspaceCustomizationContext
 {
 
@@ -72,21 +72,21 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page, Work
    };
 
    @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("template")
+   @MappedBy("mop:template")
    public abstract PageImpl getPageTemplate();
 
    public abstract void setPageTemplate(PageImpl template);
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("template")
+   @RelatedMappedBy("mop:template")
    public abstract Collection<NavigationImpl> getTemplatizedNavigations();
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("template")
+   @RelatedMappedBy("mop:template")
    public abstract Collection<PageImpl> getTemplatizedPages();
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("template")
+   @RelatedMappedBy("mop:template")
    public abstract Collection<? extends WorkspaceObject> getTemplatizedObjects();
 
    @OneToOne

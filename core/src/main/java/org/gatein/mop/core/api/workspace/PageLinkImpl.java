@@ -18,9 +18,9 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
 import org.chromattic.api.annotations.Path;
 import org.chromattic.api.RelationshipType;
@@ -32,21 +32,15 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:pagelink")
+@PrimaryType(name = "mop:pagelink")
 public abstract class PageLinkImpl extends LinkImpl implements PageLink
 {
 
    @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("page")
+   @MappedBy("mop:page")
    public abstract PageImpl getPage();
 
    public abstract void setPage(PageImpl page);
-
-   @Path
-   @Property(name = "path")
-   public abstract String getPathPath();
-
-   public abstract void setPagePath(String path);
 
    public void setPage(Page page)
    {

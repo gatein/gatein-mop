@@ -18,10 +18,10 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ui.UIWindow;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
@@ -36,7 +36,7 @@ import org.gatein.mop.core.api.workspace.content.WorkspaceCustomization;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:uiwindow")
+@PrimaryType(name = "mop:uiwindow")
 public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, CustomizationContext
 {
 

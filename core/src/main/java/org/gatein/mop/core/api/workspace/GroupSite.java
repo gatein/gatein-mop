@@ -18,7 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
 
@@ -26,7 +26,7 @@ import org.gatein.mop.api.workspace.Site;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:groupsite")
+@PrimaryType(name = "mop:groupsite")
 public abstract class GroupSite extends SiteImpl
 {
 

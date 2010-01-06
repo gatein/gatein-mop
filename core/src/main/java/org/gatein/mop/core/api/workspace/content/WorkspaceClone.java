@@ -18,8 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace.content;
 
-import org.chromattic.api.annotations.Property;
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.RelatedMappedBy;
 import org.chromattic.api.annotations.OneToMany;
@@ -36,7 +35,7 @@ import java.util.ArrayList;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:workspaceclone")
+@PrimaryType(name = "mop:workspaceclone")
 public abstract class WorkspaceClone extends WorkspaceCustomization
 {
 
@@ -49,7 +48,7 @@ public abstract class WorkspaceClone extends WorkspaceCustomization
    public abstract String getFooName();
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("customization")
+   @RelatedMappedBy("mop:customization")
    public abstract Collection<WorkspaceSpecialization> getSpecializations();
 
    //

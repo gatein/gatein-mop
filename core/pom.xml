@@ -56,14 +56,14 @@
 
       <dependency>
          <groupId>org.chromattic</groupId>
-         <version>1.0.0-beta9</version>
+         <version>1.0.0-beta13</version>
          <artifactId>chromattic.api</artifactId>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.apt</artifactId>
-         <version>1.0.0-beta9</version>
+         <version>1.0.0-beta13</version>
          <scope>compile</scope>
       </dependency>
 
@@ -83,20 +83,20 @@
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.common</artifactId>
-         <version>1.0.0-beta9</version>
+         <version>1.0.0-beta13</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.core</artifactId>
-         <version>1.0.0-beta9</version>
+         <version>1.0.0-beta13</version>
          <scope>test</scope>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.exo</artifactId>
-         <version>1.0.0-beta9</version>
+         <version>1.0.0-beta13</version>
          <scope>test</scope>
       </dependency>
 

@@ -114,6 +114,11 @@ public class MOPFormatter implements ObjectFormatter
 
    public String decodeNodeName(FormatterContext context, String internalName)
    {
+      if (!internalName.startsWith("mop:"))
+      {
+         throw new IllegalStateException("Incorrect internal name " + internalName);
+      }
+      internalName = internalName.substring(4);
       int length = internalName.length();
       for (int i = 0; i < length; i++)
       {
@@ -151,24 +156,31 @@ public class MOPFormatter implements ObjectFormatter
    public String encodeNodeName(FormatterContext context, String externalName)
    {
       int length = externalName.length();
+
+      //
       for (int i = 0; i < length; i++)
       {
          char c = externalName.charAt(i);
          if (isSpecialChar(c))
          {
-            return encode(externalName, i);
+            externalName = encode(externalName, i);
+            break;
          }
       }
-      return externalName;
+
+      //
+      return "mop:" + externalName;
    }
 
+/*
    public String decodePropertyName(FormatterContext context, String internalName)
    {
-      return internalName;
+      return decodeNodeName(context, internalName);
    }
 
    public String encodePropertyName(FormatterContext context, String externalName)
    {
-      return externalName;
+      return encodeNodeName(context, externalName);
    }
+*/
 }

@@ -51,19 +51,19 @@ public class POMFormatterTestCase extends TestCase
 
    public void testStrings()
    {
-      assertString("", "");
-      assertString("a", "a");
-      assertString("%00", "{");
-      assertString("%01", "}");
-      assertString("%02", ".");
-      assertString("%03", "/");
-      assertString("%04", ":");
-      assertString("%05", "[");
-      assertString("%06", "]");
-      assertString("%07", "|");
-      assertString("%08", "*");
-      assertString("%09", "%");
-      assertString("a%03b", "a/b");
+      assertString("mop:", "");
+      assertString("mop:a", "a");
+      assertString("mop:%00", "{");
+      assertString("mop:%01", "}");
+      assertString("mop:%02", ".");
+      assertString("mop:%03", "/");
+      assertString("mop:%04", ":");
+      assertString("mop:%05", "[");
+      assertString("mop:%06", "]");
+      assertString("mop:%07", "|");
+      assertString("mop:%08", "*");
+      assertString("mop:%09", "%");
+      assertString("mop:a%03b", "a/b");
    }
 
    public void testDecodeFailure()

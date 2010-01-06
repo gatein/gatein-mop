@@ -18,14 +18,11 @@
  */
 package org.gatein.mop.core.support.content.portlet;
 
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.RelatedMappedBy;
-import org.gatein.mop.core.support.content.portlet.Preferences;
-import org.gatein.mop.core.support.content.portlet.Preference;
-import org.gatein.mop.core.support.content.portlet.PreferencesBuilder;
 import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
 
 import java.util.Map;
@@ -34,7 +31,7 @@ import java.util.Map;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:portletpreferences")
+@PrimaryType(name = "mop:portletpreferences")
 public abstract class PortletPreferencesState
 {
 

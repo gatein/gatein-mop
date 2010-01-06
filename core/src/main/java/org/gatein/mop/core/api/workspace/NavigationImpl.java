@@ -22,8 +22,8 @@ import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.ManyToOne;
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.RelatedMappedBy;
 import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.workspace.Navigation;
@@ -39,7 +39,7 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:navigation")
+@PrimaryType(name = "mop:navigation")
 public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navigation
 {
 
@@ -70,7 +70,7 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
    public abstract PageLinkImpl createPageLink();
 
    @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("template")
+   @MappedBy("mop:template")
    public abstract PageImpl getPageTemplate();
 
    public abstract void setPageTemplate(PageImpl template);

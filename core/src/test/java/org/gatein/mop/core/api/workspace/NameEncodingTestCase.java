@@ -41,6 +41,6 @@ public class NameEncodingTestCase extends AbstractPOMTestCase
       Site site = workspace.addSite(ObjectType.GROUP_SITE, ":");
       DomainSession session = (DomainSession)model.getSession();
       Node siteNode = session.getNode(site);
-      assertEquals("%04", siteNode.getName());
+      assertEquals("mop:%04", siteNode.getName());
    }
 }

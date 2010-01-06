@@ -18,18 +18,18 @@
  */
 package org.gatein.mop.core.support.content.gadget;
 
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:gadget")
+@PrimaryType(name = "mop:gadget")
 public abstract class GadgetState
 {
 
-   @Property(name = "prefs")
+   @Property(name = "mop:prefs")
    public abstract String getUserPrefs();
 
    public abstract void setUserPrefs(String userPrefs);

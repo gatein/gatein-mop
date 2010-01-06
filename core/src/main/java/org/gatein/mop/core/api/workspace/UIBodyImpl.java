@@ -18,7 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ui.UIBody;
 import org.gatein.mop.api.workspace.ObjectType;
 
@@ -26,7 +26,7 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:uibody")
+@PrimaryType(name = "mop:uibody")
 public abstract class UIBodyImpl extends UIComponentImpl implements UIBody
 {
 

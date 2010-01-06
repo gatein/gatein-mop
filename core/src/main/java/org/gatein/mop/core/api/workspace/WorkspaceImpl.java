@@ -18,10 +18,10 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.FindById;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -37,7 +37,7 @@ import java.util.Collection;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:workspace")
+@PrimaryType(name = "mop:workspace")
 public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Workspace, WorkspaceCustomizationContext
 {
 

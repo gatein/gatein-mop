@@ -18,10 +18,10 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.NodeMapping;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.Name;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ui.UIContainer;
 import org.gatein.mop.api.workspace.ui.UIComponent;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -36,7 +36,7 @@ import java.util.ListIterator;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@NodeMapping(name = "mop:uicontainer")
+@PrimaryType(name = "mop:uicontainer")
 public abstract class UIContainerImpl extends UIComponentImpl implements UIContainer
 {
 
