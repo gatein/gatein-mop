@@ -18,7 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.core.DomainSession;
+import org.chromattic.core.api.ChromatticSessionImpl;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Workspace;
@@ -39,7 +39,7 @@ public class NameEncodingTestCase extends AbstractPOMTestCase
       ModelImpl model = pomService.getModel();
       Workspace workspace = model.getWorkspace();
       Site site = workspace.addSite(ObjectType.GROUP_SITE, ":");
-      DomainSession session = (DomainSession)model.getSession();
+      ChromatticSessionImpl session = (ChromatticSessionImpl)model.getSession();
       Node siteNode = session.getNode(site);
       assertEquals("mop:%04", siteNode.getName());
    }
