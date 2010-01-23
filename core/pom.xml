@@ -37,6 +37,10 @@
    <name>MOP Core</name>
    <description>Model Object for Portal Core</description>
 
+   <properties>
+      <org.chromattic.version>1.0.0-beta15</org.chromattic.version>
+   </properties>
+
    <dependencies>
 
       <dependency>
@@ -56,14 +60,14 @@
 
       <dependency>
          <groupId>org.chromattic</groupId>
-         <version>1.0.0-beta14</version>
+         <version>${org.chromattic.version}</version>
          <artifactId>chromattic.api</artifactId>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.apt</artifactId>
-         <version>1.0.0-beta14</version>
+         <version>${org.chromattic.version}</version>
          <scope>compile</scope>
       </dependency>
 
@@ -83,20 +87,20 @@
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.common</artifactId>
-         <version>1.0.0-beta14</version>
+         <version>${org.chromattic.version}</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.core</artifactId>
-         <version>1.0.0-beta14</version>
+         <version>${org.chromattic.version}</version>
          <scope>test</scope>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.exo</artifactId>
-         <version>1.0.0-beta14</version>
+         <version>${org.chromattic.version}</version>
          <scope>test</scope>
       </dependency>
 
@@ -107,5 +111,22 @@
       </dependency>
 
    </dependencies>
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+               <systemProperties>
+                  <property>
+                     <name>com.arjuna.ats.arjuna.objectstore.objectStoreDir</name>
+                     <value>${project.build.directory}</value>
+                  </property>
+               </systemProperties>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 
 </project>
