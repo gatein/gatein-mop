@@ -38,7 +38,11 @@ public interface Customization<S>
     */
    String getId();
 
-   /** Returns the content this customization refers to. */
+   /**
+    * Returns the content this customization refers to.
+    *
+    * @return the content
+    */
    Content<S> getContent();
 
    /**
