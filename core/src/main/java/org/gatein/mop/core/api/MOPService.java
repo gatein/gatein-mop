@@ -32,10 +32,10 @@ public abstract class MOPService
 {
 
    /** . */
-   private ContentManagerRegistry contentManagerRegistry;
+   ContentManagerRegistry contentManagerRegistry;
 
    /** . */
-   private CustomizationContextProviderRegistry customizationContextResolvers;
+   CustomizationContextProviderRegistry customizationContextResolvers;
 
    public MOPService()
    {
@@ -78,6 +78,10 @@ public abstract class MOPService
       //
    }
 
+   protected <A> Class<? extends A> getConcreteAdapterType(Class<A> adapterType) {
+      return null;
+   }
+
    protected abstract Chromattic getChromattic();
 
    public void start() throws Exception
@@ -103,8 +107,7 @@ public abstract class MOPService
       Chromattic chromattic = getChromattic();
       ChromatticSession chromeSession = chromattic.openSession();
       return new ModelImpl(
-         chromeSession,
-         contentManagerRegistry,
-         customizationContextResolvers);
+         this, chromeSession
+      );
    }
 }

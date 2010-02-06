@@ -18,8 +18,6 @@
  */
 package org.gatein.mop.core.api;
 
-import org.gatein.mop.core.api.content.ContentManagerRegistry;
-import org.gatein.mop.core.api.content.CustomizationContextProviderRegistry;
 import org.gatein.mop.core.api.content.CustomizationContextResolver;
 import org.gatein.mop.core.api.workspace.WorkspaceImpl;
 import org.gatein.mop.core.api.workspace.SiteImpl;
@@ -85,13 +83,10 @@ public class ModelImpl implements Model
    private final ChromatticSession session;
 
    /** . */
-   private final ContentManagerRegistry contentManagers;
-
-   /** . */
-   private final CustomizationContextProviderRegistry customizationContextResolvers;
-
-   /** . */
    private WorkspaceImpl workspace;
+
+   /** . */
+   private final MOPService mop;
 
    /** . */
    private final CustomizationContextResolver customizationContextResolver = new CustomizationContextResolver()
@@ -104,18 +99,15 @@ public class ModelImpl implements Model
          }
          else
          {
-            return customizationContextResolvers.resolve(contextType, contextId);
+            return mop.customizationContextResolvers.resolve(contextType, contextId);
          }
       }
    };
 
-   public ModelImpl(ChromatticSession session, ContentManagerRegistry contentManagers, CustomizationContextProviderRegistry customizationContextResolvers)
+   public ModelImpl(MOPService mop, ChromatticSession session)
    {
-
-      //
       this.session = session;
-      this.contentManagers = contentManagers;
-      this.customizationContextResolvers = customizationContextResolvers;
+      this.mop = mop;
 
       //
       session.addEventListener(contextualizer);
@@ -129,6 +121,24 @@ public class ModelImpl implements Model
    public Workspace getWorkspace()
    {
       return getWorkspaceImpl();
+   }
+
+   public <A> A getAdapter(Object o, Class<A> adaptedType, boolean adapt)
+   {
+      Class<? extends A> adapterType = mop.getConcreteAdapterType(adaptedType);
+      if (adapterType == null) {
+         adapterType = adaptedType;
+      }
+      return _getAdapter(o, adapterType, adapt);
+   }
+
+   private <A> A _getAdapter(Object o, Class<A> type, boolean adapt) {
+      A a = session.getEmbedded(o, type);
+      if (a == null && adapt) {
+         a = session.create(type);
+         session.setEmbedded(o, type, a);
+      }
+      return a;
    }
 
    private WorkspaceImpl getWorkspaceImpl()
@@ -183,8 +193,8 @@ public class ModelImpl implements Model
 
    public <O extends WorkspaceObject> Iterator<O> findObject(ObjectType<O> type, String statement)
    {
-      Class<? extends WorkspaceObjectImpl> impl = typeToClassImpl.get(type);
-      return session.createQueryBuilder().from(impl).<O>where(statement).get().objects();
+      Class<O> impl = (Class<O>)typeToClassImpl.get(type);
+      return session.createQueryBuilder(impl).where(statement).get().objects();
    }
 
    public String pathOf(WorkspaceObject o)
@@ -203,11 +213,15 @@ public class ModelImpl implements Model
       if (o instanceof AbstractCustomization)
       {
          ((AbstractCustomization)o).session = session;
-         ((AbstractCustomization)o).registry = contentManagers;
+         ((AbstractCustomization)o).registry = mop.contentManagerRegistry;
       }
-      if (o instanceof ContextSpecialization)
+      else if (o instanceof ContextSpecialization)
       {
          ((ContextSpecialization)o).setCustomizationContextResolver(customizationContextResolver);
+      }
+      else if (o instanceof WorkspaceObjectImpl)
+      {
+         ((WorkspaceObjectImpl)o).model = this;
       }
    }
 

@@ -19,16 +19,17 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.common.collection.AbstractFilterIterator;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.Attributes;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.core.api.MOPFormatter;
+import org.gatein.mop.core.api.ModelImpl;
 import org.gatein.mop.core.util.AbstractAttributes;
 import org.chromattic.api.annotations.Id;
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.Properties;
-import org.chromattic.common.AbstractFilterIterator;
 
 import java.util.Map;
 import java.util.Set;
@@ -42,6 +43,9 @@ import java.util.Iterator;
 @FormattedBy(MOPFormatter.class)
 public abstract class WorkspaceObjectImpl implements WorkspaceObject
 {
+
+   /** . */
+   public ModelImpl model;
 
    /** . */
    private final Set<String> keys = new AbstractSet<String>()
@@ -119,6 +123,16 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
 
    @Properties
    public abstract Map<String, Object> getProperties();
+
+   public <A> A adapt(Class<A> adaptedType)
+   {
+      return model.getAdapter(this, adaptedType, true);
+   }
+
+   public boolean isAdapted(Class<?> adaptedType)
+   {
+      return model.getAdapter(this, adaptedType, false) != null;
+   }
 
    @Override
    public String toString()

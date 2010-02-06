@@ -31,6 +31,7 @@ import org.gatein.mop.core.api.workspace.PageImpl;
 import org.gatein.mop.core.api.workspace.PageLinkImpl;
 import org.gatein.mop.core.api.workspace.PortalSite;
 import org.gatein.mop.core.api.workspace.PortalSiteContainer;
+import org.gatein.mop.core.api.workspace.SecuredImpl;
 import org.gatein.mop.core.api.workspace.UIBodyImpl;
 import org.gatein.mop.core.api.workspace.UIContainerImpl;
 import org.gatein.mop.core.api.workspace.UIWindowImpl;
@@ -52,6 +53,9 @@ import org.gatein.mop.core.support.content.portlet.PortletPreferenceState;
 import org.gatein.mop.core.support.content.portlet.PortletPreferencesState;
 import org.gatein.mop.core.support.content.portlet.Preferences;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
@@ -62,12 +66,15 @@ public class TestMOPService extends MOPService
    /** . */
    private final Chromattic chromattic;
 
+   /** . */
+   private final Map<Class<?>, Class<?>> adapterMap;
+
    public TestMOPService() throws Exception
    {
       ChromatticBuilder builder = ChromatticBuilder.create();
 
       //
-      builder.setOption(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
+      builder.setOptionValue(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
 
       //
       builder.add(WorkspaceImpl.class);
@@ -103,7 +110,21 @@ public class TestMOPService extends MOPService
       builder.add(GadgetState.class);
 
       //
+      builder.add(SecuredImpl.class);
+
+      //
       this.chromattic = builder.build();
+      this.adapterMap = new HashMap<Class<?>, Class<?>>();
+   }
+
+   public <A> void addAdapter(Class<A> adaptedType, Class<? extends A> adapterType) {
+      adapterMap.put(adaptedType, adapterType);
+   }
+
+   @Override
+   protected <A> Class<? extends A> getConcreteAdapterType(Class<A> adapterType)
+   {
+      return (Class<A>)adapterMap.get(adapterType);
    }
 
    @Override

@@ -60,4 +60,12 @@
     </propertyDefinitions>
   </nodeType>
 
+  <nodeType name="mop:secured" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+    <propertyDefinitions>
+      <propertyDefinition name="mop:permissions" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="true">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
 </nodeTypes>

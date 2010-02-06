@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2009 eXo Platform SAS.
+/*
+ * Copyright (C) 2010 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -16,32 +16,23 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.core.api;
 
-import junit.framework.TestCase;
+package org.gatein.mop.core.api.workspace;
 
-import org.gatein.mop.core.support.TestMOPService;
+import org.chromattic.api.annotations.MixinType;
+import org.chromattic.api.annotations.Property;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class AbstractPOMTestCase extends TestCase
+@MixinType(name = "mop:secured")
+public abstract class SecuredImpl implements Secured
 {
 
-   /** . */
-   protected TestMOPService pomService;
-
-   @Override
-   protected void setUp() throws Exception
-   {
-      TestMOPService pomService = new TestMOPService();
-
-      //
-      pomService.start();
-
-      //
-      this.pomService = pomService;
-   }
+   @Property(name = "mop:permissions")
+   public abstract List<String> getPermissions();
 
 }
