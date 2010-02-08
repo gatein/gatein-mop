@@ -36,21 +36,4 @@ public abstract class PortalSite extends SiteImpl
    {
       return ObjectType.PORTAL_SITE;
    }
-
-   // Portal implementation *********************************************************************************************
-
-   public String getSkinId()
-   {
-      throw new UnsupportedOperationException();
-   }
-
-   public String getTitle()
-   {
-      throw new UnsupportedOperationException();
-   }
-
-   public String getLocale()
-   {
-      throw new UnsupportedOperationException();
-   }
 }
