@@ -38,7 +38,7 @@
    <description>Model Object for Portal Core</description>
 
    <properties>
-      <org.chromattic.version>1.0.0-CR1</org.chromattic.version>
+      <org.chromattic.version>1.0.0-cr1</org.chromattic.version>
    </properties>
 
    <dependencies>
