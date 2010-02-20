@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.gatein.mop.api.workspace.ui.UIComponent;
 import org.gatein.mop.core.util.Tools;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
@@ -32,6 +33,7 @@ import org.gatein.mop.core.api.ModelImpl;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -231,22 +233,24 @@ public class WorkspaceTestCase extends AbstractPOMTestCase
       container.add(ObjectType.WINDOW, "2");
       container.add(0, ObjectType.WINDOW, "0");
 
-      assertEquals("0", container.get(0).getName());
-      assertEquals("2", container.get(1).getName());
-      assertEquals(2, container.size());
+      List<UIComponent> components = container.getComponents();
+
+      assertEquals("0", components.get(0).getName());
+      assertEquals("2", components.get(1).getName());
+      assertEquals(2, components.size());
 
       container.add(1, ObjectType.WINDOW, "1");
 
-      assertEquals("0", container.get(0).getName());
-      assertEquals("1", container.get(1).getName());
-      assertEquals("2", container.get(2).getName());
-      assertEquals(3, container.size());
+      assertEquals("0", components.get(0).getName());
+      assertEquals("1", components.get(1).getName());
+      assertEquals("2", components.get(2).getName());
+      assertEquals(3, components.size());
 
-      container.add(0, container.get(2));
+      components.add(0, components.get(2));
 
-      assertEquals("2", container.get(0).getName());
-      assertEquals("0", container.get(1).getName());
-      assertEquals("1", container.get(2).getName());
-      assertEquals(3, container.size());
+      assertEquals("2", components.get(0).getName());
+      assertEquals("0", components.get(1).getName());
+      assertEquals("1", components.get(2).getName());
+      assertEquals(3, components.size());
    }
 }

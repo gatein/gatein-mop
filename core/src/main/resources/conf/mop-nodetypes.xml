@@ -132,9 +132,10 @@
     </childNodeDefinitions>
   </nodeType>
 
-  <nodeType name="mop:customizationcontext" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+  <nodeType name="mop:customizationcontext" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>
+      <supertype>mix:referenceable</supertype>
     </supertypes>
     <childNodeDefinitions>
       <childNodeDefinition name="mop:customizations" defaultPrimaryType="mop:customizationcontainer" autoCreated="true" mandatory="false"

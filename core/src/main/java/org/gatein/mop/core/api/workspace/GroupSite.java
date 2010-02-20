@@ -27,7 +27,7 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:groupsite")
-public abstract class GroupSite extends SiteImpl
+public abstract class GroupSite extends SiteImpl<GroupSiteContainer>
 {
 
    // Site implementation ***********************************************************************************************

@@ -28,6 +28,7 @@ import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.RelatedMappedBy;
 import org.gatein.mop.core.api.MOPFormatter;
+import org.gatein.mop.core.api.workspace.WorkspaceCustomizationContextImpl;
 
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public abstract class CustomizationContainer
 
    @OneToOne
    @RelatedMappedBy("mop:customizations")
-   public abstract WorkspaceCustomizationContext getOwner();
+   public abstract WorkspaceCustomizationContextImpl getOwner();
 
    @OneToMany
    public abstract Map<String, WorkspaceCustomization> getCustomizations();

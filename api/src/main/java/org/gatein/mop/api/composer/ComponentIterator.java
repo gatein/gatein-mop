@@ -70,7 +70,7 @@ public class ComponentIterator implements StructureIterator
             if (current instanceof UIContainer)
             {
                UIContainer container = (UIContainer)current;
-               Iterator<? extends UIComponent> iterator = container.iterator();
+               Iterator<UIComponent> iterator = container.getComponents().iterator();
                if (iterator.hasNext())
                {
                   stack.add(new ContainerVisit(container, iterator));

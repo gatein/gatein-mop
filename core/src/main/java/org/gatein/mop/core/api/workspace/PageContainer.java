@@ -38,7 +38,7 @@ public abstract class PageContainer
 {
 
    @OneToOne
-   @RelatedMappedBy("pages")
+   @RelatedMappedBy("children")
    public abstract PageImpl getOwner();
 
    @OneToMany

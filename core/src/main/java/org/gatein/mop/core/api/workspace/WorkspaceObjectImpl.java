@@ -18,7 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.*;
 import org.chromattic.common.collection.AbstractFilterIterator;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -27,9 +27,6 @@ import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.ModelImpl;
 import org.gatein.mop.core.util.AbstractAttributes;
-import org.chromattic.api.annotations.Id;
-import org.chromattic.api.annotations.Name;
-import org.chromattic.api.annotations.Properties;
 
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +38,7 @@ import java.util.Iterator;
  * @version $Revision$
  */
 @FormattedBy(MOPFormatter.class)
+@PrimaryType(name = "mop:workspaceobject")
 public abstract class WorkspaceObjectImpl implements WorkspaceObject
 {
 
@@ -147,6 +145,11 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
 
    static boolean contains(CustomizationContext container, CustomizationContext contained)
    {
+      return contains(((WorkspaceCustomizationContextImpl)container).getOwner(), contained);
+   }
+
+   private static boolean contains(WorkspaceObjectImpl container, CustomizationContext contained)
+   {
       if (container == null)
       {
          throw new NullPointerException("No null container accepted");
@@ -155,6 +158,8 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
       {
          throw new NullPointerException("No null contained accepted");
       }
+
+
 
       //
       if (container == contained)
@@ -166,7 +171,7 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
          if (contained instanceof SiteImpl)
          {
             SiteImpl site = (SiteImpl)contained;
-            return contains(container, site.getWorkspace());
+            return contains(container, site.getWorkspace().getCustomizationContext());
          }
          else if (contained instanceof PageImpl)
          {

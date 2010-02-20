@@ -28,7 +28,7 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:usersite")
-public abstract class UserSite extends SiteImpl
+public abstract class UserSite extends SiteImpl<UserSiteContainer>
 {
 
    // Site implementation ***********************************************************************************************

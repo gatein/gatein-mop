@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.link.Link;
 import org.gatein.mop.api.workspace.ObjectType;
 
@@ -25,6 +26,7 @@ import org.gatein.mop.api.workspace.ObjectType;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@PrimaryType(name = "mop:link")
 public abstract class LinkImpl extends WorkspaceObjectImpl implements Link
 {
 

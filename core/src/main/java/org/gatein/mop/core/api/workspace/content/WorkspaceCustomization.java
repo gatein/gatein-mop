@@ -20,6 +20,7 @@ package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
@@ -30,6 +31,7 @@ import org.gatein.mop.core.api.content.ContentRegistration;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@PrimaryType(name = "mop:workspacecustomization")
 public abstract class WorkspaceCustomization extends AbstractCustomization
 {
 

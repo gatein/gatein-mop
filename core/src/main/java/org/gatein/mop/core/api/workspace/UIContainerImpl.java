@@ -20,7 +20,6 @@ package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Create;
-import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ui.UIContainer;
 import org.gatein.mop.api.workspace.ui.UIComponent;
@@ -53,7 +52,7 @@ public abstract class UIContainerImpl extends UIComponentImpl implements UIConta
    public abstract Map<String, UIComponentImpl> getComponentMap();
 
    @OneToMany
-   public abstract List<UIComponent> getComponentList();
+   public abstract List<UIComponentImpl> getComponentList();
 
    public ObjectType<? extends UIContainer> getObjectType()
    {
@@ -110,125 +109,133 @@ public abstract class UIContainerImpl extends UIComponentImpl implements UIConta
          throw new UnsupportedOperationException();
       }
       child.setName(name);
-      List<UIComponent> children = getComponentList();
+      List<UIComponentImpl> children = getComponentList();
       children.add(index, child);
       return componentType.cast(child);
    }
 
+   public List<UIComponent> getComponents() {
+      // We have to do that
+      return (List)components;
+   }
+
    // List<UIComponent> implementation **********************************************************************************
 
-   public int size()
-   {
-      return getComponentList().size();
-   }
+   private final List<UIComponentImpl> components = new List<UIComponentImpl>() {
 
-   public boolean isEmpty()
-   {
-      return getComponentList().isEmpty();
-   }
+      public int size()
+      {
+         return getComponentList().size();
+      }
 
-   public boolean contains(Object o)
-   {
-      return getComponentList().contains(o);
-   }
+      public boolean isEmpty()
+      {
+         return getComponentList().isEmpty();
+      }
 
-   public Iterator<UIComponent> iterator()
-   {
-      return getComponentList().iterator();
-   }
+      public boolean contains(Object o)
+      {
+         return getComponentList().contains(o);
+      }
 
-   public Object[] toArray()
-   {
-      return new Object[0];
-   }
+      public Iterator<UIComponentImpl> iterator()
+      {
+         return getComponentList().iterator();
+      }
 
-   public <T> T[] toArray(T[] a)
-   {
-      return getComponentList().toArray(a);
-   }
+      public Object[] toArray()
+      {
+         return new Object[0];
+      }
 
-   public boolean add(UIComponent uiComponent)
-   {
-      return getComponentList().add(uiComponent);
-   }
+      public <T> T[] toArray(T[] a)
+      {
+         return getComponentList().toArray(a);
+      }
 
-   public boolean remove(Object o)
-   {
-      return getComponentList().remove(o);
-   }
+      public boolean add(UIComponentImpl uiComponent)
+      {
+         return getComponentList().add(uiComponent);
+      }
 
-   public boolean containsAll(Collection<?> c)
-   {
-      return getComponentList().containsAll(c);
-   }
+      public boolean remove(Object o)
+      {
+         return getComponentList().remove(o);
+      }
 
-   public boolean addAll(Collection<? extends UIComponent> c)
-   {
-      return getComponentList().addAll(c);
-   }
+      public boolean containsAll(Collection<?> c)
+      {
+         return getComponentList().containsAll(c);
+      }
 
-   public boolean addAll(int index, Collection<? extends UIComponent> c)
-   {
-      return getComponentList().addAll(index, c);
-   }
+      public boolean addAll(Collection<? extends UIComponentImpl> c)
+      {
+         return getComponentList().addAll(c);
+      }
 
-   public boolean removeAll(Collection<?> c)
-   {
-      return getComponentList().removeAll(c);
-   }
+      public boolean addAll(int index, Collection<? extends UIComponentImpl> c)
+      {
+         return getComponentList().addAll(index, c);
+      }
 
-   public boolean retainAll(Collection<?> c)
-   {
-      return getComponentList().retainAll(c);
-   }
+      public boolean removeAll(Collection<?> c)
+      {
+         return getComponentList().removeAll(c);
+      }
 
-   public void clear()
-   {
-      getComponentList().clear();
-   }
+      public boolean retainAll(Collection<?> c)
+      {
+         return getComponentList().retainAll(c);
+      }
 
-   public UIComponent get(int index)
-   {
-      return getComponentList().get(index);
-   }
+      public void clear()
+      {
+         getComponentList().clear();
+      }
 
-   public UIComponent set(int index, UIComponent element)
-   {
-      return getComponentList().set(index, element);
-   }
+      public UIComponentImpl get(int index)
+      {
+         return getComponentList().get(index);
+      }
 
-   public void add(int index, UIComponent element)
-   {
-      getComponentList().add(index, element);
-   }
+      public UIComponentImpl set(int index, UIComponentImpl element)
+      {
+         return getComponentList().set(index, element);
+      }
 
-   public UIComponent remove(int index)
-   {
-      return getComponentList().remove(index);
-   }
+      public void add(int index, UIComponentImpl element)
+      {
+         getComponentList().add(index, element);
+      }
 
-   public int indexOf(Object o)
-   {
-      return getComponentList().indexOf(o);
-   }
+      public UIComponentImpl remove(int index)
+      {
+         return getComponentList().remove(index);
+      }
 
-   public int lastIndexOf(Object o)
-   {
-      return getComponentList().lastIndexOf(o);
-   }
+      public int indexOf(Object o)
+      {
+         return getComponentList().indexOf(o);
+      }
 
-   public ListIterator<UIComponent> listIterator()
-   {
-      return getComponentList().listIterator();
-   }
+      public int lastIndexOf(Object o)
+      {
+         return getComponentList().lastIndexOf(o);
+      }
 
-   public ListIterator<UIComponent> listIterator(int index)
-   {
-      return getComponentList().listIterator(index);
-   }
+      public ListIterator<UIComponentImpl> listIterator()
+      {
+         return getComponentList().listIterator();
+      }
 
-   public List<UIComponent> subList(int fromIndex, int toIndex)
-   {
-      return getComponentList().subList(fromIndex, toIndex);
-   }
+      public ListIterator<UIComponentImpl> listIterator(int index)
+      {
+         return getComponentList().listIterator(index);
+      }
+
+      public List<UIComponentImpl> subList(int fromIndex, int toIndex)
+      {
+         return getComponentList().subList(fromIndex, toIndex);
+      }
+   };
 }

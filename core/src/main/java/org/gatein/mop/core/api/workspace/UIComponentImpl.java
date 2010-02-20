@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ui.UIComponent;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.chromattic.api.annotations.ManyToOne;
@@ -27,6 +28,7 @@ import org.chromattic.api.annotations.Name;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+@PrimaryType(name = "mop:uicomponent")
 public abstract class UIComponentImpl extends WorkspaceObjectImpl implements UIComponent
 {
 

@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.FindById;
@@ -29,7 +30,6 @@ import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.ContentType;
-import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
 
 import java.util.Collection;
 
@@ -38,7 +38,7 @@ import java.util.Collection;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:workspace")
-public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Workspace, WorkspaceCustomizationContext
+public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Workspace
 {
 
    public ObjectType<? extends Workspace> getObjectType()
@@ -60,51 +60,13 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
    @MappedBy("usersites")
    public abstract UserSiteContainer getUserSites();
 
-   @OneToOne
-   @MappedBy("customizations")
-   public abstract CustomizationContainer getCustomizations();
+   @OneToOne(type = RelationshipType.EMBEDDED)
+   public abstract WorkspaceCustomizationContextImpl getCustomizationContext();
 
    // CustomizationContextResolver implementation ***********************************************************************
 
    @FindById
    public abstract CustomizationContext resolveContext(String contextId);
-
-   // WorkspaceCustomizationContext implementation **********************************************************************
-
-   public String getContextType()
-   {
-      return WorkspaceCustomizationContext.TYPE;
-   }
-
-   public String getContextId()
-   {
-      return getObjectId();
-   }
-
-   public boolean contains(CustomizationContext that)
-   {
-      return contains(this, that);
-   }
-
-   public Customization<?> getCustomization(String name)
-   {
-      return getCustomizations().getCustomization(name);
-   }
-
-   public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
-   {
-      return getCustomizations().customize(name, contentType, contentId, state);
-   }
-
-   public <S> Customization<S> customize(String name, Customization<S> customization)
-   {
-      return getCustomizations().customize(name, customization);
-   }
-
-   public String nameOf(Customization customization)
-   {
-      return getCustomizations().nameOf(customization);
-   }
 
    // Workspace implementation ******************************************************************************************
 

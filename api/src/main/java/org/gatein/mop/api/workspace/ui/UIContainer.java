@@ -26,7 +26,7 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface UIContainer extends UIComponent, List<UIComponent>
+public interface UIContainer extends UIComponent
 {
 
    <T extends UIComponent> T add(ObjectType<T> componentType, String componentName);
@@ -34,5 +34,8 @@ public interface UIContainer extends UIComponent, List<UIComponent>
    <T extends UIComponent> T add(int index, ObjectType<T> componentType, String componentName);
 
    UIComponent get(String componentName);
+
+   List<UIComponent> getComponents();
+
 
 }

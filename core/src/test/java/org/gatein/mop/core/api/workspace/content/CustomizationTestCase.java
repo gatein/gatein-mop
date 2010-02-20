@@ -54,8 +54,8 @@ public class CustomizationTestCase extends AbstractPOMTestCase
    public void testVirtualCustomization()
    {
       Workspace workspace = pomService.getModel().getWorkspace();
-      Customization<Preferences> customization1 = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
-      Customization<Preferences> customization2 = workspace.customize("paris", customization1);
+      Customization<Preferences> customization1 = workspace.getCustomizationContext().customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> customization2 = workspace.getCustomizationContext().customize("paris", customization1);
 
       //
       customization2.setState(paris);
@@ -76,15 +76,15 @@ public class CustomizationTestCase extends AbstractPOMTestCase
    public void testCustomizeWorkspace()
    {
       Workspace workspace = pomService.getModel().getWorkspace();
-      assertNull(workspace.getCustomization("marseille"));
-      Customization<Preferences> customization = workspace.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      assertNull(workspace.getCustomizationContext().getCustomization("marseille"));
+      Customization<Preferences> customization = workspace.getCustomizationContext().customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
       assertNotNull(customization);
       Preferences b = customization.getState();
       assertEquals(marseille, b);
       assertEquals(0, customization.getContexts().size());
       assertEquals("WeatherPortlet", customization.getContentId());
       assertEquals(Preferences.CONTENT_TYPE, customization.getType());
-      assertEquals("marseille", workspace.nameOf(customization));
+      assertEquals("marseille", workspace.getCustomizationContext().nameOf(customization));
    }
 
    public void testCustomizeWindow()

@@ -27,7 +27,7 @@ import org.gatein.mop.api.workspace.Site;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:portalsite")
-public abstract class PortalSite extends SiteImpl
+public abstract class PortalSite extends SiteImpl<PortalSiteContainer>
 {
 
    // Site implementation ***********************************************************************************************

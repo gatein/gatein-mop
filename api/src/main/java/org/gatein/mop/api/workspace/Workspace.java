@@ -26,7 +26,7 @@ import java.util.Collection;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Workspace extends WorkspaceObject, WorkspaceCustomizationContext
+public interface Workspace extends WorkspaceObject
 {
 
    /**
@@ -61,5 +61,12 @@ public interface Workspace extends WorkspaceObject, WorkspaceCustomizationContex
     * @return the new site
     */
    <S extends Site> S addSite(ObjectType<S> siteType, String name);
+
+   /**
+    * Returns the customization context of this object;
+    *
+    * @return the customization context
+    */
+   WorkspaceCustomizationContext getCustomizationContext();
 
 }

@@ -19,6 +19,7 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
@@ -47,6 +48,7 @@ import java.util.Arrays;
  * @version $Revision$
  */
 @FormattedBy(MOPFormatter.class)
+@PrimaryType(name = "mop:customization")
 public abstract class AbstractCustomization implements Customization<Object>, StateContainer
 {
 

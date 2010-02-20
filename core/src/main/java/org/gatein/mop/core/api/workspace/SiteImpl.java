@@ -18,11 +18,13 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -31,14 +33,14 @@ import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.core.api.MOPFormatter;
-import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
 @FormattedBy(MOPFormatter.class)
-public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, WorkspaceCustomizationContext
+@PrimaryType(name = "mop:site")
+public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectImpl implements Site, WorkspaceCustomizationContext
 {
 
    @OneToOne
@@ -50,14 +52,13 @@ public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, Work
    public abstract NavigationImpl getRootNavigation();
 
    @ManyToOne
-   public abstract SiteContainer getSites();
+   public abstract C getSites();
 
    @Destroy
    public abstract void destroy();
 
-   @OneToOne
-   @MappedBy("customizations")
-   public abstract CustomizationContainer getCustomizations();
+   @OneToOne(type = RelationshipType.EMBEDDED)
+   public abstract WorkspaceCustomizationContextImpl getCustomizationContext();
 
    public abstract ObjectType<? extends Site> getObjectType();
 
@@ -78,36 +79,36 @@ public abstract class SiteImpl extends WorkspaceObjectImpl implements Site, Work
 
    public String getContextType()
    {
-      return WorkspaceCustomizationContext.TYPE;
+      return getCustomizationContext().getContextType();
    }
 
    public String getContextId()
    {
-      return getObjectId();
+      return getCustomizationContext().getContextId();
    }
 
    public boolean contains(CustomizationContext that)
    {
-      return contains(this, that);
+      return getCustomizationContext().contains(that);
    }
 
    public Customization<?> getCustomization(String name)
    {
-      return getCustomizations().getCustomization(name);
+      return getCustomizationContext().getCustomization(name);
    }
 
    public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
    {
-      return getCustomizations().customize(name, contentType, contentId, state);
+      return getCustomizationContext().customize(name, contentType, contentId, state);
    }
 
    public <S> Customization<S> customize(String name, Customization<S> customization)
    {
-      return getCustomizations().customize(name, customization);
+      return getCustomizationContext().customize(name, customization);
    }
 
    public String nameOf(Customization customization)
    {
-      return getCustomizations().nameOf(customization);
+      return getCustomizationContext().nameOf(customization);
    }
 }
