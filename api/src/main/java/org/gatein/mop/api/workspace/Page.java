@@ -32,7 +32,7 @@ import java.util.Collection;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Page extends TemplatizedObject, WorkspaceCustomizationContext
+public interface Page extends TemplatizedObject
 {
 
    /**
@@ -124,4 +124,10 @@ public interface Page extends TemplatizedObject, WorkspaceCustomizationContext
     */
    <T extends TemplatizedObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> templatizedType);
 
+   /**
+    * Returns the customization context of this object;
+    *
+    * @return the customization context
+    */
+   WorkspaceCustomizationContext getCustomizationContext();
 }

@@ -28,10 +28,6 @@ import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.ObjectType;
-import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
-import org.gatein.mop.api.content.CustomizationContext;
-import org.gatein.mop.api.content.Customization;
-import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.core.api.MOPFormatter;
 
 /**
@@ -40,7 +36,7 @@ import org.gatein.mop.core.api.MOPFormatter;
  */
 @FormattedBy(MOPFormatter.class)
 @PrimaryType(name = "mop:site")
-public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectImpl implements Site, WorkspaceCustomizationContext
+public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectImpl implements Site
 {
 
    @OneToOne
@@ -73,42 +69,5 @@ public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectI
    public Page getRootPage()
    {
       return getRoot();
-   }
-
-   // WorkspaceCustomizationContext implementation **********************************************************************
-
-   public String getContextType()
-   {
-      return getCustomizationContext().getContextType();
-   }
-
-   public String getContextId()
-   {
-      return getCustomizationContext().getContextId();
-   }
-
-   public boolean contains(CustomizationContext that)
-   {
-      return getCustomizationContext().contains(that);
-   }
-
-   public Customization<?> getCustomization(String name)
-   {
-      return getCustomizationContext().getCustomization(name);
-   }
-
-   public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
-   {
-      return getCustomizationContext().customize(name, contentType, contentId, state);
-   }
-
-   public <S> Customization<S> customize(String name, Customization<S> customization)
-   {
-      return getCustomizationContext().customize(name, customization);
-   }
-
-   public String nameOf(Customization customization)
-   {
-      return getCustomizationContext().nameOf(customization);
    }
 }

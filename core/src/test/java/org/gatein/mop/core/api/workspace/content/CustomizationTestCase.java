@@ -128,12 +128,12 @@ public class CustomizationTestCase extends AbstractPOMTestCase
       UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
       //
-      Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> workspaceCustomization = portal.getCustomizationContext().customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
       Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
       //
       assertNotNull(windowCustomization);
-      assertEquals(Arrays.<CustomizationContext>asList(window, portal), new ArrayList<CustomizationContext>(windowCustomization.getContexts()));
+      assertEquals(Arrays.<CustomizationContext>asList(window, portal.getCustomizationContext()), new ArrayList<CustomizationContext>(windowCustomization.getContexts()));
       assertSame(windowCustomization, window.getCustomization());
       assertTrue(((Customization)windowCustomization) instanceof WorkspaceSpecialization);
 
@@ -163,7 +163,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase
       UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
       //
-      Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> workspaceCustomization = portal.getCustomizationContext().customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
       Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
       //
@@ -182,7 +182,7 @@ public class CustomizationTestCase extends AbstractPOMTestCase
       UIWindow window = layout.add(ObjectType.WINDOW, "window");
 
       //
-      Customization<Preferences> workspaceCustomization = portal.customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
+      Customization<Preferences> workspaceCustomization = portal.getCustomizationContext().customize("marseille", Preferences.CONTENT_TYPE, "WeatherPortlet", marseille);
       Customization<Preferences> windowCustomization = window.customize(workspaceCustomization);
 
       //

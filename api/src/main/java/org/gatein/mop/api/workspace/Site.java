@@ -24,7 +24,7 @@ package org.gatein.mop.api.workspace;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Site extends WorkspaceObject, WorkspaceCustomizationContext
+public interface Site extends WorkspaceObject
 {
 
    /**
@@ -67,4 +67,10 @@ public interface Site extends WorkspaceObject, WorkspaceCustomizationContext
     */
    void destroy();
 
+   /**
+    * Returns the customization context of this object;
+    *
+    * @return the customization context
+    */
+   WorkspaceCustomizationContext getCustomizationContext();
 }

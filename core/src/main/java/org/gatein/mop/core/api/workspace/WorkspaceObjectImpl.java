@@ -176,12 +176,12 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
          else if (contained instanceof PageImpl)
          {
             PageImpl page = (PageImpl)contained;
-            return contains(container, page.getSite());
+            return contains(container, page.getSite().getCustomizationContext());
          }
          else if (contained instanceof UIWindowImpl)
          {
             UIWindowImpl window = (UIWindowImpl)contained;
-            return contains(container, window.getPage());
+            return contains(container, window.getPage().getCustomizationContext());
          }
       }
       if (container instanceof SiteImpl)
@@ -189,12 +189,12 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
          if (contained instanceof PageImpl)
          {
             PageImpl page = (PageImpl)contained;
-            return contains(container, page.getSite());
+            return contains(container, page.getSite().getCustomizationContext());
          }
          else if (contained instanceof UIWindowImpl)
          {
             UIWindowImpl window = (UIWindowImpl)contained;
-            return contains(container, window.getPage());
+            return contains(container, window.getPage().getCustomizationContext());
          }
       }
       if (container instanceof PageImpl)
@@ -202,7 +202,7 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
          if (contained instanceof UIWindowImpl)
          {
             UIWindowImpl window = (UIWindowImpl)contained;
-            return contains(container, window.getPage());
+            return contains(container, window.getPage().getCustomizationContext());
          }
       }
       return false;

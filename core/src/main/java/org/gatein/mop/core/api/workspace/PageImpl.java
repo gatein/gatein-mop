@@ -31,11 +31,7 @@ import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Navigation;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.TemplatizedObject;
-import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.gatein.mop.api.workspace.link.PageLink;
-import org.gatein.mop.api.content.CustomizationContext;
-import org.gatein.mop.api.content.Customization;
-import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.Attributes;
 import org.gatein.mop.core.util.AbstractAttributes;
 
@@ -48,7 +44,7 @@ import java.util.Set;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:page")
-public abstract class PageImpl extends WorkspaceObjectImpl implements Page, WorkspaceCustomizationContext
+public abstract class PageImpl extends WorkspaceObjectImpl implements Page
 {
 
    /** . */
@@ -108,43 +104,6 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page, Work
 
    @OneToOne(type = RelationshipType.EMBEDDED)
    public abstract WorkspaceCustomizationContextImpl getCustomizationContext();
-
-   // WorkspaceCustomizationContext implementation **********************************************************************
-
-   public String getContextType()
-   {
-      return getCustomizationContext().getContextType();
-   }
-
-   public String getContextId()
-   {
-      return getCustomizationContext().getContextId();
-   }
-
-   public boolean contains(CustomizationContext that)
-   {
-      return getCustomizationContext().contains(that);
-   }
-
-   public Customization<?> getCustomization(String name)
-   {
-      return getCustomizationContext().getCustomization(name);
-   }
-
-   public <S> Customization<S> customize(String name, ContentType<S> contentType, String contentId, S state)
-   {
-      return getCustomizationContext().customize(name, contentType, contentId, state);
-   }
-
-   public <S> Customization<S> customize(String name, Customization<S> customization)
-   {
-      return getCustomizationContext().customize(name, customization);
-   }
-
-   public String nameOf(Customization customization)
-   {
-      return getCustomizationContext().nameOf(customization);
-   }
 
    // *******************************************************************************************************************
 

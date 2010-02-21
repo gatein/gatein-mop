@@ -23,7 +23,6 @@ import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.PrimaryType;
-import org.chromattic.api.annotations.RelatedMappedBy;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
