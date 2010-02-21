@@ -48,7 +48,7 @@ public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, 
    // Abstract **********************************************************************************************************
 
    @OneToOne
-   @MappedBy("customization")
+   @MappedBy("mop:customization")
    public abstract WorkspaceCustomization getCustomization();
 
    public abstract void setCustomization(WorkspaceCustomization customization);

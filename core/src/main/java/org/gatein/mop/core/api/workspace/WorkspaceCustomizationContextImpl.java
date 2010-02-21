@@ -40,7 +40,7 @@ public abstract class WorkspaceCustomizationContextImpl implements WorkspaceCust
    public abstract WorkspaceObjectImpl getOwner();
 
    @OneToOne
-   @MappedBy("customizations")
+   @MappedBy("mop:customizations")
    public abstract CustomizationContainer getCustomizations();
 
    public String getContextType()

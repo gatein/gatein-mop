@@ -44,18 +44,18 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
 {
 
    @OneToOne
-   @RelatedMappedBy("rootnavigation")
+   @RelatedMappedBy("mop:rootnavigation")
    public abstract SiteImpl getParentSite();
 
    @OneToOne
-   @MappedBy("children")
+   @MappedBy("mop:children")
    public abstract NavigationContainer getChildrenContainer();
 
    @ManyToOne
    public abstract NavigationContainer getParentContainer();
 
    @OneToOne
-   @MappedBy("link")
+   @MappedBy("mop:link")
    public abstract LinkImpl getLink();
 
    public abstract LinkImpl setLink(LinkImpl target);

@@ -29,7 +29,7 @@ import org.chromattic.api.annotations.RelatedMappedBy;
 public abstract class UserSiteContainer extends SiteContainer<UserSite>
 {
 
-   @RelatedMappedBy("usersites")
+   @RelatedMappedBy("mop:usersites")
    public abstract WorkspaceImpl getWorkspace();
 
 }

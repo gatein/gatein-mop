@@ -40,11 +40,11 @@ public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectI
 {
 
    @OneToOne
-   @MappedBy("rootpage")
+   @MappedBy("mop:rootpage")
    public abstract PageImpl getRoot();
 
    @OneToOne
-   @MappedBy("rootnavigation")
+   @MappedBy("mop:rootnavigation")
    public abstract NavigationImpl getRootNavigation();
 
    @ManyToOne

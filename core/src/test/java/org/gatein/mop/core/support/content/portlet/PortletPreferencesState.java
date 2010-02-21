@@ -45,7 +45,7 @@ public abstract class PortletPreferencesState
    public abstract PortletPreferenceState create();
 
    @OneToOne
-   @RelatedMappedBy("state")
+   @RelatedMappedBy("mop:state")
    public abstract AbstractCustomization getCustomization();
 
    private void setPayload(Preferences payload)

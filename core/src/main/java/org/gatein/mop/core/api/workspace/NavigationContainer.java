@@ -39,7 +39,7 @@ public abstract class NavigationContainer
 {
 
    @OneToOne
-   @RelatedMappedBy("children")
+   @RelatedMappedBy("mop:children")
    public abstract NavigationImpl getOwner();
 
    @OneToMany

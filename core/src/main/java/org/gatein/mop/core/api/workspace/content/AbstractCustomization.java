@@ -75,7 +75,7 @@ public abstract class AbstractCustomization implements Customization<Object>, St
    public abstract String getId();
 
    @OneToOne
-   @MappedBy("contexttypes")
+   @MappedBy("mop:contexttypes")
    abstract ContextTypeContainer getContextTypes();
 
    @Create

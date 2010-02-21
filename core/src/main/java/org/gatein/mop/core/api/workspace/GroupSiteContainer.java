@@ -29,7 +29,7 @@ import org.chromattic.api.annotations.RelatedMappedBy;
 public abstract class GroupSiteContainer extends SiteContainer<GroupSite>
 {
 
-   @RelatedMappedBy("groupsites")
+   @RelatedMappedBy("mop:groupsites")
    public abstract WorkspaceImpl getWorkspace();
 
 }

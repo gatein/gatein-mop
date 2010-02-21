@@ -29,7 +29,7 @@ import org.chromattic.api.annotations.RelatedMappedBy;
 public abstract class PortalSiteContainer extends SiteContainer<PortalSite>
 {
 
-   @RelatedMappedBy("portalsites")
+   @RelatedMappedBy("mop:portalsites")
    public abstract WorkspaceImpl getWorkspace();
 
 

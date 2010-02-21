@@ -49,15 +49,15 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
    // Abstract **********************************************************************************************************
 
    @OneToOne
-   @MappedBy("portalsites")
+   @MappedBy("mop:portalsites")
    public abstract PortalSiteContainer getPortalSites();
 
    @OneToOne
-   @MappedBy("groupsites")
+   @MappedBy("mop:groupsites")
    public abstract GroupSiteContainer getGroupSites();
 
    @OneToOne
-   @MappedBy("usersites")
+   @MappedBy("mop:usersites")
    public abstract UserSiteContainer getUserSites();
 
    @OneToOne(type = RelationshipType.EMBEDDED)

@@ -85,18 +85,18 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
    public abstract Collection<? extends WorkspaceObject> getTemplatizedObjects();
 
    @OneToOne
-   @MappedBy("children")
+   @MappedBy("mop:children")
    public abstract PageContainer getChildrenContainer();
 
    @ManyToOne
    public abstract PageContainer getParentContainer();
 
    @OneToOne
-   @RelatedMappedBy("rootpage")
+   @RelatedMappedBy("mop:rootpage")
    public abstract SiteImpl getSiteParent();
 
    @OneToOne
-   @MappedBy("rootcomponent")
+   @MappedBy("mop:rootcomponent")
    public abstract UIContainerImpl getRootComponent();
 
    @Destroy
