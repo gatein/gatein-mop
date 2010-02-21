@@ -42,7 +42,7 @@ public abstract class CustomizationContainer
 {
 
    @OneToOne
-   @RelatedMappedBy("mop:customizations")
+   @RelatedMappedBy("customizations")
    public abstract WorkspaceCustomizationContextImpl getOwner();
 
    @OneToMany
