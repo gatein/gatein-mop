@@ -18,10 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace.content;
 
-import org.chromattic.api.annotations.FormattedBy;
-import org.chromattic.api.annotations.ManyToOne;
-import org.chromattic.api.annotations.OneToMany;
-import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.api.annotations.*;
 import org.gatein.mop.core.api.MOPFormatter;
 
 import java.util.Map;
@@ -38,7 +35,8 @@ public abstract class ContextTypeContainer
    @OneToMany
    public abstract Map<String, ContextType> getContextTypes();
 
-   @ManyToOne
+   @OneToOne
+   @RelatedMappedBy("mop:contexttypes")
    public abstract AbstractCustomization getCustomization();
 
 }
