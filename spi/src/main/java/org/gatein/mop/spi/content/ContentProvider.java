@@ -21,6 +21,8 @@ package org.gatein.mop.spi.content;
 import java.util.List;
 
 /**
+ * A content provider that integrates with the mop.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  * @param <E> the external state type
