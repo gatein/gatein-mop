@@ -23,8 +23,10 @@ import java.util.List;
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
+ * @param <E> the external state type
+ * @param <I> the internal state type
  */
-public interface ContentProvider<S>
+public interface ContentProvider<E, I>
 {
 
    /**
@@ -33,7 +35,7 @@ public interface ContentProvider<S>
     * @param states the various states to combine
     * @return the combined state
     */
-   S combine(List<S> states);
+   E combine(List<E> states);
 
    /**
     * Update the state container with the provided state.
@@ -41,7 +43,7 @@ public interface ContentProvider<S>
     * @param container the state container
     * @param state     the state
     */
-   void setState(StateContainer container, S state);
+   void setState(StateContainer<I> container, E state);
 
    /**
     * Returns the state attached to the provided container.
@@ -49,13 +51,20 @@ public interface ContentProvider<S>
     * @param container the container
     * @return the state
     */
-   S getState(StateContainer container);
+   E getState(StateContainer<I> container);
 
    /**
     * Returns the class the represents the state as seen by the framework client.
     *
     * @return the external state class
     */
-   Class<S> getStateType();
+   Class<E> getExternalType();
+
+   /**
+    * Returns the class that represents the state as seen by the provider.
+    *
+    * @return the internal state class
+    */
+   Class<I> getInternalType();
 
 }

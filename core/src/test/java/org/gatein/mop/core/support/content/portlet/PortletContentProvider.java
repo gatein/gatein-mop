@@ -29,7 +29,7 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class PortletContentProvider implements ContentProvider<Preferences>
+public class PortletContentProvider implements ContentProvider<Preferences, PortletPreferencesState>
 {
 
    public Preferences combine(List<Preferences> states)
@@ -53,9 +53,9 @@ public class PortletContentProvider implements ContentProvider<Preferences>
       return new Preferences(entries);
    }
 
-   public void setState(StateContainer container, Preferences state)
+   public void setState(StateContainer<PortletPreferencesState> container, Preferences state)
    {
-      PortletPreferencesState prefs = (PortletPreferencesState)container.getState();
+      PortletPreferencesState prefs = container.getState();
 
       //
       if (prefs != null)
@@ -73,15 +73,15 @@ public class PortletContentProvider implements ContentProvider<Preferences>
       {
          if (state != null)
          {
-            prefs = container.create(PortletPreferencesState.class);
+            prefs = container.create();
             prefs.setPayload(state);
          }
       }
    }
 
-   public Preferences getState(StateContainer container)
+   public Preferences getState(StateContainer<PortletPreferencesState> container)
    {
-      PortletPreferencesState prefs = (PortletPreferencesState)container.getState();
+      PortletPreferencesState prefs = container.getState();
       if (prefs != null)
       {
          return prefs.getPayload();
@@ -92,8 +92,12 @@ public class PortletContentProvider implements ContentProvider<Preferences>
       }
    }
 
-   public Class<Preferences> getStateType()
+   public Class<Preferences> getExternalType()
    {
       return Preferences.class;
+   }
+
+   public Class<PortletPreferencesState> getInternalType() {
+      return PortletPreferencesState.class;
    }
 }

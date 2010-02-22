@@ -71,22 +71,6 @@ public abstract class AbstractCustomization implements Customization<Object>
    /** . */
    public ChromatticSession session;
 
-   /** . */
-   private StateContainer container = new StateContainer() {
-      public Object getState() {
-         return getCustomizationState();
-      }
-
-      public void setState(Object state) {
-         setCustomizationState((AbstractCustomizationState)state);
-      }
-      public <T> T create(Class<T> type) {
-         T t = session.create(type);
-         setCustomizationState((AbstractCustomizationState)t);
-         return t;
-      }
-   };
-
    @Id
    public abstract String getId();
 
@@ -110,24 +94,19 @@ public abstract class AbstractCustomization implements Customization<Object>
 
    public abstract AbstractCustomization getParent();
 
-   public Object getVirtualState()
+   private <E, I> E getVirtualState(ContentProvider<E, I> provider)
    {
-
-      ContentType contentType = getType();
-
-      String mimeType = contentType.getMimeType();
-
-      ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
+      StateContainerImpl<E, I> container = new StateContainerImpl<E, I>(provider, this);
 
       //
-      Object childPayload = contentProvider.getState(container);
+      E childPayload = provider.getState(container);
 
       //
-      Object parentPayload = null;
+      E parentPayload = null;
       AbstractCustomization parent = getParent();
       if (parent != null)
       {
-         parentPayload = parent.getVirtualState();
+         parentPayload = parent.getVirtualState(provider);
       }
 
       //
@@ -135,7 +114,7 @@ public abstract class AbstractCustomization implements Customization<Object>
       {
          if (childPayload != null)
          {
-            return contentProvider.combine(Arrays.asList(parentPayload, childPayload));
+            return provider.combine(Arrays.asList(parentPayload, childPayload));
          }
          else
          {
@@ -148,12 +127,32 @@ public abstract class AbstractCustomization implements Customization<Object>
       }
    }
 
+   private <E, I> E getState(ContentProvider<E, I> provider)
+   {
+      StateContainerImpl<E, I> container = new StateContainerImpl<E, I>(provider, this);
+      return provider.getState(container);
+   }
+
+   private <E, I> void setState(ContentProvider<E, I> provider, E state)
+   {
+      StateContainerImpl<E, I> container = new StateContainerImpl<E, I>(provider, this);
+      provider.setState(container, state);
+   }
+
+   public Object getVirtualState()
+   {
+      ContentType contentType = getType();
+      String mimeType = contentType.getMimeType();
+      ContentProvider<?, ?> provider = registry.providers.get(mimeType).getProvider();
+      return getVirtualState(provider);
+   }
+
    public Object getState()
    {
       ContentType contentType = getType();
       String mimeType = contentType.getMimeType();
-      ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
-      return contentProvider.getState(container);
+      ContentProvider<?, ?> provider = registry.providers.get(mimeType).getProvider();
+      return getState(provider);
    }
 
    public void setState(Object state)
@@ -161,7 +160,7 @@ public abstract class AbstractCustomization implements Customization<Object>
       ContentType contentType = getType();
       String mimeType = contentType.getMimeType();
       ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
-      contentProvider.setState(container, state);
+      setState(contentProvider, state);
    }
 
    public Customization<Object> getCustomization(Set<CustomizationContext> contexts)

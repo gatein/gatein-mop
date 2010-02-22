@@ -27,7 +27,7 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class GadgetContentProvider implements ContentProvider<Gadget>
+public class GadgetContentProvider implements ContentProvider<Gadget, GadgetState>
 {
 
    public Gadget combine(List<Gadget> states)
@@ -35,9 +35,8 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
       throw new UnsupportedOperationException();
    }
 
-   public void setState(StateContainer container, Gadget state)
-   {
-      GadgetState prefs = (GadgetState)container.getState();
+   public void setState(StateContainer<GadgetState> container, Gadget state) {
+      GadgetState prefs = container.getState();
       if (prefs != null)
       {
          if (state == null)
@@ -49,15 +48,15 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
       {
          if (state != null)
          {
-            prefs = container.create(GadgetState.class);
+            prefs = container.create();
             prefs.setUserPrefs(state.getUserPref());
          }
       }
    }
 
-   public Gadget getState(StateContainer container)
+   public Gadget getState(StateContainer<GadgetState> container)
    {
-      GadgetState prefs = (GadgetState)container.getState();
+      GadgetState prefs = container.getState();
       if (prefs != null)
       {
          Gadget gadget = new Gadget();
@@ -70,8 +69,12 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
       }
    }
 
-   public Class<Gadget> getStateType()
+   public Class<Gadget> getExternalType()
    {
       return Gadget.class;
+   }
+
+   public Class<GadgetState> getInternalType() {
+      return GadgetState.class;
    }
 }

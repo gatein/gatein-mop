@@ -41,7 +41,7 @@ public class ContentManagerRegistry
       providers = new HashMap<String, ContentRegistration>();
    }
 
-   public synchronized <S> void register(ContentType<S> contentType, ContentProvider<S> contentProvider)
+   public synchronized <E> void register(ContentType<E> contentType, ContentProvider<E, ?> contentProvider)
    {
       if (contentType == null)
       {
