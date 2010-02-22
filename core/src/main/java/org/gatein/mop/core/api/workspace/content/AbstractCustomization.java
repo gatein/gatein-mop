@@ -49,7 +49,7 @@ import java.util.Arrays;
  */
 @FormattedBy(MOPFormatter.class)
 @PrimaryType(name = "mop:customization")
-public abstract class AbstractCustomization implements Customization<Object>, StateContainer
+public abstract class AbstractCustomization implements Customization<Object>
 {
 
    /** . */
@@ -71,6 +71,22 @@ public abstract class AbstractCustomization implements Customization<Object>, St
    /** . */
    public ChromatticSession session;
 
+   /** . */
+   private StateContainer container = new StateContainer() {
+      public Object getState() {
+         return getCustomizationState();
+      }
+
+      public void setState(Object state) {
+         setCustomizationState((AbstractCustomizationState)state);
+      }
+      public <T> T create(Class<T> type) {
+         T t = session.create(type);
+         setCustomizationState((AbstractCustomizationState)t);
+         return t;
+      }
+   };
+
    @Id
    public abstract String getId();
 
@@ -83,6 +99,12 @@ public abstract class AbstractCustomization implements Customization<Object>, St
 
    @Create
    abstract ContextSpecialization createContextSpecialization();
+
+   @OneToOne
+   @MappedBy("mop:state")
+   public abstract AbstractCustomizationState getCustomizationState();
+
+   public abstract void setCustomizationState(AbstractCustomizationState customizationState);
 
    public abstract CustomizationContext getContext();
 
@@ -98,7 +120,7 @@ public abstract class AbstractCustomization implements Customization<Object>, St
       ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
 
       //
-      Object childPayload = contentProvider.getState(this);
+      Object childPayload = contentProvider.getState(container);
 
       //
       Object parentPayload = null;
@@ -131,7 +153,7 @@ public abstract class AbstractCustomization implements Customization<Object>, St
       ContentType contentType = getType();
       String mimeType = contentType.getMimeType();
       ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
-      return contentProvider.getState(this);
+      return contentProvider.getState(container);
    }
 
    public void setState(Object state)
@@ -139,7 +161,7 @@ public abstract class AbstractCustomization implements Customization<Object>, St
       ContentType contentType = getType();
       String mimeType = contentType.getMimeType();
       ContentProvider contentProvider = registry.providers.get(mimeType).getProvider();
-      contentProvider.setState(this, state);
+      contentProvider.setState(container, state);
    }
 
    public Customization<Object> getCustomization(Set<CustomizationContext> contexts)

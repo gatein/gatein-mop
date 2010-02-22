@@ -20,10 +20,8 @@ package org.gatein.mop.core.support.content.portlet;
 
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Create;
-import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.PrimaryType;
-import org.chromattic.api.annotations.RelatedMappedBy;
-import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
+import org.gatein.mop.core.api.workspace.content.AbstractCustomizationState;
 
 import java.util.Map;
 
@@ -32,7 +30,7 @@ import java.util.Map;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:portletpreferences")
-public abstract class PortletPreferencesState
+public abstract class PortletPreferencesState extends AbstractCustomizationState
 {
 
    /** . */
@@ -44,11 +42,7 @@ public abstract class PortletPreferencesState
    @Create
    public abstract PortletPreferenceState create();
 
-   @OneToOne
-   @RelatedMappedBy("mop:state")
-   public abstract AbstractCustomization getCustomization();
-
-   private void setPayload(Preferences payload)
+   public void setPayload(Preferences payload)
    {
 
       this.payload = payload;
@@ -66,12 +60,7 @@ public abstract class PortletPreferencesState
       }
    }
 
-   public void setPayload(Object payload)
-   {
-      setPayload((Preferences)payload);
-   }
-
-   public Object getPayload()
+   public Preferences getPayload()
    {
       if (payload == null)
       {

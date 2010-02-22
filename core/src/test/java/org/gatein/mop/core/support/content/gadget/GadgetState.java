@@ -20,13 +20,14 @@ package org.gatein.mop.core.support.content.gadget;
 
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
+import org.gatein.mop.core.api.workspace.content.AbstractCustomizationState;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
 @PrimaryType(name = "mop:gadget")
-public abstract class GadgetState
+public abstract class GadgetState extends AbstractCustomizationState
 {
 
    @Property(name = "mop:prefs")

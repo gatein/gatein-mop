@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2009 eXo Platform SAS.
+/*
+ * Copyright (C) 2010 eXo Platform SAS.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -16,19 +16,22 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.mop.spi.content;
+
+package org.gatein.mop.core.api.workspace.content;
+
+import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.api.annotations.RelatedMappedBy;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface StateContainer
-{
+@PrimaryType(name = "mop:customizationstate")
+public abstract class AbstractCustomizationState {
 
-   Object getState();
-
-   void setState(Object state);
-
-   <T> T create(Class<T> type);
+   @OneToOne
+   @RelatedMappedBy("mop:state")
+   public abstract AbstractCustomization getCustomization();
 
 }

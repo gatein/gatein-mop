@@ -20,12 +20,7 @@ package org.gatein.mop.core.support.content.portlet;
 
 import org.gatein.mop.spi.content.ContentProvider;
 import org.gatein.mop.spi.content.StateContainer;
-import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
-import org.chromattic.api.ChromatticSession;
-import org.chromattic.api.UndeclaredRepositoryException;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -60,70 +55,40 @@ public class PortletContentProvider implements ContentProvider<Preferences>
 
    public void setState(StateContainer container, Preferences state)
    {
-      try
-      {
-         ChromatticSession session = ((AbstractCustomization)container).session;
-         String containerId = session.getId(container);
-         Node node = session.getJCRSession().getNodeByUUID(containerId);
+      PortletPreferencesState prefs = (PortletPreferencesState)container.getState();
 
-         //
-         PortletPreferencesState prefs;
-         if (node.hasNode("mop:state"))
+      //
+      if (prefs != null)
+      {
+         if (state == null)
          {
-            Node stateNode = node.getNode("mop:state");
-            prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
-            if (state == null)
-            {
-               session.remove(prefs);
-               return;
-            }
+            container.setState(null);
          }
          else
          {
-            if (state == null)
-            {
-               return;
-            }
-            else
-            {
-               Node stateNode = node.addNode("mop:state", "mop:portletpreferences");
-               prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
-            }
+            prefs.setPayload(state);
          }
-
-         //
-         prefs.setPayload(state);
       }
-      catch (RepositoryException e)
+      else
       {
-         throw new UndeclaredRepositoryException(e);
+         if (state != null)
+         {
+            prefs = container.create(PortletPreferencesState.class);
+            prefs.setPayload(state);
+         }
       }
    }
 
    public Preferences getState(StateContainer container)
    {
-      try
+      PortletPreferencesState prefs = (PortletPreferencesState)container.getState();
+      if (prefs != null)
       {
-         ChromatticSession session = ((AbstractCustomization)container).session;
-         String containerId = session.getId(container);
-         Node node = session.getJCRSession().getNodeByUUID(containerId);
-
-         //
-         PortletPreferencesState prefs;
-         if (node.hasNode("mop:state"))
-         {
-            Node stateNode = node.getNode("mop:state");
-            prefs = (PortletPreferencesState)session.findById(Object.class, stateNode.getUUID());
-            return (Preferences)prefs.getPayload();
-         }
-         else
-         {
-            return null;
-         }
+         return prefs.getPayload();
       }
-      catch (RepositoryException e)
+      else
       {
-         throw new UndeclaredRepositoryException(e);
+         return null;
       }
    }
 

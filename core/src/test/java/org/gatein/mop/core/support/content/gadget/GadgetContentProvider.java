@@ -20,12 +20,7 @@ package org.gatein.mop.core.support.content.gadget;
 
 import org.gatein.mop.spi.content.ContentProvider;
 import org.gatein.mop.spi.content.StateContainer;
-import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
-import org.chromattic.api.ChromatticSession;
-import org.chromattic.api.UndeclaredRepositoryException;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import java.util.List;
 
 /**
@@ -42,72 +37,36 @@ public class GadgetContentProvider implements ContentProvider<Gadget>
 
    public void setState(StateContainer container, Gadget state)
    {
-      try
+      GadgetState prefs = (GadgetState)container.getState();
+      if (prefs != null)
       {
-         ChromatticSession session = ((AbstractCustomization)container).session;
-         String containerId = session.getId(container);
-         Node node = session.getJCRSession().getNodeByUUID(containerId);
-
-         //
-         GadgetState prefs;
-         if (node.hasNode("mop:state"))
+         if (state == null)
          {
-            Node stateNode = node.getNode("mop:state");
-            prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
-            if (state == null)
-            {
-               session.remove(prefs);
-               return;
-            }
+            container.setState(null);
          }
-         else
-         {
-            if (state == null)
-            {
-               return;
-            }
-            else
-            {
-               Node stateNode = node.addNode("mop:state", "mop:gadget");
-               prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
-            }
-         }
-
-         //
-         prefs.setUserPrefs(state.getUserPref());
       }
-      catch (RepositoryException e)
+      else
       {
-         throw new UndeclaredRepositoryException(e);
+         if (state != null)
+         {
+            prefs = container.create(GadgetState.class);
+            prefs.setUserPrefs(state.getUserPref());
+         }
       }
    }
 
    public Gadget getState(StateContainer container)
    {
-      try
+      GadgetState prefs = (GadgetState)container.getState();
+      if (prefs != null)
       {
-         ChromatticSession session = ((AbstractCustomization)container).session;
-         String containerId = session.getId(container);
-         Node node = session.getJCRSession().getNodeByUUID(containerId);
-
-         //
-         GadgetState prefs;
-         if (node.hasNode("mop:state"))
-         {
-            Node stateNode = node.getNode("mop:state");
-            prefs = (GadgetState)session.findById(Object.class, stateNode.getUUID());
-            Gadget gadget = new Gadget();
-            gadget.setUserPref(prefs.getUserPrefs());
-            return gadget;
-         }
-         else
-         {
-            return null;
-         }
+         Gadget gadget = new Gadget();
+         gadget.setUserPref(prefs.getUserPrefs());
+         return gadget;
       }
-      catch (RepositoryException e)
+      else
       {
-         throw new UndeclaredRepositoryException(e);
+         return null;
       }
    }
 
