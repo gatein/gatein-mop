@@ -19,19 +19,11 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.*;
-import org.chromattic.common.collection.AbstractFilterIterator;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
-import org.gatein.mop.api.Attributes;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.ModelImpl;
-import org.gatein.mop.core.util.AbstractAttributes;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.AbstractSet;
-import java.util.Iterator;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -45,72 +37,6 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
    /** . */
    public ModelImpl model;
 
-   /** . */
-   private final Set<String> keys = new AbstractSet<String>()
-   {
-      @Override
-      public Iterator<String> iterator()
-      {
-         Map<String, Object> properties = getProperties();
-         return new AbstractFilterIterator<String, String>(properties.keySet().iterator())
-         {
-            protected String adapt(String internal)
-            {
-               if (internal.startsWith("mop:"))
-               {
-                  return internal.substring(4);
-               }
-               else
-               {
-                  return null;
-               }
-            }
-         };
-      }
-
-      public int size()
-      {
-         Map<String, Object> properties = getProperties();
-         int count = 0;
-         for (String key : properties.keySet())
-         {
-            if (key.startsWith("mop:"))
-            {
-               count++;
-            }
-         }
-         return count;
-      }
-   };
-
-   /** . */
-   private final AbstractAttributes attributes = new AbstractAttributes()
-   {
-      @Override
-      protected Object get(String name)
-      {
-         Map<String, Object> properties = getProperties();
-         return properties.get("mop:" + name);
-      }
-
-      @Override
-      protected void set(String name, Object o)
-      {
-         Map<String, Object> properties = getProperties();
-         properties.put("mop:" + name, o);
-      }
-
-      public Set<String> getKeys()
-      {
-         return keys;
-      }
-   };
-
-   public Attributes getAttributes()
-   {
-      return attributes;
-   }
-
    @Name
    public abstract String getName();
 
@@ -119,8 +45,9 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
    @Id
    public abstract String getObjectId();
 
-   @Properties
-   public abstract Map<String, Object> getProperties();
+   @OneToOne
+   @MappedBy("mop:attributes")
+   public abstract AttributesImpl getAttributes();
 
    public <A> A adapt(Class<A> adaptedType)
    {

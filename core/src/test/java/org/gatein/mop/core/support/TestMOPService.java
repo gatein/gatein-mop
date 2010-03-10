@@ -22,16 +22,23 @@ import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticBuilder;
 import org.gatein.mop.core.api.MOPService;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
+import org.gatein.mop.core.api.workspace.Attribute;
+import org.gatein.mop.core.api.workspace.AttributesImpl;
+import org.gatein.mop.core.api.workspace.BooleanAttribute;
+import org.gatein.mop.core.api.workspace.DateAttribute;
 import org.gatein.mop.core.api.workspace.GroupSite;
 import org.gatein.mop.core.api.workspace.GroupSiteContainer;
+import org.gatein.mop.core.api.workspace.IntegerAttribute;
 import org.gatein.mop.core.api.workspace.NavigationContainer;
 import org.gatein.mop.core.api.workspace.NavigationImpl;
 import org.gatein.mop.core.api.workspace.PageContainer;
 import org.gatein.mop.core.api.workspace.PageImpl;
 import org.gatein.mop.core.api.workspace.PageLinkImpl;
+import org.gatein.mop.core.api.workspace.PathAttribute;
 import org.gatein.mop.core.api.workspace.PortalSite;
 import org.gatein.mop.core.api.workspace.PortalSiteContainer;
 import org.gatein.mop.core.api.workspace.SecuredImpl;
+import org.gatein.mop.core.api.workspace.StringAttribute;
 import org.gatein.mop.core.api.workspace.TemplatizedImpl;
 import org.gatein.mop.core.api.workspace.UIBodyImpl;
 import org.gatein.mop.core.api.workspace.UIContainerImpl;
@@ -95,6 +102,15 @@ public class TestMOPService extends MOPService
       builder.add(UserSiteContainer.class);
       builder.add(UserSite.class);
       builder.add(TemplatizedImpl.class);
+
+      //
+      builder.add(AttributesImpl.class);
+      builder.add(Attribute.class);
+      builder.add(PathAttribute.class);
+      builder.add(StringAttribute.class);
+      builder.add(BooleanAttribute.class);
+      builder.add(IntegerAttribute.class);
+      builder.add(DateAttribute.class);
 
       //
       builder.add(CustomizationContainer.class);

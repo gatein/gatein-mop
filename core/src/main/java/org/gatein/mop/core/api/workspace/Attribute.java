@@ -19,42 +19,25 @@
 
 package org.gatein.mop.core.api.workspace;
 
-import org.chromattic.api.annotations.MappedBy;
-import org.chromattic.api.annotations.MixinType;
-import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.api.annotations.Property;
 import org.gatein.mop.api.Scope;
-import org.gatein.mop.api.workspace.Page;
-import org.gatein.mop.api.workspace.Templatized;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@MixinType(name = "mop:templatized")
-public abstract class TemplatizedImpl implements Templatized
+@PrimaryType(name = "mop:attribute")
+public abstract class Attribute<T>
 {
 
-   @OneToOne
-   @MappedBy("mop:template")
-   public abstract PathAttribute getRelatedTemplate();
+   public abstract T getValue();
 
-   public void setTemplate(Page template)
-   {
-      getRelatedTemplate().setValue(template);
-   }
+   public abstract void setValue(T value);
 
-   public Page getTemplate()
-   {
-      return (Page)getRelatedTemplate().getValue();
-   }
+   @Property(name = "mop:scope")
+   public abstract Scope getScope();
 
-   public Scope getScope()
-   {
-      return getRelatedTemplate().getScope();
-   }
+   public abstract void setScope(Scope scope);
 
-   public void setScope(Scope scope)
-   {
-      getRelatedTemplate().setScope(scope);
-   }
 }

@@ -25,6 +25,8 @@ import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.Attributes;
 
+import java.util.Date;
+
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
@@ -42,6 +44,24 @@ public class AttributesTestCase extends AbstractPOMTestCase
       Attributes pageAttributes = portal.getRootPage().getAttributes();
       pageAttributes.setString("foo", "bar");
       assertEquals("bar", pageAttributes.getString("foo"));
+
+      // Overwrite
+      pageAttributes.setString("foo", "bar2");
+      assertEquals("bar2", pageAttributes.getString("foo"));
+   }
+
+   public void testTypes()
+   {
+      ModelImpl model = pomService.getModel();
+      Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal");
+      Attributes portalAttributes = portal.getAttributes();
+      portalAttributes.setInteger("integer", 4);
+      assertEquals(4, portalAttributes.getObject("integer"));
+      Date d = new Date();
+      portalAttributes.setDate("date", d);
+      assertEquals(d, portalAttributes.getObject("date"));
+      portalAttributes.setBoolean("boolean", true);
+      assertEquals(true, portalAttributes.getObject("boolean"));
    }
 
    public void testCascadedAttributes()
@@ -56,9 +76,5 @@ public class AttributesTestCase extends AbstractPOMTestCase
       aAttrs.setString("bar", "bar_a");
       rootAttrs.setString("juu", "juu_root");
       aAttrs.setString("juu", "juu_a");
-      Attributes combinedAttrs = a.getCascadingAttributes();
-      assertEquals("foo_root", combinedAttrs.getString("foo"));
-      assertEquals("bar_a", combinedAttrs.getString("bar"));
-      assertEquals("juu_a", combinedAttrs.getString("juu"));
    }
 }

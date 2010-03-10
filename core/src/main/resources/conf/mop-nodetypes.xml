@@ -20,6 +20,90 @@
 -->
 <nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
 
+  <nodeType name="mop:attributes" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <childNodeDefinitions>
+      <childNodeDefinition name="*" defaultPrimaryType="mop:stringattribute" autoCreated="false" mandatory="false"
+        onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>mop:attribute</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:attribute" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>nt:base</supertype>
+      <supertype>mix:referenceable</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="mop:scope" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:pathattribute" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:attribute</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="mop:value" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:stringattribute" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:attribute</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="mop:value" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:booleanattribute" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:attribute</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="mop:value" requiredType="Boolean" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:integerattribute" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:attribute</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="mop:value" requiredType="Long" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <nodeType name="mop:dateattribute" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+    <supertypes>
+      <supertype>mop:attribute</supertype>
+    </supertypes>
+    <propertyDefinitions>
+      <propertyDefinition name="mop:value" requiredType="Date" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
+    </propertyDefinitions>
+  </nodeType>
+
+  <!-- -->
+
   <nodeType name="mop:customizationstate" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>
@@ -154,12 +238,14 @@
       <supertype>nt:base</supertype>
       <supertype>mix:referenceable</supertype>
     </supertypes>
-    <propertyDefinitions>
-      <propertyDefinition name="*" requiredType="undefined" autoCreated="false" mandatory="false" onParentVersion="COPY"
-        protected="false" multiple="false">
-        <valueConstraints/>
-      </propertyDefinition>
-    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="mop:attributes" defaultPrimaryType="mop:attributes" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>mop:attributes</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
   </nodeType>
 
   <nodeType name="mop:uicomponent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
@@ -203,14 +289,14 @@
   </nodeType>
 
   <nodeType name="mop:templatized" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
-    <propertyDefinitions>
-      <propertyDefinition name="mop:template" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>
-      </propertyDefinition>
-      <propertyDefinition name="mop:templatescope" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints/>
-      </propertyDefinition>
-    </propertyDefinitions>
+    <childNodeDefinitions>
+      <childNodeDefinition name="mop:template" defaultPrimaryType="mop:pathattribute" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>mop:pathattribute</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
   </nodeType>
 
   <nodeType name="mop:navigation" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">

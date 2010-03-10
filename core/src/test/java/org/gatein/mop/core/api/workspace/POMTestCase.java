@@ -104,9 +104,11 @@ public class POMTestCase extends AbstractPOMTestCase
 
       // Try something with template relationships
 
+/*
       Collection<? extends Navigation> templatizedNavigations = template.getTemplatizedObjects(ObjectType.NAVIGATION);
       assertNotNull(templatizedNavigations);
       assertEquals(1, templatizedNavigations.size());
+*/
 
 /*
     Collection<Templatized> templatizedObjects = template.getTemplatizedObjects(Templatized.class);

@@ -50,13 +50,6 @@ public interface Page extends WorkspaceObject
    ObjectType<? extends Page> getObjectType();
 
    /**
-    * Returns the page attributes.
-    *
-    * @return the attributes
-    */
-   Attributes getCascadingAttributes();
-
-   /**
     * Returns the site that owns the page.
     *
     * @return the owner site
@@ -114,15 +107,6 @@ public interface Page extends WorkspaceObject
     * Destroys the page.
     */
    void destroy();
-
-   /**
-    * Returns the templatized objects for this page.
-    *
-    * @param type the type of templatized
-    * @param <T> the templatized workspace object type parameter
-    * @return the collection of templatized objects
-    */
-   <T extends WorkspaceObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> type);
 
    /**
     * Templatize the provided object.
