@@ -52,7 +52,7 @@ public abstract class TemplatizedImpl implements Templatized
       return getPageTemplate();
    }
 
-   @Property(name = "scope:template")
+   @Property(name = "mop:templatescope")
    public abstract Scope getScope();
 
    public abstract void setScope(Scope scope);

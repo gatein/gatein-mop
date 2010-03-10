@@ -207,7 +207,7 @@
       <propertyDefinition name="mop:template" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
-      <propertyDefinition name="scope:template" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="mop:templatescope" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
     </propertyDefinitions>
