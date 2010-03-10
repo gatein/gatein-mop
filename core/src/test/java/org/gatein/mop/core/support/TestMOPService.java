@@ -32,6 +32,7 @@ import org.gatein.mop.core.api.workspace.PageLinkImpl;
 import org.gatein.mop.core.api.workspace.PortalSite;
 import org.gatein.mop.core.api.workspace.PortalSiteContainer;
 import org.gatein.mop.core.api.workspace.SecuredImpl;
+import org.gatein.mop.core.api.workspace.TemplatizedImpl;
 import org.gatein.mop.core.api.workspace.UIBodyImpl;
 import org.gatein.mop.core.api.workspace.UIContainerImpl;
 import org.gatein.mop.core.api.workspace.UIWindowImpl;
@@ -93,6 +94,7 @@ public class TestMOPService extends MOPService
       builder.add(GroupSite.class);
       builder.add(UserSiteContainer.class);
       builder.add(UserSite.class);
+      builder.add(TemplatizedImpl.class);
 
       //
       builder.add(CustomizationContainer.class);

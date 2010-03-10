@@ -32,7 +32,7 @@ import java.util.Collection;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Page extends TemplatizedObject
+public interface Page extends WorkspaceObject 
 {
 
    /**
@@ -118,11 +118,20 @@ public interface Page extends TemplatizedObject
    /**
     * Returns the templatized objects for this page.
     *
-    * @param templatizedType the type of templatized
+    * @param type the type of templatized
     * @param <T> the templatized workspace object type parameter
     * @return the collection of templatized objects
     */
-   <T extends TemplatizedObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> templatizedType);
+   <T extends WorkspaceObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> type);
+
+   /**
+    * Templatize the provided object.
+    *
+    * @param object the object to templatize
+    * @return the templatized aspect of the object
+    * @throws IllegalArgumentException if the object cannot be templatized for a particular reason
+    */
+   Templatized templatize(WorkspaceObject object) throws IllegalArgumentException;
 
    /**
     * Returns the customization context of this object;

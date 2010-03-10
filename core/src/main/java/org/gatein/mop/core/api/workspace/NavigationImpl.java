@@ -27,7 +27,6 @@ import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.RelatedMappedBy;
 import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.workspace.Navigation;
-import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.link.Link;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Site;
@@ -69,28 +68,17 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
    @Create
    public abstract PageLinkImpl createPageLink();
 
-   @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("mop:template")
-   public abstract PageImpl getPageTemplate();
-
-   public abstract void setPageTemplate(PageImpl template);
-
    @Destroy
    public abstract void destroy();
+
+   @OneToOne(type = RelationshipType.EMBEDDED)
+   public abstract TemplatizedImpl getTemplatized();
+
+   public abstract void setTemplatized(TemplatizedImpl templatized);
 
    public ObjectType<? extends Navigation> getObjectType()
    {
       return ObjectType.NAVIGATION;
-   }
-
-   public Page getTemplate()
-   {
-      return getPageTemplate();
-   }
-
-   public void setTemplate(Page template)
-   {
-      setPageTemplate((PageImpl)template);
    }
 
    public Navigation getParent()

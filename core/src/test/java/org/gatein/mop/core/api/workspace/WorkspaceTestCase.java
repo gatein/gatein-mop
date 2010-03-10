@@ -18,6 +18,8 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.gatein.mop.api.Scope;
+import org.gatein.mop.api.workspace.Templatized;
 import org.gatein.mop.api.workspace.ui.UIComponent;
 import org.gatein.mop.core.util.Tools;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -100,18 +102,14 @@ public class WorkspaceTestCase extends AbstractPOMTestCase
       Workspace workspace = pomService.getModel().getWorkspace();
       Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
       Page template = portal.getRootPage().addChild("template");
-      portal.getRootNavigation().setTemplate(template);
-      assertEquals(template, portal.getRootNavigation().getTemplate());
-   }
-
-   public void testPageTemplate()
-   {
-      Workspace workspace = pomService.getModel().getWorkspace();
-      Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
-      Page template = portal.getRootPage().addChild("template");
-      Page foo = portal.getRootPage().addChild("foo");
-      foo.setTemplate(template);
-      assertEquals(template, foo.getTemplate());
+      Navigation rootNav = portal.getRootNavigation();
+      assertNull(rootNav.getTemplatized());
+      Templatized templatized = template.templatize(rootNav);
+      assertSame(templatized, rootNav.getTemplatized());
+      assertNull(templatized.getScope());
+      templatized.setScope(Scope.INHERITED);
+      assertEquals(Scope.INHERITED, templatized.getScope());
+      assertEquals(template, templatized.getTemplate());
    }
 
    public void testLoading()
@@ -202,7 +200,7 @@ public class WorkspaceTestCase extends AbstractPOMTestCase
       Site portal = workspace.addSite(ObjectType.PORTAL_SITE, "portal");
       Page root = portal.getRootPage();
       Page template = root.addChild("template");
-      portal.getRootNavigation().setTemplate(template);
+      template.templatize(portal.getRootNavigation());
       pom.save();
 
       pom = pomService.getModel();

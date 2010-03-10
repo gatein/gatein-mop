@@ -34,6 +34,7 @@
           <properties-param>
             <name>namespaces</name>
             <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/"/>
+            <property name="scope" value="http://www.gatein.org/jcr/scope/1.0/"/>
             </properties-param>
         </init-params>
       </component-plugin>

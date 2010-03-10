@@ -207,13 +207,15 @@
       <propertyDefinition name="mop:template" requiredType="Path" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints/>
       </propertyDefinition>
+      <propertyDefinition name="scope:template" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+      </propertyDefinition>
     </propertyDefinitions>
   </nodeType>
 
   <nodeType name="mop:navigation" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>mop:workspaceobject</supertype>
-      <supertype>mop:templatized</supertype>
     </supertypes>
     <childNodeDefinitions>
       <childNodeDefinition name="mop:children" defaultPrimaryType="mop:navigationcontainer" autoCreated="true" mandatory="false"
@@ -277,7 +279,6 @@
   <nodeType name="mop:page" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>mop:workspaceobject</supertype>
-      <supertype>mop:templatized</supertype>
       <supertype>mop:customizationcontext</supertype>
     </supertypes>
     <childNodeDefinitions>

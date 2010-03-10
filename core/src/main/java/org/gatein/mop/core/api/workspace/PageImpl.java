@@ -29,8 +29,8 @@ import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.workspace.Navigation;
+import org.gatein.mop.api.workspace.Templatized;
 import org.gatein.mop.api.workspace.WorkspaceObject;
-import org.gatein.mop.api.workspace.TemplatizedObject;
 import org.gatein.mop.api.workspace.link.PageLink;
 import org.gatein.mop.api.Attributes;
 import org.gatein.mop.core.util.AbstractAttributes;
@@ -107,9 +107,35 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
 
    // *******************************************************************************************************************
 
-   public <T extends TemplatizedObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> templatizedType)
+   public Templatized templatize(WorkspaceObject object)
+   {  TemplatizedImpl templatized;
+      if (object instanceof NavigationImpl)
+      {
+         NavigationImpl nav = (NavigationImpl)object;
+         templatized = nav.getTemplatized();
+         if (templatized != null)
+         {
+            throw new IllegalArgumentException("The object is already templatized");
+         }
+      }
+      else
+      {
+         throw new UnsupportedOperationException();
+      }
+
+      //
+      templatized = object.adapt(TemplatizedImpl.class);
+
+      //
+      templatized.setTemplate(this);
+
+      //
+      return templatized;
+   }
+
+   public <T extends WorkspaceObject> Collection<? extends T> getTemplatizedObjects(ObjectType<T> type)
    {
-      if (Page.class.equals(templatizedType.getJavaType()))
+      if (Page.class.equals(type.getJavaType()))
       {
          ArrayList bilto = new ArrayList();
          for (Page page : getTemplatizedPages())
@@ -118,7 +144,7 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
          }
          return bilto;
       }
-      else if (Navigation.class.isAssignableFrom(templatizedType.getJavaType()))
+      else if (Navigation.class.isAssignableFrom(type.getJavaType()))
       {
          ArrayList bilto = new ArrayList();
          for (Navigation page : getTemplatizedNavigations())

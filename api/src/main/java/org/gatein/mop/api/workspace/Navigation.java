@@ -31,7 +31,7 @@ import java.util.List;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Navigation extends TemplatizedObject
+public interface Navigation extends WorkspaceObject
 {
 
    /**
@@ -108,4 +108,11 @@ public interface Navigation extends TemplatizedObject
     * @return the link object
     */
    <L extends Link> L linkTo(ObjectType<L> linkType);
+
+   /**
+    * Returns the templatized aspect of this navigation when it exists.
+    *
+    * @return the templatized
+    */
+   Templatized getTemplatized();
 }

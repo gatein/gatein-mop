@@ -82,7 +82,6 @@ public class POMTestCase extends AbstractPOMTestCase
       //
       Page page = root.addChild("page");
       assertNotNull(page);
-      page.setTemplate(template);
 
       //
       NavigationImpl nav = (NavigationImpl)site.getRootNavigation();
@@ -90,7 +89,7 @@ public class POMTestCase extends AbstractPOMTestCase
 //    assertNull(nav.getLink());
 
       //
-      nav.setTemplate(template);
+      template.templatize(nav);
 
       //
       PageLinkImpl pageTarget = nav.createPageLink();
@@ -104,10 +103,6 @@ public class POMTestCase extends AbstractPOMTestCase
 //    urlTarget.setURL("http://www.exoplatform.com");
 
       // Try something with template relationships
-
-      Collection<? extends Page> templatizedPages = template.getTemplatizedObjects(ObjectType.PAGE);
-      assertNotNull(templatizedPages);
-      assertEquals(1, templatizedPages.size());
 
       Collection<? extends Navigation> templatizedNavigations = template.getTemplatizedObjects(ObjectType.NAVIGATION);
       assertNotNull(templatizedNavigations);

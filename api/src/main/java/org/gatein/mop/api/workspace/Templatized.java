@@ -18,6 +18,8 @@
  */
 package org.gatein.mop.api.workspace;
 
+import org.gatein.mop.api.Scope;
+
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
@@ -38,5 +40,9 @@ public interface Templatized
     * @param template the page template
     */
    void setTemplate(Page template);
+
+   Scope getScope();
+
+   void setScope(Scope scope);
 
 }
