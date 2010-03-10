@@ -66,12 +66,6 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
       }
    };
 
-   @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("mop:template")
-   public abstract PageImpl getPageTemplate();
-
-   public abstract void setPageTemplate(PageImpl template);
-
    @OneToMany(type = RelationshipType.PATH)
    @RelatedMappedBy("mop:template")
    public abstract Collection<NavigationImpl> getTemplatizedNavigations();
@@ -220,16 +214,6 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
    public Collection<PageLink> getNavigations()
    {
       throw new UnsupportedOperationException();
-   }
-
-   public void setTemplate(Page template)
-   {
-      setPageTemplate((PageImpl)template);
-   }
-
-   public Page getTemplate()
-   {
-      return getPageTemplate();
    }
 
    private Object getCascadedPropertyValue(String propertyName)
