@@ -17,27 +17,21 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.gatein.mop.core.api.workspace;
+package org.gatein.mop.core.api;
 
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
-import org.gatein.mop.api.Scope;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@PrimaryType(name = "mop:attribute")
-public abstract class Attribute<T>
+@PrimaryType(name = "mop:stringattribute")
+public abstract class StringAttribute extends Attribute<String>
 {
 
-   public abstract T getValue();
+   @Property(name = "mop:value")
+   public abstract String getValue();
 
-   public abstract void setValue(T value);
-
-   @Property(name = "mop:scope")
-   public abstract Scope getScope();
-
-   public abstract void setScope(Scope scope);
-
+   public abstract void setValue(String value);
 }

@@ -22,6 +22,7 @@ import org.chromattic.api.annotations.*;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.content.CustomizationContext;
+import org.gatein.mop.core.api.AttributesImpl;
 import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.ModelImpl;
 

@@ -17,25 +17,21 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.gatein.mop.core.api.workspace;
+package org.gatein.mop.core.api;
 
-import org.chromattic.api.RelationshipType;
-import org.chromattic.api.annotations.ManyToOne;
-import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.api.annotations.Property;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@PrimaryType(name = "mop:pathattribute")
-public abstract class PathAttribute extends Attribute<Object>
+@PrimaryType(name = "mop:booleanattribute")
+public abstract class BooleanAttribute extends Attribute<Boolean>
 {
 
-   @ManyToOne(type = RelationshipType.PATH)
-   @MappedBy("mop:value")
-   public abstract Object getValue();
+   @Property(name = "mop:value")
+   public abstract Boolean getValue();
 
-   public abstract void setValue(Object value);
-
+   public abstract void setValue(Boolean value);
 }

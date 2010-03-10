@@ -25,6 +25,7 @@ import org.chromattic.api.annotations.OneToOne;
 import org.gatein.mop.api.Scope;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.Templatized;
+import org.gatein.mop.core.api.PathAttribute;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>

@@ -17,21 +17,23 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.gatein.mop.core.api.workspace;
+package org.gatein.mop.core.api;
 
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
+
+import java.util.Date;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@PrimaryType(name = "mop:booleanattribute")
-public abstract class BooleanAttribute extends Attribute<Boolean>
+@PrimaryType(name = "mop:dateattribute")
+public abstract class DateAttribute extends Attribute<Date>
 {
 
    @Property(name = "mop:value")
-   public abstract Boolean getValue();
+   public abstract Date getValue();
 
-   public abstract void setValue(Boolean value);
+   public abstract void setValue(Date value);
 }

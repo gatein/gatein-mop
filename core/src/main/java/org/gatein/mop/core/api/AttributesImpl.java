@@ -17,7 +17,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.gatein.mop.core.api.workspace;
+package org.gatein.mop.core.api;
 
 import org.chromattic.api.NameConflictResolution;
 import org.chromattic.api.annotations.Create;
