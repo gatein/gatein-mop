@@ -21,6 +21,8 @@ package org.gatein.mop.api.workspace;
 import org.gatein.mop.api.Scope;
 
 /**
+ * The templatized aspect defined by a related template and a scope that defines the template scope.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
@@ -41,8 +43,18 @@ public interface Templatized
     */
    void setTemplate(Page template);
 
+   /**
+    * Returns the scope of the related template.
+    *
+    * @return the template scope
+    */
    Scope getScope();
 
+   /**
+    * Set the scope of the related template.
+    *
+    * @param scope the scope
+    */
    void setScope(Scope scope);
 
 }
