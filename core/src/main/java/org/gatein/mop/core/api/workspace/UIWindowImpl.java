@@ -21,6 +21,7 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.ui.UIWindow;
 import org.gatein.mop.api.workspace.ObjectType;
@@ -49,6 +50,7 @@ public abstract class UIWindowImpl extends UIComponentImpl implements UIWindow, 
 
    @OneToOne
    @MappedBy("mop:customization")
+   @Owner
    public abstract WorkspaceCustomization getCustomization();
 
    public abstract void setCustomization(WorkspaceCustomization customization);

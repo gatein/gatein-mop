@@ -18,7 +18,10 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
 
@@ -36,10 +39,6 @@
 
    <name>MOP Core</name>
    <description>Model Object for Portal Core</description>
-
-   <properties>
-      <org.chromattic.version>1.0.0-cr2</org.chromattic.version>
-   </properties>
 
    <dependencies>
 
@@ -60,53 +59,35 @@
 
       <dependency>
          <groupId>org.chromattic</groupId>
-         <version>${org.chromattic.version}</version>
          <artifactId>chromattic.api</artifactId>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
-         <version>${org.chromattic.version}</version>
          <artifactId>chromattic.ext</artifactId>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.apt</artifactId>
-         <version>${org.chromattic.version}</version>
          <scope>compile</scope>
       </dependency>
-
-      <!--
-      <dependency>
-         <groupId>org.gatein.common</groupId>
-         <artifactId>common-common</artifactId>
-      </dependency>
-
-      <dependency>
-         <groupId>org.gatein.common</groupId>
-         <artifactId>common-logging</artifactId>
-      </dependency>
-      -->
 
       <!-- should remove it, it's because of usage : org.chromattic.common.AbstractFilterIterator --> 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.common</artifactId>
-         <version>${org.chromattic.version}</version>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.core</artifactId>
-         <version>${org.chromattic.version}</version>
          <scope>test</scope>
       </dependency>
 
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.exo</artifactId>
-         <version>${org.chromattic.version}</version>
          <scope>test</scope>
       </dependency>
 

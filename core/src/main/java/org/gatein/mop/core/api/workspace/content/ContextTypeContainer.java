@@ -36,7 +36,7 @@ public abstract class ContextTypeContainer
    public abstract Map<String, ContextType> getContextTypes();
 
    @OneToOne
-   @RelatedMappedBy("mop:contexttypes")
+   @MappedBy("mop:contexttypes")
    public abstract AbstractCustomization getCustomization();
 
 }

@@ -22,6 +22,7 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.MixinType;
 import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.Owner;
 import org.gatein.mop.api.Scope;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.Templatized;
@@ -37,6 +38,7 @@ public abstract class TemplatizedImpl implements Templatized
 
    @OneToOne
    @MappedBy("mop:template")
+   @Owner
    public abstract PathAttribute getRelatedTemplate();
 
    public void setTemplate(Page template)

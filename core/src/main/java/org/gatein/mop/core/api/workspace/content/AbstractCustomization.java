@@ -19,6 +19,7 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
@@ -76,6 +77,7 @@ public abstract class AbstractCustomization implements Customization<Object>
 
    @OneToOne
    @MappedBy("mop:contexttypes")
+   @Owner
    abstract ContextTypeContainer getContextTypes();
 
    @Create
@@ -86,6 +88,7 @@ public abstract class AbstractCustomization implements Customization<Object>
 
    @OneToOne
    @MappedBy("mop:state")
+   @Owner
    public abstract AbstractCustomizationState getCustomizationState();
 
    public abstract void setCustomizationState(AbstractCustomizationState customizationState);

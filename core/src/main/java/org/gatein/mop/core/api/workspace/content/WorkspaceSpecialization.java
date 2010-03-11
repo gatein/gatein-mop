@@ -21,6 +21,7 @@ package org.gatein.mop.core.api.workspace.content;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.RelationshipType;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 
 /**
@@ -33,6 +34,7 @@ public abstract class WorkspaceSpecialization extends WorkspaceCustomization
 
    @ManyToOne(type = RelationshipType.PATH)
    @MappedBy("mop:customization")
+   @Owner
    public abstract WorkspaceCustomization getCustomization();
 
    public abstract void setCustomization(WorkspaceCustomization customization);

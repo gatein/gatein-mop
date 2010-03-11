@@ -20,7 +20,7 @@ package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Name;
-import org.chromattic.api.annotations.RelatedMappedBy;
+import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.content.CustomizationContext;
@@ -48,7 +48,7 @@ public abstract class WorkspaceClone extends WorkspaceCustomization
    public abstract String getFooName();
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("mop:customization")
+   @MappedBy("mop:customization")
    public abstract Collection<WorkspaceSpecialization> getSpecializations();
 
    //

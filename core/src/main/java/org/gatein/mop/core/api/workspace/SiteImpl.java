@@ -24,6 +24,7 @@ import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Page;
@@ -41,10 +42,12 @@ public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectI
 
    @OneToOne
    @MappedBy("mop:rootpage")
+   @Owner
    public abstract PageImpl getRoot();
 
    @OneToOne
    @MappedBy("mop:rootnavigation")
+   @Owner
    public abstract NavigationImpl getRootNavigation();
 
    @ManyToOne
@@ -54,6 +57,7 @@ public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectI
    public abstract void destroy();
 
    @OneToOne(type = RelationshipType.EMBEDDED)
+   @Owner
    public abstract WorkspaceCustomizationContextImpl getCustomizationContext();
 
    public abstract ObjectType<? extends Site> getObjectType();

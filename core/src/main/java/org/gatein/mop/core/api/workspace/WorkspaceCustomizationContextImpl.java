@@ -22,6 +22,7 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToOne;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.content.Customization;
@@ -36,11 +37,14 @@ import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
 @PrimaryType(name = "mop:customizationcontext")
 public abstract class WorkspaceCustomizationContextImpl implements WorkspaceCustomizationContext {
 
+   // THIS IS A BUG IT SHOULD NOT BE HERE
+   @Owner
    @OneToOne(type = RelationshipType.EMBEDDED)
    public abstract WorkspaceObjectImpl getOwner();
 
    @OneToOne
    @MappedBy("mop:customizations")
+   @Owner
    public abstract CustomizationContainer getCustomizations();
 
    public String getContextType()

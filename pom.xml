@@ -18,7 +18,10 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -45,7 +48,6 @@
     <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/</developerConnection>
     <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/</url>
   </scm>
- 
 
   <dependencyManagement>
     <dependencies>
@@ -58,6 +60,43 @@
         <scope>import</scope>
       </dependency>
       
+      <dependency>
+         <groupId>org.chromattic</groupId>
+         <version>${org.chromattic.version}</version>
+         <artifactId>chromattic.api</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.chromattic</groupId>
+         <version>${org.chromattic.version}</version>
+         <artifactId>chromattic.ext</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.chromattic</groupId>
+         <artifactId>chromattic.apt</artifactId>
+         <version>${org.chromattic.version}</version>
+      </dependency>
+
+      <!-- should remove it, it's because of usage : org.chromattic.common.AbstractFilterIterator -->
+      <dependency>
+         <groupId>org.chromattic</groupId>
+         <artifactId>chromattic.common</artifactId>
+         <version>${org.chromattic.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.chromattic</groupId>
+         <artifactId>chromattic.core</artifactId>
+         <version>${org.chromattic.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.chromattic</groupId>
+         <artifactId>chromattic.exo</artifactId>
+         <version>${org.chromattic.version}</version>
+      </dependency>
+
       <!-- Internal dependencies -->
       <!--
       <dependency>
@@ -104,6 +143,8 @@
     <!-- maven-enforcer-plugin -->
     <jdk.min.version>1.6</jdk.min.version>
         
+    <org.chromattic.version>1.0.0</org.chromattic.version>
+
   </properties>
 
   <!-- **************** -->

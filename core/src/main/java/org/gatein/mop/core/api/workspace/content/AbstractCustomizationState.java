@@ -21,7 +21,7 @@ package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.PrimaryType;
-import org.chromattic.api.annotations.RelatedMappedBy;
+import org.chromattic.api.annotations.MappedBy;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -31,7 +31,7 @@ import org.chromattic.api.annotations.RelatedMappedBy;
 public abstract class AbstractCustomizationState {
 
    @OneToOne
-   @RelatedMappedBy("mop:state")
+   @MappedBy("mop:state")
    public abstract AbstractCustomization getCustomization();
 
 }

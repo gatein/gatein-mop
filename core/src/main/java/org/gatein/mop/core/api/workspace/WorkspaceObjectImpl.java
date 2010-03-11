@@ -48,6 +48,7 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
 
    @OneToOne
    @MappedBy("mop:attributes")
+   @Owner
    public abstract AttributesImpl getAttributes();
 
    public <A> A adapt(Class<A> adaptedType)

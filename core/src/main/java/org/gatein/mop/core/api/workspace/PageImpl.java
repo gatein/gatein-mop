@@ -21,8 +21,9 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.ManyToOne;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
-import org.chromattic.api.annotations.RelatedMappedBy;
+import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Destroy;
 import org.chromattic.api.RelationshipType;
@@ -43,36 +44,39 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
 {
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("mop:template")
+   @MappedBy("mop:template")
    public abstract Collection<NavigationImpl> getTemplatizedNavigations();
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("mop:template")
+   @MappedBy("mop:template")
    public abstract Collection<PageImpl> getTemplatizedPages();
 
    @OneToMany(type = RelationshipType.PATH)
-   @RelatedMappedBy("mop:template")
+   @MappedBy("mop:template")
    public abstract Collection<? extends WorkspaceObject> getTemplatizedObjects();
 
    @OneToOne
    @MappedBy("mop:children")
+   @Owner
    public abstract PageContainer getChildrenContainer();
 
    @ManyToOne
    public abstract PageContainer getParentContainer();
 
    @OneToOne
-   @RelatedMappedBy("mop:rootpage")
+   @MappedBy("mop:rootpage")
    public abstract SiteImpl getSiteParent();
 
    @OneToOne
    @MappedBy("mop:rootcomponent")
+   @Owner
    public abstract UIContainerImpl getRootComponent();
 
    @Destroy
    public abstract void destroy();
 
    @OneToOne(type = RelationshipType.EMBEDDED)
+   @Owner
    public abstract WorkspaceCustomizationContextImpl getCustomizationContext();
 
    // *******************************************************************************************************************

@@ -20,6 +20,7 @@ package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
 import org.chromattic.api.annotations.Path;
@@ -38,6 +39,7 @@ public abstract class PageLinkImpl extends LinkImpl implements PageLink
 
    @ManyToOne(type = RelationshipType.PATH)
    @MappedBy("mop:page")
+   @Owner
    public abstract PageImpl getPage();
 
    public abstract void setPage(PageImpl page);

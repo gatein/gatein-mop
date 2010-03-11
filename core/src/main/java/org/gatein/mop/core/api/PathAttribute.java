@@ -22,6 +22,7 @@ package org.gatein.mop.core.api;
 import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.MappedBy;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 
 /**
@@ -34,6 +35,7 @@ public abstract class PathAttribute extends Attribute<Object>
 
    @ManyToOne(type = RelationshipType.PATH)
    @MappedBy("mop:value")
+   @Owner
    public abstract Object getValue();
 
    public abstract void setValue(Object value);

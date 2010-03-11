@@ -22,6 +22,7 @@ import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.FindById;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.api.workspace.Site;
@@ -50,17 +51,21 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
 
    @OneToOne
    @MappedBy("mop:portalsites")
+   @Owner
    public abstract PortalSiteContainer getPortalSites();
 
    @OneToOne
    @MappedBy("mop:groupsites")
+   @Owner
    public abstract GroupSiteContainer getGroupSites();
 
    @OneToOne
    @MappedBy("mop:usersites")
+   @Owner
    public abstract UserSiteContainer getUserSites();
 
    @OneToOne(type = RelationshipType.EMBEDDED)
+   @Owner
    public abstract WorkspaceCustomizationContextImpl getCustomizationContext();
 
    // CustomizationContextResolver implementation ***********************************************************************

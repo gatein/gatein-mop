@@ -23,8 +23,9 @@ import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.Destroy;
+import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
-import org.chromattic.api.annotations.RelatedMappedBy;
+import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.RelationshipType;
 import org.gatein.mop.api.workspace.Navigation;
 import org.gatein.mop.api.workspace.link.Link;
@@ -43,11 +44,12 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
 {
 
    @OneToOne
-   @RelatedMappedBy("mop:rootnavigation")
+   @MappedBy("mop:rootnavigation")
    public abstract SiteImpl getParentSite();
 
    @OneToOne
    @MappedBy("mop:children")
+   @Owner
    public abstract NavigationContainer getChildrenContainer();
 
    @ManyToOne
@@ -55,6 +57,7 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
 
    @OneToOne
    @MappedBy("mop:link")
+   @Owner
    public abstract LinkImpl getLink();
 
    public abstract LinkImpl setLink(LinkImpl target);
@@ -72,6 +75,7 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
    public abstract void destroy();
 
    @OneToOne(type = RelationshipType.EMBEDDED)
+   @Owner
    public abstract TemplatizedImpl getTemplatized();
 
    public abstract void setTemplatized(TemplatizedImpl templatized);

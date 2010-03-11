@@ -23,7 +23,7 @@ import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.PrimaryType;
-import org.chromattic.api.annotations.RelatedMappedBy;
+import org.chromattic.api.annotations.MappedBy;
 import org.gatein.mop.core.api.MOPFormatter;
 
 import java.util.Map;
@@ -38,7 +38,7 @@ public abstract class PageContainer
 {
 
    @OneToOne
-   @RelatedMappedBy("mop:children")
+   @MappedBy("mop:children")
    public abstract PageImpl getOwner();
 
    @OneToMany
