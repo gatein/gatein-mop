@@ -140,7 +140,7 @@
     <!-- maven-enforcer-plugin -->
     <jdk.min.version>1.6</jdk.min.version>
         
-    <org.chromattic.version>1.0.1-cr1</org.chromattic.version>
+    <org.chromattic.version>1.0.1-cr2</org.chromattic.version>
 
   </properties>
 

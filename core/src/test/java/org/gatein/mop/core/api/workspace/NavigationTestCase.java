@@ -46,4 +46,15 @@ public class NavigationTestCase extends AbstractPOMTestCase
       assertSame(n2, ns.get(1));
       assertSame(n3, ns.get(2));
    }
+
+   public void testSetName()
+   {
+      ModelImpl model = pomService.getModel();
+      Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal_for_navigation");
+      Navigation root = portal.getRootNavigation();
+      Navigation n1 = root.addChild("1");
+      assertEquals("1", n1.getName());
+      n1.setName("2");
+      assertEquals("2", n1.getName());
+   }
 }

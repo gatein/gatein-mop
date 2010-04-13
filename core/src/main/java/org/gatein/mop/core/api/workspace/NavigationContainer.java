@@ -54,7 +54,7 @@ public abstract class NavigationContainer
    public NavigationImpl addNavigation(String name)
    {
       NavigationImpl page = createNavigation();
-      page.setName(name);
+      page.setNodeName(name);
       getNavigationList().add(page);
       return page;
    }

@@ -34,6 +34,7 @@ import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.link.PageLink;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -80,12 +81,25 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
 
    public abstract void setTemplatized(TemplatizedImpl templatized);
 
+   public String getName()
+   {
+      return getNodeName();
+   }
+
+   public void setName(String name)
+   {
+      // todo: change to setNodeName when it is fixed
+      NavigationContainer parent = getParentContainer();
+      Map<String, NavigationImpl> map = parent.getNavigationMap();
+      map.put(name, this);
+   }
+
    public ObjectType<? extends Navigation> getObjectType()
    {
       return ObjectType.NAVIGATION;
    }
 
-   public Navigation getParent()
+   public NavigationImpl getParent()
    {
       NavigationContainer parent = getParentContainer();
       if (parent != null)

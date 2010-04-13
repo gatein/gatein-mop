@@ -42,6 +42,13 @@ public interface Navigation extends WorkspaceObject
    String getName();
 
    /**
+    * Update the navigation name.
+    *
+    * @param name the new navigation name
+    */
+   void setName(String name);
+
+   /**
     * Extends the object type to navigation.
     *
     * @return the object type

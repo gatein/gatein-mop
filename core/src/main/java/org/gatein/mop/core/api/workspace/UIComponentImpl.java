@@ -40,6 +40,11 @@ public abstract class UIComponentImpl extends WorkspaceObjectImpl implements UIC
 
    public abstract ObjectType<? extends UIComponent> getObjectType();
 
+   public String getName()
+   {
+      return getNodeName();
+   }
+
    public final UIContainerImpl getParent()
    {
       return getParentContainer();

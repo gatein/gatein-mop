@@ -39,9 +39,9 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
    public ModelImpl model;
 
    @Name
-   public abstract String getName();
+   public abstract String getNodeName();
 
-   public abstract void setName(String name);
+   public abstract void setNodeName(String name);
 
    @Id
    public abstract String getObjectId();
@@ -67,7 +67,7 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
       ObjectType<?> objectType = getObjectType();
       Class<? extends WorkspaceObject> javaType = objectType.getJavaType();
       String typeName = javaType.getSimpleName();
-      String name = getName();
+      String name = getNodeName();
       String id = getObjectId();
       return typeName + "[name=" + name + ",id=" + id + "]";
    }

@@ -108,7 +108,7 @@ public abstract class UIContainerImpl extends UIComponentImpl implements UIConta
       {
          throw new UnsupportedOperationException();
       }
-      child.setName(name);
+      child.setNodeName(name);
       List<UIComponentImpl> children = getComponentList();
       children.add(index, child);
       return componentType.cast(child);
