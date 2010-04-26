@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.gatein</groupId>
     <artifactId>gatein-parent</artifactId>
-    <version>1.0.0-GA</version>
+    <version>1.0.1-GA</version>
   </parent>
 
   <!-- ****************** -->
@@ -52,7 +52,7 @@
       <dependency>
         <groupId>org.gatein</groupId>
         <artifactId>gatein-dep</artifactId>
-        <version>1.0.0-GA</version>
+        <version>1.0.1-GA</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -94,19 +94,6 @@
          <version>${org.chromattic.version}</version>
       </dependency>
 
-      <!-- Internal dependencies -->
-      <!--
-      <dependency>
-        <groupId>org.gatein.common</groupId>
-        <artifactId>common-logging</artifactId>
-        <version>${version.gatein.common}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.gatein.common</groupId>
-        <artifactId>common-common</artifactId>
-        <version>${version.gatein.common}</version>
-      </dependency>
-      -->
       <dependency>
         <groupId>org.gatein.mop</groupId>
         <artifactId>mop-api</artifactId>
