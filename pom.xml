@@ -34,7 +34,7 @@
 
   <groupId>org.gatein.mop</groupId>
   <artifactId>mop-parent</artifactId>
-  <version>1.0.2-GA-SNAPSHOT</version>
+  <version>1.0.1-GA-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>GateIn - MOP</name>
@@ -52,7 +52,7 @@
       <dependency>
         <groupId>org.gatein</groupId>
         <artifactId>gatein-dep</artifactId>
-        <version>1.0.1-GA</version>
+        <version>1.0.2-GA</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
