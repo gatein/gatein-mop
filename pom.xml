@@ -34,16 +34,16 @@
 
   <groupId>org.gatein.mop</groupId>
   <artifactId>mop-parent</artifactId>
-  <version>1.0.2-GA</version>
+  <version>1.0.3-GA-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>GateIn - MOP</name>
   <description>Model Object for Portal</description>
 
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/tags/1.0.2-GA</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/tags/1.0.2-GA</developerConnection>
-    <url>http://fisheye.jboss.org/browse/gatein/components/mop/tags/1.0.2-GA</url>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/gatein/components/mop/trunk/</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/gatein/components/mop/trunk/</developerConnection>
+    <url>http://fisheye.jboss.org/browse/gatein/components/mop/trunk/</url>
   </scm>
 
   <dependencyManagement>
