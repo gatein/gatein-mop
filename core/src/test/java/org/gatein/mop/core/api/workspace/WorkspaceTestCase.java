@@ -50,6 +50,7 @@ public class WorkspaceTestCase extends AbstractPOMTestCase
       Workspace workspace = model.getWorkspace();
       Site site = workspace.addSite(ObjectType.GROUP_SITE, "site");
       assertNotNull(site);
+      assertEquals("site", site.getName());
       Site s2 = model.findObjectById(ObjectType.SITE, site.getObjectId());
       assertEquals(site, s2);
       assertEquals(workspace, site.getWorkspace());

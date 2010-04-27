@@ -61,6 +61,11 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
       return model.getAdapter(this, adaptedType, false) != null;
    }
 
+   public String getName()
+   {
+      return getNodeName();
+   }
+
    @Override
    public String toString()
    {
