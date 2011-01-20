@@ -127,7 +127,8 @@
     <!-- maven-enforcer-plugin -->
     <jdk.min.version>1.6</jdk.min.version>
         
-    <org.chromattic.version>1.0.4</org.chromattic.version>
+    <org.chromattic.version>1.0.5</org.chromattic.version>
+    <!--<org.chromattic.version>1.1.0-SNAPSHOT</org.chromattic.version>-->
 
   </properties>
 

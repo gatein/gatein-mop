@@ -53,7 +53,7 @@ public abstract class PageImpl extends WorkspaceObjectImpl implements Page
 
    @OneToMany(type = RelationshipType.PATH)
    @MappedBy("mop:template")
-   public abstract Collection<? extends WorkspaceObject> getTemplatizedObjects();
+   public abstract Collection<? extends TemplatizedImpl> getTemplatizedObjects();
 
    @OneToOne
    @MappedBy("mop:children")

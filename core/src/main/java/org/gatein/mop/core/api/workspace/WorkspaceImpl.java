@@ -76,19 +76,19 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
    // Workspace implementation ******************************************************************************************
 
    @SuppressWarnings("unchecked")
-   private <S extends Site> SiteContainer<S> getSiteContainer(ObjectType<S> siteType)
+   private <S extends Site> SiteContainer getSiteContainer(ObjectType<S> siteType)
    {
       if (siteType == ObjectType.PORTAL_SITE)
       {
-         return (SiteContainer<S>)getPortalSites();
+         return getPortalSites();
       }
       else if (siteType == ObjectType.GROUP_SITE)
       {
-         return (SiteContainer<S>)getGroupSites();
+         return getGroupSites();
       }
       else if (siteType == ObjectType.USER_SITE)
       {
-         return (SiteContainer<S>)getUserSites();
+         return getUserSites();
       }
       else
       {
@@ -98,8 +98,8 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
 
    public <S extends Site> S getSite(ObjectType<S> siteType, String siteName)
    {
-      SiteContainer<S> sites = getSiteContainer(siteType);
-      return sites.getSite(siteName);
+      SiteContainer sites = getSiteContainer(siteType);
+      return (S)sites.getSite(siteName);
    }
 
    public Collection<Site> getSites()
@@ -109,13 +109,13 @@ public abstract class WorkspaceImpl extends WorkspaceObjectImpl implements Works
 
    public <S extends Site> Collection<S> getSites(ObjectType<S> siteType)
    {
-      SiteContainer<S> sites = getSiteContainer(siteType);
+      SiteContainer sites = getSiteContainer(siteType);
       return sites.getAllSites();
    }
 
    public <S extends Site> S addSite(ObjectType<S> siteType, String name)
    {
-      SiteContainer<S> sites = getSiteContainer(siteType);
-      return sites.addSite(name);
+      SiteContainer sites = getSiteContainer(siteType);
+      return (S)sites.addSite(name);
    }
 }

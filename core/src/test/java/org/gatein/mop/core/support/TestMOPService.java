@@ -30,6 +30,7 @@ import org.gatein.mop.core.api.DateAttribute;
 import org.gatein.mop.core.api.workspace.GroupSite;
 import org.gatein.mop.core.api.workspace.GroupSiteContainer;
 import org.gatein.mop.core.api.IntegerAttribute;
+import org.gatein.mop.core.api.workspace.LinkImpl;
 import org.gatein.mop.core.api.workspace.NavigationContainer;
 import org.gatein.mop.core.api.workspace.NavigationImpl;
 import org.gatein.mop.core.api.workspace.PageContainer;
@@ -39,19 +40,27 @@ import org.gatein.mop.core.api.workspace.PortalSite;
 import org.gatein.mop.core.api.workspace.PortalSiteContainer;
 import org.gatein.mop.core.api.workspace.SecuredImpl;
 import org.gatein.mop.core.api.StringAttribute;
+import org.gatein.mop.core.api.workspace.SiteContainer;
+import org.gatein.mop.core.api.workspace.SiteImpl;
 import org.gatein.mop.core.api.workspace.TemplatizedImpl;
 import org.gatein.mop.core.api.workspace.UIBodyImpl;
+import org.gatein.mop.core.api.workspace.UIComponentImpl;
 import org.gatein.mop.core.api.workspace.UIContainerImpl;
 import org.gatein.mop.core.api.workspace.UIWindowImpl;
 import org.gatein.mop.core.api.workspace.URLLinkImpl;
 import org.gatein.mop.core.api.workspace.UserSite;
 import org.gatein.mop.core.api.workspace.UserSiteContainer;
+import org.gatein.mop.core.api.workspace.WorkspaceCustomizationContextImpl;
 import org.gatein.mop.core.api.workspace.WorkspaceImpl;
+import org.gatein.mop.core.api.workspace.WorkspaceObjectImpl;
+import org.gatein.mop.core.api.workspace.content.AbstractCustomization;
+import org.gatein.mop.core.api.workspace.content.AbstractCustomizationState;
 import org.gatein.mop.core.api.workspace.content.ContextSpecialization;
 import org.gatein.mop.core.api.workspace.content.ContextType;
 import org.gatein.mop.core.api.workspace.content.ContextTypeContainer;
 import org.gatein.mop.core.api.workspace.content.CustomizationContainer;
 import org.gatein.mop.core.api.workspace.content.WorkspaceClone;
+import org.gatein.mop.core.api.workspace.content.WorkspaceCustomization;
 import org.gatein.mop.core.api.workspace.content.WorkspaceSpecialization;
 import org.gatein.mop.core.support.content.gadget.Gadget;
 import org.gatein.mop.core.support.content.gadget.GadgetContentProvider;
@@ -85,7 +94,9 @@ public class TestMOPService extends MOPService
       builder.setOptionValue(ChromatticBuilder.INSTRUMENTOR_CLASSNAME, "org.chromattic.apt.InstrumentorImpl");
 
       //
+      builder.add(WorkspaceObjectImpl.class);
       builder.add(WorkspaceImpl.class);
+      builder.add(UIComponentImpl.class);
       builder.add(UIContainerImpl.class);
       builder.add(UIWindowImpl.class);
       builder.add(UIBodyImpl.class);
@@ -93,8 +104,11 @@ public class TestMOPService extends MOPService
       builder.add(PageContainer.class);
       builder.add(NavigationImpl.class);
       builder.add(NavigationContainer.class);
+      builder.add(LinkImpl.class);
       builder.add(PageLinkImpl.class);
       builder.add(URLLinkImpl.class);
+      builder.add(SiteImpl.class);
+      builder.add(SiteContainer.class);
       builder.add(PortalSiteContainer.class);
       builder.add(PortalSite.class);
       builder.add(GroupSiteContainer.class);
@@ -116,9 +130,13 @@ public class TestMOPService extends MOPService
       builder.add(CustomizationContainer.class);
       builder.add(ContextTypeContainer.class);
       builder.add(ContextType.class);
+      builder.add(AbstractCustomization.class);
+      builder.add(AbstractCustomizationState.class);
       builder.add(ContextSpecialization.class);
+      builder.add(WorkspaceCustomization.class);
       builder.add(WorkspaceClone.class);
       builder.add(WorkspaceSpecialization.class);
+      builder.add(WorkspaceCustomizationContextImpl.class);
 
       //
       builder.add(PortletPreferencesState.class);

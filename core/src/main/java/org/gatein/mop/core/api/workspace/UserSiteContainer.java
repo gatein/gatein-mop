@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.MappedBy;
 
@@ -29,6 +30,7 @@ import org.chromattic.api.annotations.MappedBy;
 public abstract class UserSiteContainer extends SiteContainer<UserSite>
 {
 
+   @OneToOne
    @MappedBy("mop:usersites")
    public abstract WorkspaceImpl getWorkspace();
 

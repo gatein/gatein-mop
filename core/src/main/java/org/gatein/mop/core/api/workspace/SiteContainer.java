@@ -19,9 +19,11 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Create;
+import org.chromattic.api.annotations.PrimaryType;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.core.api.MOPFormatter;
 
@@ -33,13 +35,13 @@ import java.util.Map;
  * @version $Revision$
  */
 @FormattedBy(MOPFormatter.class)
-public abstract class SiteContainer<T extends Site>
+@PrimaryType(name = "foo")
+public abstract class SiteContainer<T extends SiteImpl>
 {
 
    @OneToMany
    public abstract Map<String, T> getSites();
 
-   @OneToOne
    public abstract WorkspaceImpl getWorkspace();
 
    public T addSite(String siteName)

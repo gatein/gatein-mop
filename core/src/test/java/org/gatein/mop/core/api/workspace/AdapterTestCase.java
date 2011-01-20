@@ -25,6 +25,9 @@ import org.gatein.mop.api.workspace.Workspace;
 import org.gatein.mop.core.api.AbstractPOMTestCase;
 import org.gatein.mop.core.api.ModelImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
@@ -38,12 +41,14 @@ public class AdapterTestCase extends AbstractPOMTestCase
       ModelImpl model = pomService.getModel();
       Workspace workspace = model.getWorkspace();
       Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptablefoo");
-      assertFalse(site.isAdapted(Secured.class));
+      assertFalse(site.isAdapted(SecuredImpl.class));
       Secured secured = site.adapt(Secured.class);
       assertNotNull(secured);
       assertTrue(site.isAdapted(Secured.class));
-      assertTrue(secured.getPermissions().isEmpty());
-      secured.getPermissions().add("FOO");
+      secured.setPermissions(new ArrayList<String>());
+      List<String> permissions = secured.getPermissions();
+      assertTrue(permissions.isEmpty());
+      permissions.add("FOO");
       model.save();
    }
 }
