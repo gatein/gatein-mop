@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.gatein</groupId>
     <artifactId>gatein-parent</artifactId>
-    <version>1.0.1-GA</version>
+    <version>1.0.2-GA</version>
   </parent>
 
   <!-- ****************** -->
@@ -124,11 +124,7 @@
     <!-- Build settings -->
     <!-- ************** -->
 
-    <!-- maven-enforcer-plugin -->
-    <jdk.min.version>1.6</jdk.min.version>
-        
-    <org.chromattic.version>1.0.5</org.chromattic.version>
-    <!--<org.chromattic.version>1.1.0-SNAPSHOT</org.chromattic.version>-->
+    <org.chromattic.version>1.0.6</org.chromattic.version>
 
   </properties>
 
@@ -158,5 +154,15 @@
     <module>spi</module>
     <module>core</module>
   </modules>
+
+  <!-- for testing purpose only -->
+  <profiles>
+    <profile>
+      <id>chromattictrunk</id>
+      <properties>
+        <org.chromattic.version>1.1.0-SNAPSHOT</org.chromattic.version>
+      </properties>
+    </profile>
+  </profiles>
 
 </project>
