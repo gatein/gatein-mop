@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.gatein</groupId>
     <artifactId>gatein-parent</artifactId>
-    <version>1.0.2-GA</version>
+    <version>1.1.0-Beta01</version>
   </parent>
 
   <!-- ****************** -->
@@ -52,7 +52,7 @@
       <dependency>
         <groupId>org.gatein</groupId>
         <artifactId>gatein-dep</artifactId>
-        <version>1.0.2-GA</version>
+        <version>1.0.3-Beta01</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -126,28 +126,16 @@
 
     <org.chromattic.version>1.0.6</org.chromattic.version>
 
+    <!--
+         Current testuite doesn't work with surefire 2.7 defined in parent pom
+    -->
+    <version.surefire.plugin>2.6</version.surefire.plugin>
+
   </properties>
 
   <!-- **************** -->
   <!-- Build Definition -->
   <!-- **************** -->
-  
-  <repositories>
-    <repository>
-      <id>jboss-public-repository-group</id>
-      <name>JBoss Public Maven Repository Group</name>
-      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-      <layout>default</layout>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </snapshots>
-    </repository>
-  </repositories>
   
   <modules>
     <module>api</module>
