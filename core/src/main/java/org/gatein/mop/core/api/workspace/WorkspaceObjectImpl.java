@@ -19,18 +19,19 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.*;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.core.api.AttributesImpl;
-import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.ModelImpl;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 @PrimaryType(name = "mop:workspaceobject")
 public abstract class WorkspaceObjectImpl implements WorkspaceObject
 {

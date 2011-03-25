@@ -18,12 +18,10 @@
  */
 package org.gatein.mop.core.support.content.portlet;
 
-import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.Property;
-import org.gatein.mop.core.api.MOPFormatter;
 
 import java.util.List;
 
@@ -32,7 +30,6 @@ import java.util.List;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:portletpreference")
-@FormattedBy(MOPFormatter.class)
 public abstract class PortletPreferenceState
 {
 

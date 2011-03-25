@@ -124,7 +124,7 @@
     <!-- Build settings -->
     <!-- ************** -->
 
-    <org.chromattic.version>1.0.6</org.chromattic.version>
+    <org.chromattic.version>1.1.0-beta2</org.chromattic.version>
 
     <!--
          Current testuite doesn't work with surefire 2.7 defined in parent pom
@@ -142,15 +142,5 @@
     <module>spi</module>
     <module>core</module>
   </modules>
-
-  <!-- for testing purpose only -->
-  <profiles>
-    <profile>
-      <id>chromattictrunk</id>
-      <properties>
-        <org.chromattic.version>1.1.0-SNAPSHOT</org.chromattic.version>
-      </properties>
-    </profile>
-  </profiles>
 
 </project>

@@ -19,7 +19,7 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.*;
-import org.gatein.mop.core.api.MOPFormatter;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 
 import java.util.Map;
 
@@ -28,7 +28,8 @@ import java.util.Map;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:contexttypecontainer")
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 public abstract class ContextTypeContainer
 {
 

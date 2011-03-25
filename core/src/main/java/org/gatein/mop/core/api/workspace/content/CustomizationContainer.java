@@ -19,15 +19,15 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.NamingPrefix;
 import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.ContentType;
-import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.MappedBy;
-import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.workspace.WorkspaceCustomizationContextImpl;
 
 import java.util.Map;
@@ -37,7 +37,8 @@ import java.util.Map;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:customizationcontainer")
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 public abstract class CustomizationContainer
 {
 

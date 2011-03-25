@@ -148,7 +148,7 @@ public class ModelImpl implements Model
          workspace = session.findByPath(WorkspaceImpl.class, "mop:workspace");
          if (workspace == null)
          {
-            workspace = session.insert(WorkspaceImpl.class, "mop:workspace");
+            workspace = session.insert(WorkspaceImpl.class, "mop", "workspace");
          }
       }
       return workspace;

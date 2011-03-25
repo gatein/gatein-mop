@@ -19,11 +19,12 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.NamingPrefix;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.Name;
 import org.chromattic.api.annotations.ManyToOne;
 import org.chromattic.api.annotations.PrimaryType;
-import org.gatein.mop.core.api.MOPFormatter;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 
 import java.util.Map;
 
@@ -32,7 +33,8 @@ import java.util.Map;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:contexttype")
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 public abstract class ContextType
 {
 

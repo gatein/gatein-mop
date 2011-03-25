@@ -21,21 +21,23 @@ package org.gatein.mop.core.api.workspace;
 import org.chromattic.api.RelationshipType;
 import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.ManyToOne;
+import org.chromattic.api.annotations.NamingPrefix;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Destroy;
 import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.gatein.mop.api.workspace.Site;
 import org.gatein.mop.api.workspace.Page;
 import org.gatein.mop.api.workspace.ObjectType;
-import org.gatein.mop.core.api.MOPFormatter;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 @PrimaryType(name = "mop:site")
 public abstract class SiteImpl<C extends SiteContainer> extends WorkspaceObjectImpl implements Site
 {

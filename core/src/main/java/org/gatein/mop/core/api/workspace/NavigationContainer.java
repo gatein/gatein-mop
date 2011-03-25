@@ -19,12 +19,13 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.NamingPrefix;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.PrimaryType;
 import org.chromattic.api.annotations.MappedBy;
-import org.gatein.mop.core.api.MOPFormatter;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,8 @@ import java.util.Map;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:navigationcontainer")
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 public abstract class NavigationContainer
 {
 

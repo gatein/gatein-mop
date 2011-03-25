@@ -19,17 +19,17 @@
 package org.gatein.mop.core.api.workspace.content;
 
 import org.chromattic.api.annotations.FormattedBy;
+import org.chromattic.api.annotations.NamingPrefix;
 import org.chromattic.api.annotations.Owner;
 import org.chromattic.api.annotations.PrimaryType;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.gatein.mop.api.content.Customization;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.api.content.ContentType;
 import org.gatein.mop.api.workspace.WorkspaceCustomizationContext;
-import org.gatein.mop.core.api.MOPFormatter;
 import org.gatein.mop.core.api.content.CustomizationContextComparator;
 import org.gatein.mop.core.api.content.ContentManagerRegistry;
 import org.gatein.mop.spi.content.ContentProvider;
-import org.gatein.mop.spi.content.StateContainer;
 import org.chromattic.api.annotations.OneToOne;
 import org.chromattic.api.annotations.MappedBy;
 import org.chromattic.api.annotations.Create;
@@ -48,7 +48,8 @@ import java.util.Arrays;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 @PrimaryType(name = "mop:customization")
 public abstract class AbstractCustomization implements Customization<Object>
 {

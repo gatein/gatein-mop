@@ -23,9 +23,10 @@ import org.chromattic.api.NameConflictResolution;
 import org.chromattic.api.annotations.Create;
 import org.chromattic.api.annotations.FormattedBy;
 import org.chromattic.api.annotations.NamingPolicy;
+import org.chromattic.api.annotations.NamingPrefix;
 import org.chromattic.api.annotations.OneToMany;
 import org.chromattic.api.annotations.PrimaryType;
-import org.gatein.mop.core.api.MOPFormatter;
+import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.gatein.mop.core.util.AbstractAttributes;
 
 import java.util.Date;
@@ -37,7 +38,8 @@ import java.util.Set;
  * @version $Revision$
  */
 @PrimaryType(name = "mop:attributes")
-@FormattedBy(MOPFormatter.class)
+@NamingPrefix("mop")
+@FormattedBy(BaseEncodingObjectFormatter.class)
 @NamingPolicy(onDuplicate = NameConflictResolution.REPLACE)
 public abstract class AttributesImpl extends AbstractAttributes 
 {
