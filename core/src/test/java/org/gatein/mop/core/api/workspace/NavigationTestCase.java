@@ -72,8 +72,10 @@ public class NavigationTestCase extends AbstractPOMTestCase
       Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal_for_navigation");
       Navigation root = portal.getRootNavigation();
       Navigation n1 = root.addChild("1");
+      Navigation n2 = root.addChild("2");
       assertEquals("1", n1.getName());
-      n1.setName("2");
-      assertEquals("2", n1.getName());
+      n1.setName("3");
+      assertEquals("3", n1.getName());
+      assertEquals(0, n1.getIndex());
    }
 }

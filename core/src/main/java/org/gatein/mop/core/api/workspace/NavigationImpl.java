@@ -88,10 +88,15 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
 
    public void setName(String name)
    {
-      // todo: change to setNodeName when it is fixed
-      NavigationContainer parent = getParentContainer();
-      Map<String, NavigationImpl> map = parent.getNavigationMap();
-      map.put(name, this);
+      // Capture the current index
+      int index = getIndex();
+
+      // Rename (will change the index to the last / JCR move)
+      setNodeName(name);
+
+      // Set index back to original value
+      List<NavigationImpl> siblings = getParentContainer().getNavigationList();
+      siblings.add(index, this);
    }
 
    public int getIndex()
