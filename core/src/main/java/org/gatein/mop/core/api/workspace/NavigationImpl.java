@@ -94,6 +94,19 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
       map.put(name, this);
    }
 
+   public int getIndex()
+   {
+      NavigationImpl parent = getParent();
+      if (parent == null)
+      {
+         return 0;
+      }
+      else
+      {
+         return parent.getChildren().indexOf(this);
+      }
+   }
+
    public ObjectType<? extends Navigation> getObjectType()
    {
       return ObjectType.NAVIGATION;
@@ -131,10 +144,15 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
       return childrenContainer.getNavigationMap().get(name);
    }
 
-   public NavigationImpl addChild(String name)
+   public NavigationImpl addChild(Integer index, String name) throws NullPointerException, IndexOutOfBoundsException, IllegalArgumentException
    {
       NavigationContainer childrenContainer = getChildrenContainer();
-      return childrenContainer.addNavigation(name);
+      return childrenContainer.addNavigation(index, name);
+   }
+
+   public NavigationImpl addChild(String name)
+   {
+      return addChild(null, name);
    }
 
    public <L extends Link> L linkTo(ObjectType<L> linkType)

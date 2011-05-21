@@ -32,14 +32,33 @@ import java.util.List;
  */
 public class NavigationTestCase extends AbstractPOMTestCase
 {
-   public void testNavigationOrder()
+   public void testOrder()
+   {
+      ModelImpl model = pomService.getModel();
+      Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal_for_navigation");
+      Navigation root = portal.getRootNavigation();
+      assertEquals(0, root.getIndex());
+      Navigation n1 = root.addChild("1");
+      assertEquals(0, n1.getIndex());
+      Navigation n2 = root.addChild("2");
+      assertEquals(1, n2.getIndex());
+      Navigation n3 = root.addChild("3");
+      assertEquals(2, n3.getIndex());
+      List<? extends Navigation> ns = root.getChildren();
+      assertEquals(3, ns.size());
+      assertSame(n1, ns.get(0));
+      assertSame(n2, ns.get(1));
+      assertSame(n3, ns.get(2));
+   }
+
+   public void testIndexAdd()
    {
       ModelImpl model = pomService.getModel();
       Site portal = model.getWorkspace().addSite(ObjectType.PORTAL_SITE, "portal_for_navigation");
       Navigation root = portal.getRootNavigation();
       Navigation n1 = root.addChild("1");
-      Navigation n2 = root.addChild("2");
       Navigation n3 = root.addChild("3");
+      Navigation n2 = root.addChild(1, "2");
       List<? extends Navigation> ns = root.getChildren();
       assertEquals(3, ns.size());
       assertSame(n1, ns.get(0));

@@ -51,11 +51,19 @@ public abstract class NavigationContainer
    @Create
    public abstract NavigationImpl createNavigation();
 
-   public NavigationImpl addNavigation(String name)
+   public NavigationImpl addNavigation(Integer index, String name)
    {
       NavigationImpl page = createNavigation();
       page.setNodeName(name);
-      getNavigationList().add(page);
+      List<NavigationImpl> list = getNavigationList();
+      if (index != null)
+      {
+         list.add(index, page);
+      }
+      else
+      {
+         list.add(page);
+      }
       return page;
    }
 }

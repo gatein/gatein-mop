@@ -49,6 +49,13 @@ public interface Navigation extends WorkspaceObject
    void setName(String name);
 
    /**
+    * Returns the index of this navigation.
+    *
+    * @return the navigation index
+    */
+   int getIndex();
+
+   /**
     * Extends the object type to navigation.
     *
     * @return the object type
@@ -93,6 +100,19 @@ public interface Navigation extends WorkspaceObject
     * @throws IllegalArgumentException when an illegal name is provided
     */
    Navigation addChild(String name) throws NullPointerException, IllegalArgumentException;
+
+   /**
+    * Adds a child navigation that will be added to the specified position among the ordered children list. When
+    * the the index is not specified, the child is appended at the last position.
+    *
+    * @param index the child index
+    * @param name the child name
+    * @return the child navigation
+    * @throws NullPointerException when a null name is provided
+    * @throws IndexOutOfBoundsException if the index is out of bounds
+    * @throws IllegalArgumentException when an illegal name is provided
+    */
+   Navigation addChild(Integer index, String name) throws NullPointerException, IndexOutOfBoundsException, IllegalArgumentException;
 
    /**
     * Destroys this navigation.
