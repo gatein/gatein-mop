@@ -88,10 +88,28 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
 
    public void setName(String name)
    {
-      // todo: change to setNodeName when it is fixed
-      NavigationContainer parent = getParentContainer();
-      Map<String, NavigationImpl> map = parent.getNavigationMap();
-      map.put(name, this);
+      // Capture the current index
+      int index = getIndex();
+
+      // Rename (will change the index to the last / JCR move)
+      setNodeName(name);
+
+      // Set index back to original value
+      List<NavigationImpl> siblings = getParentContainer().getNavigationList();
+      siblings.add(index, this);
+   }
+
+   public int getIndex()
+   {
+      NavigationImpl parent = getParent();
+      if (parent == null)
+      {
+         return 0;
+      }
+      else
+      {
+         return parent.getChildren().indexOf(this);
+      }
    }
 
    public ObjectType<? extends Navigation> getObjectType()
@@ -131,10 +149,15 @@ public abstract class NavigationImpl extends WorkspaceObjectImpl implements Navi
       return childrenContainer.getNavigationMap().get(name);
    }
 
-   public NavigationImpl addChild(String name)
+   public NavigationImpl addChild(Integer index, String name) throws NullPointerException, IndexOutOfBoundsException, IllegalArgumentException
    {
       NavigationContainer childrenContainer = getChildrenContainer();
-      return childrenContainer.addNavigation(name);
+      return childrenContainer.addNavigation(index, name);
+   }
+
+   public NavigationImpl addChild(String name)
+   {
+      return addChild(null, name);
    }
 
    public <L extends Link> L linkTo(ObjectType<L> linkType)
