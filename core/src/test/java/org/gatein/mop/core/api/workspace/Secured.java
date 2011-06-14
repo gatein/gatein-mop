@@ -19,16 +19,21 @@
 
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.annotations.MixinType;
+import org.chromattic.api.annotations.Property;
+
 import java.util.List;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Secured
+@MixinType(name = "mop:secured")
+public abstract class Secured
 {
 
-   List<String> getPermissions();
+   @Property(name = "mop:permissions")
+   public abstract List<String> getPermissions();
 
-   void setPermissions(List<String> permissions);
+   public abstract void setPermissions(List<String> permissions);
 }

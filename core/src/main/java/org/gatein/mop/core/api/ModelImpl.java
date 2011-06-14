@@ -123,22 +123,31 @@ public class ModelImpl implements Model
       return getWorkspaceImpl();
    }
 
-   public <A> A getAdapter(Object o, Class<A> adaptedType, boolean adapt)
+   public <A> A getAdapter(Object o, Class<A> adapterType)
    {
-      Class<? extends A> adapterType = mop.getConcreteAdapterType(adaptedType);
-      if (adapterType == null) {
-         adapterType = adaptedType;
+      AdapterFactoryRegistration<Object, A> registration = AdapterFactoryRegistration.getInstance(adapterType);
+
+      //
+      if (registration != null)
+      {
+         if (registration.adapteeType.isInstance(o))
+         {
+            return registration.factory.getAdapter(o, adapterType);
+         }
+         else
+         {
+            return null;
+         }
       }
-      return _getAdapter(o, adapterType, adapt);
+      else
+      {
+         return null;
+      }
    }
 
-   private <A> A _getAdapter(Object o, Class<A> type, boolean adapt) {
-      A a = session.getEmbedded(o, type);
-      if (a == null && adapt) {
-         a = session.create(type);
-         session.setEmbedded(o, type, a);
-      }
-      return a;
+   public <A> boolean isAdaptable(Class<A> adapterType)
+   {
+      return AdapterFactoryRegistration.getInstance(adapterType) != null;
    }
 
    private WorkspaceImpl getWorkspaceImpl()

@@ -18,6 +18,9 @@
  */
 package org.gatein.mop.core.util;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -139,5 +142,68 @@ public class Tools
             throw new UnsupportedOperationException();
          }
       };
+   }
+
+   /**
+    * A simplistic implementation, it may not handle all cases but it should handle enough.
+    *
+    * @param implementation the type for which the parameter requires a resolution
+    * @param type the type that owns the parameter
+    * @param parameterIndex the parameter index
+    * @return the resolved type
+    */
+   public static Type resolve(Type implementation, Class<?> type, int parameterIndex) {
+     if (implementation == null) {
+       throw new NullPointerException();
+     }
+
+     //
+     if (implementation == type) {
+       TypeVariable<? extends Class<?>>[] tp = type.getTypeParameters();
+       if (parameterIndex < tp.length) {
+         return tp[parameterIndex];
+       } else {
+         throw new IllegalArgumentException();
+       }
+     } else if (implementation instanceof Class<?>) {
+       Class<?> c = (Class<?>) implementation;
+       Type gsc = c.getGenericSuperclass();
+       Type resolved = null;
+       if (gsc != null) {
+         resolved = resolve(gsc, type, parameterIndex);
+         if (resolved == null) {
+           // Try with interface
+         }
+       }
+       return resolved;
+     } else if (implementation instanceof ParameterizedType) {
+       ParameterizedType pt = (ParameterizedType) implementation;
+       Type[] typeArgs = pt.getActualTypeArguments();
+       Type rawType = pt.getRawType();
+       if (rawType == type) {
+         return typeArgs[parameterIndex];
+       } else if (rawType instanceof Class<?>) {
+         Class<?> classRawType = (Class<?>)rawType;
+         Type resolved = resolve(classRawType, type, parameterIndex);
+         if (resolved == null) {
+           return null;
+         } else if (resolved instanceof TypeVariable) {
+           TypeVariable resolvedTV = (TypeVariable)resolved;
+           TypeVariable[] a = classRawType.getTypeParameters();
+           for (int i = 0;i < a.length;i++) {
+             if (a[i].equals(resolvedTV)) {
+               return resolve(implementation, classRawType, i);
+             }
+           }
+           throw new AssertionError();
+         } else {
+           throw new UnsupportedOperationException("Cannot support resolution of " + resolved);
+         }
+       } else {
+         throw new UnsupportedOperationException();
+       }
+     } else {
+       throw new UnsupportedOperationException("todo " + implementation + " " + implementation.getClass());
+     }
    }
 }

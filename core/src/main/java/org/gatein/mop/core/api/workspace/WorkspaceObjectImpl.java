@@ -18,6 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
+import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.annotations.*;
 import org.chromattic.ext.format.BaseEncodingObjectFormatter;
 import org.gatein.mop.api.workspace.WorkspaceObject;
@@ -25,6 +26,9 @@ import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.core.api.AttributesImpl;
 import org.gatein.mop.core.api.ModelImpl;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -39,6 +43,9 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
    /** . */
    public ModelImpl model;
 
+   /** . */
+   private Map adapters;
+
    @Name
    public abstract String getNodeName();
 
@@ -52,14 +59,72 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
    @Owner
    public abstract AttributesImpl getAttributes();
 
-   public <A> A adapt(Class<A> adaptedType)
+   public final <A> A adapt(Class<A> adapterType)
    {
-      return model.getAdapter(this, adaptedType, true);
+      // Lookup in map first
+      if (adapters != null)
+      {
+         Object adapter = adapters.get(adapterType);
+         if (adapter != null)
+         {
+            return (A)adapter;
+         }
+      }
+
+      //
+      A adapter;
+      if (model.isAdaptable(adapterType))
+      {
+         adapter = model.getAdapter(this, adapterType);
+         if (adapter != null)
+         {
+            if (adapters == null)
+            {
+               adapters = new HashMap();
+            }
+            adapters.put(adapterType, adapter);
+         }
+      }
+      else
+      {
+         adapter = getMixin(adapterType, true);
+      }
+
+      //
+      return adapter;
    }
 
-   public boolean isAdapted(Class<?> adaptedType)
+   public final boolean isAdapted(Class<?> adapterType)
    {
-      return model.getAdapter(this, adaptedType, false) != null;
+      if (adapters != null)
+      {
+         if (adapters.containsKey(adapterType))
+         {
+            return true;
+         }
+      }
+
+      //
+      if (model.isAdaptable(adapterType))
+      {
+         return false;
+      }
+      else
+      {
+         return getMixin(adapterType, false) != null;
+      }
+   }
+
+   private <A> A getMixin(Class<A> type, boolean adapt)
+   {
+      ChromatticSession session = model.getSession();
+      A a = session.getEmbedded(this, type);
+      if (a == null && adapt)
+      {
+         a = session.create(type);
+         session.setEmbedded(this, type, a);
+      }
+      return a;
    }
 
    public String getName()

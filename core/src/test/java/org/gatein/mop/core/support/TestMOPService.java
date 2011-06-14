@@ -38,8 +38,8 @@ import org.gatein.mop.core.api.workspace.PageImpl;
 import org.gatein.mop.core.api.workspace.PageLinkImpl;
 import org.gatein.mop.core.api.workspace.PortalSite;
 import org.gatein.mop.core.api.workspace.PortalSiteContainer;
-import org.gatein.mop.core.api.workspace.SecuredImpl;
 import org.gatein.mop.core.api.StringAttribute;
+import org.gatein.mop.core.api.workspace.Secured;
 import org.gatein.mop.core.api.workspace.SiteContainer;
 import org.gatein.mop.core.api.workspace.SiteImpl;
 import org.gatein.mop.core.api.workspace.TemplatizedImpl;
@@ -82,9 +82,6 @@ public class TestMOPService extends MOPService
 
    /** . */
    private final Chromattic chromattic;
-
-   /** . */
-   private final Map<Class<?>, Class<?>> adapterMap;
 
    public TestMOPService() throws Exception
    {
@@ -146,21 +143,10 @@ public class TestMOPService extends MOPService
       builder.add(GadgetState.class);
 
       //
-      builder.add(SecuredImpl.class);
+      builder.add(Secured.class);
 
       //
       this.chromattic = builder.build();
-      this.adapterMap = new HashMap<Class<?>, Class<?>>();
-   }
-
-   public <A> void addAdapter(Class<A> adaptedType, Class<? extends A> adapterType) {
-      adapterMap.put(adaptedType, adapterType);
-   }
-
-   @Override
-   protected <A> Class<? extends A> getConcreteAdapterType(Class<A> adapterType)
-   {
-      return (Class<A>)adapterMap.get(adapterType);
    }
 
    @Override

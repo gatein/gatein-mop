@@ -37,11 +37,10 @@ public class AdapterTestCase extends AbstractPOMTestCase
 
    public void testSecured() throws Exception
    {
-      pomService.addAdapter(Secured.class, SecuredImpl.class);
       ModelImpl model = pomService.getModel();
       Workspace workspace = model.getWorkspace();
-      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptablefoo");
-      assertFalse(site.isAdapted(SecuredImpl.class));
+      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_secured");
+      assertFalse(site.isAdapted(Secured.class));
       Secured secured = site.adapt(Secured.class);
       assertNotNull(secured);
       assertTrue(site.isAdapted(Secured.class));
@@ -50,5 +49,49 @@ public class AdapterTestCase extends AbstractPOMTestCase
       assertTrue(permissions.isEmpty());
       permissions.add("FOO");
       model.save();
+   }
+
+   public void testWorkspaceObjectType() throws Exception
+   {
+      ModelImpl model = pomService.getModel();
+      Workspace workspace = model.getWorkspace();
+      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_foo");
+      assertFalse(site.isAdapted(Foo.class));
+      Foo foo = site.adapt(Foo.class);
+      assertNotNull(foo);
+      assertSame(foo, site.adapt(Foo.class));
+      assertSame(site, foo.adaptee);
+      assertSame(Foo.class, foo.adapterType);
+      assertTrue(site.isAdapted(Foo.class));
+   }
+
+   public void testWorkspaceObjectImplType() throws Exception
+   {
+      ModelImpl model = pomService.getModel();
+      Workspace workspace = model.getWorkspace();
+      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_bar");
+      assertFalse(site.isAdapted(Bar.class));
+      Bar bar = site.adapt(Bar.class);
+      assertNotNull(bar);
+      assertSame(bar, site.adapt(Bar.class));
+      assertSame(site, bar.adaptee);
+      assertSame(Bar.class, bar.adapterType);
+      assertTrue(site.isAdapted(Bar.class));
+   }
+
+   public void testSiteType() throws Exception
+   {
+      ModelImpl model = pomService.getModel();
+      Workspace workspace = model.getWorkspace();
+      assertNull(workspace.adapt(Juu.class));
+
+      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_juu");
+      assertFalse(site.isAdapted(Juu.class));
+      Juu juu = site.adapt(Juu.class);
+      assertNotNull(juu);
+      assertSame(juu, site.adapt(Juu.class));
+      assertSame(site, juu.adaptee);
+      assertSame(Juu.class, juu.adapterType);
+      assertTrue(site.isAdapted(Juu.class));
    }
 }

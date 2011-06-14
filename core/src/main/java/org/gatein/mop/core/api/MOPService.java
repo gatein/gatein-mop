@@ -78,10 +78,6 @@ public abstract class MOPService
       //
    }
 
-   protected <A> Class<? extends A> getConcreteAdapterType(Class<A> adapterType) {
-      return null;
-   }
-
    protected abstract Chromattic getChromattic();
 
    public void start() throws Exception

@@ -16,23 +16,17 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-
-package org.gatein.mop.core.api.workspace;
-
-import org.chromattic.api.annotations.MixinType;
-import org.chromattic.api.annotations.Property;
-
-import java.util.List;
+package org.gatein.mop.spi;
 
 /**
+ * The adapter factory.
+ *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-@MixinType(name = "mop:secured")
-public abstract class SecuredImpl implements Secured
+public abstract class AdapterFactory<T, A>
 {
 
-   @Property(name = "mop:permissions")
-   public abstract List<String> getPermissions();
+   public abstract A getAdapter(T adaptee, Class<A> adapterType);
 
 }

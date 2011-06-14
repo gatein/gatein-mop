@@ -16,33 +16,36 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
+package org.gatein.mop.core.api.workspace;
 
-package org.gatein.mop.api;
+import org.gatein.mop.api.workspace.Site;
+import org.gatein.mop.spi.AdapterFactory;
 
 /**
- * The adapter pattern.
- *
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public interface Adaptable
+public class Juu
 {
 
-   /**
-    * Returns an adaptee for the specified type.
-    *
-    * @param adapterType the adapter type class
-    * @param <A> the adapter type
-    * @return the adaptee or null
-    */
-   <A> A adapt(Class<A> adapterType);
+   /** . */
+   final Site adaptee;
 
-   /**
-    * Returns true if the workspace object is adapted to the specified type.
-    *
-    * @param adapterType the adapter type
-    * @return the adaptability of the current object
-    */
-   boolean isAdapted(Class<?> adapterType);
+   /** . */
+   final Class<Juu> adapterType;
 
+   public Juu(Site adaptee, Class<Juu> adapterType)
+   {
+      this.adaptee = adaptee;
+      this.adapterType = adapterType;
+   }
+
+   public static class Factory extends AdapterFactory<Site, Juu>
+   {
+      @Override
+      public Juu getAdapter(Site adaptee, Class<Juu> adapterType)
+      {
+         return new Juu(adaptee, adapterType);
+      }
+   }
 }
