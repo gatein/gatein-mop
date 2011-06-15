@@ -35,12 +35,42 @@ import java.util.List;
 public class AdapterTestCase extends AbstractPOMTestCase
 {
 
-   public void testSecured() throws Exception
+   public void testLifeCycle() throws Exception
+   {
+      ModelImpl model = pomService.getModel();
+      Workspace workspace = model.getWorkspace();
+      Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_foo");
+
+      //
+      assertFalse(site.isAdapted(Foo.class));
+
+      //
+      Foo foo = site.adapt(Foo.class);
+      assertNotNull(foo);
+      assertSame(foo, site.adapt(Foo.class));
+      assertSame(site, foo.adapteeCreated);
+      assertSame(Foo.class, foo.typeCreated);
+      assertNull(foo.adapteeRemoved);
+      assertNull(foo.typeRemoved);
+      assertTrue(site.isAdapted(Foo.class));
+
+      //
+      site.removeAdapter(Foo.class);
+      assertSame(site, foo.adapteeRemoved);
+      assertSame(Foo.class, foo.typeRemoved);
+      assertFalse(site.isAdapted(Foo.class));
+   }
+
+   public void testMixinLifeCycle() throws Exception
    {
       ModelImpl model = pomService.getModel();
       Workspace workspace = model.getWorkspace();
       Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_secured");
+
+      //
       assertFalse(site.isAdapted(Secured.class));
+
+      //
       Secured secured = site.adapt(Secured.class);
       assertNotNull(secured);
       assertTrue(site.isAdapted(Secured.class));
@@ -49,6 +79,10 @@ public class AdapterTestCase extends AbstractPOMTestCase
       assertTrue(permissions.isEmpty());
       permissions.add("FOO");
       model.save();
+
+      //
+      site.removeAdapter(Secured.class);
+      assertFalse(site.isAdapted(Secured.class));
    }
 
    public void testWorkspaceObjectType() throws Exception
@@ -60,8 +94,8 @@ public class AdapterTestCase extends AbstractPOMTestCase
       Foo foo = site.adapt(Foo.class);
       assertNotNull(foo);
       assertSame(foo, site.adapt(Foo.class));
-      assertSame(site, foo.adaptee);
-      assertSame(Foo.class, foo.adapterType);
+      assertSame(site, foo.adapteeCreated);
+      assertSame(Foo.class, foo.typeCreated);
       assertTrue(site.isAdapted(Foo.class));
    }
 
@@ -84,7 +118,6 @@ public class AdapterTestCase extends AbstractPOMTestCase
       ModelImpl model = pomService.getModel();
       Workspace workspace = model.getWorkspace();
       assertNull(workspace.adapt(Juu.class));
-
       Site site = workspace.addSite(ObjectType.PORTAL_SITE, "adaptable_juu");
       assertFalse(site.isAdapted(Juu.class));
       Juu juu = site.adapt(Juu.class);

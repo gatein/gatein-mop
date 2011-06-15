@@ -29,11 +29,11 @@ public interface Adaptable
 {
 
    /**
-    * Returns an adaptee for the specified type.
+    * Returns an adapter for the specified type.
     *
     * @param adapterType the adapter type class
     * @param <A> the adapter type
-    * @return the adaptee or null
+    * @return the adapter or null
     */
    <A> A adapt(Class<A> adapterType);
 
@@ -43,6 +43,14 @@ public interface Adaptable
     * @param adapterType the adapter type
     * @return the adaptability of the current object
     */
-   boolean isAdapted(Class<?> adapterType);
+   <A> boolean isAdapted(Class<A> adapterType);
+
+   /**
+    * Removes the adapter from this adaptable object.
+    *
+    * @param adapterType the adapter type class
+    * @param <A> the adapter generic type
+    */
+   <A> void removeAdapter(Class<A> adapterType);
 
 }

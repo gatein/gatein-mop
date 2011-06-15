@@ -18,7 +18,7 @@
  */
 package org.gatein.mop.core.api.workspace;
 
-import org.gatein.mop.spi.AdapterFactory;
+import org.gatein.mop.spi.AdapterLifeCycle;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -39,11 +39,16 @@ public class Bar
       this.adapterType = adapterType;
    }
 
-   public static class Factory extends AdapterFactory<WorkspaceObjectImpl, Bar>
+   public static class Factory extends AdapterLifeCycle<WorkspaceObjectImpl, Bar>
    {
-      public Bar getAdapter(WorkspaceObjectImpl adaptee, Class<Bar> adapterType)
+      public Bar create(WorkspaceObjectImpl adaptee, Class<Bar> adapterType)
       {
          return new Bar(adaptee, adapterType);
+      }
+
+      @Override
+      public void destroy(Bar adapter, WorkspaceObjectImpl adaptee, Class<Bar> adapterType)
+      {
       }
    }
 }

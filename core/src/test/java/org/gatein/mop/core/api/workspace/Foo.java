@@ -19,7 +19,7 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.gatein.mop.api.workspace.WorkspaceObject;
-import org.gatein.mop.spi.AdapterFactory;
+import org.gatein.mop.spi.AdapterLifeCycle;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -29,23 +29,36 @@ public class Foo
 {
 
    /** . */
-   final WorkspaceObject adaptee;
+   final WorkspaceObject adapteeCreated;
 
    /** . */
-   final Class<Foo> adapterType;
+   final Class<Foo> typeCreated;
+
+   /** . */
+   WorkspaceObject adapteeRemoved;
+
+   /** . */
+   Class<Foo> typeRemoved;
 
    public Foo(WorkspaceObject adaptee, Class<Foo> adapterType)
    {
-      this.adaptee = adaptee;
-      this.adapterType = adapterType;
+      this.adapteeCreated = adaptee;
+      this.typeCreated = adapterType;
    }
 
-   public static class Factory extends AdapterFactory<WorkspaceObject, Foo>
+   public static class Factory extends AdapterLifeCycle<WorkspaceObject, Foo>
    {
       @Override
-      public Foo getAdapter(WorkspaceObject adaptee, Class<Foo> adapterType)
+      public Foo create(WorkspaceObject adaptee, Class<Foo> adapterType)
       {
          return new Foo(adaptee, adapterType);
+      }
+
+      @Override
+      public void destroy(Foo adapter, WorkspaceObject adaptee, Class<Foo> adapterType)
+      {
+         adapter.adapteeRemoved = adaptee;
+         adapter.typeRemoved = adapterType;
       }
    }
 }

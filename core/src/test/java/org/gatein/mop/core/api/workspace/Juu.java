@@ -19,7 +19,7 @@
 package org.gatein.mop.core.api.workspace;
 
 import org.gatein.mop.api.workspace.Site;
-import org.gatein.mop.spi.AdapterFactory;
+import org.gatein.mop.spi.AdapterLifeCycle;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -40,12 +40,17 @@ public class Juu
       this.adapterType = adapterType;
    }
 
-   public static class Factory extends AdapterFactory<Site, Juu>
+   public static class Factory extends AdapterLifeCycle<Site, Juu>
    {
       @Override
-      public Juu getAdapter(Site adaptee, Class<Juu> adapterType)
+      public Juu create(Site adaptee, Class<Juu> adapterType)
       {
          return new Juu(adaptee, adapterType);
+      }
+
+      @Override
+      public void destroy(Juu adapter, Site adaptee, Class<Juu> adapterType)
+      {
       }
    }
 }

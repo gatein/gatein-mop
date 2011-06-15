@@ -19,7 +19,7 @@
 package org.gatein.mop.core.api;
 
 import org.gatein.mop.core.util.Tools;
-import org.gatein.mop.spi.AdapterFactory;
+import org.gatein.mop.spi.AdapterLifeCycle;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,19 +29,19 @@ import java.util.ServiceLoader;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-class AdapterFactoryRegistration<T, A>
+class AdapterRegistration<T, A>
 {
 
    /** . */
-   private static final Map<Class<?>, AdapterFactoryRegistration<?, ?>> instances;
+   private static final Map<Class<?>, AdapterRegistration<?, ?>> instances;
 
    static
    {
-      ServiceLoader<AdapterFactory> loader = ServiceLoader.load(AdapterFactory.class);
-      Map<Class<?>, AdapterFactoryRegistration<?, ?>> map = new HashMap<Class<?>, AdapterFactoryRegistration<?, ?>>();
-      for (AdapterFactory factory : loader)
+      ServiceLoader<AdapterLifeCycle> loader = ServiceLoader.load(AdapterLifeCycle.class);
+      Map<Class<?>, AdapterRegistration<?, ?>> map = new HashMap<Class<?>, AdapterRegistration<?, ?>>();
+      for (AdapterLifeCycle factory : loader)
       {
-         AdapterFactoryRegistration registration = new AdapterFactoryRegistration(factory);
+         AdapterRegistration registration = new AdapterRegistration(factory);
          map.put(registration.adapterType, registration);
       }
 
@@ -49,13 +49,13 @@ class AdapterFactoryRegistration<T, A>
       instances = map;
    }
 
-   static <A> AdapterFactoryRegistration<Object, A> getInstance(Class<A> type)
+   static <A> AdapterRegistration<Object, A> getInstance(Class<A> type)
    {
-      return (AdapterFactoryRegistration<Object, A>)instances.get(type);
+      return (AdapterRegistration<Object, A>)instances.get(type);
    }
 
    /** . */
-   final AdapterFactory<T, A> factory;
+   final AdapterLifeCycle<T, A> factory;
 
    /** . */
    final Class<T> adapteeType;
@@ -63,10 +63,10 @@ class AdapterFactoryRegistration<T, A>
    /** . */
    final Class<A> adapterType;
 
-   AdapterFactoryRegistration(AdapterFactory<T, A> factory)
+   AdapterRegistration(AdapterLifeCycle<T, A> factory)
    {
       this.factory = factory;
-      this.adapteeType = (Class<T>)Tools.resolve(factory.getClass(), AdapterFactory.class, 0);
-      this.adapterType = (Class<A>)Tools.resolve(factory.getClass(), AdapterFactory.class, 1);
+      this.adapteeType = (Class<T>)Tools.resolve(factory.getClass(), AdapterLifeCycle.class, 0);
+      this.adapterType = (Class<A>)Tools.resolve(factory.getClass(), AdapterLifeCycle.class, 1);
    }
 }

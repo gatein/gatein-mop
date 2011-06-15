@@ -44,6 +44,7 @@ import org.gatein.mop.api.workspace.WorkspaceObject;
 import org.gatein.mop.api.Model;
 import org.chromattic.api.ChromatticSession;
 import org.chromattic.api.event.LifeCycleListener;
+import org.gatein.mop.spi.AdapterLifeCycle;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -123,16 +124,16 @@ public class ModelImpl implements Model
       return getWorkspaceImpl();
    }
 
-   public <A> A getAdapter(Object o, Class<A> adapterType)
+   public <A> AdapterLifeCycle<Object, A> getAdapter(Object o, Class<A> adapterType)
    {
-      AdapterFactoryRegistration<Object, A> registration = AdapterFactoryRegistration.getInstance(adapterType);
+      AdapterRegistration<Object, A> registration = AdapterRegistration.getInstance(adapterType);
 
       //
       if (registration != null)
       {
          if (registration.adapteeType.isInstance(o))
          {
-            return registration.factory.getAdapter(o, adapterType);
+            return registration.factory;
          }
          else
          {
@@ -147,7 +148,7 @@ public class ModelImpl implements Model
 
    public <A> boolean isAdaptable(Class<A> adapterType)
    {
-      return AdapterFactoryRegistration.getInstance(adapterType) != null;
+      return AdapterRegistration.getInstance(adapterType) != null;
    }
 
    private WorkspaceImpl getWorkspaceImpl()

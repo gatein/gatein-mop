@@ -24,9 +24,11 @@ package org.gatein.mop.spi;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public abstract class AdapterFactory<T, A>
+public abstract class AdapterLifeCycle<T, A>
 {
 
-   public abstract A getAdapter(T adaptee, Class<A> adapterType);
+   public abstract A create(T adaptee, Class<A> adapterType);
+
+   public abstract void destroy(A adapter, T adaptee, Class<A> adapterType);
 
 }

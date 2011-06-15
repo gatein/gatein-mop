@@ -26,6 +26,7 @@ import org.gatein.mop.api.workspace.ObjectType;
 import org.gatein.mop.api.content.CustomizationContext;
 import org.gatein.mop.core.api.AttributesImpl;
 import org.gatein.mop.core.api.ModelImpl;
+import org.gatein.mop.spi.AdapterLifeCycle;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +45,7 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
    public ModelImpl model;
 
    /** . */
-   private Map adapters;
+   private Map<Class<?>, Object> adapters;
 
    @Name
    public abstract String getNodeName();
@@ -75,14 +76,19 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
       A adapter;
       if (model.isAdaptable(adapterType))
       {
-         adapter = model.getAdapter(this, adapterType);
-         if (adapter != null)
+         AdapterLifeCycle<Object, A> lifeCycle = model.getAdapter(this, adapterType);
+         if (lifeCycle != null)
          {
             if (adapters == null)
             {
-               adapters = new HashMap();
+               adapters = new HashMap<Class<?>, Object>();
             }
+            adapter = lifeCycle.create(this, adapterType);
             adapters.put(adapterType, adapter);
+         }
+         else
+         {
+            adapter = null;
          }
       }
       else
@@ -94,7 +100,7 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
       return adapter;
    }
 
-   public final boolean isAdapted(Class<?> adapterType)
+   public final <A> boolean isAdapted(Class<A> adapterType)
    {
       if (adapters != null)
       {
@@ -115,16 +121,42 @@ public abstract class WorkspaceObjectImpl implements WorkspaceObject
       }
    }
 
-   private <A> A getMixin(Class<A> type, boolean adapt)
+   public <A> void removeAdapter(Class<A> adapterType)
+   {
+      if (model.isAdaptable(adapterType))
+      {
+         if (adapters != null)
+         {
+            A adapter = (A)adapters.remove(adapterType);
+            if (adapter != null)
+            {
+               AdapterLifeCycle<Object, A> lifeCycle = model.getAdapter(this, adapterType);
+               lifeCycle.destroy(adapter, this, adapterType);
+            }
+         }
+      }
+      else
+      {
+         removeMixin(adapterType);
+      }
+   }
+
+   private <A> A getMixin(Class<A> type, boolean create)
    {
       ChromatticSession session = model.getSession();
       A a = session.getEmbedded(this, type);
-      if (a == null && adapt)
+      if (a == null && create)
       {
          a = session.create(type);
          session.setEmbedded(this, type, a);
       }
       return a;
+   }
+
+   private <A> void removeMixin(Class<A> type)
+   {
+      ChromatticSession session = model.getSession();
+      session.setEmbedded(this, type, null);
    }
 
    public String getName()
