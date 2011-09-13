@@ -21,6 +21,11 @@ package org.gatein.mop.core.api.workspace;
 import junit.framework.TestCase;
 import org.gatein.mop.api.workspace.ObjectType;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
@@ -43,5 +48,17 @@ public class ObjectTypeTestCase extends TestCase
       //
       assertTrue(ObjectType.SITE.isAssignableFrom(ObjectType.GROUP_SITE));
       assertFalse(ObjectType.GROUP_SITE.isAssignableFrom(ObjectType.SITE));
+   }
+
+   public void testSerialization() throws Exception
+   {
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      ObjectOutputStream out = new ObjectOutputStream(baos);
+      out.writeObject(ObjectType.PAGE);
+      out.close();
+      ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+      ObjectInputStream in = new ObjectInputStream(bais);
+      Object o = in.readObject();
+      assertSame(ObjectType.PAGE, o);
    }
 }

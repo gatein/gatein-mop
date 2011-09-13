@@ -25,6 +25,8 @@ import org.gatein.mop.api.workspace.ui.UIBody;
 import org.gatein.mop.api.workspace.link.PageLink;
 import org.gatein.mop.api.workspace.link.URLLink;
 
+import java.io.InvalidObjectException;
+import java.io.Serializable;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -34,58 +36,80 @@ import java.util.HashSet;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
-public class ObjectType<O extends WorkspaceObject>
+public class ObjectType<O extends WorkspaceObject> implements Serializable
 {
 
    /** . */
-   public static final ObjectType<WorkspaceObject> ANY = new ObjectType<WorkspaceObject>(WorkspaceObject.class);
+   public static final ObjectType<WorkspaceObject> ANY = new ObjectType<WorkspaceObject>(0, WorkspaceObject.class);
 
    /** . */
-   public static final ObjectType<Workspace> WORKSPACE = new ObjectType<Workspace>(Workspace.class);
+   public static final ObjectType<Workspace> WORKSPACE = new ObjectType<Workspace>(1, Workspace.class);
 
    /** . */
-   public static final ObjectType<Site> SITE = new ObjectType<Site>(Site.class);
+   public static final ObjectType<Site> SITE = new ObjectType<Site>(2, Site.class);
 
    /** . */
-   public static final ObjectType<Site> PORTAL_SITE = new ObjectType<Site>(Site.class, SITE);
+   public static final ObjectType<Site> PORTAL_SITE = new ObjectType<Site>(3, Site.class, SITE);
 
    /** . */
-   public static final ObjectType<Site> GROUP_SITE = new ObjectType<Site>(Site.class, SITE);
+   public static final ObjectType<Site> GROUP_SITE = new ObjectType<Site>(4, Site.class, SITE);
 
    /** . */
-   public static final ObjectType<Site> USER_SITE = new ObjectType<Site>(Site.class, SITE);
+   public static final ObjectType<Site> USER_SITE = new ObjectType<Site>(5, Site.class, SITE);
 
    /** . */
-   public static final ObjectType<Page> PAGE = new ObjectType<Page>(Page.class);
+   public static final ObjectType<Page> PAGE = new ObjectType<Page>(6, Page.class);
 
    /** . */
-   public static final ObjectType<Navigation> NAVIGATION = new ObjectType<Navigation>(Navigation.class);
+   public static final ObjectType<Navigation> NAVIGATION = new ObjectType<Navigation>(7, Navigation.class);
 
    /** . */
-   public static final ObjectType<UIComponent> COMPONENT = new ObjectType<UIComponent>(UIComponent.class);
+   public static final ObjectType<UIComponent> COMPONENT = new ObjectType<UIComponent>(8, UIComponent.class);
 
    /** . */
-   public static final ObjectType<UIBody> BODY = new ObjectType<UIBody>(UIBody.class, COMPONENT);
+   public static final ObjectType<UIBody> BODY = new ObjectType<UIBody>(9, UIBody.class, COMPONENT);
 
    /** . */
-   public static final ObjectType<UIContainer> CONTAINER = new ObjectType<UIContainer>(UIContainer.class, COMPONENT);
+   public static final ObjectType<UIContainer> CONTAINER = new ObjectType<UIContainer>(10, UIContainer.class, COMPONENT);
 
    /** . */
-   public static final ObjectType<UIWindow> WINDOW = new ObjectType<UIWindow>(UIWindow.class, COMPONENT);
+   public static final ObjectType<UIWindow> WINDOW = new ObjectType<UIWindow>(11, UIWindow.class, COMPONENT);
 
    /** . */
-   public static final ObjectType<PageLink> PAGE_LINK = new ObjectType<PageLink>(PageLink.class);
+   public static final ObjectType<PageLink> PAGE_LINK = new ObjectType<PageLink>(12, PageLink.class);
 
    /** . */
-   public static final ObjectType<URLLink> URL_LINK = new ObjectType<URLLink>(URLLink.class);
+   public static final ObjectType<URLLink> URL_LINK = new ObjectType<URLLink>(13, URLLink.class);
 
    /** . */
-   private final Class<O> javaType;
+   private static final ObjectType[] ENUMERATION =
+   {
+      ANY,
+      WORKSPACE,
+      SITE,
+      PORTAL_SITE,
+      GROUP_SITE,
+      USER_SITE,
+      PAGE,
+      NAVIGATION,
+      COMPONENT,
+      BODY,
+      CONTAINER,
+      WINDOW,
+      PAGE_LINK,
+      URL_LINK
+   };
 
    /** . */
-   private final Set<ObjectType<?>> superTypes;
+   private final int ordinal;
 
-   private ObjectType(Class<O> javaType, ObjectType<?>... superTypes)
+   /** . */
+   private final transient Class<O> javaType;
+
+   /** . */
+   private final transient Set<ObjectType<?>> superTypes;
+
+   private ObjectType(int ordinal, Class<O> javaType, ObjectType<?>... superTypes)
    {
       for (ObjectType<?> superType : superTypes)
       {
@@ -103,6 +127,7 @@ public class ObjectType<O extends WorkspaceObject>
       }
 
       //
+      this.ordinal = ordinal;
       this.javaType = javaType;
       this.superTypes = tmp;
    }
@@ -138,6 +163,18 @@ public class ObjectType<O extends WorkspaceObject>
       else
       {
          throw new ClassCastException();
+      }
+   }
+
+   private Object readResolve () throws java.io.ObjectStreamException
+   {
+      if (ordinal >= 0 || ordinal < ENUMERATION.length)
+      {
+         return ENUMERATION[ordinal];
+      }
+      else
+      {
+         throw new InvalidObjectException("Corrupted ordinal value" + ordinal);
       }
    }
 
