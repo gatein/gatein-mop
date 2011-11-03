@@ -124,7 +124,7 @@
     <!-- Build settings -->
     <!-- ************** -->
 
-    <org.chromattic.version>1.1.0</org.chromattic.version>
+    <org.chromattic.version>1.1.1</org.chromattic.version>
 
     <!--
          Current testuite doesn't work with surefire 2.7 defined in parent pom
