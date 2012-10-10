@@ -25,7 +25,7 @@
    <parent>
       <groupId>org.gatein.mop</groupId>
       <artifactId>mop-parent</artifactId>
-      <version>1.1.3-GA-SNAPSHOT</version>
+      <version>1.2.0.Beta01-SNAPSHOT</version>
    </parent>
 
    <!-- ****************** -->
@@ -127,18 +127,19 @@
           </executions>
         </plugin>
 -->
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-               <systemProperties>
-                  <property>
-                     <name>com.arjuna.ats.arjuna.objectstore.objectStoreDir</name>
-                     <value>${project.build.directory}</value>
-                  </property>
-               </systemProperties>
-            </configuration>
-         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <excludes>
+              <exclude>**/Test*.java</exclude>
+            </excludes>
+            <systemPropertyVariables>
+              <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}/dir1</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
+              <ObjectStoreEnvironmentBean.objectStoreDir>${project.build.directory}/dir2</ObjectStoreEnvironmentBean.objectStoreDir>
+            </systemPropertyVariables>
+          </configuration>
+        </plugin>
       </plugins>
    </build>
 
