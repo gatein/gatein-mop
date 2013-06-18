@@ -34,7 +34,7 @@
 
   <groupId>org.gatein.mop</groupId>
   <artifactId>mop-parent</artifactId>
-  <version>1.2.1.CR04-SNAPSHOT</version>
+  <version>1.2.1.Final</version>
   <packaging>pom</packaging>
 
   <name>GateIn - MOP</name>
