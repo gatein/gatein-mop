@@ -20,6 +20,7 @@ package org.gatein.mop.core.support;
 
 import org.chromattic.api.Chromattic;
 import org.chromattic.api.ChromatticBuilder;
+import org.chromattic.exo.ExoSessionLifeCycle;
 import org.gatein.mop.core.api.Attribute;
 import org.gatein.mop.core.api.AttributesImpl;
 import org.gatein.mop.core.api.MOPService;
@@ -146,6 +147,7 @@ public class TestMOPService extends MOPService
       builder.add(Secured.class);
 
       //
+      ExoSessionLifeCycle a = null;
       this.chromattic = builder.build();
    }
 
