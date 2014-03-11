@@ -70,7 +70,7 @@
          <scope>compile</scope>
       </dependency>
 
-      <!-- should remove it, it's because of usage : org.chromattic.common.AbstractFilterIterator --> 
+      <!-- should remove it, it's because of usage : org.chromattic.common.AbstractFilterIterator -->
       <dependency>
          <groupId>org.chromattic</groupId>
          <artifactId>chromattic.common</artifactId>
@@ -134,6 +134,8 @@
             <excludes>
               <exclude>**/Test*.java</exclude>
             </excludes>
+            <threadCount>1</threadCount>
+            <reuseForks>false</reuseForks>
             <systemPropertyVariables>
               <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}/dir1</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
               <ObjectStoreEnvironmentBean.objectStoreDir>${project.build.directory}/dir2</ObjectStoreEnvironmentBean.objectStoreDir>
